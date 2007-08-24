@@ -2,7 +2,7 @@
  * Created on Jan 6, 2007
  *
  */
-package src.gui;
+package gui;
 
 import java.awt.AWTEvent;
 import java.awt.BorderLayout;
@@ -28,7 +28,7 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import javax.swing.plaf.InternalFrameUI;
 
-import src.core.ConnectionManager;
+import core.ConnectionManager;
 
 import sun.awt.AWTAutoShutdown;
 

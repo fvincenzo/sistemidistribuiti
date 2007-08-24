@@ -2,7 +2,7 @@
  * Created on Jan 5, 2007
  *
  */
-package src.serverUtils;
+package serverUtils;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;

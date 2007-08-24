@@ -1,16 +1,16 @@
 /**
  * 
  */
-package src.core;
+package core;
 
 import org.objectweb.joram.client.jms.admin.*;
 import org.objectweb.joram.client.jms.*;
 import org.objectweb.joram.client.jms.tcp.*;
 
-import src.serverUtils.ChannelListAdmin;
-import src.serverUtils.ChannelListServer;
+import serverUtils.ChannelListAdmin;
+import serverUtils.ChannelListServer;
 
-import src.gui.AdminGuiInterface;
+import gui.AdminGuiInterface;
 
 import java.net.ConnectException;
 import java.rmi.Naming;

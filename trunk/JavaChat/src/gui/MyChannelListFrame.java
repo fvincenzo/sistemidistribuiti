@@ -2,7 +2,7 @@
  * Created on Jan 6, 2007
  *
  */
-package src.gui;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -27,7 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
-import src.serverUtils.ChannelList;
+import serverUtils.ChannelList;
 
 /**
  * @author   noname
