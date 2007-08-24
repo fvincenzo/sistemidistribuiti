@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="datisicuri" size="583,618" id="uml" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303431392D3130303020446174695369637572692F6E6F6E616D65">
+  <children xsi:type="editmodel:PackageEditModel" name="server" location="15,15" size="354,323" id="server">
+    <children xsi:type="editmodel:ClassEditModel" name="MainServer" location="235,107" size="100,67" id="server/MainServer" runTimeClassModel="main([Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="43,18">
+        <children xsi:type="editmodel:MethodEditModel" name="main" id="server/MainServer#main([Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="server/MainServer->server/DatiSicuriServant" source="//@children.0/@children.0" target="//@children.0/@children.2" targetEnd="//@children.0/@children.0/@sourceConnections.0/@children.1" label="//@children.0/@children.0/@sourceConnections.0/@children.2" sourceEnd="//@children.0/@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,66" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="129,26"/>
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Instantiate»" size="42,9" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.2/@sourceConnections.0" name="DatiSicuriPOA" location="28,28" size="112,121" id="server/DatiSicuriPOA" runTimeClassModel="_this(),_all_interfaces(Lorg.omg.PortableServer.POA;[B),_this(Lorg.omg.CORBA.ORB;),_invoke(Ljava.lang.String;Lorg.omg.CORBA.portable.InputStream;Lorg.omg.CORBA.portable.ResponseHandler;)">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="75,72">
+        <children xsi:type="editmodel:MethodEditModel" name="_all_interfaces" id="server/DatiSicuriPOA#_all_interfaces(Lorg.omg.PortableServer.POA;[B)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="_invoke" id="server/DatiSicuriPOA#_invoke(Ljava.lang.String;Lorg.omg.CORBA.portable.InputStream;Lorg.omg.CORBA.portable.ResponseHandler;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="_this" id="server/DatiSicuriPOA#_this()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="_this" id="server/DatiSicuriPOA#_this(Lorg.omg.CORBA.ORB;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.0/@sourceConnections.0" name="DatiSicuriServant" location="63,175" size="129,139" id="server/DatiSicuriServant" runTimeClassModel="leggiDato(Lcore.Handle;),addListener(Lclient.HandleListener;Ljava.lang.String;),pubblica(Lcore.Handle;Ljava.lang.String;),scriviDato(Lcore.Handle;I),riservaSpazio()">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="73,90">
+        <children xsi:type="editmodel:MethodEditModel" name="addListener" id="server/DatiSicuriServant#addListener(Lclient.HandleListener;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="leggiDato" id="server/DatiSicuriServant#leggiDato(Lcore.Handle;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="pubblica" id="server/DatiSicuriServant#pubblica(Lcore.Handle;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="riservaSpazio" id="server/DatiSicuriServant#riservaSpazio()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="scriviDato" id="server/DatiSicuriServant#scriviDato(Lcore.Handle;I)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="server/DatiSicuriPOA&lt;-server/DatiSicuriServant" source="//@children.0/@children.2" target="//@children.0/@children.1" targetEnd="//@children.0/@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@children.2/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="38,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="73,121"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" showAttributeProperty="true"/>
+    </children>
+    <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" showStereotype="true"/>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="core" location="20,350" size="344,282" id="core">
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@children.3/@sourceConnections.0" name="HandlePOA" location="25,33" size="98,121" id="core/HandlePOA" runTimeClassModel="_this(),_all_interfaces(Lorg.omg.PortableServer.POA;[B),_this(Lorg.omg.CORBA.ORB;),_invoke(Ljava.lang.String;Lorg.omg.CORBA.portable.InputStream;Lorg.omg.CORBA.portable.ResponseHandler;)">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="75,72">
+        <children xsi:type="editmodel:MethodEditModel" name="_all_interfaces" id="core/HandlePOA#_all_interfaces(Lorg.omg.PortableServer.POA;[B)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="_invoke" id="core/HandlePOA#_invoke(Ljava.lang.String;Lorg.omg.CORBA.portable.InputStream;Lorg.omg.CORBA.portable.ResponseHandler;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="_this" location="12,72" id="core/HandlePOA#_this()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="_this" id="core/HandlePOA#_this(Lorg.omg.CORBA.ORB;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@children.3/@sourceConnections.2" name="dato" location="154,29" size="146,139" id="core.HandlePackage/dato" runTimeClassModel="scrittura,dato(),lettura,dato(IZZ),id">
+      <children xsi:type="editmodel:CompartmentEditModel" size="77,54">
+        <children xsi:type="editmodel:AttributeEditModel" name="id" id="core.HandlePackage/dato#id"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="lettura" id="core.HandlePackage/dato#lettura"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="scrittura" id="core.HandlePackage/dato#scrittura"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="40,36">
+        <children xsi:type="editmodel:MethodEditModel" name="dato" id="core.HandlePackage/dato#dato(IZZ)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="dato" id="core.HandlePackage/dato#dato()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@children.3/@sourceConnections.1" name="HandleInterface" location="215,197" size="119,76" id="core/HandleInterface" runTimeClassModel="restringiPermessi()">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="87,18">
+        <children xsi:type="editmodel:MethodEditModel" name="restringiPermessi" id="core/HandleInterface#restringiPermessi()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="HandleImplementation" location="29,200" size="151,67" id="core/HandleImplementation" runTimeClassModel="restringiPermessi()">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="87,18">
+        <children xsi:type="editmodel:MethodEditModel" name="restringiPermessi" id="core/HandleImplementation#restringiPermessi()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="core/HandlePOA&lt;-core/HandleImplementation" source="//@children.1/@children.3" target="//@children.1/@children.0" targetEnd="//@children.1/@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@children.3/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="46,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="50,121"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="core/HandleInterface&lt;-core/HandleImplementation" source="//@children.1/@children.3" target="//@children.1/@children.2" targetEnd="//@children.1/@children.3/@sourceConnections.1/@children.1" sourceEnd="//@children.1/@children.3/@sourceConnections.1/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="151,33" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,36"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="core/HandleImplementation->core.HandlePackage/dato" source="//@children.1/@children.3" target="//@children.1/@children.1" targetEnd="//@children.1/@children.3/@sourceConnections.2/@children.1" label="//@children.1/@children.3/@sourceConnections.2/@children.2" sourceEnd="//@children.1/@children.3/@sourceConnections.2/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="137,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="12,139"/>
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Responsibility»" location="195,528" size="56,9" fontInfo="Arial-8-0" automaticRelocationAllowed="false" locationOnWireFromSource="2.0" distanceFromWire="-37.0" anchorKind="MiddlePart"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" showAttributeProperty="true"/>
+    </children>
+    <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" showStereotype="true"/>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="client" location="410,95" size="456,478" id="client">
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@children.3/@sourceConnections.0" name="HandleListenerPOA" location="30,48" size="138,121" id="client/HandleListenerPOA" runTimeClassModel="_this(),_all_interfaces(Lorg.omg.PortableServer.POA;[B),_this(Lorg.omg.CORBA.ORB;),_invoke(Ljava.lang.String;Lorg.omg.CORBA.portable.InputStream;Lorg.omg.CORBA.portable.ResponseHandler;)">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="75,72">
+        <children xsi:type="editmodel:MethodEditModel" name="_all_interfaces" id="client/HandleListenerPOA#_all_interfaces(Lorg.omg.PortableServer.POA;[B)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="_invoke" id="client/HandleListenerPOA#_invoke(Ljava.lang.String;Lorg.omg.CORBA.portable.InputStream;Lorg.omg.CORBA.portable.ResponseHandler;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="_this" id="client/HandleListenerPOA#_this()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="_this" id="client/HandleListenerPOA#_this(Lorg.omg.CORBA.ORB;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="MainClient" location="29,367" size="94,67" id="client/MainClient" runTimeClassModel="main([Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="43,18">
+        <children xsi:type="editmodel:MethodEditModel" name="main" id="client/MainClient#main([Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="client/MainClient->client/Client" source="//@children.2/@children.1" target="//@children.2/@children.2" targetEnd="//@children.2/@children.1/@sourceConnections.0/@children.1" label="//@children.2/@children.1/@sourceConnections.0/@children.2" sourceEnd="//@children.2/@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="76,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,129"/>
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Instantiate»" size="42,9" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.2/@children.3/@sourceConnections.1 //@children.2/@children.1/@sourceConnections.0" name="ClientInterface" location="124,216" size="113,130" id="client/ClientInterface" runTimeClassModel="pubblica(Ljava.lang.String;Ljava.lang.String;),scriviDato(Ljava.lang.String;I),leggiDato(Ljava.lang.String;),riservaSpazio()">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="73,72">
+        <children xsi:type="editmodel:MethodEditModel" name="scriviDato" id="client/ClientInterface#scriviDato(Ljava.lang.String;I)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="leggiDato" id="client/ClientInterface#leggiDato(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="riservaSpazio" id="client/ClientInterface#riservaSpazio()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="pubblica" id="client/ClientInterface#pubblica(Ljava.lang.String;Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="Client" location="284,155" size="109,139" id="client/Client" runTimeClassModel="pubblica(Ljava.lang.String;Ljava.lang.String;),scriviDato(Ljava.lang.String;I),notificaHandle(Lcore.Handle;),leggiDato(Ljava.lang.String;),riservaSpazio()">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="74,90">
+        <children xsi:type="editmodel:MethodEditModel" name="leggiDato" id="client/Client#leggiDato(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="notificaHandle" id="client/Client#notificaHandle(Lcore.Handle;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="pubblica" id="client/Client#pubblica(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="riservaSpazio" id="client/Client#riservaSpazio()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="scriviDato" id="client/Client#scriviDato(Ljava.lang.String;I)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="client/HandleListenerPOA&lt;-client/Client" source="//@children.2/@children.3" target="//@children.2/@children.0" targetEnd="//@children.2/@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@children.3/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,7" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="138,114"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="client/ClientInterface&lt;-client/Client" source="//@children.2/@children.3" target="//@children.2/@children.2" targetEnd="//@children.2/@children.3/@sourceConnections.1/@children.1" sourceEnd="//@children.2/@children.3/@sourceConnections.1/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,99" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="113,38"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" showAttributeProperty="true"/>
+    </children>
+    <packagePreferences xsi:type="editmodel:UMLClassDiagramPackagePreference" showStereotype="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" showInterfaceStereotype="true" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
