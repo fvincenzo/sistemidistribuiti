@@ -1,0 +1,32 @@
+module core {
+	interface Handle {
+	struct dato {
+		long id;
+		boolean lettura;
+		boolean scrittura;
+	};
+	long restringiPermessi();
+	};
+};
+
+module client{
+	interface HandleListener{
+		void notificaHandle(in core::Handle h);
+	};
+};
+
+module server {
+
+	exception ReadErrorException { };
+
+	interface DatiSicuri {
+		void addListener(in client::HandleListener l, in string id);
+		
+		core::Handle riservaSpazio();
+		long leggiDato (in core::Handle h) raises(ReadErrorException);
+		boolean scriviDato (in core::Handle h, in long dato);
+		
+		void pubblica(in core::Handle h, in string destinatario);
+		
+	};
+};
