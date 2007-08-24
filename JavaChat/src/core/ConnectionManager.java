@@ -1,10 +1,10 @@
 /**
  * JavaChat Project
  */
-package core;
+package src.core;
 
-import gui.MainGui;
-import gui.ChatApplicationNotifier;
+import src.gui.MainGui;
+import src.gui.ChatApplicationNotifier;
 
 import javax.jms.*;
 import javax.naming.*;
@@ -16,8 +16,8 @@ import java.util.Map;
 import java.util.StringTokenizer;
 //import java.util.Properties;
 
-import serverUtils.ChannelList;
-import utils.*;
+import src.serverUtils.ChannelList;
+import src.utils.*;
 
 /**
  * @author   Vincenzo Frascino

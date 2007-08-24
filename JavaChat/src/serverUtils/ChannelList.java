@@ -2,7 +2,7 @@
  * Created on Jan 5, 2007
  *
  */
-package serverUtils;
+package src.serverUtils;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

@@ -1,14 +1,14 @@
 /**
  * javaChat Project
  */
-package cli;
+package src.cli;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.util.*;
-import core.*;
+import src.core.*;
 
 /**
  * @author   Prof. Frascino

@@ -1,7 +1,7 @@
 /**
  * JavaChat Project
  */
-package core;
+package src.core;
 
 import javax.jms.*;
 

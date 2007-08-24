@@ -2,7 +2,7 @@
  * Created on Jan 8, 2007
  *
  */
-package gui;
+package src.gui;
 
 public interface ChatApplicationNotifier {
     public void textReceived(String text);

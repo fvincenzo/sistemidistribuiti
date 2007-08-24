@@ -2,7 +2,7 @@
  * Created on Jan 21, 2007
  *
  */
-package gui;
+package src.gui;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
-import core.JavaChatAdminService;
+import src.core.JavaChatAdminService;
 
 
 import java.awt.BorderLayout;
