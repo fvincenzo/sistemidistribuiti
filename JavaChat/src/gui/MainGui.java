@@ -2,7 +2,7 @@
  * Created on Jan 5, 2007
  *
  */
-package src.gui;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.event.*;

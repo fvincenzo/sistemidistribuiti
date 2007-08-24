@@ -2,7 +2,7 @@
  * Created on Jan 6, 2007
  *
  */
-package src.serverUtils;
+package serverUtils;
 
 import java.rmi.Naming;
 

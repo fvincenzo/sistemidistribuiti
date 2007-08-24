@@ -1,9 +1,9 @@
 /**
  * JavaChat Project
  */
-package src.cli;
+package cli;
 
-import src.core.*;
+import core.*;
 import java.io.InputStreamReader;
 import java.io.BufferedReader ;
 import java.io.IOException;
