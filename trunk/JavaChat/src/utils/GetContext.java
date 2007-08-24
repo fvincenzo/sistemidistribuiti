@@ -1,7 +1,7 @@
 /**
  * JavaChat Project
  */
-package utils;
+package src.utils;
 
 import javax.naming.InitialContext;
 import javax.naming.Context;

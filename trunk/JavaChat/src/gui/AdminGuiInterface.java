@@ -2,7 +2,7 @@
  * Created on 12/mar/07
  * 
  */
-package gui;
+package src.gui;
 
 public interface AdminGuiInterface {
     public void addLine(String chat, boolean privato);
