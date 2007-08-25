@@ -15,7 +15,7 @@ import java.util.Set;
 public class ChannelListServer extends UnicastRemoteObject implements ChannelListAdmin {
 
     private Set<String> list = null;
-    
+    //TODO rimuovere questa parte perchè non ha senso che esista un main
     public static void main(String[] args) throws Exception{
         try{
             ChannelListAdmin server = new ChannelListServer();
