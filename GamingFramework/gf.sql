@@ -1,4 +1,19 @@
 #
+#Prima bisogna creare un database
+#
+
+create database arena;
+
+#
+#Poi si usa quel database
+#
+
+use arena;
+
+#
+#Infine si creano le tabelle
+#
+#
 #Struttura della tabella `accounts`
 #
 

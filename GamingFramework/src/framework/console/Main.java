@@ -72,8 +72,10 @@ public class Main {
 		cfg.port = 1099;
 		cfg.workspace = "/home/gabrielknight/workspace/GamingFramework";
 		cfg.dbUrl = "localhost:3306/arena";
-		cfg.dbUser = "root";
-		cfg.dbPassword = "";
+		// Meglio non usare l'utente root ma un utente fatto apposta per 
+		// il database. Ricordati di garntirgli tutti i privilegi sul db arena
+        cfg.dbUser = "provauser";
+		cfg.dbPassword = "prova";
 		if(as.init(cfg)) {
 			shell = new Shell();
 			shell.setSelectedNode(as.getRoot());
