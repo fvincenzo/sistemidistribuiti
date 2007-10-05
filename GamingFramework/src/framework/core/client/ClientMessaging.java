@@ -10,12 +10,16 @@ import framework.core.messaging.MessageService;
 
 public class ClientMessaging implements Runnable{
 	
-	private String host = "localhost:1099";
+	private ClientConfig conf;
+	
+	private String host;
 	
 	private MessageServerInterface p;
 	
 	public ClientMessaging() {
 		try {
+			conf = ClientConfig.getClientConfig();
+			host = conf.host+":"+conf.rmiport;
 			p = (MessageServerInterface) Naming.lookup("//"+host+"/MessageServer");
 		} catch (Exception e) {
 			// TODO: handle exception

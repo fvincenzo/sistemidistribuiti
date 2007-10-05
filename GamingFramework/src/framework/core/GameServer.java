@@ -42,6 +42,7 @@ public class GameServer extends UnicastRemoteObject implements LoginServer {
 	//FileSystem del server
 	private Node home;
 	private Node etc;
+	private Node fileserver;
 	private LogHandler log;
 	
 	private GameConfiguration configuration;
@@ -72,6 +73,7 @@ public class GameServer extends UnicastRemoteObject implements LoginServer {
 			//Crea il server filesystem
 			etc = server.addChild(new Node("etc"));
 			home = server.addChild(new Node("home"));
+			fileserver = server.addChild(new Node("fileserver"));
 		} else throw new InstantiationException();
 	}
 	/**
@@ -138,6 +140,9 @@ public class GameServer extends UnicastRemoteObject implements LoginServer {
 				String pingpong ="//localhost:" + cfg.port +"/PingPongServer" ;
 				Naming.rebind(pingpong, PingPongServer.init());
 				log("PingPongServer: in ascolto su " + pingpong);
+				String fileserver ="//localhost:" + cfg.port +"/FileServer" ;
+				Naming.rebind(fileserver, FileServer.init());
+				log("FileServer: in ascolto su " + fileserver);
 				log(":: GameServer init() ok.");
 				return true;
 			} else {

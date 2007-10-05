@@ -17,17 +17,19 @@ import framework.core.messaging.*;
  */
 public class ClientPing implements Runnable{
 	
-	private String host = "localhost:1099";
+	private ClientConfig conf;
 	
-	private String username;
-	
+	private String host;
+		
 	private PingPongServerInterface p;
 	
 	private String casa;
 	
-	public ClientPing(String username) {
+	public ClientPing() {
 		try {
-			this.username = username;
+
+			conf = ClientConfig.getClientConfig();
+			host = conf.host+":"+conf.rmiport;
 			p = (PingPongServerInterface) Naming.lookup("//"+host+"/PingPongServer");
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -42,7 +44,7 @@ public class ClientPing implements Runnable{
 			
 			while(true) {
 			
-					m.append(username+".PING");
+					m.append(conf.username+".PING");
 					//System.out.println("Client Message:PING\n");
 					try {
 						Thread.sleep(15000);

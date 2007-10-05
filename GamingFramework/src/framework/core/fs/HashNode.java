@@ -1,20 +1,14 @@
 package framework.core.fs;
 
-/**
- * Astrae un file nel Filesystem Virtuale
- * 
- * @author Vincenzo Frascino
- *
- */
-public class FileNode extends Node {
+public class HashNode extends Node {
+
+private UFile file;
 	
-	private UFile file;
-	
-	public FileNode(UFile file) throws NullPointerException{
+	public HashNode(UFile file) throws NullPointerException{
 			
 		if(file!=null) {
 			this.file = file;
-			setName(file.getName());
+			setName(file.getHash());
 		} else throw new NullPointerException();
 			
 	}
@@ -35,4 +29,5 @@ public class FileNode extends Node {
 		
 	}
 
+	
 }
