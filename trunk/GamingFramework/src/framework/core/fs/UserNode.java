@@ -22,6 +22,7 @@ public class UserNode extends Node {
 			setName(u.getAccount().getName());
 			addChild(new Node("files"));
 			addChild(new Node("messages"));
+			addChild(new Node("hashregistry"));
 		} else throw new NullPointerException();
 	}
 	/**

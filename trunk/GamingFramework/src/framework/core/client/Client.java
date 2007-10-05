@@ -5,6 +5,8 @@ import java.util.*;
 import java.lang.reflect.*;
 import java.rmi.server.*;
 
+import framework.core.client.transfer.TransferClient;
+import framework.core.client.transfer.TransferServer;
 import framework.core.fs.ParsedCmd;
 import framework.core.fs.Shell;
 import framework.core.logic.LogHandler;
@@ -98,10 +100,15 @@ public class Client implements LogHandler {
 				core.server = ls.login(core, username, password);
 				if(core.server != null) {
 					core.host = host;
+					//Genero la Configurazione del Client
+					ClientConfig conf = ClientConfig.getClientConfig();
+					conf.username = username;
 					//Avvio del Client dei Messaggi
 					new Thread(new ClientMessaging()).start();
 					//Avvio del Client Ping-Pong
-					new Thread(new ClientPing(username)).start();
+					new Thread(new ClientPing()).start();
+					//Lancio il server di FileSharing
+                    new Thread(new ClientFile()).start();
 					res = true;
 				} 
 			} catch(Exception e) {
@@ -229,6 +236,59 @@ public class Client implements LogHandler {
 		} catch(Exception e) {
 		}
         }
+    /**
+     * Metodo find per cercare file remoti
+     */
+    public void find(String text) {
+    	//System.out.println("find invocato");
+    	try {
+			Dictionary hash = core.server.find(text);
+			Enumeration elements = hash.elements();
+			while(elements.hasMoreElements()) {
+				System.out.println((String)elements.nextElement());
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	
+    }
+    /**
+     * Metodo download per scaricare file remoti
+     */
+    public void download(String text) {
+    	try {
+			Dictionary files = core.server.find(text);
+			Enumeration IPs = files.keys();
+			TransferClient tclient = new TransferClient();
+			tclient.reaquestFile((String)IPs.nextElement(), text);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    }
+    /**
+     * Metodo list per ottenere la lista dei file
+     */
+    public void list(String text) {
+    	try {
+			Dictionary filelist = core.server.listoffile(text);
+			Enumeration enf = filelist.elements();
+			while (enf.hasMoreElements()) {
+				System.out.println(enf.nextElement());
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    }
+    /**
+     * Metodo che serve ad ottenere la lista di Ip
+     */
+    public void myip() {
+    	Vector<String> v = ClientIpList.ipList();
+    	Enumeration enip = v.elements();
+    	while(enip.hasMoreElements()) {
+    		System.out.println(enip.nextElement());
+    	}
+    }
 	/**
 	 * Crea un nuovo torneo.
 	 * @param name il nome del torneo.
@@ -567,10 +627,38 @@ public class Client implements LogHandler {
 				}
 			}
 		}
-                public void cmdSay(ParsedCmd cmd) {
-                    if(client.isLogged()) {
-                        client.say(cmd.Params[0]);
-                    }
-                }
+        
+		public void cmdSay(ParsedCmd cmd) {
+            if(client.isLogged()) {
+                client.say(cmd.Params[0]);
+            }
+        }
+		
+		public void cmdFind(ParsedCmd cmd) {
+			if(client.isLogged()){
+				//System.out.println("find invocato");
+				client.find(cmd.Params[0]);
+			}
+		}
+               
+		public void cmdDownload(ParsedCmd cmd) {
+			if(client.isLogged()){
+				//System.out.println("download invocato");
+				client.download(cmd.Params[0]);
+			}
+		}
+		
+		public void cmdList(ParsedCmd cmd) {
+			if(client.isLogged()){
+				//System.out.println("list invocato");
+				client.list(cmd.Params[0]);
+			}
+		}
+		
+		public void cmdMyip(ParsedCmd cmd) {
+				//System.out.println("find invocato");
+				client.myip();
+		}
+              
 	}
 }

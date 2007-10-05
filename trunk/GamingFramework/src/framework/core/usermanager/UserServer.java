@@ -40,4 +40,6 @@ public interface UserServer extends Remote {
 	public Dictionary getTournamentData(String name) throws RemoteException;
 	public boolean subscribe(String name) throws RemoteException;
 	public boolean start(String tournamentName) throws RemoteException;
+	public Dictionary find(String Name) throws RemoteException;
+	public Dictionary listoffile(String users) throws RemoteException;
 }

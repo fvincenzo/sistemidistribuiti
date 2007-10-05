@@ -4,7 +4,10 @@ import java.rmi.server.*;
 import java.rmi.*;
 
 import framework.core.GameServer;
+import framework.core.fs.FileNode;
+import framework.core.fs.HashNode;
 import framework.core.fs.Node;
+import framework.core.fs.UFile;
 import framework.core.fs.UserNode;
 import framework.core.logic.Game;
 import framework.core.logic.Tournament;
@@ -204,6 +207,68 @@ public class User extends UnicastRemoteObject implements UserServer {
 		    return true;
 		}
 		return false;
+	}
+	
+	public Dictionary find(String Name) throws RemoteException{
+		
+		Hashtable users = new Hashtable();
+		String hashcode = new String();
+		GameServer game = GameServer.getInstance();
+		FileNode  file = (FileNode)game.getRoot().find("/server/fileserver/"+Name);
+		//System.out.println(file.getUFile().getOwner());
+		//users.put(String.valueOf(1), file.getUFile().getOwner());
+		hashcode = file.getUFile().getHash();
+		
+		Enumeration en = game.getRoot().find("/users").children();
+		
+		while (en.hasMoreElements()) {
+			//System.out.println("Sono qui!!"+hashcode);
+			String username = (String)((UserNode)en.nextElement()).getUser().getAccount().getName();
+			//System.out.println(username);
+			Node hash = (Node) game.getRoot().find("/users/"+username+"/hashregistry");
+			Enumeration enh = hash.children();
+			while(enh.hasMoreElements()) {
+				UFile file1 = ((HashNode)enh.nextElement()).getUFile();
+				String hash1 = file1.getHash();
+				//System.out.println("hash.equal :"+hash1.equals(hashcode));
+				if(hash1.equals(hashcode)) {
+					//System.out.println(file1.getOwner());
+					users.put(file1.getIP(), file1.getOwner());
+					break;
+				}
+			}
+		}
+		
+		return users;
+		
+	}
+	
+	public Dictionary listoffile(String users) throws RemoteException{
+		
+		GameServer game = GameServer.getInstance();
+		Hashtable result = new Hashtable();
+		
+		if(users.equals("all")) {
+			Node fileserver = game.getRoot().find("/server/fileserver");
+			Enumeration enf = fileserver.children();
+			while(enf.hasMoreElements()) {
+				FileNode f = (FileNode)enf.nextElement();
+				result.put(f.getUFile().getHash(), f.getUFile().getName());
+			}
+		} else
+		if (users.equals(null)) {
+			result = null;
+		} else {
+			Node fileserver = game.getRoot().find("/users/"+users+"/files");
+			Enumeration enf = fileserver.children();
+			while(enf.hasMoreElements()) {
+				FileNode f = (FileNode)enf.nextElement();
+				result.put(f.getUFile().getHash(), f.getUFile().getName());
+			}
+		}
+		
+		return result;
+		
 	}
 	
 }
