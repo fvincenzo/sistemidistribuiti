@@ -72,6 +72,8 @@ public class Main {
 		cfg.port = 1099;
 		cfg.workspace = "/home/gabrielknight/workspace/GamingFramework";
 		cfg.dbUrl = "localhost:3306/arena";
+		//cfg.dbUser = "root";
+		//cfg.dbPassword = "";
 		// Meglio non usare l'utente root ma un utente fatto apposta per 
 		// il database. Ricordati di garntirgli tutti i privilegi sul db arena
         cfg.dbUser = "provauser";
@@ -80,7 +82,7 @@ public class Main {
 			shell = new Shell();
 			shell.setSelectedNode(as.getRoot());
 		} else {
-			// L'avvio del server ï¿½ fallito, rimetti tutto come prima.
+			// L'avvio del server è fallito, rimetti tutto come prima.
 			//g.remove(); 
 		}
 	}
