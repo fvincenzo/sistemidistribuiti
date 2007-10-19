@@ -21,6 +21,7 @@ import utils.*;
 
 /**
  * @author   Vincenzo Frascino
+ * @author   Nicolas Tagliani
  */
 
 public class ConnectionManager implements ChannelManagerInterface,

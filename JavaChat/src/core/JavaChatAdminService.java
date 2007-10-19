@@ -14,11 +14,18 @@ import gui.AdminGuiInterface;
 
 import java.net.ConnectException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.*;
 
 import javax.jms.JMSException;
+import javax.naming.InitialContext;
+import javax.naming.NameClassPair;
+import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
+import javax.naming.NoInitialContextException;
 
 
 /**
@@ -36,7 +43,6 @@ public class JavaChatAdminService {
     private AdminGuiInterface guiInterface;
 
     private ChannelListAdmin rmiServer;
-
     /**
      * @uml.property  name="address"
      */
@@ -54,160 +60,210 @@ public class JavaChatAdminService {
      */
     private int joramPort = 16010;
 
+    private Registry myRegistry;
+
     public JavaChatAdminService() {
     }
 
 
     public JavaChatAdminService(String address, int joramPort, String userName,String password) {
-        this.address = address;
-        this.userName = userName;
-        this.password = password;
-        this.joramPort = joramPort;
+	this.address = address;
+	this.userName = userName;
+	this.password = password;
+	this.joramPort = joramPort;
     }
 
     public boolean initServer(){
-        
-            /*
-             * Installo il servizio rmi
-             */
-        try {
-            ChannelListAdmin server = new ChannelListServer();
-            Naming.rebind("ChannelList", server);
-            /*
-             * Controllo che esita un servizio rmi
-             */
-            rmiServer = (ChannelListAdmin)Naming.lookup("ChannelList");
-            AdminModule.connect(address, joramPort, userName, password,60);
+	/*
+	 * Faccio partire rmiregistry
+	 */
+	/*
+	try {
+	    myRegistry = LocateRegistry.createRegistry(1099);
+	    
+	 }
+	catch (RemoteException e){
+	    try {
+		myRegistry = LocateRegistry.getRegistry(1099);
+	    }
+	    catch (RemoteException re){
+		//TODO log info
+		System.out.println("Impossible inizializzare il server");
+		return false;
+		
+	    }
+	}
+	*/
+	
+	/*
+	 * Installo il servizio rmi
+	 */
+	 try {
+	     try {
+	     rmiServer = (ChannelListAdmin)Naming.lookup("rmi://127.0.0.1/"+"ChannelList");
+	     }
+	     catch (NotBoundException e){
+		 ChannelListAdmin server = new ChannelListServer();
+		 Naming.rebind("ChannelList", server);
+		 
+		 rmiServer = (ChannelListAdmin)Naming.lookup("rmi://127.0.0.1/"+"ChannelList");
+		 }
+	     /*
+	      * Controllo che esita un servizio rmi
+	      */
 
-            User.create("anonymous", "anonymous", 0);
-        }
-        catch (Exception rem){
-            return false;
-        }
-            
-            try {
-                jndiCtx = new javax.naming.InitialContext();
-                jndiCtx.lookup("JavaChat");
-            
-            connFactory = TopicTcpConnectionFactory.create(address, 16010);
+	     /*
+	      * Mi collego al sistema Joram
+	      */
 
-            jndiCtx.bind("JavaChat", connFactory);
+	     AdminModule.connect(address, joramPort, userName, password,10);
+	     
+	     User.create("anonymous", "anonymous", 0);
+	     jndiCtx = new javax.naming.InitialContext();
 
-            return true;
-            } catch (NamingException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                return false;
-            }  
-       
-  
+	    /*
+	     
+	      try {
+		 jndiCtx.lookup("JavaChat");
+	     }
+	     //catch (NoInitialContextException e){*/
+	     try {
+	     connFactory = (ConnectionFactory)jndiCtx.lookup("JavaChat");
+	     }
+	     catch (Exception e){
+//		 e.printStackTrace();
+		 connFactory = TopicTcpConnectionFactory.create(address, 16010);
+		 jndiCtx.rebind("JavaChat", connFactory);
+	     }
+//	     }
+	     List l = AdminModule.getDestinations();
+	     Iterator i = l.iterator();
+	     
+	     while (i.hasNext()){
+		 String s = ((Destination)i.next()).getAdminName();
+		 if (rmiServer.existsName(s)) {
+		     guiInterface.addLine(s, false);
+		 }
+		 else {
+		     guiInterface.addLine(s, true);
+		 }
+		 
+	     }
+	     return true;
+	 } catch (Exception e) {
+	     // TODO Auto-generated catch block
+	     e.printStackTrace();
+	     return false;
+	 }  
+
+
     }
 
 
     public boolean createChat(String name, boolean priv) {
-        try {
-            Destination dest;
-            dest = org.objectweb.joram.client.jms.Topic.create(name);
+	try {
+	    Destination dest;
+	    dest = org.objectweb.joram.client.jms.Topic.create(name);
 
-            dest.setFreeReading();
-            dest.setFreeWriting();
+	    dest.setFreeReading();
+	    dest.setFreeWriting();
 
-            jndiCtx.bind(name , dest);
-            if (!priv) {
-                rmiServer.addChannel(name);
-            }
-            guiInterface.addLine(name, priv);
-            return true;
-        }catch (Exception e){
-            System.out.println(e.getLocalizedMessage());
-            return false;
-        }
+	    jndiCtx.bind(name , dest);
+	    if (!priv) {
+		rmiServer.addChannel(name);
+	    }
+	    guiInterface.addLine(name, priv);
+	    return true;
+	}catch (Exception e){
+	    System.out.println(e.getLocalizedMessage());
+	    return false;
+	}
     }
 
     public boolean deleteChat (String chat){
-        try{
-            try {
-                Destination dest = (Destination)jndiCtx.lookup(chat);
-                dest.delete();
-                jndiCtx.unbind(chat);
-            }
-            catch (NamingException ex){
-                System.out.println(ex.getLocalizedMessage());
-                return false;
-            }
+	try{
+	    try {
+		Destination dest = (Destination)jndiCtx.lookup(chat);
+		dest.delete();
+		jndiCtx.unbind(chat);
+	    }
+	    catch (NamingException ex){
+		System.out.println(ex.getLocalizedMessage());
+		return false;
+	    }
 
-            rmiServer.removeChannel(chat);
-            guiInterface.deleteLine(chat);
-            return true;
+	    rmiServer.removeChannel(chat);
+	    guiInterface.deleteLine(chat);
+	    return true;
 
-        }catch (RemoteException e){
-            System.out.println(e.getLocalizedMessage());
-            return false;
-        }
-        catch (AdminException e){
-            System.out.println(e.getLocalizedMessage());
-            return false;
-        }
-        catch (ConnectException e){
-            System.out.println(e.getLocalizedMessage());
-            return false;
-        }
-        catch (JMSException e){
-            System.out.println(e.getLocalizedMessage());
-            return false;
-        }
+	}catch (RemoteException e){
+	    System.out.println(e.getLocalizedMessage());
+	    return false;
+	}
+	catch (AdminException e){
+	    System.out.println(e.getLocalizedMessage());
+	    return false;
+	}
+	catch (ConnectException e){
+	    System.out.println(e.getLocalizedMessage());
+	    return false;
+	}
+	catch (JMSException e){
+	    System.out.println(e.getLocalizedMessage());
+	    return false;
+	}
 
     }
 
     public boolean setPrivate(String chat, boolean privato){
-        try {
-            if (privato){
-                rmiServer.removeChannel(chat);
-            }
-            else {
-                rmiServer.addChannel(chat);
-            }
-            guiInterface.deleteLine(chat);
-            guiInterface.addLine(chat, privato);
-            return true;
-        } catch (RemoteException e){
-            System.out.println(e.getLocalizedMessage());
-            return false;
-        }
+	try {
+	    if (privato){
+		rmiServer.removeChannel(chat);
+	    }
+	    else {
+		rmiServer.addChannel(chat);
+	    }
+	    guiInterface.deleteLine(chat);
+	    guiInterface.addLine(chat, privato);
+	    return true;
+	} catch (RemoteException e){
+	    System.out.println(e.getLocalizedMessage());
+	    return false;
+	}
 
     }
 
     public boolean disconnect() {
 
-        try {
+	try {
 
-            jndiCtx.close();
-            AdminModule.disconnect();
-            return true;
+	    jndiCtx.close();
+	    AdminModule.disconnect();
+	    return true;
 
-        } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
-            return false;
-        }
+	} catch (Exception e) {
+	    System.out.println(e.getLocalizedMessage());
+	    return false;
+	}
 
     }
 
 
 
     public void setInterfaccia(AdminGuiInterface gui){
-        guiInterface = gui;
+	guiInterface = gui;
     }
     /*
      *********************************************************
      *           getter e setter dei parametri
      ********************************************************* 
      */
-    /**
-     * @return  the address
-     * @uml.property  name="address"
-     */
-    public String getAddress() {
-        return address;
+     /**
+      * @return  the address
+      * @uml.property  name="address"
+      */
+      public String getAddress() {
+	return address;
     }
 
 
@@ -215,62 +271,62 @@ public class JavaChatAdminService {
      * @param address  the address to set
      * @uml.property  name="address"
      */
-    public void setAddress(String address) {
-        this.address = address;
-    }
+      public void setAddress(String address) {
+	  this.address = address;
+      }
 
 
-    /**
-     * @return  the joramPort
-     * @uml.property  name="joramPort"
-     */
-    public int getJoramPort() {
-        return joramPort;
-    }
+      /**
+       * @return  the joramPort
+       * @uml.property  name="joramPort"
+       */
+      public int getJoramPort() {
+	  return joramPort;
+      }
 
 
-    /**
-     * @param joramPort  the joramPort to set
-     * @uml.property  name="joramPort"
-     */
-    public void setJoramPort(int joramPort) {
-        this.joramPort = joramPort;
-    }
+      /**
+       * @param joramPort  the joramPort to set
+       * @uml.property  name="joramPort"
+       */
+      public void setJoramPort(int joramPort) {
+	  this.joramPort = joramPort;
+      }
 
 
-    /**
-     * @return  the password
-     * @uml.property  name="password"
-     */
-    public String getPassword() {
-        return password;
-    }
+      /**
+       * @return  the password
+       * @uml.property  name="password"
+       */
+      public String getPassword() {
+	  return password;
+      }
 
 
-    /**
-     * @param password  the password to set
-     * @uml.property  name="password"
-     */
-    public void setPassword(String password) {
-        this.password = password;
-    }
+      /**
+       * @param password  the password to set
+       * @uml.property  name="password"
+       */
+      public void setPassword(String password) {
+	  this.password = password;
+      }
 
 
-    /**
-     * @return  the userName
-     * @uml.property  name="userName"
-     */
-    public String getUserName() {
-        return userName;
-    }
+      /**
+       * @return  the userName
+       * @uml.property  name="userName"
+       */
+      public String getUserName() {
+	  return userName;
+      }
 
 
-    /**
-     * @param userName  the userName to set
-     * @uml.property  name="userName"
-     */
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
+      /**
+       * @param userName  the userName to set
+       * @uml.property  name="userName"
+       */
+      public void setUserName(String userName) {
+	  this.userName = userName;
+      }
 
 }

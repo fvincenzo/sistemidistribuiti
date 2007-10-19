@@ -57,5 +57,8 @@ public class ChannelListServer extends UnicastRemoteObject implements ChannelLis
 //        new String[1];
         return list.toArray(a);
     }
+    public synchronized boolean existsName(String n) throws RemoteException {
+	return list.contains(n);
+    }
 
 }

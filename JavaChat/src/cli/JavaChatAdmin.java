@@ -11,7 +11,8 @@ import java.util.*;
 import core.*;
 
 /**
- * @author   Prof. Frascino
+ * @author   Vincenzo Frascino
+ * @author   Nicolas Tagliani
  */
 public class JavaChatAdmin {
 
