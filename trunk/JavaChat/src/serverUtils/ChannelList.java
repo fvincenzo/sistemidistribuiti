@@ -10,5 +10,7 @@ import java.rmi.RemoteException;
 public interface ChannelList extends Remote{
 
     public String[] getAllChannels() throws RemoteException;
+    
+    public boolean existsName(String s) throws RemoteException; 
 
 }
