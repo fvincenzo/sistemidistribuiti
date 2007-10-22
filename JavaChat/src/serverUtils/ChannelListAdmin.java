@@ -12,4 +12,5 @@ public interface ChannelListAdmin extends ChannelList{
 
     public boolean removeChannel(String channel) throws RemoteException;
 
+    public boolean existsName(String s) throws RemoteException;
 }
