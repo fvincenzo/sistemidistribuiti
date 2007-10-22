@@ -6,6 +6,8 @@ package gui;
 
 public interface AdminGuiInterface {
     public void addLine(String chat, boolean privato);
+    public void editLine(String chat, boolean privato);
     public void deleteLine(String chat);
+    
 
 }
