@@ -97,6 +97,7 @@ public class AdminGui extends JFrame implements ActionListener, MouseListener, A
 	adminService = new JavaChatAdminService();
 	adminService.setInterfaccia(this);
 	setPanel = new SettingPanel(adminService);
+//	setPanel = new SettingPanel(adminService);
 
 	tabella.addMouseListener(this);
 

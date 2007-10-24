@@ -7,6 +7,8 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
@@ -32,7 +34,7 @@ import serverUtils.ChannelList;
 /**
  * @author   noname
  */
-public class MyChannelListFrame extends JInternalFrame implements KeyListener {
+public class MyChannelListFrame extends JInternalFrame implements KeyListener, ActionListener {
 
     private JList lista = new JList();
     private JTextField address = new JTextField();
@@ -68,7 +70,7 @@ public class MyChannelListFrame extends JInternalFrame implements KeyListener {
         south.add(address, BorderLayout.CENTER);
         address.addKeyListener(this);
         //  address.setMinimumSize(new Dimension(300, 25));
-
+        connect.addActionListener(this);
         south.add(connect, BorderLayout.EAST);
 
         main.add(south, BorderLayout.SOUTH);
@@ -145,12 +147,24 @@ public class MyChannelListFrame extends JInternalFrame implements KeyListener {
             return false;
         }
     }
+    
 
+    public void updateList(){
+	try {
+          String[] l = list.getAllChannels();
+          lista.setListData(l);
+      } catch (Exception e) {
+          // TODO Auto-generated catch block
+          String[] s = {"Error occurred on server "+serverAddress,"Try to contact the administrator"};
+          lista.setListData(s);
+      }
+    }
+    
     public void keyPressed(KeyEvent arg0) {
         if (arg0.getKeyCode() == KeyEvent.VK_ENTER){
             String text = address.getText();
-            if (!text.equals("") ){
-                mainGui.openChatWindow(address.getText());
+            if (!text.trim().equals("") ){
+                mainGui.openChatWindow(address.getText().trim());
                 address.setText("");
             }
         }
@@ -162,6 +176,17 @@ public class MyChannelListFrame extends JInternalFrame implements KeyListener {
 
     public void keyTyped(KeyEvent arg0) {
         // TODO Implementare il metodo keyTyped
+    }
+
+    public void actionPerformed(ActionEvent e) {
+	if (e.getSource() == (JButton)connect){
+	    String text = address.getText();
+            if (!text.trim().equals("") ){
+                mainGui.openChatWindow(address.getText().trim());
+                address.setText("");
+            }
+	}
+	
     }
 
 }
