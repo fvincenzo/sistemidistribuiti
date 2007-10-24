@@ -24,8 +24,7 @@ import utils.*;
  * @author   Nicolas Tagliani
  */
 
-public class ConnectionManager implements ChannelManagerInterface,
-		ConnectionManagerInterface {
+public class Channel implements ChannelInterface {
 
 	//Connection Factory
 	private ConnectionFactory conFactory;
@@ -47,14 +46,16 @@ public class ConnectionManager implements ChannelManagerInterface,
     private boolean login = true;
     //Flag to control the change nick phase
     private boolean change = false;
+    //Flag to control the change nick phase
+    private boolean hello = false;
     //Vector Clock
-    private Map<String, Integer> vectorClock = new Hashtable<String, Integer>();
+//    private Map<String, Integer> vectorClock = new Hashtable<String, Integer>();
     
     private ChatApplicationNotifier notifier = null;
 	/* (non-Javadoc)
 	 * @see core.connectionManagerInterface#connect(java.lang.String)
 	 */
-	private ConnectionManager(String topicName, String username) throws Exception {
+	private Channel(String topicName, String username) throws Exception {
         
         InitialContext jndi = null;
         
@@ -94,9 +95,9 @@ public class ConnectionManager implements ChannelManagerInterface,
         message.setText("/login "+userName);
         message.setStringProperty("User", userName);
         this.login = true;
-        userList.add(userName);
+        
         pub.send(message);
-        vectorClock.put(username, 0);
+//        vectorClock.put(username, 0);
         
     }
     public  void setTextReceiver(ChatApplicationNotifier recv){
@@ -105,10 +106,10 @@ public class ConnectionManager implements ChannelManagerInterface,
 	/* (non-Javadoc)
 	 * @see core.connectionManagerInterface#connect(java.lang.String)
 	 */
-	public static ConnectionManager connect(String topicName, String username) throws Exception{
+	public static Channel connect(String topicName, String username) throws Exception{
 		
 		connections++;  //non capisco a cosa serve questo contatore
-		return new ConnectionManager(topicName,username);
+		return new Channel(topicName,username);
 	
 	}
 
@@ -150,7 +151,7 @@ public class ConnectionManager implements ChannelManagerInterface,
 	/* (non-Javadoc)
 	 * @see core.connectionManagerInterface#login(java.lang.String)
 	 */
-	public ChannelManagerInterface login(String channel) {
+	public ChannelInterface login(String channel) {
 		// TODO decidere se serve...
 		return null;
 	}
@@ -167,11 +168,12 @@ public class ConnectionManager implements ChannelManagerInterface,
 	public synchronized void sendText(String Text) throws JMSException{
 		//TODO Sistemare l'object message
         ObjectMessage message1 = pubSession.createObjectMessage();
-		TextMessage message = pubSession.createTextMessage( );
-        message1.setStringProperty("Text", Text);
-        message1.setStringProperty("User", userName);
+	TextMessage message = pubSession.createTextMessage( );
+//        message1.setStringProperty("Text", Text);
+//        message1.setStringProperty("User", userName);
         message.setText(Text);
         message.setStringProperty("User", userName);
+ /*  
         vectorClock.put(userName, vectorClock.get(userName)+1);
         message1.setObjectProperty("VectorClock", vectorClock);
 
@@ -186,6 +188,7 @@ public class ConnectionManager implements ChannelManagerInterface,
         message.setStringProperty("vecUsers", users);
         message.setStringProperty("vecValues", clocks);
         pub.send(message1);
+     */   
         pub.send(message);
 	
 	}
@@ -196,11 +199,11 @@ public class ConnectionManager implements ChannelManagerInterface,
 	public synchronized void onMessage(Message message) {
 		//TODO Ricevere l'objectmessage e sistemare
 		try {
-            ObjectMessage objectMessage = (ObjectMessage) message;
+//            ObjectMessage objectMessage = (ObjectMessage) message;
             
             TextMessage textMessage = (TextMessage) message;
             String text = textMessage.getText( );
-            String text1 = objectMessage.getStringProperty("Text");
+//            String text1 = objectMessage.getStringProperty("Text");
             
             if (text.startsWith("/login") ){
                 //salto fino allo prima lettera del nome
@@ -208,18 +211,32 @@ public class ConnectionManager implements ChannelManagerInterface,
                                 
                 if (newUser.equals(userName) ){  //O sono io o √® qualcuno con il mio nick
                     if (login) {
+                	/*
+                	 * login true se il messaggio l'ho inviato io 
+                	 * mi inserisco nella lista degli utenti
+                	 */
+                	userList.add(userName);
                         notifier.userJoin(userName);
                         login = false;
                     }
                     else {
+                	/*
+                	 * non ho inviato io il messaggio di login
+                	 * un'altro utente cerca di entrare col mio nick gli notifico che c'ero prima io
+                	 */
                         change = true;
                         sendText("/change "+newUser);
                     }
                 }
                 else {
+                    /*
+                     * L'utente per me potrebbe stare nella chat perchè non ha il mio nick
+                     * gli rispondo con un hello
+                     */
+//                    hello = true;
                     sendText("/hello "+userName);
-                    
-
+                    userList.add(newUser);
+                    notifier.userJoin(newUser); 
                 }
                 
             } else if (text.startsWith("/bye")) {
@@ -228,6 +245,7 @@ public class ConnectionManager implements ChannelManagerInterface,
                 if (notifier!=null) notifier.userPart(newUser);
                 
             } else if(text.startsWith("/hello")) {
+
                 String newUser = text.substring(7);
                 userList.add(newUser);
                 if (notifier!=null) notifier.userJoin(newUser);
@@ -239,11 +257,12 @@ public class ConnectionManager implements ChannelManagerInterface,
                 if (change) //L'ho mandato io questo messaggio
                     change = false;
                 else { //non l'ho mandato io
-                    //TODO aggiungere la segnalazione
+                    //TODO aggiungere la segnalazione grafica
                     System.out.println("Username gia' in uso!!");
                     disconnect();
                 }
-            } else {
+            } 
+           /* else {
                 vectorClock.clear();
 //                String users = textMessage.getStringProperty("vecUsers");
 //                String clocks = textMessage.getStringProperty("vecValues");
@@ -254,9 +273,11 @@ public class ConnectionManager implements ChannelManagerInterface,
                    vectorClock.put(strokUsers.nextToken(), Integer.parseInt(strokValues.nextToken()) ); 
                }
                 
-               if (notifier == null) System.out.println(textMessage.getStringProperty("User") + ": " + text);
-               else notifier.textReceived(textMessage.getStringProperty("User") + ": " + text);
-            }
+              if (notifier == null) System.out.println(textMessage.getStringProperty("User") + ": " + text);
+               */
+            else notifier.textReceived(textMessage.getStringProperty("User"), text);
+            
+            
         } catch (JMSException e) {
             e.printStackTrace( );
         }

@@ -5,6 +5,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.*;
 import java.beans.PropertyVetoException;
 import java.io.BufferedReader;
@@ -15,10 +16,16 @@ import java.io.InputStreamReader;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import core.JavaChatAdminService;
 
 
 
@@ -34,9 +41,11 @@ public class MainGui extends JFrame implements ActionListener {
     private JToolBar toolBar = new JToolBar("JavaChat toolbar");
     private String address = "localhost";
     private JButton connect = new JButton("Connect to...");
+    private JButton settings = new JButton("Settings");
     public static MainGui m;
-    private String userName = "";
-
+    private String userName = "Default";
+//    private String address = "";
+    
     public MainGui(){
 
         this.setTitle("JavaChat v0.1(R)");
@@ -65,9 +74,11 @@ public class MainGui extends JFrame implements ActionListener {
         getContentPane().setLayout(new BorderLayout());
         this.add(toolBar, BorderLayout.PAGE_START);
         toolBar.setFloatable(false);
+        toolBar.add(settings);
         toolBar.add(connect);
+        settings.addActionListener(this);
         connect.addActionListener(this);
-        connect.setActionCommand("connect");
+//        connect.setActionCommand("connect");
         this.add(desktopPane, BorderLayout.CENTER);
         MyChannelListFrame.setServerAddress(address);
         MyChannelListFrame.setMainApplication(this);
@@ -132,9 +143,25 @@ public class MainGui extends JFrame implements ActionListener {
 
 
     }
+    public String getUsername(){
+	return this.userName;
+    }
+    
+    public String getAddress(){
+	return this.address;
+    }
 
+    public void setUsername(String username){
+	this.userName = username;
+    }
+    
+    public void setAddress (String address){
+	this.address = address;
+	MyChannelListFrame.setServerAddress(address);
+    }
+    
     public void openChatWindow(String channel){
-        if (userName.equals("")) this.userName = "Default";
+        
         MyChatFrame newChat = new MyChatFrame(channel, userName);
         
         desktopPane.add(newChat);
@@ -149,6 +176,7 @@ public class MainGui extends JFrame implements ActionListener {
         if (!MyChannelListFrame.getChannelListFrame().isVisible()){
             desktopPane.add(MyChannelListFrame.getChannelListFrame());
 
+            MyChannelListFrame.getChannelListFrame().updateList();
             MyChannelListFrame.getChannelListFrame().setVisible(true);
                 try{
                     MyChannelListFrame.getChannelListFrame().setSelected(true);
@@ -160,8 +188,11 @@ public class MainGui extends JFrame implements ActionListener {
         return false;
     }
     public void actionPerformed(ActionEvent e) {
-        if ("connect".equals(e.getActionCommand())){
+        if (e.getSource() == (JButton)connect){
             showListWindow();
+        }
+        if (e.getSource() == (JButton)settings){
+            new MainSettingPanel(this).setVisible(true);
         }
 
     }
@@ -175,4 +206,80 @@ public class MainGui extends JFrame implements ActionListener {
         m.setVisible(true);
     }
 
+}
+
+
+class MainSettingPanel extends JFrame implements ActionListener {
+
+//    private JavaChatAdminService adminService;
+    private JTextField indirizzo = new JTextField();
+//    private JTextField porta = new JTextField();
+    private JTextField utente = new JTextField();
+//    private JPasswordField password = new JPasswordField();
+//  private JLabel nome = new JLabel("Inserisci il nome della chat:");
+    private JLabel indirizzoL = new JLabel("Indirizzo del server delle chat: ");
+//    private JLabel portaL = new JLabel("Porta: ");
+    private JLabel utenteL = new JLabel("Nome utente: ");
+//    private JLabel passwordL = new JLabel("Password: ");
+//  private JCheckBox privato = new JCheckBox("Privato");
+    private JButton ok = new JButton("OK");
+    private JButton cancel = new JButton("Cancel");
+    private JPanel sotto = new JPanel();
+    private JPanel centro = new JPanel();
+    private MainGui mg;
+
+    public MainSettingPanel(MainGui mg){
+	this.mg = mg;
+//	this.adminService = adminService;
+	sotto.setLayout(new FlowLayout());
+	ok.addActionListener(this);
+	cancel.addActionListener(this);
+	sotto.add(ok);
+	sotto.add(cancel);
+	setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	getContentPane().add(sotto, BorderLayout.SOUTH);
+	getContentPane().add(centro, BorderLayout.CENTER);
+	centro.setLayout(null);
+	centro.add(indirizzoL);
+	indirizzoL.setBounds(30, 10, 300, 25);
+	centro.add(indirizzo);
+	indirizzo.setBounds(30, 35, 300, 25);
+	indirizzo.setText(mg.getAddress());
+//	centro.add(portaL);
+//	portaL.setBounds(30, 60, 300, 25);
+//	centro.add(porta);
+//	porta.setBounds(30, 85, 300, 25);
+	centro.add(utenteL);
+	utenteL.setBounds(30, 60, 300, 25);
+	centro.add(utente);
+	utente.setBounds(30, 85, 300, 25);
+	utente.setText(mg.getUsername());
+//	centro.add(passwordL);
+//	passwordL.setBounds(30, 160, 300, 25);
+//	centro.add(password);
+//	password.setBounds(30, 185, 300, 25);
+	setResizable(false);
+//	indirizzo.setText(adminService.getAddress());
+//	porta.setText(""+adminService.getJoramPort());
+//	utente.setText(adminService.getUserName());
+	java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+	setBounds((screenSize.width-360)/2, (screenSize.height-300)/2, 360, 300);
+
+
+    }
+
+    public void actionPerformed(ActionEvent arg0) {
+	// TODO Implementare il metodo actionPerformed
+	if (arg0.getSource() == (JButton)cancel) {
+	    dispose();
+	}
+	if (arg0.getSource() == (JButton)ok) {
+	    if (utente.getText().trim() != "" && indirizzo.getText().trim() != ""){
+		mg.setAddress(indirizzo.getText().trim());
+		mg.setUsername(utente.getText().trim());
+		dispose();
+	    }
+	}
+
+    }
 }

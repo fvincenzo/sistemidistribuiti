@@ -21,7 +21,7 @@ public class JavaChatMain {
 	public static void main(String[] args) {
 		
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-		ConnectionManager chat = null;
+		Channel chat = null;
         String     user = null;
 	
 		System.out.printf("JavaChat the new IRC World!!!!\n");
@@ -35,7 +35,7 @@ public class JavaChatMain {
          
         try {
             
-            chat = ConnectionManager.connect("topicChat", user);
+            chat = Channel.connect("topicChat", user);
 
             System.out.println("Utente: " + user + " connesso!!!");
             System.out.println("Digita 'ENTER' per inviare una frase...");

@@ -6,6 +6,7 @@ package gui;
 
 import java.awt.AWTEvent;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -28,7 +29,7 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import javax.swing.plaf.InternalFrameUI;
 
-import core.ConnectionManager;
+import core.Channel;
 
 import sun.awt.AWTAutoShutdown;
 
@@ -47,8 +48,8 @@ public class MyChatFrame extends JInternalFrame implements InternalFrameListener
 
     private String channel;
     private String userName;
-
-    ConnectionManager chat;
+    private Object lock;
+    Channel chat;
 
     public MyChatFrame(String channel, String userName) {
         /*
@@ -83,7 +84,7 @@ public class MyChatFrame extends JInternalFrame implements InternalFrameListener
          * Attivazione della connessione
          */
         try {
-            chat = ConnectionManager.connect(channel, userName);
+            chat = Channel.connect(channel, userName);
             chat.setTextReceiver(this);
 //            inputText.setText("Type text here and press <enter>");
 //            inputText.selectAll();
@@ -114,6 +115,17 @@ public class MyChatFrame extends JInternalFrame implements InternalFrameListener
         outputText.append(text+"\n");
     }
 
+    public synchronized void textReceived(String username, String text){
+	
+	    outputText.setForeground(Color.BLUE);
+	    outputText.repaint();
+	    outputText.append(username+": ");
+	    outputText.setForeground(Color.BLACK);
+	    outputText.repaint();
+	    outputText.append(text+"\n");   
+	    
+    }
+    
     public void textReceived(String text){
         outputText.append(text+"\n");
 
