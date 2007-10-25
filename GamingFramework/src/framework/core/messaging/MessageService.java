@@ -55,7 +55,7 @@ public class MessageService extends UnicastRemoteObject implements MessageServic
 	
 	public synchronized void append(String s) throws RemoteException {
 		
-		if(!s.isEmpty()) {
+		if(!s.equals("")) {
 			int a;
 			
 			this.s = s;

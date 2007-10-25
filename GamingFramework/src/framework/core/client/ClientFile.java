@@ -1,16 +1,13 @@
 package framework.core.client;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.FileReader;
 import java.io.PrintStream;
 import java.net.InetAddress;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.util.Vector;
 
 import framework.core.FileServerInterface;
 import framework.core.client.hashtools.Hash;
@@ -75,13 +72,14 @@ private ClientConfig conf;
         	String filehash = new String();
         	FileServiceInterface service = (FileServiceInterface) f.getInstance();
         	//System.out.println("Adesso Sono qui");
-        	DataInputStream in = new DataInputStream(new FileInputStream("fileout.share"));
+        	BufferedReader in = new BufferedReader(new FileReader("fileout.share"));
+//        	DataInputStream in = new DataInputStream(new FileInputStream("fileout.share"));
         	
         	while(true) {
     			
     			filename = in.readLine();
     			filehash = in.readLine();
-    			if(filename.isEmpty()) break;
+    			if(filename.equals("")) break;
     			service.sendFile(conf.username, myip.getHostAddress(), filename, filehash);
     			
     		}
