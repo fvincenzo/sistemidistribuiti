@@ -45,7 +45,7 @@ public class TransferClient {
 		
 		
 		//controllo argomenti
-		if(Dfile.isEmpty()){
+		if(Dfile.equals("")){
 			os.println("File Name non corretto");
 			os.flush();
 			os.close();
