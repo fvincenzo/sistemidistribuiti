@@ -263,7 +263,7 @@ class MainSettingPanel extends JFrame implements ActionListener {
 //	porta.setText(""+adminService.getJoramPort());
 //	utente.setText(adminService.getUserName());
 	java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-	setBounds((screenSize.width-360)/2, (screenSize.height-300)/2, 360, 300);
+	setBounds((screenSize.width-360)/2, (screenSize.height-200)/2, 360, 200);
 
 
     }
