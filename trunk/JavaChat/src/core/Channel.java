@@ -3,7 +3,6 @@
  */
 package core;
 
-import gui.MainGui;
 import gui.ChatApplicationNotifier;
 
 import javax.jms.*;
@@ -11,11 +10,6 @@ import javax.naming.*;
 //import java.io.*;
 import java.rmi.Naming;
 import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.StringTokenizer;
-//import java.util.Properties;
-
 import serverUtils.ChannelList;
 import utils.*;
 
@@ -144,13 +138,14 @@ public class Channel implements ChannelInterface {
         message.setText("/bye "+userName);
         message.setStringProperty("User", userName);
         pub.send(message);
-		connection.close( );
+	connection.close( );
 	
 	}
 
 	/* (non-Javadoc)
 	 * @see core.connectionManagerInterface#login(java.lang.String)
 	 */
+	/*
 	public ChannelInterface login(String channel) {
 		// TODO decidere se serve...
 		return null;
@@ -161,13 +156,14 @@ public class Channel implements ChannelInterface {
 		return this.connections;
 		
 	}
-	
+	*/
 	/* (non-Javadoc)
 	 * @see core.channelManagerInterface#sendText(java.lang.String)
 	 */
 	public synchronized void sendText(String Text) throws JMSException{
-		//TODO Sistemare l'object message
-        ObjectMessage message1 = pubSession.createObjectMessage();
+	
+	    if (!Text.trim().equals("")){
+//        ObjectMessage message1 = pubSession.createObjectMessage();
 	TextMessage message = pubSession.createTextMessage( );
 //        message1.setStringProperty("Text", Text);
 //        message1.setStringProperty("User", userName);
@@ -190,7 +186,7 @@ public class Channel implements ChannelInterface {
         pub.send(message1);
      */   
         pub.send(message);
-	
+	    }
 	}
 
 	/* (non-Javadoc)
@@ -257,9 +253,9 @@ public class Channel implements ChannelInterface {
                 if (change) //L'ho mandato io questo messaggio
                     change = false;
                 else { //non l'ho mandato io
-                    //TODO aggiungere la segnalazione grafica
-                    System.out.println("Username gia' in uso!!");
+//                    System.out.println("Username gia' in uso!!");
                     disconnect();
+                    notifier.usernameAlreadyInUse();
                 }
             } 
            /* else {

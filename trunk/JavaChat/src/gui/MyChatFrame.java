@@ -4,20 +4,14 @@
  */
 package gui;
 
-import java.awt.AWTEvent;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.beans.PropertyVetoException;
 
 import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageListener;
-import javax.swing.JDesktopPane;
 import javax.swing.JInternalFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -27,16 +21,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
-import javax.swing.plaf.InternalFrameUI;
 
 import core.Channel;
 
-import sun.awt.AWTAutoShutdown;
 
 /**
  * @author   noname
  */
-public class MyChatFrame extends JInternalFrame implements InternalFrameListener , ChatApplicationNotifier{
+public class MyChatFrame extends JInternalFrame implements InternalFrameListener , ChatApplicationNotifier, KeyListener{
 
     private JTextField inputText = new JTextField();
     private JTextArea outputText = new JTextArea();
@@ -48,7 +40,7 @@ public class MyChatFrame extends JInternalFrame implements InternalFrameListener
 
     private String channel;
     private String userName;
-    private Object lock;
+//    private Object lock;
     Channel chat;
 
     public MyChatFrame(String channel, String userName) {
@@ -76,45 +68,35 @@ public class MyChatFrame extends JInternalFrame implements InternalFrameListener
         //outputText.setFocusable(false);
         //this.add(userList, BorderLayout.EAST);
 
-        inputText.setFocusCycleRoot(true);
-        
-
+//        inputText.setFocusCycleRoot(true);
+//        inputText.requestFocus();
 
         /*
          * Attivazione della connessione
          */
+        inputText.addKeyListener(this);
+        
         try {
-            chat = Channel.connect(channel, userName);
-            chat.setTextReceiver(this);
+            chat = initialize(this.userName);
+            
 //            inputText.setText("Type text here and press <enter>");
 //            inputText.selectAll();
-            inputText.addKeyListener(new KeyAdapter(){
-                public void keyPressed(KeyEvent e){
-                    int key = e.getKeyCode();
-                    if (key == KeyEvent.VK_ENTER) {
-                        try {
-                            chat.sendText(inputText.getText());
-                        }
-                        catch (JMSException jme){
-                            outputText.setText("failed to send: "+inputText.getText());
-
-                        }
-                        inputText.setText("");
-                    }
-
-                }
-
-
-            });
         } catch(Exception E){
             print("Error while connecting to "+channel);
         }
+        inputText.requestFocusInWindow();
 
     }
     private void print (String text){
         outputText.append(text+"\n");
     }
 
+    private Channel initialize(String username) throws Exception {
+	Channel c = Channel.connect(this.channel, username);
+        c.setTextReceiver(this);
+        return c;
+	
+    }
     public synchronized void textReceived(String username, String text){
 	
 	    outputText.setForeground(Color.BLUE);
@@ -191,6 +173,38 @@ public class MyChatFrame extends JInternalFrame implements InternalFrameListener
     public void userPart(String userName) {
         userList.setListData(chat.getUsersList());
         
+    }
+    
+    public void usernameAlreadyInUse(){
+	JOptionPane.showMessageDialog(this, "Questo username è già in uso.", "Errore", JOptionPane.ERROR_MESSAGE);
+	try{
+	this.chat = initialize("username_secondario");
+	}
+	catch(Exception e){
+	    
+	}
+    }
+    public void keyPressed(KeyEvent e) {
+	// TODO Implementare il metodo keyPressed
+	int key = e.getKeyCode();
+        if (key == KeyEvent.VK_ENTER) {
+            try {
+                
+                chat.sendText(inputText.getText());
+            }
+            catch (JMSException jme){
+                outputText.setText("failed to send: "+inputText.getText());
+
+            }
+            inputText.setText("");
+            inputText.requestFocusInWindow();
+        }
+    }
+    public void keyReleased(KeyEvent arg0) {
+	// TODO Implementare il metodo keyReleased
+    }
+    public void keyTyped(KeyEvent arg0) {
+	// TODO Implementare il metodo keyTyped
     }
 
 }

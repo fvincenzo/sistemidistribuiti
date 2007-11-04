@@ -10,5 +10,6 @@ public interface ChatApplicationNotifier {
     public abstract void textReceived(String username, String text);
     public abstract void userJoin(String userName);
     public abstract void userPart(String userName);
+    public abstract void usernameAlreadyInUse();
 
 }

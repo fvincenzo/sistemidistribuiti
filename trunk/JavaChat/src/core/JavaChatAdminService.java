@@ -8,25 +8,17 @@ import org.objectweb.joram.client.jms.*;
 import org.objectweb.joram.client.jms.tcp.*;
 
 import serverUtils.ChannelListAdmin;
-import serverUtils.ChannelListServer;
 
 import gui.AdminGuiInterface;
 
-import java.io.IOException;
 import java.net.ConnectException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.*;
 
 import javax.jms.JMSException;
-import javax.naming.InitialContext;
-import javax.naming.NameClassPair;
-import javax.naming.NamingEnumeration;
 import javax.naming.NamingException;
-import javax.naming.NoInitialContextException;
 
 
 /**
@@ -61,7 +53,7 @@ public class JavaChatAdminService {
      */
     private int joramPort = 16010;
 
-    private Registry myRegistry;
+//    private Registry myRegistry;
 
     public JavaChatAdminService() {
     }
