@@ -1,7 +1,9 @@
 package framework.core.client;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 
 public class ClientConfig {
@@ -21,7 +23,8 @@ public class ClientConfig {
 	public String sharing[] = { new String() };
 	
 	private ClientConfig() throws IOException{
-		DataInputStream config = new DataInputStream(new FileInputStream("client.config"));
+//		DataInputStream config = new DataInputStream(new FileInputStream("client.config"));
+		BufferedReader config = new BufferedReader(new FileReader("cliend.config"));
 		host = config.readLine();
 		//System.out.println(host);
 		port = config.readLine();
