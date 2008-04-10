@@ -66,7 +66,8 @@ public class JavaChatAdminService {
 	this.joramPort = joramPort;
     }
 
-    public boolean initServer(){
+    @SuppressWarnings("unchecked")
+	public boolean initServer(){
 	/*
 	 * Faccio partire rmiregistry
 	 */

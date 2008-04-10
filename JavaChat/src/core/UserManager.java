@@ -4,6 +4,7 @@ import java.util.*;
 
 public class UserManager implements UserManagerInterface{
 	
+	@SuppressWarnings("unchecked")
 	private Hashtable utenti = new Hashtable();
 	static int i = 0;
 	static boolean created = false;
@@ -32,6 +33,7 @@ public class UserManager implements UserManagerInterface{
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public boolean addUser(String usr,String Pwd) {
 		
 		if(i<256) {
@@ -71,6 +73,7 @@ public class UserManager implements UserManagerInterface{
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Hashtable returnUserList() {
 		
 		return utenti;

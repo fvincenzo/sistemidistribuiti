@@ -20,13 +20,10 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.InternalFrameListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.Document;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
@@ -36,6 +33,7 @@ import core.Channel;
 /**
  * @author   noname
  */
+@SuppressWarnings("serial")
 public class MyChatFrame extends JInternalFrame implements InternalFrameListener , ChatApplicationNotifier, KeyListener{
 
     private JTextField inputText = new JTextField();

@@ -4,10 +4,6 @@
 package utils;
 
 import javax.naming.InitialContext;
-import javax.naming.Context;
-
-import org.objectweb.joram.client.jms.admin.AdminModule;
-
 import java.util.Properties;
 
 /**
