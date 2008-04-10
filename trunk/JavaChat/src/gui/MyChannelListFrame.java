@@ -28,6 +28,7 @@ import serverUtils.ChannelList;
 /**
  * @author   noname
  */
+@SuppressWarnings("serial")
 public class MyChannelListFrame extends JInternalFrame implements KeyListener, ActionListener {
 
     private JList lista = new JList();

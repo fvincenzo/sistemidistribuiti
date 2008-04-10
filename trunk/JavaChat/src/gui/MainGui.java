@@ -8,24 +8,15 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.*;
 import java.beans.PropertyVetoException;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.InputStreamReader;
-
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
-import core.JavaChatAdminService;
 
 
 
@@ -33,6 +24,7 @@ import core.JavaChatAdminService;
 /**
  * @author   noname
  */
+@SuppressWarnings("serial")
 public class MainGui extends JFrame implements ActionListener {
 
     private int defaultWidth = 800;
@@ -83,13 +75,7 @@ public class MainGui extends JFrame implements ActionListener {
         MyChannelListFrame.setServerAddress(address);
         MyChannelListFrame.setMainApplication(this);
         //TODO leggere le impostazioni da un file
-        try {
-            BufferedReader read = new BufferedReader(new FileReader("foeifwoifj"));
-            
-        }
-        catch (FileNotFoundException e){
-            
-        }
+        
 //        openChatWindow("topicChat");
 //      MyChatFrame cf1 = new MyChatFrame("Prova1");
 //      MyChatFrame cf2 = new MyChatFrame("Prova2");
@@ -209,6 +195,7 @@ public class MainGui extends JFrame implements ActionListener {
 }
 
 
+@SuppressWarnings("serial")
 class MainSettingPanel extends JFrame implements ActionListener {
 
 //    private JavaChatAdminService adminService;

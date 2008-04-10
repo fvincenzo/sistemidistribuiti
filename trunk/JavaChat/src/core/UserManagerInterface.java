@@ -16,6 +16,7 @@ public interface UserManagerInterface {
 	public abstract String returnUserPwd(String usr);
 	public abstract boolean isAdmin(String usr);
 	public abstract boolean setAdmin(String usr,boolean admin);
+	@SuppressWarnings("unchecked")
 	public abstract Hashtable returnUserList();
 	
 }

@@ -41,7 +41,7 @@ public class Channel implements ChannelInterface {
     //Flag to control the change nick phase
     private boolean change = false;
     //Flag to control the change nick phase
-    private boolean hello = false;
+//    private boolean hello = false;
     
     private boolean changeUsername = false;
     private int name = 0;

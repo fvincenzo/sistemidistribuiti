@@ -31,6 +31,7 @@ import java.util.Vector;
 /**
  * @author   noname
  */
+@SuppressWarnings({ "unchecked", "serial" })
 public class AdminGui extends JFrame implements ActionListener, MouseListener, AdminGuiInterface {
 
     private JButton add = new JButton("Add");
@@ -44,7 +45,7 @@ public class AdminGui extends JFrame implements ActionListener, MouseListener, A
     private JTable tabella = new JTable();
     private JScrollPane jScrollPane1 = new JScrollPane(tabella, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED); 
     private Vector<String> columns = new Vector<String>();
-    private Vector rows= new Vector();
+	private Vector rows= new Vector();
     private DefaultTableModel tabModel;
     private int lines = 0;
 
@@ -111,7 +112,8 @@ public class AdminGui extends JFrame implements ActionListener, MouseListener, A
     }
 
 
-    public void actionPerformed(ActionEvent e) {
+    @SuppressWarnings("unchecked")
+	public void actionPerformed(ActionEvent e) {
 	// TODO Implementare actionPerformed
 	if (e.getSource() == (JButton)exit ){
 //	    adminService.disconnect();
@@ -240,6 +242,7 @@ public class AdminGui extends JFrame implements ActionListener, MouseListener, A
 /**
  * @author   noname
  */
+@SuppressWarnings("serial")
 class NewChat extends JFrame implements ActionListener {
 
     /**
@@ -306,6 +309,7 @@ class NewChat extends JFrame implements ActionListener {
     }
 
 }
+@SuppressWarnings("serial")
 class EditChat extends JFrame implements ActionListener {
 
     /**
@@ -387,6 +391,7 @@ class EditChat extends JFrame implements ActionListener {
 
 
 
+@SuppressWarnings("serial")
 class SettingPanel extends JFrame implements ActionListener {
 
     private JavaChatAdminService adminService;
