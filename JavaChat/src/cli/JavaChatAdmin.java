@@ -6,8 +6,6 @@ package cli;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Method;
-import java.util.*;
 import core.*;
 
 /**
@@ -51,8 +49,9 @@ public class JavaChatAdmin {
 	
 			try {
 				 JavaChatAdmin v = new JavaChatAdmin();
-		         Class c = Class.forName("cli.javaChatAdmin");
-		         Object r = c.getMethod(str).invoke(v);
+//		         Class c = 
+		        	 Class.forName("cli.javaChatAdmin").getMethod(str).invoke(v);
+//		         Object r = c.getMethod(str).invoke(v);
 		        }
 		      catch (Throwable e) {
 		         System.err.println(e);
