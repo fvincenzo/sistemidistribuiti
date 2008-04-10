@@ -3,7 +3,6 @@
  */
 package cli;
 
-import core.*;
 import java.io.InputStreamReader;
 import java.io.BufferedReader ;
 import java.io.IOException;
@@ -42,8 +41,8 @@ public class JavaChatDebug {
 			}
 	
 			try {
-		         Class c = Class.forName(str);
-		         Method m[] = c.getDeclaredMethods();
+//		         Class c = Class.forName(str);
+		         Method m[] = Class.forName(str).getDeclaredMethods();
 		         for (int i = 0; i < m.length; i++)
 		         System.out.println(m[i].toString());
 		      }
