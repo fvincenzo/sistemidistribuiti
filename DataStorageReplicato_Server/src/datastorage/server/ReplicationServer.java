@@ -85,6 +85,7 @@ public class ReplicationServer extends ServerPOA implements MessageListener {
 		synchronized (lock) {
 			try {
 				if (!message.getJMSMessageID().equals(lastMsgId)){
+					System.out.println("Ricevo: "+((TextMessage)message).getText());
 					StringTokenizer tok = new StringTokenizer(((TextMessage)message).getText());
 					String command = tok.nextToken();
 					if (command.equals("ID:")){
