@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="Class_Diagram" size="924,701" id="" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D31303030204461746153746F726167655265706C696361746F2F6E6F6E616D65">
+  <children xsi:type="editmodel:PackageEditModel" name="datastorage.server" location="15,15" size="620,666" id="datastorage.server">
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.4/@sourceConnections.0 //@children.0/@children.3/@sourceConnections.1" name="NoValue" location="477,146" size="91,95" id="datastorage.corba/NoValue" runTimeClassModel="NoValue(),NoValue(Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="58,36">
+        <children xsi:type="editmodel:MethodEditModel" name="NoValue" id="datastorage.corba/NoValue#NoValue()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="NoValue" id="datastorage.corba/NoValue#NoValue(Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.4/@sourceConnections.1 //@children.0/@children.3/@sourceConnections.0" name="CantUpdate" location="52,164" size="104,95" id="datastorage.corba/CantUpdate" runTimeClassModel="CantUpdate(),CantUpdate(Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="72,36">
+        <children xsi:type="editmodel:MethodEditModel" name="CantUpdate" id="datastorage.corba/CantUpdate#CantUpdate(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="CantUpdate" id="datastorage.corba/CantUpdate#CantUpdate()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.4/@sourceConnections.2" name="ReplicationCommunication" location="424,443" size="180,103" id="datastorage.server/ReplicationCommunication" runTimeClassModel="sendPrivMessage(Ljava.lang.String;Ljava.lang.String;),sendMessage(Ljava.lang.String;),ReplicationCommunication(Ldatastorage.server.ReplicationServer;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="128,54">
+        <children xsi:type="editmodel:MethodEditModel" name="ReplicationCommunication" id="datastorage.server/ReplicationCommunication#ReplicationCommunication(Ldatastorage.server.ReplicationServer;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="sendMessage" id="datastorage.server/ReplicationCommunication#sendMessage(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="sendPrivMessage" id="datastorage.server/ReplicationCommunication#sendPrivMessage(Ljava.lang.String;Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" id="datastorage.server/ReplicationCommunication-Soyatec::Import->datastorage.server/ReplicationServer" source="//@children.0/@children.2" target="//@children.0/@children.4" targetEnd="//@children.0/@children.2/@sourceConnections.0/@children.2" label="//@children.0/@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="33,10" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,73" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="133,96"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.4/@sourceConnections.4 //@children.0/@children.4/@sourceConnections.3" name="ServerPOA" location="268,132" size="102,131" id="datastorage.corba/ServerPOA" runTimeClassModel="_this(),_all_interfaces(Lorg.omg.PortableServer.POA;[B),_this(Lorg.omg.CORBA.ORB;),_invoke(Ljava.lang.String;Lorg.omg.CORBA.portable.InputStream;Lorg.omg.CORBA.portable.ResponseHandler;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="79,72">
+        <children xsi:type="editmodel:MethodEditModel" name="_all_interfaces" id="datastorage.corba/ServerPOA#_all_interfaces(Lorg.omg.PortableServer.POA;[B)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="_invoke" id="datastorage.corba/ServerPOA#_invoke(Ljava.lang.String;Lorg.omg.CORBA.portable.InputStream;Lorg.omg.CORBA.portable.ResponseHandler;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="_this" id="datastorage.corba/ServerPOA#_this(Lorg.omg.CORBA.ORB;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="_this" id="datastorage.corba/ServerPOA#_this()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="datastorage.corba/ServerPOA-Soyatec::Import->datastorage.corba/CantUpdate" source="//@children.0/@children.3" target="//@children.0/@children.1" targetEnd="//@children.0/@children.3/@sourceConnections.0/@children.2" label="//@children.0/@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="33,10" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,79" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="104,47"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="datastorage.corba/ServerPOA-Soyatec::Import->datastorage.corba/NoValue" source="//@children.0/@children.3" target="//@children.0/@children.0" targetEnd="//@children.0/@children.3/@sourceConnections.1/@children.2" label="//@children.0/@children.3/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@children.3/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="33,10" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="102,61" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,47"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.2/@sourceConnections.0" name="ReplicationServer" location="153,420" size="133,131" id="datastorage.server/ReplicationServer" runTimeClassModel="write(II),onMessage(Ljavax.jms.Message;),read(I),ReplicationServer(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="90,72">
+        <children xsi:type="editmodel:MethodEditModel" name="onMessage" id="datastorage.server/ReplicationServer#onMessage(Ljavax.jms.Message;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="read" id="datastorage.server/ReplicationServer#read(I)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="write" id="datastorage.server/ReplicationServer#write(II)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="ReplicationServer" id="datastorage.server/ReplicationServer#ReplicationServer(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="datastorage.server/ReplicationServer-Standard::Send->datastorage.corba/NoValue*datastorage.server/ReplicationServer-Standard::Instantiate->datastorage.corba/NoValue*datastorage.server/ReplicationServer-Soyatec::Import->datastorage.corba/NoValue" source="//@children.0/@children.4" target="//@children.0/@children.0" targetEnd="//@children.0/@children.4/@sourceConnections.0/@children.2" label="//@children.0/@children.4/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.4/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Instantiate, Send, Import»" size="102,10" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="133,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,90"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="datastorage.server/ReplicationServer-Standard::Send->datastorage.corba/CantUpdate*datastorage.server/ReplicationServer-Standard::Instantiate->datastorage.corba/CantUpdate*datastorage.server/ReplicationServer-Soyatec::Import->datastorage.corba/CantUpdate" source="//@children.0/@children.4" target="//@children.0/@children.1" targetEnd="//@children.0/@children.4/@sourceConnections.1/@children.2" label="//@children.0/@children.4/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@children.4/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Instantiate, Send, Import»" location="67,340" size="102,10" automaticRelocationAllowed="false" locationOnWireFromSource="9.0" distanceFromWire="51.0" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="1,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="102,95"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" id="datastorage.server/ReplicationServer-Standard::Call->datastorage.server/ReplicationCommunication*datastorage.server/ReplicationServer-Soyatec::Import->datastorage.server/ReplicationCommunication*datastorage.server/ReplicationServer-Standard::Instantiate->datastorage.server/ReplicationCommunication" source="//@children.0/@children.4" target="//@children.0/@children.2" targetEnd="//@children.0/@children.4/@sourceConnections.2/@children.2" label="//@children.0/@children.4/@sourceConnections.2/@children.0" sourceEnd="//@children.0/@children.4/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Instantiate, Import, Call»" size="98,10" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="133,38" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,13"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" id="datastorage.corba/ServerPOA&lt;-datastorage.server/ReplicationServer" source="//@children.0/@children.4" target="//@children.0/@children.3" targetEnd="//@children.0/@children.4/@sourceConnections.3/@children.1" sourceEnd="//@children.0/@children.4/@sourceConnections.3/@children.0" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="69,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="5,131"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" id="datastorage.server/ReplicationServer-Standard::Derive->datastorage.corba/ServerPOA" source="//@children.0/@children.4" target="//@children.0/@children.3" targetEnd="//@children.0/@children.4/@sourceConnections.4/@children.2" label="//@children.0/@children.4/@sourceConnections.4/@children.0" sourceEnd="//@children.0/@children.4/@sourceConnections.4/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Derive»" size="31,10" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="95,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="53,131"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=7;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
