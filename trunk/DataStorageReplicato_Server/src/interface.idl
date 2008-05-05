@@ -1,0 +1,14 @@
+module datastorage{
+	module corba {
+
+		exception NoValue { };
+		exception CantUpdate{ };
+
+		interface Server {
+	
+			long read(in long dataId) raises (NoValue);
+			void write (in long dataId, in long newValue) raises (CantUpdate);	
+		};
+	
+	};
+};
