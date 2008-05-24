@@ -4,21 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
-import java.rmi.Naming;
 import java.util.Iterator;
 import java.util.Vector;
-
 import namingservice.core.NSClient;
 import namingservice.core.NSServer;
 import namingservice.core.RemoteServer;
-import namingservice.core.Server;
-import namingservice.core.node.Node;
-import namingservice.core.node.NodeManager;
 
 
 public class Adminshell {
 
 	
+	@SuppressWarnings("unused")
 	private static NSServer ns;
 	private static NSClient nsc;
 	private static RemoteServer rs;
@@ -112,11 +108,11 @@ public class Adminshell {
 		        	if (conn == 1) {
 		        		
 		        		Vector<String> ls = nsc.list();
-		        		Iterator it = ls.iterator();
+		        		Iterator<String> it = ls.iterator();
 		        		
 		        		while(it.hasNext()) {
 		        			
-		        			System.out.println((String) it.next());
+		        			System.out.println(it.next());
 		        			
 		        		}
 		        		continue;
