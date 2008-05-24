@@ -218,7 +218,7 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 			
 			line = line.replace(line.substring(0, line.indexOf(".")+1), "");
 			
-			while(!line.isEmpty()) {
+			while(!line.equals("")) {
 				pars.add(line.substring(0, line.indexOf(".")));
 				line = line.replace(line.substring(0, line.indexOf(" ")+1), "");
 			}
