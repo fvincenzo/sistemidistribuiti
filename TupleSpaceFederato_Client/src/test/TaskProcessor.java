@@ -8,7 +8,7 @@ public class TaskProcessor {
 	static NodoLocale js;
 
 	public static void main(String[] args) throws IOException, ClassNotFoundException {
-		js = new NodoLocale("jini://localhost","jini://localhost" );
+		js = new NodoLocale("jini://localhost" );
 		js.setFederationServiceAddress("localhost");
 		if (js.cercaFederazione("fed1")){
 			js.join("fed1");

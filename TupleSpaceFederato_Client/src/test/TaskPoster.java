@@ -23,7 +23,7 @@ public class TaskPoster {
      * @throws RemoteException 
      */
     public static void main(String[] args) throws Exception  {
-        js = new NodoLocale("jini://localhost", "jini://localhost");
+        js = new NodoLocale("jini://localhost");
         js.setFederationServiceAddress("localhost");
         if (js.cercaFederazione("fed1")){
         	js.join("fed1");

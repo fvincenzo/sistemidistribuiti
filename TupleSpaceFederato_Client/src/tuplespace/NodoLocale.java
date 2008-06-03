@@ -46,12 +46,12 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 	private String jSpaceRemoteAddress;
 	private boolean debug = false;
 
-	public NodoLocale(String indirizzoJavaspace, String indirizzoRemoto) throws IOException, ClassNotFoundException, RemoteException{
+	public NodoLocale(String externalAddress) throws IOException, ClassNotFoundException, RemoteException{
 		
-		LookupLocator l = new LookupLocator(indirizzoJavaspace);
+		LookupLocator l = new LookupLocator("jini://localhost");
 		ServiceRegistrar r = l.getRegistrar();
 		js = (JavaSpace)r.lookup(new ServiceTemplate(null, new Class[]{ JavaSpace.class }, null));
-		jSpaceRemoteAddress = indirizzoRemoto;
+		jSpaceRemoteAddress = externalAddress;
 
 	}
 
