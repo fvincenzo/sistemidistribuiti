@@ -17,21 +17,20 @@ import net.jini.space.JavaSpace;
 
 public class ReadThread extends Thread {
 
-//	private int source;
-	private NodoRemotoInterface nodoSource;
 	private JavaSpace js;
 	private Entry e;
 	private Transaction t; 
 	private long l;
-//	private Response r;
-	private boolean run = true;
+
+	private boolean quit = false;
 	private ReadRequest rq;
 	private long updateRate = 10000;
+	private NodoRemotoInterface nodoSource;
 
 	public ReadThread(ReadRequest rq, NodoRemotoInterface nodoSource, String address, Entry e, Transaction t, long l){
-		try {
-			System.out.println("Istanzio un nuovo ReadThread richiesto su:"+address+"\nEntry: "+e+"\nda: "+nodoSource);
+//		System.out.println("Istanzio un nuovo ReadThread richiesto su:"+address+"\nEntry: "+e+"\nda: "+nodoSource);
 
+		try {
 			LookupLocator lookupL = new LookupLocator(address);
 			ServiceRegistrar registrar = lookupL.getRegistrar();
 			js = (JavaSpace)registrar.lookup(new ServiceTemplate(null, new Class[]{ JavaSpace.class }, null));
@@ -53,11 +52,12 @@ public class ReadThread extends Thread {
 			ex.printStackTrace();
 		}	
 	}
+
 	public void run(){
-		System.out.println("ReadThread.run()");
+//		System.out.println("ReadThread.run()");
+		boolean run = true;
 		Entry ret = null;
-//		Long lcopy = l;
-		while (this.run ){
+		while (!quit & run & ret == null){
 			try {
 				if (l > updateRate){
 					ret = js.read(e,t,updateRate);
@@ -65,9 +65,8 @@ public class ReadThread extends Thread {
 				}
 				else {
 					ret = js.read(e,t,l);
-					this.run = false;
+					run = false;
 				}
-
 			} catch (RemoteException e) {
 				rq.throwException(nodoSource, e);
 			} catch (UnusableEntryException e) {
@@ -77,13 +76,12 @@ public class ReadThread extends Thread {
 			} catch (InterruptedException e) {
 				rq.throwException(nodoSource, e);
 			}
-
 		}
-		rq.gotResult(nodoSource, ret);
+		if (!quit) rq.gotResult(nodoSource, ret);
 	}
 
 	public void halt(){
-		run= false;
+		quit = true;
 	}
 
 }

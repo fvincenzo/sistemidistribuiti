@@ -17,19 +17,18 @@ import net.jini.space.JavaSpace;
 
 public class TakeThread extends Thread {
 
-//	private int source;
 	private JavaSpace js;
 	private Entry e;
 	private Transaction t; 
 	private long l;
-//	private Response r;
-	private boolean run = true;
+
+	private boolean quit = false;
 	private TakeRequest tq;
 	private long updateRate = 10000;
 	private NodoRemotoInterface nodoSource;
 
 	public TakeThread(TakeRequest tq, NodoRemotoInterface nodoSource, String address, Entry e, Transaction t, long l){
-		System.out.println("Istanzio un nuovo TakeThread richiesto su:"+address+"\nEntry: "+e+"\nda: "+nodoSource);
+//		System.out.println("Istanzio un nuovo TakeThread richiesto su:"+address+"\nEntry: "+e+"\nda: "+nodoSource);
 		try {
 
 			LookupLocator lookupL = new LookupLocator(address);
@@ -37,7 +36,7 @@ public class TakeThread extends Thread {
 			js = (JavaSpace)registrar.lookup(new ServiceTemplate(null, new Class[]{ JavaSpace.class }, null));
 			this.tq=tq;
 //			this.r=r;
-			this.nodoSource= nodoSource;
+			this.nodoSource = nodoSource;
 //			this.source=source;
 			this.e=e;
 			this.t=t;
@@ -53,11 +52,12 @@ public class TakeThread extends Thread {
 			ex.printStackTrace();
 		}	
 	}
+
 	public void run(){
-	System.out.println("TakeThread.run()");
+//		System.out.println("TakeThread.run()");
+		boolean run = true;
 		Entry ret = null;
-//		Long lcopy = l;
-		while (this.run ){
+		while (!quit & run & ret == null){
 			try {
 				if (l > updateRate){
 					ret = js.take(e,t,updateRate);
@@ -65,9 +65,8 @@ public class TakeThread extends Thread {
 				}
 				else {
 					ret = js.take(e,t,l);
-					this.run = false;
+					run = false;
 				}
-
 			} catch (RemoteException e) {
 				tq.throwException(nodoSource, e);
 			} catch (UnusableEntryException e) {
@@ -77,14 +76,12 @@ public class TakeThread extends Thread {
 			} catch (InterruptedException e) {
 				tq.throwException(nodoSource, e);
 			}
-
 		}
-		tq.gotResult(nodoSource, ret);
+		if (!quit) tq.gotResult(nodoSource, ret);
 	}
 
-
 	public void halt(){
-		run= false;
+		quit = true;
 	}
 
 }
