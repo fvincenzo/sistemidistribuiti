@@ -1,51 +1,93 @@
 package tuplespace;
 
 import tuplespace.NodoRemotoInterface;
-
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.MalformedURLException;
-//import java.rmi.MarshalledObject;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-
 import federationservice.FederationServiceInterface;
 import federazione.FederazioneInterface;
 import net.jini.core.discovery.LookupLocator;
 import net.jini.core.entry.Entry;
 import net.jini.core.entry.UnusableEntryException;
-//import net.jini.core.event.EventRegistration;
-//import net.jini.core.event.RemoteEventListener;
 import net.jini.core.lease.Lease;
 import net.jini.core.lookup.ServiceRegistrar;
 import net.jini.core.lookup.ServiceTemplate;
 import net.jini.core.transaction.Transaction;
 import net.jini.core.transaction.TransactionException;
-//import net.jini.lease.LeaseListener;
-//import net.jini.lease.LeaseRenewalEvent;
-//import net.jini.lease.LeaseRenewalManager;
 import net.jini.space.JavaSpace;
 
+/**
+ * Classe principale per ogni client.
+ * Ogni nodo locale si colleghera' a un javaspace su localhost e rendera' accessibile il javaspace all'esterno con un indirizzo remoto
+ * Il fatto di essere connessi o meno a una federazione e' trasparente all'utente
+ * 
+ * @author Vincenzo Frascino
+ * @author Nicolas Tagliani 
+ *
+ */
 @SuppressWarnings("serial")
 public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Serializable {
 
-//	private String nomeFederazione;
+
+	/**
+	 * Indirizzo di default del Federation Service
+	 */
 	private String federationServiceAddress = "localhost";
+	
+	/**
+	 * Riferimento all'javaspace locale
+	 */
 	private JavaSpace js;
+	
+	/**
+	 * riferimento alla federazione remota
+	 */
 	private FederazioneInterface f = null;
+	/**
+	 * riferimento al federation service remoto
+	 */
 	private FederationServiceInterface remFedService = null;
-//	private LeaseRenewalManager leaseRenewal;
+	
+	/**
+	 * Valore temporaneo di ritorno per una read o take bloccanti
+	 */
 	private Entry result = null;
+	
+	/**
+	 * Valore temporaneo delle eccezioni di ritorno da una read o una take bloccanti
+	 */
 	private Exception resultException = null;
-	@SuppressWarnings("unused")
-	private boolean r_present = false;
+
+	/**
+	 * Status in cui si trova il nodo locale:
+	 * 0  = bloccato e in attesa di risultati
+	 * -1 = eccezione remota
+	 * 1  = risultato remoto
+	 */
 	private int result_status = 0;
-//	private NodoLocaleEventListener listener = null;
+	
+	/**
+	 * Indirizzo pubblico del javaspace locale
+	 */
 	private String jSpaceRemoteAddress;
+	
+	/**
+	 * Flag per l'attivazione dei messaggi di debug
+	 */
 	private boolean debug = false;
 
+	/**
+	 * Costruttore della classe nodo locale
+	 * 
+	 * @param externalAddress L'indirizzo pubblico da cui sarà raggiungibile il javaspace
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 * @throws RemoteException
+	 */
 	public NodoLocale(String externalAddress) throws IOException, ClassNotFoundException, RemoteException{
 		
 		LookupLocator l = new LookupLocator("jini://localhost");
@@ -55,7 +97,12 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 
 	}
 
-
+	/**
+	 * Cerca se esiste una federazione con nome "nome"
+	 * 
+	 * @param nome Il nome della federazione da cercare
+	 * @return true se trova la federazione o false se non esiste la federazione o se accade qualche errore sul server
+	 */
 	public boolean cercaFederazione(String nome) {
 		try{
 			if (remFedService == null){
@@ -73,6 +120,12 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 		}
 	}
 
+	/**
+	 * Crea una nuova federazione con nome nome
+	 * 
+	 * @param nome Il nome della federazione da creare
+	 * @return true se la federazione è stata creata o false se è capitato qualche problema che non ha permesso di creare la federazione
+	 */
 	public boolean creaFederazione(String nome) {
 		try{
 			if (remFedService == null){
@@ -91,6 +144,13 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 		}
 	}
 
+	
+	/**
+	 * Aggiunge il nodo locale a una federazione specificandone il nome
+	 * 
+	 * @param nome Il nome della federazione a cui collegarsi
+	 * @return true se è andato tutto bene o false se è capitato qualche problema che ha impedito il collegamento con la federazione
+	 */
 	public boolean join(String nome) {
 		try{
 			if (remFedService == null){
@@ -110,6 +170,11 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 		}
 	}
 
+	/**
+	 * Lascia una federazione a cui ci si era precedentemente connessi.
+	 * 
+	 * @return true se abbiamo lasciato con successo la federazione false altrimenti. Se non siamo connessi a nessuna federazione Leave restituisce comunque il valore true
+	 */
 	public boolean leave() {
 		if (f != null){
 			try{
@@ -121,9 +186,47 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 				return false;
 			}
 		}
-		return false;
+		return true;
+	}
+	
+	
+	/**
+	 * Getter dell'indirizzo remodo del Federation Service
+	 * 
+	 * @return L'indirizzo remodo del Federation Service
+	 */
+	public String getFederationServiceAddress() {
+		return federationServiceAddress;
 	}
 
+	/**
+	 * Setter dell'indirizzo remoto del Federation service
+	 * 
+	 * @param federationServiceAddress L'indirizzo remoto del Federation Service
+	 */
+	public void setFederationServiceAddress(String federationServiceAddress) {
+		this.federationServiceAddress = federationServiceAddress;
+	}
+	
+	/**
+	 * Getter dell'indirizzo remoto a cui è raggiungibile il javaspace locale
+	 * Questo metodo è tipicamente richiamato da remoto dalla federazione
+	 * 
+	 * @return L'indirizzo remoto del javaspace locale
+	 */
+	public String getJavaSpaceAddress() throws RemoteException {
+		return jSpaceRemoteAddress;
+	}
+	
+	/**
+	 * Read bloccante da tuple space
+	 * 
+	 * @param e Entry da leggere
+	 * @param t transazione associata alla lettura
+	 * @param l tempo di lease per questa lettura
+	 * @return L'Entry letta
+	 * @throws Exception  
+	 */
 	public Entry read(Entry e, Transaction t, long l) throws Exception {
 		if (f!=null){
 			Entry ret = js.readIfExists(e,t,l);
@@ -138,6 +241,15 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 		return js.read(e,t,l);
 	}
 
+	/**
+	 * Read non bloccante da tuple space
+	 * 
+	 * @param e Entry da leggere
+	 * @param t transazione associata alla lettura
+	 * @param l tempo di lease per questa lettura
+	 * @return L'Entry letta
+	 * @throws Exception 
+	 */
 	public Entry readIfExists(Entry e, Transaction t, long l) throws Exception {
 		if (f!=null){
 			return f.readIfExists(this, e, t, l);
@@ -145,6 +257,15 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 		return js.readIfExists(e,t,l);
 	}
 
+	/**
+	 * Take bloccante da tuple space
+	 * 
+	 * @param e Entry da ottenere
+	 * @param t transazione associata alla take
+	 * @param l tempo di lease per questa take
+	 * @return L'Entry ottenuta
+	 * @throws Exception  
+	 */
 	public Entry take(Entry e, Transaction t, long l) throws Exception {
 		
 		if (f!=null){
@@ -165,7 +286,15 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 
 		return js.take(e,t,l);
 	}
-
+	/**
+	 * Take non  bloccante da tuple space
+	 * 
+	 * @param e Entry da ottenere
+	 * @param t transazione associata alla take
+	 * @param l tempo di lease per questa take
+	 * @return L'Entry ottenuta
+	 * @throws Exception  
+	 */
 	public Entry takeIfExists(Entry e, Transaction t, long l) throws Exception {
 		if (f!=null){
 			return f.takeIfExists(this, e, t, l);
@@ -173,12 +302,30 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 		return js.takeIfExists(e,t,l);
 	}
 
+	/**
+	 * Scrittura nel tuple space locale
+	 * 
+	 * @param e Entry da scrivere
+	 * @param t transazione associata alla scrittura
+	 * @param l tempo di lease per questa scrittura
+	 * @return La Lease associata alla scrittura
+	 * @throws Exception  
+	 */
 	public Lease write(Entry e, Transaction t, long l) throws Exception {
 		return js.write(e,t,l);
 
 	}
 
-
+	/**
+	 * Lettura non bloccante da remoto effettuata dalla federazione
+	 *
+	 * @param e Entry da leggere
+	 * @param t transazione associata alla lettura
+	 * @param l tempo di lease per questa lettura
+	 * @return L'Entry letta
+	 * @throws Exception  
+	 * 
+	 */
 	public Entry remoteReadIfExists(Entry e, Transaction t, long l)
 	throws RemoteException {
 		try {
@@ -193,7 +340,16 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 	}
 
 
-
+	/**
+	 * Take non bloccante da remoto effettuata dalla federazione
+	 *
+	 * @param e Entry da ottenere
+	 * @param t transazione associata alla take
+	 * @param l tempo di lease per questa take
+	 * @return L'Entry ottenuta
+	 * @throws Exception  
+	 * 
+	 */
 	public Entry remoteTakeIfExists(Entry e, Transaction t, long l)
 	throws RemoteException {
 		try {
@@ -206,51 +362,12 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 			throw new RemoteException(e1.getMessage());
 		}
 	}
-//	public void register(Entry e, Transaction t, RemoteEventListener r, long l) throws RemoteException{
-//		System.out.println("NodoLocale.register()");
-//		try {
-//			System.out.println("NodoLocale.register()");
-//			leaseRenewal = new LeaseRenewalManager();
-//			/**
-//			 * inserire l'oggetto di hangback per identificare chi ha fatto partire
-//			 * il notify
-//			 */
-//			EventRegistration myReg;
-//			try {
-//				myReg = js.notify(e, null, r, 30000,new MarshalledObject(new Integer(432)));
-//				leaseRenewal.renewFor(myReg.getLease(), Lease.FOREVER, 30000, new DebugListener());
-//			} catch (IOException e1) {
-//				throw new RemoteException("Impossibile registrare l'oggetto di ritorno");
-//			}
-//		}
-//
-//
-//		catch (TransactionException e1) {
-//			throw new RemoteException(e1.getMessage());
-//		}
-//
-//	}
 
-	/**
-	 * @return the federationService
-	 */
-	public String getFederationServiceAddress() {
-		return federationServiceAddress;
-	}
+
+
 
 	private Entry getResult() throws Exception {
 		if (debug) System.out.println("NodoLocale.getResult()");
-	/*
-	 	while (!r_present){
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		r_present = false;
-		return result;
-*/
 		
 		while (result_status == 0){
 			try {
@@ -271,61 +388,30 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 
 		
 	}
-
+	
+	/**
+	 * Questo metodo tipicamente richiamato dalla federazione notifica l'ottenimento di un qualche risultato al nodo locale e sblocca lo stato del nodo durante read e take bloccanti
+	 * 
+	 * @param e L'entry ottenuta da remoto
+	 * 
+	 */
 	public void putResult(Entry e) throws RemoteException{
 		if (debug) System.out.println("NodoLocale.putResult()");
 		result = e;
-//		notify();
-//		r_present = true;
 		result_status = 1;
 	}
 
-	
+	/**
+	 * Questo metodo tipicamente richiamato dalla federazione notifica l'accadimento di qualche eccezione sul nodo remoto e sblocca lo stato del nodo durante read e take bloccanti
+	 * 
+	 * @param e L'eccezione accaduta sul nodo remoto
+	 * 
+	 */
 	public void throwException(Exception e) throws RemoteException {
 		this.resultException = e;
 		result_status  = -1;
 		
 	}
-
-	/**
-	 * @param federationService the federationService to set
-	 */
-	public void setFederationServiceAddress(String federationServiceAddress) {
-		this.federationServiceAddress = federationServiceAddress;
-	}
-
-	public String getJavaSpaceAddress() throws RemoteException {
-		return jSpaceRemoteAddress;
-	}
-
-
-
-//	private static class DebugListener implements LeaseListener {
-//		public void notify(LeaseRenewalEvent anEvent) {
-//			System.out.println("Got lease renewal problem");
-//
-//			System.out.println(anEvent.getException());
-//			System.out.println(anEvent.getExpiration());
-//			System.out.println(anEvent.getLease());
-//		}
-//	}
-//
-//	/**
-//	 * @return the listener
-//	 */
-//	public NodoLocaleEventListener getListener() {
-//		return listener;
-//	}
-//
-//
-//	/**
-//	 * @param listener the listener to set
-//	 */
-//	public void setListener(NodoLocaleEventListener listener) {
-//		this.listener = listener;
-//	}
-//
-//
 
 
 }
