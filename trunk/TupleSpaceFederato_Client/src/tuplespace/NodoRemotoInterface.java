@@ -9,6 +9,7 @@ import net.jini.core.transaction.Transaction;
 /**
  * Questa interfaccia rappresenta le funzionalitˆ remote offerte dalla classe NodoLocale ed utilizzate nella federazione da remoto.
  *
+ * @author Vincenzo Frascino
  * @author Nicolas Tagliani
  *
  */
