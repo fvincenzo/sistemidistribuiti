@@ -8,6 +8,8 @@ import net.jini.core.transaction.Transaction;
 /**
  * Questa interfaccia mostra le funzionalità che devono essere disponibili in un qualsiasi nodo locale
  * Il fatto di essere connessi o meno a una federazione è trasparente all'utente
+ * 
+ * @author Vincenzo Frascino
  * @author Nicolas Tagliani
  *
  */
