@@ -3,9 +3,7 @@ package federazione;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
-
 import tuplespace.NodoRemotoInterface;
-
 import net.jini.core.discovery.LookupLocator;
 import net.jini.core.entry.Entry;
 import net.jini.core.entry.UnusableEntryException;
@@ -15,29 +13,68 @@ import net.jini.core.transaction.Transaction;
 import net.jini.core.transaction.TransactionException;
 import net.jini.space.JavaSpace;
 
+/**
+ * Questa classe si occupa di effettuare una read blocante su un nodo remoto per conto di una federazione.
+ * Una volta ottenuto un risultato questo verrà propagato indietro alla federazione chiamante.
+ * 
+ * @author Vincenzo Frascino
+ * @author Nicolas Tagliani
+ *
+ */
 public class TakeThread extends Thread {
 
+	/**
+	 * Il javaspace remoto su cui effettuare la read
+	 */
 	private JavaSpace js;
+	/**
+	 * l'entry da richiedere al javaspace remoto
+	 */
 	private Entry e;
+	/**
+	 * La trasazione associata all'entry
+	 */
 	private Transaction t; 
+	/**
+	 * Tempo massimo per rimanere in attesa di una risposta
+	 */
 	private long l;
-
+	/**
+	 * Flag per imporre la terminazione del thread
+	 */
 	private boolean quit = false;
+	/**
+	 * Riferimento all'oggetto che riceverà la notifica della risposta
+	 */
 	private TakeRequest tq;
+	/**
+	 * Tempo massimo di attesa per singola richiesta così da non saturare il server con thread sempre attivi
+	 */
 	private long updateRate = 10000;
+	/**
+	 * Riferimento dell'oggetto che dovrà ottenere il risultato
+	 */
 	private NodoRemotoInterface nodoSource;
 
+	/**
+	 * Costruttore della classe takethread. 
+	 * Viene inizializzato con tutti i parametri necessari a effettuare una take
+	 * 
+	 * @param rq Riferimento dell'oggetto che ha istanziato questo takethread
+	 * @param nodoSource Nodo remoto che dovrà ottenere l'eventuale risposta
+	 * @param address indirizzo del javaspace su cui effettuare la take
+	 * @param e l'entry da ottenere
+	 * @param t la trasazione associata alla take
+	 * @param l il tempo massimo di attesa per la take
+	 */
 	public TakeThread(TakeRequest tq, NodoRemotoInterface nodoSource, String address, Entry e, Transaction t, long l){
-//		System.out.println("Istanzio un nuovo TakeThread richiesto su:"+address+"\nEntry: "+e+"\nda: "+nodoSource);
 		try {
 
 			LookupLocator lookupL = new LookupLocator(address);
 			ServiceRegistrar registrar = lookupL.getRegistrar();
 			js = (JavaSpace)registrar.lookup(new ServiceTemplate(null, new Class[]{ JavaSpace.class }, null));
 			this.tq=tq;
-//			this.r=r;
 			this.nodoSource = nodoSource;
-//			this.source=source;
 			this.e=e;
 			this.t=t;
 			this.l=l;
@@ -53,8 +90,10 @@ public class TakeThread extends Thread {
 		}	
 	}
 
+	/**
+	 * Metodo ereditato dalla classe thread per mandare in esecuzione il takeThread.
+	 */
 	public void run(){
-//		System.out.println("TakeThread.run()");
 		boolean run = true;
 		Entry ret = null;
 		while (!quit & run & ret == null){
@@ -79,7 +118,10 @@ public class TakeThread extends Thread {
 		}
 		if (!quit) tq.gotResult(nodoSource, ret);
 	}
-
+	
+	/**
+	 * Ferma il readThread. L'operazione sara' effettuata entro 10 secondi.
+	 */
 	public void halt(){
 		quit = true;
 	}
