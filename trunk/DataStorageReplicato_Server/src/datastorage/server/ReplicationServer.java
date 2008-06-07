@@ -3,39 +3,60 @@ package datastorage.server;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
-
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
-
 import datastorage.corba.ServerPOA;
 import datastorage.corba.NoValue;
 import datastorage.corba.CantUpdate;
 
-/** 
+/**
+ * Classe principale che implementa il servant generato da interface.idl
+ * 
+ * @author Vincenzo Frascino
  * @author Nicolas Tagliani
  * @uml.stereotype uml_id="Standard::ImplementationClass" 
  */
 @SuppressWarnings("serial")
 public class ReplicationServer extends ServerPOA implements MessageListener {
-//	private static boolean debug = true;
-	private ReplicationCommunication replComm;
-	private String lastMsgId = "";
-	private Object lock = new Object();
-	private String myAccount = "";
-	private String lastJoin1 = "";
-	private String lastJoin2 = "";
 
-	/** 
-	 * @uml.property name="localData"
+	/**
+	 * Riferimento all'oggetto che si occupa della gestione della comunicazione nella fase di invio dei messaggi.
+	 */
+	private ReplicationCommunication replComm;
+	/**
+	 * Id dell'ultimo messaggio inviato
+	 */
+	private String lastMsgId = "";
+	/**
+	 * Oggetto su cui vengono effettuati i lock dei metodi sincronizzati
+	 */
+	private Object lock = new Object();
+	/**
+	 * Riferimento del nome utente che usa questo server
+	 */
+	private String myAccount = "";
+	/**
+	 * Identificativo dell'ultimo server che si e' unito alla rete.
+	 */
+	private String lastJoin1 = "";
+	/**
+	 * Identificativo del penultimo server che si e' unito alla rete.
+	 */
+	private String lastJoin2 = "";
+	/**
+	 * Struttura dati per la memorizzazione dei dati locali e remoti
 	 */
 	private Map<Integer, Integer> localData = new HashMap<Integer, Integer>();
 
-
-
-	/** 
-	 * Costruttore per la classe ReplicationServer
+	/**
+	 * Costruttore della classe ReplicationServer+
+	 * 
+	 * @param jndiAddress Indirizzo a cui trovare la connection factory
+	 * @param jndiPort Porta a cui fa riferimento la connection factory
+	 * @param topicUser Username usato da questo server
+	 * @param topicPassword password usata da questo server
 	 */
 	public ReplicationServer(String jndiAddress, String jndiPort, String topicUser, String topicPassword) {
 		this.myAccount = topicUser;
@@ -49,14 +70,27 @@ public class ReplicationServer extends ServerPOA implements MessageListener {
 		}
 	}
 
-
+	/**
+	 * Operazione di lettura esportata tramite corba
+	 * 
+	 * @param dataId l'id del dato da leggere
+	 * @return il dato letto
+	 * @throws NoValue Lancia l'eccezione NoValue se il dato non e' presente nel sistema
+	 */
 	public int read(int dataId) throws NoValue {
 		synchronized (lock) {
 			if (!localData.containsKey(dataId)) throw new NoValue();
 			return localData.get(dataId);
 		}
 	}
-
+	
+	/**
+	 * Operazione di scrittura esportata tramite corba
+	 * 
+	 * @param dataId Id del dato da scrivere
+	 * @param newValue Nuovo valore del dato da scrivere
+	 * @throws CantUpdate Eccezione lanciata se avviene qualche errore sulla rete e il dato non viene propagato
+	 */
 	public void write(int dataId, int newValue) throws CantUpdate {
 		synchronized (lock) {
 
@@ -81,6 +115,12 @@ public class ReplicationServer extends ServerPOA implements MessageListener {
 	}
 	*/
 
+	/**
+	 * Metodo ereditato dall'interfaccia MessageListener di joram.
+	 * Implementa il protocollo di comunicazione in fase di ricezione dei messaggi.
+	 * 
+	 * @param message il message ricevuto
+	 */
 	public void onMessage(Message message)  {
 		synchronized (lock) {
 			try {
@@ -99,19 +139,17 @@ public class ReplicationServer extends ServerPOA implements MessageListener {
 							String out = "";
 							for (Integer i : localData.keySet()) out=out+i+" "+localData.get(i)+" ";
 							lastMsgId = replComm.sendPrivMessage(lastJoin1, out );
-//							System.out.println("Devo inviare le informazioni a "+lastJoin1+" prima volta");
 						}
 						else 
 							if (lastJoin2.equals("")){
 								lastJoin2 = tok.nextToken();
 								String out = "";
 								for (Integer i : localData.keySet()) out=out+i+" "+localData.get(i)+" ";
-								lastMsgId = replComm.sendPrivMessage(lastJoin1, out );
-//								System.out.println("Devo inviare le informazioni a "+lastJoin2+" seconda volta");
+								lastMsgId = replComm.sendPrivMessage(lastJoin1, out );								
 							}
 					}
 					if (command.equals("TOSERVER:") && tok.nextToken().equals(myAccount) ){
-						/**
+						/*
 						 * Ho ricevuto un aggiornamento sui dati presenti
 						 */
 						while ( tok.countTokens() >= 2 ){
@@ -131,7 +169,7 @@ public class ReplicationServer extends ServerPOA implements MessageListener {
 					}*/
 					}
 				else {
-					System.out.println("Ho ricevuto questo messaggio che ho inviato io:\n"+((TextMessage)message).getText());
+//					System.out.println("Ho ricevuto questo messaggio che ho inviato io:\n"+((TextMessage)message).getText());
 				}
 			} catch (JMSException e) {
 				e.printStackTrace();
