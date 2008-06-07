@@ -1,6 +1,3 @@
-/**
- * Main class to start the corba servant
- */
 package datastorage.server;
 
 import java.util.Vector;
@@ -13,14 +10,15 @@ import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
 
 /**
+ * Classe principale del servizio server.
+ * Questa classe si occupa di istanziare il servant del datastorage replicato
+ * 
+ * @author Vincenzo Frascino
  * @author Nicolas Tagliani
  *
  */
 public class MainClass {
 
-	/**
-	 * @param args
-	 */
 
 	private static void Start(String orbdHost, String orbdPort, String jndiHost, String jndiPort, String user, String password){
 		try {
