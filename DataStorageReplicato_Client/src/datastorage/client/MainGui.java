@@ -1,13 +1,11 @@
 package datastorage.client;
 
-
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,12 +20,19 @@ import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.InvalidName;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
-
 import datastorage.corba.CantUpdate;
 import datastorage.corba.NoValue;
 import datastorage.corba.Server;
 import datastorage.corba.ServerHelper;
 
+/**
+ * Classe che implementa un semplice client grafico per accedere alle funzionalita' deò datastorage replicato
+ * 
+ * 
+ * @author Vincenzo Frascino
+ * @author Nicolas Tagliani
+ *
+ */
 @SuppressWarnings("serial")
 public class MainGui extends JFrame implements ActionListener , KeyListener{
 	private static MainGui m;
@@ -77,24 +82,6 @@ public class MainGui extends JFrame implements ActionListener , KeyListener{
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 
-		/*
-		 * 
-		 try {
-			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		} catch (ClassNotFoundException e) {
-			//  Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			//  Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			//  Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			//  Auto-generated catch block
-			e.printStackTrace();
-		}
-		 */
 
 		getContentPane().setLayout(new BorderLayout());
 		mainPanel.setLayout(null);
@@ -104,8 +91,6 @@ public class MainGui extends JFrame implements ActionListener , KeyListener{
 		mainPanel.add(readBox);
 		readBox.setBounds(20, 35, 270, 25);
 		readBox.addKeyListener(this);
-
-//		nome.setBounds(10, 10, 30, 20);
 		mainPanel.add(idWrite);
 		idWrite.setBounds(20, 60, 130, 25);
 		mainPanel.add(idWrite2);
@@ -171,12 +156,12 @@ public class MainGui extends JFrame implements ActionListener , KeyListener{
 	}
 
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
+
 
 	}
 
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+
 
 	}
 
