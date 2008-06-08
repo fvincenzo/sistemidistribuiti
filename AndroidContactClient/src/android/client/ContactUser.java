@@ -10,6 +10,9 @@ public class ContactUser implements UserInterface {
 	private String mail;
 	private String IM;
 	
+	public ContactUser(String parseMe){
+		
+	}
 	
 	public ContactUser(String usename, String position, String mobile,
 			String home, String work, String mail, String im) {
