@@ -21,8 +21,6 @@ public class MyContatsClient extends Activity implements OnClickListener{
 	private ContactClientInterface contactList;
 	
 	
-	
-	
 	Button login;
 	Button register;
 	
