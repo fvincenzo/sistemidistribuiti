@@ -24,7 +24,7 @@ public class SocketServer extends Thread{
 	
 	public void run(){
     	
-    	System.out.println("Android Contact Server ver 0.1");
+    	System.out.println("Android Contact Server ver 0.11");
     	
     	try {
     		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -32,11 +32,11 @@ public class SocketServer extends Thread{
             String s = null;
             
             //Server version
-            out.println("Android Contact Server ver 0.1");
+            out.println("Android Contact Server ver 0.11\r");
             //Server Welcome Message
-            out.println("Welcome in Darkstar Contact Server.");
+            out.println("Welcome in Darkstar Contact Server.\r");
             //Server Status
-            out.println("Status: up and running.");
+            out.println("Status: up and running.\r");
             
             while(true) {
             	
@@ -52,11 +52,16 @@ public class SocketServer extends Thread{
             		if(s.equals("REGISTER")) {
             			
             			System.out.println("REGISTER");
-            			String u = in.readLine();
-            			String p = in.readLine();
-            			String g = in.readLine();
+            			String username = in.readLine();
+            			String password = in.readLine();
+            			String mobile = in.readLine();
+            			String home = in.readLine();
+            			String work = in.readLine();
+            			String mail = in.readLine();
+            			String im = in.readLine();
+            			String position = in.readLine();
             			
-            			boolean res = register(u,p,g);
+            			boolean res = register(username,password,mobile,home,work,mail,im,position);
             			
             			if (res == true) {
             				result = "Register and Login OK.";
@@ -109,10 +114,49 @@ public class SocketServer extends Thread{
             			
             		}
             		
+            		if(s.equals("ADDFRIEND")) {
+            			System.out.println("ADDFRIEND");
+            			String u = in.readLine();
+            			String p = in.readLine();
+            			result = addfriend(u,p);
+            		}
+            		
+            		if(s.equals("PENDINGFRIENDS")) {
+            			System.out.println("PENDINGFRIENDS");
+            			String p = in.readLine();
+            			result = pendingfriends(p);
+            		}
+            		
+            		if(s.equals("ACCEPTFRIEND")) {
+            			System.out.println("ACCEPTFRIEND");
+            			String u = in.readLine();
+            			String p = in.readLine();
+            			result = acceptfriend(u,p);
+            		}
+            		
+            		if(s.equals("DENYFRIEND")) {
+            			System.out.println("DENYFRIEND");
+            			String u = in.readLine();
+            			String p = in.readLine();
+            			result = denyfriend(u,p);
+            		}
+            		
+            		if(s.equals("GETUSERDATA")) {
+            			System.out.println("GETUSERDATA");
+            			String u = in.readLine();
+            			result = getuserdata(u);
+            		}
+            		
+            		if(s.equals("CHECKPOSITION")) {
+            			System.out.println("GETUSERDATA");
+            			String u = in.readLine();
+            			result = getposition(u);
+            		}
             		
             	}
             	
             	out.println(result);
+            	result = "";
             	
             }
             /*
@@ -128,14 +172,14 @@ public class SocketServer extends Thread{
         
     }
 	
-	public static boolean register(String uname, String pwd, String geo) {
+	public static boolean register(String username,String password,String mobile,String home,String work,String mail,String im,String position) {
 		
 		//Aggiungo l'utente 
-		users.add(new User(uname,pwd,geo));
-		//Salvo la lista
+		users.add(new User(username,password,mobile,home,work,mail,im,position));
+		//Salvo la lista}
 		um.save(users);
 		//Loggo l'utente appena registrato
-		return login(uname,pwd);
+		return login(username,password);
 		
 	}
 	
@@ -233,4 +277,174 @@ public class SocketServer extends Thread{
 		return result;
 		
 	}
-}
+
+	//Alla richiesta di aggiunta di un amico questo viene aggiunto nella lista degli pending
+	public static String addfriend(String uname,String friend) {
+		
+		Iterator<User> i = users.iterator();
+		String result = "";
+		
+		do {
+			
+			User u = (User)i.next();
+			
+			if((u.getUser().equals(friend)==true)) {
+				
+				u.addPendings(uname);
+				
+				break;
+				
+			} 
+			
+		} while(i.hasNext());
+		
+		return result;
+		
+	}
+	
+	public static String pendingfriends(String uname) {
+		
+		Iterator<User> i = users.iterator();
+		String result = "";
+		
+		do {
+			
+			User u = (User)i.next();
+			
+			if((u.getUser().equals(uname)==true) && (u.getConnected() == true)) {
+				
+				Iterator<String> it = u.listPendings().iterator();
+				
+				while(it.hasNext()) {
+					
+					result += it.next()+"$";
+					
+				}
+				
+				break;
+				
+			} else if ((u.getUser().equals(uname)==true) && (u.getConnected() == false)) {
+				
+				result = "Connect Before.";
+				
+			}
+			
+		} while(i.hasNext());
+		
+		return result;
+		
+	}
+
+	public static String acceptfriend(String uname,String friend) {
+		
+		Iterator<User> i = users.iterator();
+		String result = "";
+		
+		do {
+			
+			User u = (User)i.next();
+			
+			if((u.getUser().equals(uname)==true) && (u.getConnected() == true)) {
+				
+				u.addFriend(friend);
+				u.removePenginds(friend);
+				
+				break;
+				
+			} else if ((u.getUser().equals(uname)==true) && (u.getConnected() == false)) {
+				
+				result = "Connect Before.";
+				
+			}
+			
+		} while(i.hasNext());
+		
+		do {
+			
+			User u = (User)i.next();
+			
+			if((u.getUser().equals(friend)==true)) {
+				
+				u.addFriend(uname);
+				u.removePenginds(uname);
+				
+				break;
+				
+			} 
+			
+		} while(i.hasNext());
+		
+		return result;
+		
+	}
+	
+	public static String denyfriend(String uname,String friend) {
+		
+		Iterator<User> i = users.iterator();
+		String result = "Request Denied.";
+		
+		do {
+			
+			User u = (User)i.next();
+			
+			if((u.getUser().equals(friend)==true)) {
+				
+				u.removePenginds(uname);
+				
+				break;
+				
+			} 
+			
+		} while(i.hasNext());
+		
+		return result;
+		
+	}
+	
+	public static String getuserdata(String uname) {
+		
+		Iterator<User> i = users.iterator();
+		String result = "";
+		
+		do {
+			
+			User u = (User)i.next();
+			
+			if((u.getUser().equals(uname)==true)) {
+				
+				result = u.getUserInfo();
+				
+				break;
+				
+			} 
+			
+		} while(i.hasNext());
+		
+		return result;
+		
+	}
+	
+	public static String getposition(String uname) {
+		
+		Iterator<User> i = users.iterator();
+		String result = "";
+		
+		do {
+			
+			User u = (User)i.next();
+			
+			if((u.getUser().equals(uname)==true)) {
+				
+				result = u.getGeo();
+				
+				break;
+				
+			} 
+			
+		} while(i.hasNext());
+		
+		return result;
+		
+	}
+	
+}	

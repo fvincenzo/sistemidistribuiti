@@ -9,17 +9,27 @@ public class User {
 
 	private String uname;
 	private String pwd;
+	private String mobile;
+	private String work;
+	private String home;
+	private String mail;
+	private String im;
 	private String geo;
 	private boolean connected;
 	
 	private Vector<String> Friends;
 	private Vector<String> Pendings;
 	
-	public User(String uname,String pwd, String geo) {
+	public User(String username,String password,String mobile,String home,String work,String mail,String im,String position) {
 		
-		this.uname = uname;
-		this.pwd = pwd;
-		this.geo = geo;
+		this.uname = username;
+		this.pwd = password;
+		this.home = home;
+		this.mobile = mobile;
+		this.work = work;
+		this.mail = mail;
+		this.im = im;
+		this.geo = position;
 	
 		Friends = new Vector<String>();
 		Pendings = new Vector<String>();
@@ -100,6 +110,12 @@ public class User {
 		
 	}
 	
+	public void removePenginds(String pen) {
+		
+		Pendings.remove(pen);
+		
+	}
+	
 	public Vector<String> listPendings() {
 		
 		return Pendings;
@@ -112,11 +128,38 @@ public class User {
 		
 	}
 	
+	public String getUserInfo() {
+		
+		String user = this.uname+"$"+this.geo+"$"+this.mobile+"$"+this.work+"$"+this.home+"$"+this.mail+"$"+this.im;
+		return user;
+		
+	}
+	
 	public void setConnected() {
 		if(connected==true) {
 			connected = false;
 		} else {
 			connected = true;
 		}
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public String getWork() {
+		return work;
+	}
+
+	public String getHome() {
+		return home;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public String getIm() {
+		return im;
 	}
 }

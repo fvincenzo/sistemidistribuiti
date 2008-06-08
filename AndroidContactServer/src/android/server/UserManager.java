@@ -13,9 +13,14 @@ public class UserManager {
 	public Vector<User> restore() {
 		
 		Vector<User> v = new Vector<User>();
-		String s = " ";
-		String p;
-		String g;
+		String username= " ";
+		String password;
+		String mobile;
+		String home;
+		String work;
+		String mail;
+		String im;
+		String position;
 		
 		try
 		{
@@ -25,16 +30,21 @@ public class UserManager {
 		    // Read a line of text
 		    DataInputStream in = new DataInputStream(fin);
 		    
-		    s = in.readLine();
-	    	p = in.readLine();
-	    	g = in.readLine();
+		    username = in.readLine();
+			password = in.readLine();
+			mobile = in.readLine();
+			home = in.readLine();
+			work = in.readLine();
+			mail = in.readLine();
+			im = in.readLine();
+			position = in.readLine();
 		    
-		    while(s != null) {
+		    while(username != null) {
 		    	
 		    	String f;
 		    	//System.out.println(s+p+g);
 		    	//Carico l'utente
-		    	User u = new User(s,p,g);
+		    	User u = new User(username,password,mobile,home,work,mail,im,position);
 		    	//Carico la lista degli amici
 		    	FileInputStream frdin = new FileInputStream ("users/"+u.getUser()+".frd");
 		    	DataInputStream frin = new DataInputStream(frdin);
@@ -58,9 +68,14 @@ public class UserManager {
 		    	//Aggiungo l'utente
 		    	v.add(u);
 		    	
-		    	s = in.readLine();
-		    	p = in.readLine();
-		    	g = in.readLine();
+		    	username = in.readLine();
+				password = in.readLine();
+				mobile = in.readLine();
+				home = in.readLine();
+				work = in.readLine();
+				mail = in.readLine();
+				im = in.readLine();
+				position = in.readLine();
 		    	
 		    } 
 		    	
@@ -97,6 +112,11 @@ public class UserManager {
 				
 				out.println(s.getUser());
 				out.println(s.getPwd());
+				out.println(s.getMobile());
+				out.println(s.getHome());
+				out.println(s.getWork());
+				out.println(s.getMail());
+				out.println(s.getIm());
 				out.println(s.getGeo());
 				
 				//Aggiorno la lista degli amici
