@@ -11,12 +11,18 @@
         
         
         
-        <activity android:name=".PendingFriendsList" android:label="@string/pending_friends">
+        <activity android:name=".PendingFriendsList" android:label="@string/title_pending_friends">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                  <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         
+         <activity android:name=".RegisterActivity" android:label="@string/title_register">
+            <intent-filter>
+                <action android:name="android.client.action.REGISTER" />
+                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 </manifest> 

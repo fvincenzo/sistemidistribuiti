@@ -45,7 +45,7 @@ public class MyContatsClient extends Activity implements OnClickListener{
 			startActivity(new Intent(Intent.VIEW_ACTION, getIntent().getData()));
 		}
 		if (arg0 == (Button) findViewById(R.id.Register)){
-			Log.i("MyContactsClient", "Hai premuto register");
+			startActivity(new Intent(android.client.RegisterActivity.REGISTER_ACTION, getIntent().getData()));
 		}
 	}
 }
