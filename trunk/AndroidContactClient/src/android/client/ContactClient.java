@@ -14,9 +14,17 @@ public class ContactClient implements ContactClientInterface {
 	private BufferedReader in;
 	private Socket socket;
 	private String username = "";
+	private static ContactClient me = null;
 
-	public ContactClient(){}
+	private ContactClient(){}
 
+	public static ContactClient getHistance(){
+		if (me == null){
+			me = new ContactClient();
+		}
+		return me;
+		
+	}
 	@Override
 	public void acceptFriend( String friendName) {
 		if (username != ""){

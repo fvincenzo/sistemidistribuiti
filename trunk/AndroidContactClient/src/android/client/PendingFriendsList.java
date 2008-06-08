@@ -17,9 +17,15 @@ package android.client;
 
 
 
+import java.util.LinkedList;
+import java.util.Vector;
+
 import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.util.EventLog.List;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -30,10 +36,12 @@ import android.widget.ListView;
  * A list view example where the 
  * data for the list comes from an array of strings.
  */
-public class PendingFriendsList extends ListActivity {
+public class PendingFriendsList extends ListActivity implements OnClickListener {
 	
 	private ContactClientInterface contactList;
-
+	private ArrayAdapter<String> arrAd;
+	private String selected;
+	private Vector<String> v = new Vector<String>();
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -41,17 +49,41 @@ public class PendingFriendsList extends ListActivity {
 
         // Use an existing ListAdapter that will map an array
         // of strings to TextViews
-        setListAdapter(new ArrayAdapter<String>(this, 
-                android.R.layout.simple_list_item_1, mStrings));
+        for(String s: mStrings){
+        	v.add(s);
+        }
+        arrAd = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, v.toArray(new String[1]));
+        setListAdapter(arrAd);
+
     }
-    
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id){
-    	if (l.getSelectedItem()!= null){
-    		AlertDialog.show(this, "Titolo", 0, "messaggio", "OK", true);
-    	}
+//    	if (l.getSelectedItem()!= null){
+    	
+//    	String selezionato 	= l.getSelectedItem().toString();
+    		setSelection(position);
+    		
+    		selected = this.v.get(getSelectedItemPosition()) ;
+//    		AlertDialog.show(this, "Titolo", 0,mStrings[getSelectedItemPosition()] , "ACCEPT" ,this, "DENY",this, false, null);
+    		AlertDialog.show(this, "Accept or Deny?", 0, "What do you want to do with:\n"+selected, "ACCEPT",this,"DENY", this, true, null);
+//    	}
     }
 
+    @Override
+    public void onClick(DialogInterface dialog, int which){
+    	if (which == DialogInterface.BUTTON1){
+    		removeEntry(selected);
+    	}
+    	if (which == DialogInterface.BUTTON2){
+    		removeEntry(selected);
+    	}
+    }
+    
+    public void removeEntry(String toRemove){
+    	v.remove(toRemove);
+        arrAd = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, v.toArray(new String[1]));
+        setListAdapter(arrAd);
+    }
     
     private String[] mStrings = {
             "Abbaye de Belloc", "Abbaye du Mont des Cats", "Abertam",
