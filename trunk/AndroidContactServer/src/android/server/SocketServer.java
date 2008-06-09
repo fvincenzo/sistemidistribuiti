@@ -148,7 +148,7 @@ public class SocketServer extends Thread{
             		}
             		
             		if(s.equals("CHECKPOSITION")) {
-            			System.out.println("GETUSERDATA");
+            			System.out.println("CHECKPOSITION");
             			String u = in.readLine();
             			result = getposition(u);
             		}
@@ -241,7 +241,7 @@ public class SocketServer extends Thread{
 				
 			} else if ((u.getUser().equals(uname)==true) && (u.getConnected() == false)) {
 				
-				result = "Connect Before.";
+				result = "Connect Before. ERROR.";
 				
 			}
 			
@@ -264,11 +264,13 @@ public class SocketServer extends Thread{
 				
 				u.setGeo(position);
 				
+				result = "Position Updated. OK.";
+				
 				break;
 				
 			} else if ((u.getUser().equals(uname)==true) && (u.getConnected() == false)) {
 				
-				result = "Connect Before.";
+				result = "Connect Before. ERROR.";
 				
 			}
 			
@@ -325,7 +327,7 @@ public class SocketServer extends Thread{
 				
 			} else if ((u.getUser().equals(uname)==true) && (u.getConnected() == false)) {
 				
-				result = "Connect Before.";
+				result = "Connect Before. ERROR.";
 				
 			}
 			
@@ -353,7 +355,7 @@ public class SocketServer extends Thread{
 				
 			} else if ((u.getUser().equals(uname)==true) && (u.getConnected() == false)) {
 				
-				result = "Connect Before.";
+				result = "Connect Before. ERROR.";
 				
 			}
 			
