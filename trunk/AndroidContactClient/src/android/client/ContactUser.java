@@ -1,5 +1,7 @@
 package android.client;
 
+import java.util.StringTokenizer;
+
 public class ContactUser implements UserInterface {
 
 	private String usename;
@@ -11,6 +13,14 @@ public class ContactUser implements UserInterface {
 	private String IM;
 	
 	public ContactUser(String parseMe){
+		StringTokenizer tok = new StringTokenizer(parseMe, "$");
+		this.usename = tok.nextToken();
+		this.position = tok.nextToken();
+		this.mobile = tok.nextToken();
+		this.work = tok.nextToken();
+		this.home = tok.nextToken();
+		this.mail = tok.nextToken();
+		this.IM = tok.nextToken();
 		
 	}
 	
