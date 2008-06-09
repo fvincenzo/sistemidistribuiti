@@ -3,5 +3,9 @@
     <string name="app_name">MyContats</string>
     <string name="title_pending_friends">Pending Friends List</string>
     <string name="title_register">Register</string>
+    <string name="title_main_loop">What do you want to do?</string>
+    <string name="local_service_started">START</string>
+    <string name="local_service_stopped">STOP</string>
+    <string name="local_service_notification">NOTIFY</string>
     
 </resources>

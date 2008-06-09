@@ -4,6 +4,8 @@
  */
 package android.client;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Vector;
 
 /**
@@ -20,10 +22,16 @@ public interface ContactClientInterface {
 	 * 
 	 * @param uname username da registrare
 	 * @param pwd password dell'utente
-	 * @param geo coordinate della posizione attuale
+	 * @param mobile il numero di cellulare
+	 * @param home il numero di casa
+	 * @param work il numero del lavoro
+	 * @param mail l'indirizzo email
+	 * @param im l'account su qualche istant messenger
+	 * @param x_position la coordinata x della posizione attuale
+	 * @param y_position la coordinata y della posizione attuale
 	 * @return true se la login ha avuto successo false altrimenti
 	 */
-	public boolean register(String uname, String pwd, String geo);
+	public boolean register(String uname, String pwd, String mobile, String home, String work, String mail, String im, double x_position, double y_position);
 	
 	/**
 	 * Logga un utente nel sistema
@@ -54,7 +62,7 @@ public interface ContactClientInterface {
 	 * @param position la posizione da aggiornare
 	 * @return true se la posizione è aggiornata con successo false altrimenti
 	 */
-	public boolean updatePosition(float x_position, float y_position);	
+	public boolean updatePosition(double x_position, double y_position);	
 	
 	/**
 	 * Aggiunge un amico alla lista dell'utente uname
@@ -93,6 +101,14 @@ public interface ContactClientInterface {
 	 */
 	public UserInterface getUserDetails(String friend);
 	
+	/**
+	 * Esegue una connessione al server specificato sulla porta 4444
+	 * 
+	 * @param server Indirizzo remoto del server
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
+	public void connect(String server) throws UnknownHostException, IOException;
 	
 
 }
