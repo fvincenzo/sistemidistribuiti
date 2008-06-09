@@ -10,9 +10,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-	 <activity android:name=".PendingFriendsList" android:label="@string/title_pending_friends">
+	 <activity android:name=".FriendsList" >
             <intent-filter>
                 <action android:name="android.client.action.PENDING" />
+                <action android:name="android.client.action.ALL_USERS" />
                  <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

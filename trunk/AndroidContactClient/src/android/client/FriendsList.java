@@ -34,12 +34,22 @@ import android.widget.ListView;
  * A list view example where the 
  * data for the list comes from an array of strings.
  */
-public class PendingFriendsList extends ListActivity implements OnClickListener {
+public class FriendsList extends ListActivity implements OnClickListener {
 	
 
+	//TODO Inserire la gestione della lista degli utenti
+	
 	public static final String PENDING_ACTION =
 		"android.client.action.PENDING";
 	
+	public static final String ALL_USERS_ACTION =
+		"android.client.action.ALL_USERS";
+	
+    private static final int PENDING = 0;
+    private static final int ALL_USERS = 1;
+
+    private int mState;
+    
 	private ContactClientInterface contactList = ContactClient.getHistance();
 	private ArrayAdapter<String> arrAd;
 	private String selected;
@@ -48,7 +58,12 @@ public class PendingFriendsList extends ListActivity implements OnClickListener 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-
+        
+        final Intent intent = getIntent();
+        final String action = intent.getAction();
+        if (action.equals(PENDING_ACTION)) {
+        	mState = PENDING;
+        	setTitle(R.string.title_pending_friends);
         // Use an existing ListAdapter that will map an array
         // of strings to TextViews
         for(String s: contactList.pendingFriends()){
@@ -63,10 +78,16 @@ public class PendingFriendsList extends ListActivity implements OnClickListener 
         	startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, null));
         	finish();
         }
+        }
+        if (action.equals(ALL_USERS_ACTION)) {
+        	mState = ALL_USERS;
+        	
+        }
     }
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id){
-//    	if (l.getSelectedItem()!= null){
+    	if (mState == PENDING){
+    	//    	if (l.getSelectedItem()!= null){
     	
 //    	String selezionato 	= l.getSelectedItem().toString();
     		setSelection(position);
@@ -76,9 +97,15 @@ public class PendingFriendsList extends ListActivity implements OnClickListener 
     		AlertDialog.show(this, "Accept or Deny?", 0, "What do you want to do with:\n"+selected, "ACCEPT",this,"DENY", this, true, null);
 //    	}
     }
+    if (mState == ALL_USERS) {
+    	
+    }
+    }
+    
 
     @Override
     public void onClick(DialogInterface dialog, int which){
+    	if (mState == PENDING){
     	if (which == DialogInterface.BUTTON1){
     		contactList.acceptFriend(selected);
     		removeEntry(selected);
@@ -87,9 +114,14 @@ public class PendingFriendsList extends ListActivity implements OnClickListener 
     		contactList.denyFriend(selected);
     		removeEntry(selected);
     	}
+    	}
+        if (mState == ALL_USERS) {
+        	
+        }
     }
     
     public void removeEntry(String toRemove){
+    	if (mState == PENDING){
     	v.remove(toRemove);
     	if (v.size() > 0){
         arrAd = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, v.toArray(new String[0]));
@@ -99,6 +131,10 @@ public class PendingFriendsList extends ListActivity implements OnClickListener 
         	startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, null));
         	finish();
     	}
+    	}
+        if (mState == ALL_USERS) {
+        	
+        }
     }
    
 }

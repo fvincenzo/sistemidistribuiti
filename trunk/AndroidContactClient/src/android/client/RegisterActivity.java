@@ -71,7 +71,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 				contactList.connect("192.168.0.8");
 //				if (contactList.register(u, p, m, h, w, e, i, l.getLatitude(), l.getLongitude())){
 					if (contactList.register(u, p, m, h, w, e, i, 13.4336, 64.3464)){
-					startActivity(new Intent(android.client.PendingFriendsList.PENDING_ACTION, getIntent().getData()));
+					startActivity(new Intent(android.client.FriendsList.PENDING_ACTION, getIntent().getData()));
 					finish();
 				}
 				else {

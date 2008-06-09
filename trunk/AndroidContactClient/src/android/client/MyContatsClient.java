@@ -54,7 +54,7 @@ public class MyContatsClient extends Activity implements OnClickListener{
 				try {
 					contactList.connect("192.168.0.8");
 					if (contactList.login(u,p)){
-						startActivity(new Intent(android.client.PendingFriendsList.PENDING_ACTION, getIntent().getData()));
+						startActivity(new Intent(android.client.FriendsList.PENDING_ACTION, getIntent().getData()));
 						finish();
 					}
 					else {
@@ -71,6 +71,7 @@ public class MyContatsClient extends Activity implements OnClickListener{
 		}
 		if (arg0 == register){
 			startActivity(new Intent(android.client.RegisterActivity.REGISTER_ACTION, getIntent().getData()));
+			finish();
 		}
 	}
 }
