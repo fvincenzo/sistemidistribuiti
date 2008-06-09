@@ -14,6 +14,7 @@ public class SocketServer extends Thread{
 	private static Socket clientSocket;
 	
 	public SocketServer(Socket s) {
+		System.out.println("Android Contact Server ver 0.11");
 		
 		clientSocket = s;
 		um = new UserManager();
@@ -24,7 +25,6 @@ public class SocketServer extends Thread{
 	
 	public void run(){
     	
-    	System.out.println("Android Contact Server ver 0.11");
     	
     	try {
     		PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
@@ -32,11 +32,11 @@ public class SocketServer extends Thread{
             String s = null;
             
             //Server version
-            out.println("Android Contact Server ver 0.11\r");
+            out.println("Android Contact Server ver 0.11");
             //Server Welcome Message
-            out.println("Welcome in Darkstar Contact Server.\r");
+            out.println("Welcome in Darkstar Contact Server.");
             //Server Status
-            out.println("Status: up and running.\r");
+            out.println("Status: up and running.");
             
             while(true) {
             	
