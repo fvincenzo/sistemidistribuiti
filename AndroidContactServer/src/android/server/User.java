@@ -17,6 +17,9 @@ public class User {
 	private String geo;
 	private boolean connected;
 	
+	//Questa Stringa può assumere i valori HOME WORK MAIL IM, di default per ogni utente è settata ad HOME
+	private String PreferredMode;
+	
 	private Vector<String> Friends;
 	private Vector<String> Pendings;
 	
@@ -31,6 +34,8 @@ public class User {
 		this.im = im;
 		this.geo = position;
 	
+		this.PreferredMode = "HOME";
+		
 		Friends = new Vector<String>();
 		Pendings = new Vector<String>();
 		
@@ -161,5 +166,13 @@ public class User {
 
 	public String getIm() {
 		return im;
+	}
+
+	public String getPreferredMode() {
+		return PreferredMode;
+	}
+
+	public void setPreferredMode(String preferredMode) {
+		PreferredMode = preferredMode;
 	}
 }
