@@ -14,7 +14,7 @@ public class SocketServer extends Thread{
 	private static Socket clientSocket;
 	
 	public SocketServer(Socket s) {
-		System.out.println("Android Contact Server ver 0.11");
+		System.out.println("Android Contact Server ver 0.12");
 		
 		clientSocket = s;
 		um = new UserManager();
@@ -32,7 +32,7 @@ public class SocketServer extends Thread{
             String s = null;
             
             //Server version
-            out.println("Android Contact Server ver 0.11");
+            out.println("Android Contact Server ver 0.12");
             //Server Welcome Message
             out.println("Welcome in Darkstar Contact Server.");
             //Server Status
@@ -151,6 +151,19 @@ public class SocketServer extends Thread{
             			System.out.println("CHECKPOSITION");
             			String u = in.readLine();
             			result = getposition(u);
+            		}
+            		
+            		if(s.equals("SETPREFERRED")) {
+            			System.out.println("SETPREFERRED");
+            			String u = in.readLine();
+            			String pos = in.readLine();
+            			result = setpreferred(u, pos);
+            		}
+            		
+            		if(s.equals("GETPREFERRED")) {
+            			System.out.println("GETPREFERRED");
+            			String u = in.readLine();
+            			result = getpreferred(u);
             		}
             		
             	}
@@ -457,5 +470,53 @@ public class SocketServer extends Thread{
 		return result;
 		
 	}
+	
+	public static String setpreferred(String uname, String pos) {
+		
+		Iterator<User> i = users.iterator();
+		String result = "ERROR Unexisting User.";
+		
+		do {
+			
+			User u = (User)i.next();
+			
+			if((u.getUser().equals(uname)==true)) {
+				
+				result = "OK Mode Changed.";
+					
+				u.setPreferredMode(pos);
+				
+				break;
+				
+			} 
+			
+		} while(i.hasNext());
+		
+		return result;
+		
+	}	
+	
+	public static String getpreferred(String uname) {
+		
+		Iterator<User> i = users.iterator();
+		String result = "ERROR Unexisting User.";
+		
+		do {
+			
+			User u = (User)i.next();
+			
+			if((u.getUser().equals(uname)==true)) {
+				
+				result = u.getPreferredMode();
+				
+				break;
+				
+			} 
+			
+		} while(i.hasNext());
+		
+		return result;
+		
+	}	
 	
 }	
