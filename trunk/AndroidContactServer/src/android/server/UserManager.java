@@ -163,29 +163,38 @@ public class UserManager {
 		
 		try {
 			//Aggiorno la lista degli amici
-			FileOutputStream frdout = new FileOutputStream ("users/"+username+".frd");
+			FileOutputStream frdout = new FileOutputStream ("users/"+s.getUser()+".frd");
 			PrintStream frout = new PrintStream(frdout);
-			
+//			System.out.println("Sono qui");
 			Vector<String> u = s.listFriends();
 			
-			Iterator it = u.iterator();
-			System.out.println((String)it.next());
+			if(!u.isEmpty()) {
+				
+				Iterator<String> it = u.iterator();
+				System.out.println((String)it.next());
+//				System.out.println("Sono qui");
+				
+				while(it.hasNext())
+					frout.println((String)it.next());
+				
+			}
 			
-			while(it.hasNext())
-				frout.println((String)it.next());
-			
-			System.out.println("Sono qui");
+//			System.out.println("Sono qui");
 			
 			//Aggiorno la lista richieste pendendi
-			FileOutputStream pndout = new FileOutputStream ("users/"+username+".pnd");
+			FileOutputStream pndout = new FileOutputStream ("users/"+s.getUser()+".pnd");
 			PrintStream pnout = new PrintStream(pndout);
 			
 			Vector<String> t = s.listPendings();
 			
-			Iterator pi = t.iterator();
+			if(!t.isEmpty()) {
+				
+				Iterator<String> pi = t.iterator();
 			
-			while(pi.hasNext())
-				pnout.println((String)pi.next());
+				while(pi.hasNext())
+					pnout.println((String)pi.next());
+			
+			}
 			
 			frout.close();
 			frdout.close();
@@ -193,7 +202,7 @@ public class UserManager {
 			pndout.close();
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("UserManager.savefriends()"+e.toString());
 		}
 		
 		
