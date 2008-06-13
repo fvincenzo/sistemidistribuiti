@@ -121,7 +121,9 @@ public class UserManager {
 			
 			do {
 				
-				User s = i.next();
+				User s = (User)i.next();
+				
+				System.out.println("User:"+s.getUser());
 				
 				out.println(s.getUser());
 				out.println(s.getPwd());
@@ -132,35 +134,6 @@ public class UserManager {
 				out.println(s.getIm());
 				out.println(s.getGeo());
 				
-				//Aggiorno la lista degli amici
-				FileOutputStream frdout = new FileOutputStream ("users/"+s.getUser()+".frd");
-				PrintStream frout = new PrintStream(frdout);
-				
-				Vector<String> u = s.listFriends();
-				
-				Iterator it = u.iterator();
-				
-				while(it.hasNext()) {
-					System.out.println((String)it.next());
-					frout.println((String)it.next());
-				}
-				
-				//Aggiorno la lista richieste pendendi
-				FileOutputStream pndout = new FileOutputStream ("users/"+s.getUser()+".pnd");
-				PrintStream pnout = new PrintStream(pndout);
-				
-				Vector<String> t = s.listPendings();
-				
-				Iterator pi = u.iterator();
-				
-				while(pi.hasNext())
-					pnout.println((String)pi.next());
-				
-				frout.close();
-				frdout.close();
-				pnout.close();
-				pndout.close();
-				
 				
 			} while(i.hasNext());
 			
@@ -170,6 +143,59 @@ public class UserManager {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
+	}
+	
+	public void savefriends(String username,Vector<User> v) {
+		
+		System.out.println("Save Friends");
+		
+		User s = null;
+		User c = null;
+		
+		Iterator i = v.iterator();
+		
+		while(i.hasNext())
+			if((c = (User) i.next()).getUser().equals(username))
+				s = c;
+		
+		System.out.println(s.getUser());
+		
+		try {
+			//Aggiorno la lista degli amici
+			FileOutputStream frdout = new FileOutputStream ("users/"+username+".frd");
+			PrintStream frout = new PrintStream(frdout);
+			
+			Vector<String> u = s.listFriends();
+			
+			Iterator it = u.iterator();
+			System.out.println((String)it.next());
+			
+			while(it.hasNext())
+				frout.println((String)it.next());
+			
+			System.out.println("Sono qui");
+			
+			//Aggiorno la lista richieste pendendi
+			FileOutputStream pndout = new FileOutputStream ("users/"+username+".pnd");
+			PrintStream pnout = new PrintStream(pndout);
+			
+			Vector<String> t = s.listPendings();
+			
+			Iterator pi = t.iterator();
+			
+			while(pi.hasNext())
+				pnout.println((String)pi.next());
+			
+			frout.close();
+			frdout.close();
+			pnout.close();
+			pndout.close();
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		
 	}
 	

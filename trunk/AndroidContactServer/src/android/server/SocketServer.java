@@ -176,7 +176,7 @@ public class SocketServer extends Thread{
 		
 		//Aggiungo l'utente 
 		users.add(new User(username,password,mobile,home,work,mail,im,position));
-		//Salvo la lista}
+		//Salvo la lista
 		um.save(users);
 		//Loggo l'utente appena registrato
 		return login(username,password);
@@ -302,7 +302,7 @@ public class SocketServer extends Thread{
 			
 		} while(i.hasNext());
 		
-		um.save(users);
+		um.savefriends(friend,users);
 		
 		return result;
 		
@@ -381,7 +381,7 @@ public class SocketServer extends Thread{
 		} while(i.hasNext());
 		
 		//Salvo tutto
-		um.save(users);
+		um.savefriends(friend,users);
 		
 		return result;
 		
@@ -406,7 +406,7 @@ public class SocketServer extends Thread{
 			
 		} while(i.hasNext());
 		
-		um.save(users);
+		um.savefriends(friend,users);
 		
 		return result;
 		
