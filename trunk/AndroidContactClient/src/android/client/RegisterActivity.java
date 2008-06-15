@@ -20,7 +20,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 	public static final String REGISTER_ACTION =
 		"android.client.action.REGISTER";
 
-	private ContactClientInterface contactList = ContactClient.getHistance();
+	private ContactClientInterface contactList = null;
 
 	private Button register;
 	private EditText username;
@@ -68,7 +68,7 @@ public class RegisterActivity extends Activity implements OnClickListener {
 			final String i = im.getText().toString();
 			Location l = lManager.getCurrentLocation("gps");
 			try {
-				contactList.connect("192.168.0.8");
+				contactList.connect("10.0.2.2");
 //				if (contactList.register(u, p, m, h, w, e, i, l.getLatitude(), l.getLongitude())){
 					if (contactList.register(u, p, m, h, w, e, i, 13.4336, 64.3464)){
 					startActivity(new Intent(android.client.FriendsList.PENDING_ACTION, getIntent().getData()));
@@ -76,17 +76,10 @@ public class RegisterActivity extends Activity implements OnClickListener {
 				}
 				else {
 					AlertDialog.show(this, "Error", 0, "Error occurred while registering user:\n"+u, "OK", false);
-
 				}
 			}catch (Exception ex){
 				AlertDialog.show(this, "Exception", 0, "Exception occurred while registering user", "OK", false);
-
 			}
-
 		}
 	}
-
-
-
-
 }

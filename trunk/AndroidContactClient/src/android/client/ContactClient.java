@@ -26,7 +26,7 @@ public class ContactClient implements ContactClientInterface {
 
 	}
 
-	private ContactClient(){
+	public ContactClient(){
 		
 	}
 
@@ -183,7 +183,9 @@ public class ContactClient implements ContactClientInterface {
 				ret = in.readLine();
 				StringTokenizer tok =new StringTokenizer(ret, "$");
 				while (tok.hasMoreTokens()) {
-					retV.add(tok.nextToken());
+					String toAdd = tok.nextToken();
+					if (!toAdd.equals(username))
+						retV.add(toAdd);
 				}
 				return retV;
 			} catch (IOException e) {
