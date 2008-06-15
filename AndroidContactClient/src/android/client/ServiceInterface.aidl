@@ -13,5 +13,8 @@ interface ServiceInterface {
 	void denyFriend( String friendName);
 	List<String> getUserDetails(String friend);
 	boolean connect(String server);
+	boolean changepersonal(String username,String mobile,String home,String work,String mail,String im);
+	boolean setpreferred(String username,String mode);
+	String getpreferred(String username);
 	
 }

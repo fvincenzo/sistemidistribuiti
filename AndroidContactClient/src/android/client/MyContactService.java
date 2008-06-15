@@ -121,7 +121,67 @@ public class MyContactService extends Service  {
     			return false;
     		}
     	}
+    	
+    	@Override
+    	public boolean changepersonal(String username,String mobile,String home,String work,String mail,String im) {
+    		
+    		try {
+    			out.println("CHANGEPERSONAL");
+    			out.println(username);
+    			out.println(mobile);
+    			out.println(home);
+    			out.println(work);
+    			out.println(mail);
+    			out.println(im);
+    			out.println("END");
+    			String ret;
+    			ret = in.readLine();
+    			if (ret.contains("OK")){
+    				return true;
+    			}
+    			return false;
+    		} catch (IOException e) {
+    			return false;
+    		}
+    		
+    	}
 
+    	@Override
+    	public boolean setpreferred(String username,String mode) {
+    		
+    		try {
+    			out.println("SETPREFERRED");
+    			out.println(username);
+    			out.println(mode);
+    			out.println("END");
+    			String ret;
+    			ret = in.readLine();
+    			if (ret.contains("OK")){
+    				return true;
+    			}
+    			return false;
+    		} catch (IOException e) {
+    			return false;
+    		}
+    		
+    	}
+    	
+    	@Override
+    	public String getpreferred(String username) {
+    		
+    		try {
+    			out.println("GETPREFERRED");
+    			out.println(username);
+    			out.println("END");
+    			String ret;
+    			ret = in.readLine();
+    			return ret;
+    		} catch (IOException e) {
+    			return null;
+    		}
+    		
+    	}
+    	
     	@Override
     	public boolean addFriend(String friendName) {
     		
