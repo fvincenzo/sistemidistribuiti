@@ -225,4 +225,24 @@ public class User {
 	public void setPreferredMode(String preferredMode) {
 		PreferredMode = preferredMode;
 	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public void setWork(String work) {
+		this.work = work;
+	}
+
+	public void setHome(String home) {
+		this.home = home;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public void setIm(String im) {
+		this.im = im;
+	}
 }

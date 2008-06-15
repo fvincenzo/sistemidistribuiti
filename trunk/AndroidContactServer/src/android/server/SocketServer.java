@@ -89,6 +89,20 @@ public class SocketServer extends Thread{
             			
             		}
             		
+            		if(s.equals("CHANGEPERSONAL")) {
+            			
+            			System.out.println("CHANGEPERSONAL");
+            			String username = in.readLine();
+            			String mobile = in.readLine();
+            			String home = in.readLine();
+            			String work = in.readLine();
+            			String mail = in.readLine();
+            			String im = in.readLine();
+            			
+            			result = changepersonal(username,mobile,home,work,mail,im);
+            		
+            		}
+            		
             		if(s.equals("GETUSERS")) {
             			
             			System.out.println("GETUSERS");
@@ -212,6 +226,32 @@ public class SocketServer extends Thread{
 		} while(i.hasNext());
 		
 		return false;
+		
+	}
+	
+	public static String changepersonal(String username,String mobile,String home,String work,String mail,String im) {
+		
+		Iterator<User> i = users.iterator();
+		
+		String result = "ERROR.";
+		
+		do {
+			
+			User u = (User)i.next();
+			
+			if((u.getUser().equals(username)==true) && (u.getConnected()==true)) {
+				u.setMobile(mobile);
+				u.setHome(home);
+				u.setIm(im);
+				u.setMail(mail);
+				u.setWork(work);
+				result = "0K.";
+				break;
+			}
+			
+		} while(i.hasNext());
+		
+		return result;
 		
 	}
 	
