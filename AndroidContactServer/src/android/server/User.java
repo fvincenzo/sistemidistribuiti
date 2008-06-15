@@ -17,7 +17,7 @@ public class User {
 	private String geo;
 	private boolean connected;
 	
-	//Questa Stringa può assumere i valori HOME WORK MAIL IM, di default per ogni utente è settata ad HOME
+	//Questa Stringa puÃ² assumere i valori HOME WORK MAIL IM o MOBILE, di default per ogni utente Ã¨ settata ad HOME
 	private String PreferredMode;
 	
 	private Vector<String> Friends;
@@ -33,6 +33,56 @@ public class User {
 		this.mail = mail;
 		this.im = im;
 		this.geo = position;
+	
+		this.PreferredMode = "HOME";
+		
+		Friends = new Vector<String>();
+		Pendings = new Vector<String>();
+		
+		connected = false;
+		
+		File f = new File("users/"+getUser()+".frd");
+		//System.out.println("users/"+getUser()+".frd exists:"+f.exists());
+		
+		if(!f.exists()) {
+			//Creo il file degli amici
+			try {
+				FileOutputStream frdout = new FileOutputStream ("users/"+getUser()+".frd");
+				PrintStream frout = new PrintStream(frdout);
+				frout.close();
+				frdout.close();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+		
+		File g = new File("users/"+getUser()+".pnd");
+		//System.out.println("users/"+getUser()+".frd exists:"+f.exists());
+		
+		if(!g.exists()) {
+			//Creo il file degli amici
+			try {
+				FileOutputStream frdout = new FileOutputStream ("users/"+getUser()+".pnd");
+				PrintStream frout = new PrintStream(frdout);
+				frout.close();
+				frdout.close();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+	
+	}
+	
+	public User(String username,String password,String mobile,String home,String work,String mail,String im) {
+		
+		this.uname = username;
+		this.pwd = password;
+		this.home = home;
+		this.mobile = mobile;
+		this.work = work;
+		this.mail = mail;
+		this.im = im;
+		this.geo = "0";
 	
 		this.PreferredMode = "HOME";
 		
