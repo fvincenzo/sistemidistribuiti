@@ -251,6 +251,8 @@ public class SocketServer extends Thread{
 			
 		} while(i.hasNext());
 		
+		um.save(users);
+		
 		return result;
 		
 	}
