@@ -14,7 +14,7 @@ public class SocketServer extends Thread{
 	private static Socket clientSocket;
 	
 	public SocketServer(Socket s) {
-		System.out.println("Android Contact Server ver 0.12");
+		System.out.println("Android Contact Server ver 0.14 final");
 		
 		clientSocket = s;
 		um = new UserManager();
@@ -32,7 +32,7 @@ public class SocketServer extends Thread{
             String s = null;
             
             //Server version
-            out.println("Android Contact Server ver 0.12");
+            out.println("Android Contact Server ver 0.14 final");
             //Server Welcome Message
             out.println("Welcome in Darkstar Contact Server.");
             //Server Status
@@ -59,9 +59,8 @@ public class SocketServer extends Thread{
             			String work = in.readLine();
             			String mail = in.readLine();
             			String im = in.readLine();
-            			String position = in.readLine();
             			
-            			boolean res = register(username,password,mobile,home,work,mail,im,position);
+            			boolean res = register(username,password,mobile,home,work,mail,im);
             			
             			if (res == true) {
             				result = "Register and Login OK.";
@@ -144,7 +143,8 @@ public class SocketServer extends Thread{
             		if(s.equals("GETUSERDATA")) {
             			System.out.println("GETUSERDATA");
             			String u = in.readLine();
-            			result = getuserdata(u);
+            			String f = in.readLine();
+            			result = getuserdata(u,f);
             		}
             		
             		if(s.equals("CHECKPOSITION")) {
@@ -185,10 +185,10 @@ public class SocketServer extends Thread{
         
     }
 	
-	public static boolean register(String username,String password,String mobile,String home,String work,String mail,String im,String position) {
+	public static boolean register(String username,String password,String mobile,String home,String work,String mail,String im) {
 		
 		//Aggiungo l'utente 
-		users.add(new User(username,password,mobile,home,work,mail,im,position));
+		users.add(new User(username,password,mobile,home,work,mail,im));
 		//Salvo la lista
 		um.save(users);
 		//Loggo l'utente appena registrato
@@ -357,7 +357,7 @@ public class SocketServer extends Thread{
 	public static String acceptfriend(String uname,String friend) {
 		
 		Iterator<User> i = users.iterator();
-		String result = "";
+		String result = "Request Denied. ERROR.";
 		
 		do {
 			
@@ -387,6 +387,8 @@ public class SocketServer extends Thread{
 				u.addFriend(uname);
 				u.removePenginds(uname);
 				
+				result = "OK.";
+				
 				break;
 				
 			} 
@@ -403,15 +405,17 @@ public class SocketServer extends Thread{
 	public static String denyfriend(String uname,String friend) {
 		
 		Iterator<User> i = users.iterator();
-		String result = "Request Denied.";
+		String result = "Request Denied. ERROR.";
 		
 		do {
 			
 			User u = (User)i.next();
 			
-			if((u.getUser().equals(friend)==true)) {
+			if((u.getUser().equals(uname)==true)) {
 				
-				u.removePenginds(uname);
+				u.removePenginds(friend);
+				
+				result = "OK.";
 				
 				break;
 				
@@ -425,24 +429,32 @@ public class SocketServer extends Thread{
 		
 	}
 	
-	public static String getuserdata(String uname) {
+	public static String getuserdata(String uname, String friend) {
 		
 		Iterator<User> i = users.iterator();
 		String result = "";
 		
-		do {
+		if(getfriends(uname).contains(friend)) {
 			
-			User u = (User)i.next();
+			do {
+				
+				User u = (User)i.next();
+				
+				if((u.getUser().equals(uname)==true)) {
+					
+					result = u.getUserInfo();
+					
+					break;
+					
+				} 
+				
+			} while(i.hasNext());
 			
-			if((u.getUser().equals(uname)==true)) {
-				
-				result = u.getUserInfo();
-				
-				break;
-				
-			} 
+		} else {
 			
-		} while(i.hasNext());
+			result = friend + "is not in your friends list. ERROR."; 
+			
+		}
 		
 		return result;
 		
