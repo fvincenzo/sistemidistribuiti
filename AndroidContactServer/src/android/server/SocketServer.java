@@ -183,6 +183,7 @@ public class SocketServer extends Thread{
             	}
             	
             	out.println(result);
+            	System.out.println("Ritorno al client: "+result);
             	result = "";
             	
             }
