@@ -420,6 +420,7 @@ public class SocketServer extends Thread{
 			
 		} while(i.hasNext());
 		
+		i = users.iterator();
 		do {
 			
 			User u = (User)i.next();
@@ -475,14 +476,14 @@ public class SocketServer extends Thread{
 		
 		Iterator<User> i = users.iterator();
 		String result = "";
-		
+		//TODO: non sarebbe giusto controllare anche se friend ha nella sua lista di amici uname?
 		if(getfriends(uname).contains(friend)) {
 			
 			do {
 				
 				User u = (User)i.next();
 				
-				if((u.getUser().equals(uname)==true)) {
+				if((u.getUser().equals(friend)==true)) {
 					
 					result = u.getUserInfo();
 					
