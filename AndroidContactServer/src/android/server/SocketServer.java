@@ -351,7 +351,7 @@ public class SocketServer extends Thread{
 			if((u.getUser().equals(friend)==true)) {
 				
 				u.addPendings(uname);
-				
+				result = "Friend added to pending list. OK.";
 				break;
 				
 			} 

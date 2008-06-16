@@ -82,7 +82,7 @@ public class User {
 		this.work = work;
 		this.mail = mail;
 		this.im = im;
-		this.geo = "0";
+		this.geo = "geo:0,0#";
 	
 		this.PreferredMode = "HOME";
 		
