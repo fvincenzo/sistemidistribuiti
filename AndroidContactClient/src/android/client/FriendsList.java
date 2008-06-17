@@ -35,6 +35,7 @@ import android.os.DeadObjectException;
 import android.os.IBinder;
 import android.provider.Contacts;
 import android.provider.Contacts.People;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -69,7 +70,7 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-		
+
 		final Intent intent = getIntent();
 		final String action = intent.getAction();
 		if (action.equals(PENDING_ACTION)) {
@@ -77,14 +78,14 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 			setTitle(R.string.title_pending_friends);
 			// Use an existing ListAdapter that will map an array
 			// of strings to TextViews
-			
+
 		}
 		if (action.equals(ALL_USERS_ACTION)) {
 			mState = ALL_USERS;
 			setTitle(R.string.all_users);
 		}
 		bindService(new Intent("android.client.MY_SERVICE"),this,0);
-		
+
 	}
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id){
@@ -100,7 +101,7 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 //			}
 		}
 		if (mState == ALL_USERS) {
-			
+
 			setSelection(position);
 
 			selected = this.v.get(getSelectedItemPosition()) ;
@@ -116,8 +117,12 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 			if (which == DialogInterface.BUTTON1){
 				try {
 					s.acceptFriend(selected);
-					addContact(s.getUserDetails(selected));
-					removeEntry(selected);
+					if (s.insertContact(selected)){
+						removeEntry(selected);						
+					}
+					else {
+						//TODO controllare e segnalare l'errore;
+					}
 				} catch (DeadObjectException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -154,68 +159,170 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 
 	public void removeEntry(String toRemove){
 //		if (mState == PENDING){
-			v.remove(toRemove);
-			if (v.size() > 0){
-				arrAd = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, v.toArray(new String[0]));
-				setListAdapter(arrAd);
-			}
-			else {
-				startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
-				finish();
-			}
+		v.remove(toRemove);
+		if (v.size() > 0){
+			arrAd = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, v.toArray(new String[0]));
+			setListAdapter(arrAd);
+		}
+		else {
+			startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
+			finish();
+		}
 //		}
 //		if (mState == ALL_USERS) {
-//
+
 //		}
 	}
-	
-	private boolean addContact(List<String> info){
 
-		String[] projection = new String[] {
-			    android.provider.Contacts.PeopleColumns.NAME,
-			};
+	/**
+	 * Inserisce i dati di un utente in rubrica
+	 * 
+	 * @param info dati dell'utente sotto forma di lista così come viene ritornata 
+	 * da getUserdetails
+	 * 
+	 * @return
+	 */
+	/*private boolean addContact(List<String> info){
+		ContentValues person = new ContentValues();
+		person.put(Contacts.People.NAME, info.get(0));
+//		person.put(Contacts.People.COMPANY, "Test Company");
+//		person.put(Contacts.People.NOTES,"note");
 
-		Cursor cur =managedQuery(People.CONTENT_URI, projection, null, null, null);
-		if (cur.count() > 0){
-			return false;
+		Uri newPerson = getContentResolver().insert(
+				Contacts.People.CONTENT_URI, person);
+
+		if (newPerson != null) {
+			List<String> pathList = newPerson.getPathSegments();
+			String pathLeaf = pathList.get(pathList.size() - 1);
+
+
+			// add mobile phone number
+
+			ContentValues number = new ContentValues();
+			number.put(Contacts.Phones.PERSON_ID, pathLeaf);
+			number.put(Contacts.Phones.NUMBER, info.get(1));
+			number.put(Contacts.Phones.TYPE, Contacts.Phones.MOBILE_TYPE);
+			Uri phoneUpdate = getContentResolver().insert(
+					Contacts.Phones.CONTENT_URI, number);
+			if (phoneUpdate == null) {
+//				throw new Exception("Failed to insert mobile phone number");
+				return false;
+			}
+
+
+			// add work number ok
+
+			number = new ContentValues();
+			number.put(Contacts.Phones.PERSON_ID, pathLeaf);
+			number.put(Contacts.Phones.NUMBER, info.get(3));
+			number.put(Contacts.Phones.TYPE, Contacts.Phones.WORK_TYPE);
+			phoneUpdate = getContentResolver().insert(
+					Contacts.Phones.CONTENT_URI, number);
+			if (phoneUpdate == null) {
+//				throw new Exception("Failed to insert work number");
+				return false;
+			}
+
+			//ADD home number
+			number = new ContentValues();
+			number.put(Contacts.Phones.PERSON_ID, pathLeaf);
+			number.put(Contacts.Phones.NUMBER, info.get(2));
+			number.put(Contacts.Phones.TYPE, Contacts.Phones.HOME_TYPE);
+			phoneUpdate = getContentResolver().insert(
+					Contacts.Phones.CONTENT_URI, number);
+			if (phoneUpdate == null) {
+//				throw new Exception("Failed to insert work number");
+				return false;
+			}
+
+
+			// add email ok
+
+			ContentValues email = new ContentValues();
+			email.put(Contacts.ContactMethods.PERSON_ID, pathLeaf);
+			email.put(Contacts.ContactMethods.KIND,
+					Contacts.ContactMethods.EMAIL_KIND);
+			email.put(Contacts.ContactMethods.DATA,
+			info.get(4));
+			email.put(Contacts.ContactMethods.TYPE, Contacts.ContactMethods.EMAIL_KIND_OTHER_TYPE);
+			email.put(Contacts.ContactMethods.LABEL, "Mail");
+			Uri emailUpdate = getContentResolver()
+			.insert(
+					Uri.withAppendedPath(newPerson,
+							Contacts.ContactMethods.CONTENT_URI.getPath()
+							.substring(1)), email);
+			if (emailUpdate == null) {
+//				throw new Exception("Failed to insert primary email");
+				return false;
+			}
+
+
+
+
+			// add im contact ok
+
+			ContentValues im = new ContentValues();
+			im.put(Contacts.ContactMethods.PERSON_ID, pathLeaf);
+			im.put(Contacts.ContactMethods.KIND,
+					Contacts.ContactMethods.EMAIL_KIND);
+			im.put(Contacts.ContactMethods.DATA,
+			info.get(5));
+			im.put(Contacts.ContactMethods.TYPE, Contacts.ContactMethods.EMAIL_KIND_OTHER_TYPE);
+			im.put(Contacts.ContactMethods.LABEL, "Messenger");
+			Uri imUpdate = getContentResolver()
+			.insert(
+					Uri.withAppendedPath(newPerson,
+							Contacts.ContactMethods.CONTENT_URI.getPath()
+							.substring(1)), im);
+			if (imUpdate == null) {
+//				throw new Exception("Failed to insert primary email");
+				return false;
+			}
+
+
+
+			ContentValues geo = new ContentValues();
+			geo.put(Contacts.ContactMethods.PERSON_ID, pathLeaf);
+			geo.put(Contacts.ContactMethods.KIND,
+					Contacts.ContactMethods.POSTAL_KIND);
+			geo.put(Contacts.ContactMethods.DATA,
+			info.get(6));
+			geo.put(Contacts.ContactMethods.TYPE, Contacts.ContactMethods.POSTAL_KIND_OTHER_TYPE);
+			geo.put(Contacts.ContactMethods.LABEL, "Current Position");
+			Uri geoUpdate = getContentResolver()
+			.insert(
+					Uri.withAppendedPath(newPerson,
+							Contacts.ContactMethods.CONTENT_URI.getPath()
+							.substring(1)), geo);
+			if (geoUpdate == null) {
+//				throw new Exception("Failed to insert primary email");
+				return false;
+			}
 		}
-		ContentValues values = new ContentValues();
-		values.put(Contacts.People.NAME, info.get(0));
-		// add it to the database
-		Uri newContact = getContentResolver().insert(Contacts.People.CONTENT_URI, values);
-		if (newContact != null){
-			return true;
-		}
+		return true;
 
-		
-//		ret.add(username);
-//		ret.add(mobile);
-//		ret.add(home);
-//		ret.add(work);
-//		ret.add(mail);
-//		ret.add(IM);
-//		ret.add(position);
-		
-		return false;
 	}
-	
+*/
+
+
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {
 		s = ServiceInterface.Stub.asInterface(service);
 		if (mState == PENDING){
-				try {
-					for(String str: s.pendingFriends()){
-						v.add(str);
-					}
-				} catch (DeadObjectException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+			try {
+				for(String str: s.pendingFriends()){
+					v.add(str);
 				}
+			} catch (DeadObjectException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		if (mState == ALL_USERS){
 			try {
+				List<String> friends = s.getFriends();
 				for(String str: s.getUsers()){
-						v.add(str);
+					if (!friends.contains(str)) v.add(str);
 				}
 			} catch (DeadObjectException e) {
 				// TODO Auto-generated catch block
@@ -225,19 +332,19 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 		if (v.size() > 0){
 			arrAd = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, v.toArray(new String[0]));
 			setListAdapter(arrAd);
-			
+
 		}
 		else {
 			startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
 			finish();
 		}
 	}
-	
-	
+
+
 	@Override
 	public void onServiceDisconnected(ComponentName arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

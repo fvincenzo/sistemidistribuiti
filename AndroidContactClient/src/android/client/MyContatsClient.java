@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.DeadObjectException;
 import android.os.IBinder;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,9 +15,9 @@ import android.widget.EditText;
 
 
 public class MyContatsClient extends Activity implements OnClickListener, ServiceConnection{
-	
+
 	//TODO sistemare la gestione del servizio
-	
+
 	private ServiceInterface s;
 
 	public static final String LOGIN_ACTION =
@@ -39,28 +40,20 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 
-//        final Intent intent = getIntent();
-//        String action = intent.getAction();
-//        if (action.equals(Intent.MAIN_ACTION)){
-//		
-//			if (bindService(new Intent("android.client.MY_SERVICE"),this, 0)){
-//				startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
-////				finish();
-//			} else {
-			
-			startService(new Intent("android.client.MY_SERVICE"), null);
-			bindService(new Intent("android.client.MY_SERVICE"),this, 0);
-			setContentView(R.layout.login);
-			
+//		final Intent intent = getIntent();
+//		String action = intent.getAction();
+//		if (action.equals(Intent.MAIN_ACTION)){
 
-			username = (EditText)findViewById(R.id.Username);
-			password = (EditText)findViewById(R.id.Password);
-			login = (Button) findViewById(R.id.Login);
-			register  = (Button) findViewById(R.id.Register);
-			login.setOnClickListener(this);
-			register.setOnClickListener(this);
-//        }
-//			}
+//		if (bindService(new Intent("android.client.MY_SERVICE"),this, 0)){
+//		startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
+////		finish();
+//		} else {
+
+		startService(new Intent("android.client.MY_SERVICE"), null);
+		bindService(new Intent("android.client.MY_SERVICE"),this, 0);
+
+//		}
+//		}
 
 
 	}
@@ -70,7 +63,7 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 		if (arg0 == login){
 			bindService(new Intent("android.client.MY_SERVICE"),this, 0);
 			service_status = LOGIN;
-			
+
 			final String u = username.getText().toString();
 			final String p = password.getText().toString();
 			if ( u != "" && p != ""){
@@ -101,11 +94,30 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 	@Override
 	public void onServiceConnected(ComponentName name, IBinder service) {
 		s = ServiceInterface.Stub.asInterface(service);
+		try {
+			if (s.isRunning()){
+				startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
+				finish();
+			}else {
+
+				setContentView(R.layout.login);
+
+
+				username = (EditText)findViewById(R.id.Username);
+				password = (EditText)findViewById(R.id.Password);
+				login = (Button) findViewById(R.id.Login);
+				register  = (Button) findViewById(R.id.Register);
+				login.setOnClickListener(this);
+				register.setOnClickListener(this);
+			}
+		}catch (DeadObjectException e){
+
+		}
 	}
 
 	@Override
 	public void onServiceDisconnected(ComponentName arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }
