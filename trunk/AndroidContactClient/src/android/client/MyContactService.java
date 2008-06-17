@@ -16,7 +16,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.DeadObjectException;
 import android.os.IBinder;
 import android.provider.Contacts;
