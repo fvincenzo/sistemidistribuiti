@@ -16,5 +16,10 @@ interface ServiceInterface {
 	boolean changepersonal(String username,String mobile,String home,String work,String mail,String im);
 	boolean setpreferred(String username,String mode);
 	String getpreferred(String username);
+	boolean isRunning();
+	boolean insertContact(String friend);
+	boolean modifyContact(String friend);
+	
+	
 	
 }

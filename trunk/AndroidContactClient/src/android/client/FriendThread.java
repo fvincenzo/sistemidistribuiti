@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import android.os.DeadObjectException;
+import android.util.Log;
 
 public class FriendThread extends Thread {
 
@@ -11,7 +12,7 @@ public class FriendThread extends Thread {
 	private boolean run = true;
 	private long waitMinutes = 1;
 	private List<String> friendReq = new LinkedList<String>();
-	private Object Lock;
+	private Object Lock = new Object();
 
 
 	public boolean addFriendRequest(String friend){
@@ -36,15 +37,16 @@ public class FriendThread extends Thread {
 			try {
 				Thread.sleep(waitMinutes*60000);
 				synchronized (Lock) {
-
+					Log.v("FriendThread", "Controllo se c'e' qualcuno di nuovo nella lista degli amici");
 					List<String> friendsList = servInt.getFriends();
 					List<String> friendsReqCopy = friendReq;
 					for (String friend : friendReq){
 						if (friendsList.contains(friend)){
-							insertFriend(friend);
+							servInt.insertContact(friend);
 							friendsReqCopy.remove(friend);
 						}
 					}
+					friendReq = friendsReqCopy;
 				}
 
 			} catch (InterruptedException e) {
@@ -57,9 +59,7 @@ public class FriendThread extends Thread {
 
 		}
 	}
-	private void insertFriend(String f){
-		//TODO: implementare l'inserimento in rubrica con tutti i parametri
-	}
+
 
 
 	public void quit(){
