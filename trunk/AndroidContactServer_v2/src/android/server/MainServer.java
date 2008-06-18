@@ -23,7 +23,7 @@ public class MainServer {
         try {
         	while(true) {
         		 Socket clientSocket = serverSocket.accept();
-        		 new SocketServer(clientSocket);
+        		 new SocketServer(clientSocket).start();
         	}
         } catch (IOException e) {
             System.err.println("Non posso accettare la connessione.");
