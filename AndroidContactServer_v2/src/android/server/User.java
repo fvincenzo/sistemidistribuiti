@@ -2,18 +2,13 @@ package android.server;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintStream;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.util.*;
 
-public class User implements Serializable {
+public class User  {
 
 	private String uname;
 	private String pwd;
