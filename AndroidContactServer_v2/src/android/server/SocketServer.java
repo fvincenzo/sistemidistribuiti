@@ -14,7 +14,7 @@ public class SocketServer extends Thread{
 	private Socket clientSocket;
 	private User u;
 	private UserManager um = UserManager.getHinstance();
-
+	private boolean run = true;
 	private boolean logged;
 	private String username;
 
@@ -44,7 +44,7 @@ public class SocketServer extends Thread{
 			//Server Status
 			out.println("Status: up and running.");
 			int size = 0;
-			while(true) {
+			while(run) {
 
 				command.add(in.readLine());
 
@@ -56,68 +56,34 @@ public class SocketServer extends Thread{
 
 				System.out.println("Command: "+command);
 
-				if(command.firstElement().equals("REGISTER")) {
+				if(command.firstElement().equals("REGISTER") && command.size() > 7) {
 
-//					System.out.println("REGISTER");
-					/*	String username = in.readLine();
-            			String password = in.readLine();
-            			String mobile = in.readLine();
-            			String home = in.readLine();
-            			String work = in.readLine();
-            			String mail = in.readLine();
-            			String im = in.readLine();*/
-
-					boolean res = register(command.get(1),command.get(2),command.get(3),command.get(4),command.get(5),command.get(6),command.get(7));
-
-					if (res == true) {
-						result = "Register and Login OK.";
-					} else {
-						result = "Register ERROR.";
-					}
+					result = register(command.get(1),command.get(2),command.get(3),command.get(4),command.get(5),command.get(6),command.get(7));
 					out.println(result);
 
 
 				}
 				else 
-					if(command.firstElement().equals("LOGIN")) {
+					if(command.firstElement().equals("LOGIN") && command.size() > 2) {
 
-//						System.out.println("LOGIN");
-//						String u = in.readLine();
-//						String p = in.readLine();
-//						System.out.println("Username:"+u);
-//						System.out.println("Password:"+p);
-						boolean res = login(command.get(1),command.get(2));
-
-						if (res == true) {
-							result = "Login OK.";
-						} else {
-							result = "Login ERROR.";
-						}
+						result = login(command.get(1),command.get(2));
 						out.println(result);
 					}
 					else
-						if(command.firstElement().equals("CHANGEPERSONAL")) {
+						if(command.firstElement().equals("CHANGEPERSONAL") && command.size() > 8) {
 
-//							System.out.println("CHANGEPERSONAL");
-//							String username = in.readLine();
-//							String mobile = in.readLine();
-//							String home = in.readLine();
-//							String work = in.readLine();
-//							String mail = in.readLine();
-//							String im = in.readLine();
-
-							result = changepersonal(command.get(1),command.get(2),command.get(3),command.get(4),command.get(5),command.get(6));
+							result = changePersonal(command.get(1),command.get(2),command.get(3),command.get(4),command.get(5),command.get(6), command.get(7),command.get(8));
 							out.println(result);
 						}
 						else
-							if(command.firstElement().equals("GETUSERS")) {
+							if(command.firstElement().equals("GETUSERS") && command.size() > 0) {
 
 //								System.out.println("GETUSERS");
 								result = getusers();
 								out.println(result);
 							}
 							else
-								if(command.firstElement().equals("GETFRIENDS")) {
+								if(command.firstElement().equals("GETFRIENDS") && command.size() > 1) {
 
 //									System.out.println("GETFRIENDS");
 //									String u = in.readLine();
@@ -125,7 +91,7 @@ public class SocketServer extends Thread{
 									out.println(result);
 								}
 								else
-									if(command.firstElement().equals("UPDATEPOSITION")) {
+									if(command.firstElement().equals("UPDATEPOSITION") && command.size() > 2) {
 
 //										System.out.println("UPDATEPOSITION");
 //										String u = in.readLine();
@@ -134,7 +100,7 @@ public class SocketServer extends Thread{
 										out.println(result);
 									}
 									else
-										if(command.firstElement().equals("ADDFRIEND")) {
+										if(command.firstElement().equals("ADDFRIEND") && command.size() > 2) {
 //											System.out.println("ADDFRIEND");
 //											String u = in.readLine();
 //											String p = in.readLine();
@@ -142,14 +108,14 @@ public class SocketServer extends Thread{
 											out.println(result);
 										}
 										else
-											if(command.firstElement().equals("PENDINGFRIENDS")) {
+											if(command.firstElement().equals("PENDINGFRIENDS") && command.size() > 1) {
 //												System.out.println("PENDINGFRIENDS");
 //												String p = in.readLine();
 												result = pendingfriends(command.get(1));
 												out.println(result);
 											}
 											else
-												if(command.firstElement().equals("ACCEPTFRIEND")) {
+												if(command.firstElement().equals("ACCEPTFRIEND") && command.size() > 2) {
 //													System.out.println("ACCEPTFRIEND");
 //													String u = in.readLine();
 //													String p = in.readLine();
@@ -157,7 +123,7 @@ public class SocketServer extends Thread{
 													out.println(result);
 												}
 												else
-													if(command.firstElement().equals("DENYFRIEND")) {
+													if(command.firstElement().equals("DENYFRIEND") && command.size() > 2) {
 //														System.out.println("DENYFRIEND");
 //														String u = in.readLine();
 //														String p = in.readLine();
@@ -165,7 +131,7 @@ public class SocketServer extends Thread{
 														out.println(result);
 													}
 													else
-														if(command.firstElement().equals("GETUSERDATA")) {
+														if(command.firstElement().equals("GETUSERDATA") && command.size() > 2) {
 //															System.out.println("GETUSERDATA");
 //															String u = in.readLine();
 //															String f = in.readLine();
@@ -173,14 +139,14 @@ public class SocketServer extends Thread{
 															out.println(result);
 														}
 														else
-															if(command.firstElement().equals("CHECKPOSITION")) {
+															if(command.firstElement().equals("CHECKPOSITION") && command.size() > 2) {
 //																System.out.println("CHECKPOSITION");
 //																String u = in.readLine();
 																result = getposition(command.get(1),command.get(2));
 																out.println(result);
 															}
 															else
-																if(command.firstElement().equals("SETPREFERRED")) {
+																if(command.firstElement().equals("SETPREFERRED") && command.size() > 2) {
 //																	System.out.println("SETPREFERRED");
 //																	String u = in.readLine();
 //																	String pos = in.readLine();
@@ -188,12 +154,17 @@ public class SocketServer extends Thread{
 																	out.println(result);
 																}
 																else
-																	if(command.firstElement().equals("GETPREFERRED")) {
+																	if(command.firstElement().equals("GETPREFERRED") && command.size() > 2) {
 //																		System.out.println("GETPREFERRED");
 //																		String u = in.readLine();
 																		result = getpreferred(command.get(1),command.get(2));
 																		out.println(result);
-																	}
+																	} 
+																	else
+																		if (command.firstElement().equals("QUIT")){
+																			System.out.println("Closing thread: user "+username+" sent QUIT command.");
+																			quit();
+																		}
 
 				for ( ; size > 0; size--){
 					command.remove(0);
@@ -219,35 +190,45 @@ public class SocketServer extends Thread{
 
 
 	}
+	public void quit(){
+		try {
+			run = false;
+			clientSocket.close();
+		} catch (IOException e) {
+
+		}
+	}
 
 	/* (non-Javadoc)
 	 * @see android.server.ServerInterface#register(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
-	public  boolean register(String username,String password,String mobile,String home,String work,String mail,String im) {
+	public  String register(String username,String password,String mobile,String home,String work,String mail,String im) {
 
-		u = new User(username,password,mobile,home,work,mail,im);
-		if (um.addUser(u)){
-//			um.commit();
-			return login(username,password);
+		if (!logged){
+			u = new User(username,password,mobile,home,work,mail,im, "@0.0,0.0", "MOBILE");
+			if (um.addUser(u)){
+//				um.commit();
+				return login(username,password);
+			}
 		}
-		return false;
+		return "Register ERROR.";
 	}
 
 	/* (non-Javadoc)
 	 * @see android.server.ServerInterface#login(java.lang.String, java.lang.String)
 	 */
-	public  boolean login(String uname, String pwd) {
+	public  String login(String uname, String pwd) {
 		User u;
 		if (!logged){
 			if ((u =um.getUser(uname)) != null){
 				if (u.getPwd().equals(pwd)){
 					logged = true;
 					username = uname;
-					return true;
+					return "Login OK.";
 				}
 			}
 		}
-		return false;
+		return "Login ERROR.";
 		/*	Iterator<User> i = users.iterator();
 
 		do {
@@ -268,7 +249,7 @@ public class SocketServer extends Thread{
 	/* (non-Javadoc)
 	 * @see android.server.ServerInterface#changepersonal(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
-	public  String changepersonal(String username,String mobile,String home,String work,String mail,String im) {
+	/*public  String changepersonal(String username,String mobile,String home,String work,String mail,String im) {
 		User u = null;
 		String result = "Update ERROR.";
 		if (logged && username.equals(this.username) &&(u = um.getUser(username)) != null){
@@ -283,7 +264,7 @@ public class SocketServer extends Thread{
 		return result;
 
 
-	}
+	}*/
 
 	/* (non-Javadoc)
 	 * @see android.server.ServerInterface#getusers()
@@ -705,6 +686,42 @@ public class SocketServer extends Thread{
 		}
 		return ret;
 	}
+
+	public String getPersonal(String uname){
+		String ret= "Impossible return personal data. ERROR";
+		if (logged && uname.equals(username)){
+			User u = um.getUser(uname);
+			if (u!= null){
+				ret = u.getPersonal();
+			}
+		}
+
+		return ret;
+	}
+
+	public String changePersonal(String uname, String oldPwd, String pwd,String  mobile,String work,String home,String mail,String im){
+		String ret= "Impossible to change personal data. ERROR";
+		if (logged && uname.equals(username)){
+			User u = um.getUser(uname);
+			if (u!= null){
+				if (u.getPwd().equals(oldPwd)){
+					u.setPwd(pwd);
+					u.setMobile(mobile);
+					u.setWork(work);
+					u.setHome(home);
+					u.setMail(mail);
+					u.setIm(im);
+					um.commit();
+					ret = "OK";
+				}
+//				u.
+			}
+		}
+
+		return ret;
+	}
+
+
 	/*
 		Iterator<User> i = users.iterator();
 		String result = "ERROR Unexisting User.";
