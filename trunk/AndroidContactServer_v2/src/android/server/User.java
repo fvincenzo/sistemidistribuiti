@@ -18,21 +18,22 @@ public class User  {
 	private String mail;
 	private String im;
 	private String geo;
-	private boolean connected;
+//	private boolean connected;
 
 	//Questa Stringa può assumere i valori HOME WORK MAIL IM o MOBILE, di default per ogni utente è settata ad HOME
-	private String PreferredMode;
+	private String preferredMode;
 
 //	private transient Vector<String> Friends;
 //	private transient Vector<String> Pendings;
 
-	private transient Set<String> friends = new HashSet<String>();
-	private transient Set<String> pendings = new HashSet<String>();
-	private transient PrintWriter pendings_out;
-	private transient PrintWriter friends_out;
+	private Set<String> friends = new HashSet<String>();
+	private Set<String> pendings = new HashSet<String>();
+//	private PrintWriter pendings_out;
+//	private PrintWriter friends_out;
+	private Object pendingsLock = new Object();
+	private Object friendsLock = new Object();
 
-
-	public User(String username,String password,String mobile,String home,String work,String mail,String im,String position) {
+	public User(String username,String password,String mobile,String home,String work,String mail,String im,String lastPosition, String preferred) {
 
 		this.uname = username;
 		this.pwd = password;
@@ -41,17 +42,17 @@ public class User  {
 		this.work = work;
 		this.mail = mail;
 		this.im = im;
-		this.geo = position;
+		this.geo = lastPosition;
 
-		this.PreferredMode = "HOME";
+		this.preferredMode = preferred;
 
 //		Friends = new Vector<String>();
 //		Pendings = new Vector<String>();
 
-		connected = false;
+//		connected = false;
 
 
-		initWrite();
+//		initWrite();
 
 		/*
 	File f = new File("users/"+getUser()+".frd");
@@ -82,11 +83,11 @@ public class User  {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-	}
-		 */
+	}*/
+
 
 	}
-
+	/*
 	public User(String username,String password,String mobile,String home,String work,String mail,String im) {
 
 		this.uname = username;
@@ -138,11 +139,11 @@ public class User  {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-		}*/
+		}
 
 	}
-
-
+	 */
+	/*
 	private void initWrite(){
 
 		FileOutputStream pendings_file = null;
@@ -174,14 +175,15 @@ public class User  {
 			ex.printStackTrace();
 		}
 	}
-	public boolean load() {
+	 */
+	public void load() {
 
 
 
-		FileReader friendsFis = null;
-		BufferedReader friendsIn = null;
 		try
 		{
+			FileReader friendsFis = null;
+			BufferedReader friendsIn = null;
 			friendsFis = new FileReader("users/"+getUser()+".sfrn");
 			friendsIn = new BufferedReader(friendsFis);
 			String friend = friendsIn.readLine();
@@ -190,153 +192,189 @@ public class User  {
 			}
 
 			friendsIn.close();
-
+			friendsFis.close();
+		} catch (IOException e) {
+		}
+		try {
 			FileReader pendingsFis = null;
 			BufferedReader pendingsIn = null;
 
 			pendingsFis = new FileReader("users/"+getUser()+".spnd");
 			pendingsIn = new BufferedReader(pendingsFis);
-			String pending = friendsIn.readLine();
+			String pending = pendingsIn.readLine();
 			while (pending != null){
 				pendings.add(pending);
 			}
 			pendingsIn.close();
+			pendingsFis.close();
 
-
-			initWrite();
-			return true;
+//			initWrite();
+//			return true;
 		}
 		catch (IOException e){
-			return false;
+//			return false;
 		}
 	}
 
-		@Override
-		public boolean equals(Object obj) {
-			if (obj instanceof User) {
-				if ( ((User)obj).uname.equals(uname))
-					return true;
-
-			}
-			return false;
-		}
-
-		public String getUser() {
-
-			return uname;
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof User) {
+			if ( ((User)obj).uname.equals(uname))
+				return true;
 
 		}
+		return false;
+	}
 
-		public String getPwd() {
-
-			return pwd;
-
-		}
-
-		public void setGeo(String geo) {
-
-			this.geo = geo;
-
-		}
-
-		public String getGeo() {
-
-			return geo;
-
-		}
-
-		public void addFriend(String f) {
+	public void addFriend(String f) {
+		synchronized (friendsLock) {
 
 //			try {
 			friends.add(f);
-//			friends_out.reset();
-			friends_out.append(f+"\n");
-			friends_out.flush();
-//			Friends.add(f);
 
+			try {
+				PrintWriter friends_out = new PrintWriter(new FileOutputStream("users/"+getUser()+".sfrn"), true);
+
+				friends_out.append(f+"\n");
+				friends_out.flush();
+				friends_out.close();
+			}
+			catch (IOException e){
+			}
 
 		}
-		public Set<String> getFriends(){
-			return friends;
-		}
+//		friends_out.reset();
+//		friends_out.append(f+"\n");
+//		friends_out.flush();
+//		Friends.add(f);
 
-		public Set<String> getPendings(){
-			return pendings;
-		}
 
-//		public Vector<String> listFriends() {
+	}
+	public Set<String> getFriends(){
+		return friends;
+	}
 
-//		return Friends;
+	public Set<String> getPendings(){
+		return pendings;
+	}
 
-//		}
+//	public Vector<String> listFriends() {
 
-		public void addPendings(String pen) {
+//	return Friends;
+
+//	}
+
+	public void addPendings(String pen) {
+		synchronized (pendingsLock) {
+
 			pendings.add(pen);
 //			friends_out.reset();
-			pendings_out.append(pen+"\n");
-			pendings_out.flush();
-		}
+			try {
+				PrintWriter pendings_out = new PrintWriter(new FileOutputStream("users/"+getUser()+".spnd"), true);
 
-		public void removePenginds(String pen) {
+				pendings_out.append(pen+"\n");
+				pendings_out.flush();
+				pendings_out.close();
+			}
+			catch (IOException e){
+
+			}
+		}
+	}
+
+	public void removePenginds(String pen) {
+		synchronized (pendingsLock) {
+
 			try {
 				pendings.remove(pen);
-				pendings_out.close();
 				File pendings = new File("users/"+getUser()+".spnd");
 				pendings.delete();
 //				pendings_out.reset();
 //				pendings_out.writeObject(friends);
-				pendings_out = new PrintWriter(new FileOutputStream("users/"+getUser()+".spnd"), true);
+				PrintWriter pendings_out = new PrintWriter(new FileOutputStream("users/"+getUser()+".spnd"), true);
 				for (String s: this.pendings){
 					pendings_out.println(s);
 				}
 				pendings_out.flush();
+				pendings_out.close();
 //				Pendings.remove(pen);
 			} catch (IOException e){
 				e.printStackTrace();
 			}
 		}
+	}
 
-//		public Vector<String> listPendings() {
+//	public Vector<String> listPendings() {
 
-//		return Pendings;
+//	return Pendings;
 
-//		}
+	@Override
+	public String toString() {
 
-		public boolean getConnected() {
+		String user = this.uname+"$"+this.geo+"$"+this.mobile+"$"+this.work+"$"+this.home+"$"+this.mail+"$"+this.im;
+		return user;
 
-			return connected;
+	}
 
-		}
-
-		public String getUserInfo() {
-
-			String user = this.uname+"$"+this.geo+"$"+this.mobile+"$"+this.work+"$"+this.home+"$"+this.mail+"$"+this.im;
-			return user;
-
-		}
-
-		@Override
-		public String toString() {
-
-			String user = this.uname+"$"+this.geo+"$"+this.mobile+"$"+this.work+"$"+this.home+"$"+this.mail+"$"+this.im;
-			return user;
-
-		}
-
-		public String saveMe(){
-			return		 	uname+"\n"+
-							pwd+"\n"+
-							mobile+"\n"+
-							work+"\n"+
-							home+"\n"+
-							mail+"\n"+
-							im+"\n"+
-							geo+"\n";
+	public String saveMe(){
+		return		 	uname+"\n"+
+		pwd+"\n"+
+		mobile+"\n"+
+		work+"\n"+
+		home+"\n"+
+		mail+"\n"+
+		im+"\n"+
+		geo+"\n"+
+		preferredMode+"\n";
 
 
-		}
+	}
 
 
+	//		public Vector<String> listPendings() {
+
+	//		return Pendings;
+
+	//		}
+	/*
+				public boolean getConnected() {
+
+					return connected;
+
+				}
+	 */
+	public String getUserInfo() {
+
+		String user = this.uname+"$"+this.geo+"$"+this.mobile+"$"+this.work+"$"+this.home+"$"+this.mail+"$"+this.im;
+		return user;
+
+	}
+
+	public String getUser() {
+
+		return uname;
+
+	}
+
+	public String getPwd() {
+
+		return pwd;
+
+	}
+
+	public String getGeo() {
+
+		return geo;
+
+	}
+
+	public String getPersonal(){
+		return uname+"$"+pwd+"$"+mobile+"$"+work+"$"+home+"$"+mail+"$"+im;
+	}
+
+
+
+	/*	
 		public void setConnected() {
 			if(connected==true) {
 				connected = false;
@@ -344,52 +382,61 @@ public class User  {
 				connected = true;
 			}
 		}
-
-		public String getMobile() {
-			return mobile;
-		}
-
-		public String getWork() {
-			return work;
-		}
-
-		public String getHome() {
-			return home;
-		}
-
-		public String getMail() {
-			return mail;
-		}
-
-		public String getIm() {
-			return im;
-		}
-
-		public String getPreferredMode() {
-			return PreferredMode;
-		}
-
-		public void setPreferredMode(String preferredMode) {
-			PreferredMode = preferredMode;
-		}
-
-		public void setMobile(String mobile) {
-			this.mobile = mobile;
-		}
-
-		public void setWork(String work) {
-			this.work = work;
-		}
-
-		public void setHome(String home) {
-			this.home = home;
-		}
-
-		public void setMail(String mail) {
-			this.mail = mail;
-		}
-
-		public void setIm(String im) {
-			this.im = im;
-		}
+	 */
+	public String getMobile() {
+		return mobile;
 	}
+
+	public String getWork() {
+		return work;
+	}
+
+	public String getHome() {
+		return home;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public String getIm() {
+		return im;
+	}
+
+	public String getPreferredMode() {
+		return preferredMode;
+	}
+
+	public void setPreferredMode(String preferredMode) {
+		this.preferredMode = preferredMode;
+	}
+	public void setGeo(String geo) {
+
+		this.geo = geo;
+
+	}
+
+	public void setPwd(String pwd){
+		this.pwd = pwd;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public void setWork(String work) {
+		this.work = work;
+	}
+
+	public void setHome(String home) {
+		this.home = home;
+	}
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public void setIm(String im) {
+		this.im = im;
+	}
+}

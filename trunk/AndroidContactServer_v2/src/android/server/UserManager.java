@@ -28,33 +28,35 @@ public class UserManager {
 			usersIn = new BufferedReader(usersFis);
 			String newUser = usersIn.readLine();
 			while (newUser != null){
-			User u = new User(newUser, usersIn.readLine(),usersIn.readLine(),usersIn.readLine(),usersIn.readLine(),usersIn.readLine(),usersIn.readLine(),usersIn.readLine());
+			User u = new User(newUser, usersIn.readLine(),usersIn.readLine(),usersIn.readLine(),usersIn.readLine(),usersIn.readLine(),usersIn.readLine(),usersIn.readLine(), usersIn.readLine());
 				users.put(newUser, u);
 				newUser = usersIn.readLine();
 			}
-			
+			usersFis.close();
 			usersIn.close();
 		}
 		catch(IOException ex)
 		{
-			System.out.println("File non presente, si parte da zero...");
+			System.out.println("No userfile found. Creating a new one...");
 //			ex.printStackTrace();
 
 		}
 		
-		FileOutputStream file = null;
+	/*	FileOutputStream file = null;
 		out_users = null;
 		try
 		{
 			file = new FileOutputStream("users.slist");
 			out_users = new PrintWriter(file, true);
+			out_users.close();
+			file.close();
 
 		}
 		catch(IOException ex)
 		{
 			ex.printStackTrace();
 		}
-
+*/
 		for(User u : users.values()){
 			u.load();
 		}
@@ -90,14 +92,15 @@ public class UserManager {
 
 	public boolean commit(){
 		
+		try{
+			PrintWriter out_users = new PrintWriter(new FileOutputStream("users.slist"), true);
+		
 //			out_users.reset();
 			for (User u : users.values()){
 				out_users.print(u.saveMe());
 				out_users.flush();
 				}
 			out_users.close();
-			try{
-			out_users = new PrintWriter(new FileOutputStream("users.slist"), true);
 			}catch (IOException e){
 				e.printStackTrace();
 				return false;
