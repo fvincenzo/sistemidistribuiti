@@ -21,7 +21,9 @@ public class MainLoopActivity extends Activity implements OnClickListener, Servi
 	private TextView runningLabel;
 	private TextView notRunningLabel;
 	private Button findFriends;
-	
+	private Button modifyData;
+	private Button addOneFriend;
+	private Button addLocation;
 	
 	@Override
 	protected void onCreate(Bundle icicle) {
@@ -59,6 +61,9 @@ public class MainLoopActivity extends Activity implements OnClickListener, Servi
 			notRunningLabel.setVisibility(View.VISIBLE);
 			
 		}
+		if (arg0 == modifyData){
+			startActivity(new Intent(RegisterActivity.MODIFY_ACTION, getIntent().getData()));
+		}
 	}
 
 
@@ -72,14 +77,21 @@ public class MainLoopActivity extends Activity implements OnClickListener, Servi
 		stop = (Button)findViewById(R.id.stop_button);
 		runningLabel =  (TextView)findViewById(R.id.running_label);
 		notRunningLabel = (TextView)findViewById(R.id.not_running_label);
-		findFriends.setOnClickListener(this);
-		start.setOnClickListener(this);
-		stop.setOnClickListener(this);
+		modifyData = (Button)findViewById(R.id.modify_parameters);
+		addOneFriend = (Button)findViewById(R.id.add_one_friend);
+		addLocation = (Button)findViewById(R.id.add_location);
 		
 		start.setVisibility(View.INVISIBLE);
 		notRunningLabel.setVisibility(View.INVISIBLE);
 		stop.setVisibility(View.VISIBLE);
 		runningLabel.setVisibility(View.VISIBLE);		
+		
+		start.setOnClickListener(this);
+		stop.setOnClickListener(this);
+		modifyData.setOnClickListener(this);
+		findFriends.setOnClickListener(this);
+		addOneFriend.setOnClickListener(this);
+		addLocation.setOnClickListener(this);
 	}
 
 

@@ -23,14 +23,14 @@ import android.util.Log;
 import android.widget.Toast;
 import android.client.R;
 
-public class MyContactService extends Service implements ServiceConnection{
-	
-	private PositionService posService;
+public class MyContactService extends Service {
+
+//	private PositionService posService;
 	private Notification not;
-	private FriendsService friendService;
+//	private FriendsService friendService;
 	private NotificationManager mNM;
 //	private FriendThread ft = null;
-	
+
 	/*@Override
 	protected void onStart(int arg1, Bundle arguments){
 		bindService(new Intent(MyContactService.this, PositionService.class), new ServiceConnection(){
@@ -39,17 +39,17 @@ public class MyContactService extends Service implements ServiceConnection{
 			public void onServiceConnected(ComponentName name, IBinder service) {
 				posService = ((PositionService.LocalBinder)service).getService();
 				Toast.makeText(MyContactService.this, "PositionService bound", Toast.LENGTH_SHORT).show();
-				
+
 			}
 
 			@Override
 			public void onServiceDisconnected(ComponentName arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-    		
+
     	}, BIND_AUTO_CREATE);
-    	
+
     	bindService(new Intent(MyContactService.this, FriendsService.class), new ServiceConnection(){
 
 			@Override
@@ -61,37 +61,38 @@ public class MyContactService extends Service implements ServiceConnection{
 			@Override
 			public void onServiceDisconnected(ComponentName arg0) {
 				// TODO Auto-generated method stub
-				
-			}
-    		
-    	}, BIND_AUTO_CREATE);
-    	
-	}*/
-	
-	
-	
-	
-    private ServiceConnection friendConnection = new ServiceConnection() {
-		public void onServiceConnected(ComponentName className, IBinder service) {
-			friendService = ((FriendsService.LocalBinder)service).getService();
-			Log.v("MyContactService", "FriendConnection stabilita");
-			
-		}
 
-		public void onServiceDisconnected(ComponentName className) {
-			friendService = null;
-			Toast.makeText(MyContactService.this, "Servizio morto",
-					Toast.LENGTH_SHORT).show();
-		}
-	};
+			}
+
+    	}, BIND_AUTO_CREATE);
+
+	}*/
+
+
+
+
+//	private ServiceConnection friendConnection = new ServiceConnection() {
+//	public void onServiceConnected(ComponentName className, IBinder service) {
+//	friendService = ((FriendsService.LocalBinder)service).getService();
+//	Log.v("MyContactService", "FriendConnection stabilita");
+
+//	}
+
+//	public void onServiceDisconnected(ComponentName className) {
+//	friendService = null;
+//	Toast.makeText(MyContactService.this, "Servizio morto",
+//	Toast.LENGTH_SHORT).show();
+//	}
+//	};
 
 	private final ServiceInterface.Stub mBinder = new ServiceInterface.Stub() {
-		
+
 		private PrintWriter out;
 		private BufferedReader in;
 		private Socket socket;
 		private String username = "";
 		private FriendThread ft = new FriendThread(this);
+		private String password = "";
 
 		@Override
 		public boolean register(String uname, String pwd, String mobile,
@@ -125,10 +126,10 @@ public class MyContactService extends Service implements ServiceConnection{
 					this.username = uname;
 					if (!ft.isAlive()){
 						ft.start();
-						Log.v("MyContactService" , "Thread di ascolto degli amici fatto partire");
-						
+
+					}
+					serviceConnectedNotification();
 					return true;
-				}
 				}
 				return false;
 			} catch (IOException e) {
@@ -152,9 +153,10 @@ public class MyContactService extends Service implements ServiceConnection{
 					this.username = uname;
 					if (!ft.isAlive()){
 						ft.start();
-						Log.v("MyContactService" , "Thread di ascolto degli amici fatto partire");
-						return true;
+//						Log.v("MyContactService" , "Thread di ascolto degli amici fatto partire");
 					}
+					serviceConnectedNotification();
+					return true;
 				}
 				return false;
 			} catch (IOException e) {
@@ -441,7 +443,7 @@ public class MyContactService extends Service implements ServiceConnection{
 				Uri emailUpdate = getContentResolver().insert(
 						Uri.withAppendedPath(newPerson,
 								Contacts.ContactMethods.CONTENT_URI.getPath()
-										.substring(1)), email);
+								.substring(1)), email);
 				if (emailUpdate == null) {
 					return false;
 				}
@@ -456,7 +458,7 @@ public class MyContactService extends Service implements ServiceConnection{
 				Uri imUpdate = getContentResolver().insert(
 						Uri.withAppendedPath(newPerson,
 								Contacts.ContactMethods.CONTENT_URI.getPath()
-										.substring(1)), im);
+								.substring(1)), im);
 				if (imUpdate == null) {
 					return false;
 				}
@@ -471,7 +473,7 @@ public class MyContactService extends Service implements ServiceConnection{
 				Uri geoUpdate = getContentResolver().insert(
 						Uri.withAppendedPath(newPerson,
 								Contacts.ContactMethods.CONTENT_URI.getPath()
-										.substring(1)), geo);
+								.substring(1)), geo);
 				if (geoUpdate == null) {
 					return false;
 				}
@@ -486,76 +488,105 @@ public class MyContactService extends Service implements ServiceConnection{
 	};
 
 	@Override
-    protected void onCreate() {
-    	
-    	
-    	
-        mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        
-        // Display a notification about us starting.  We put an icon in the status bar.
-        showNotification();
-//        Log.v("MyContactService", "Ho appena notificato");
-//        bindService(new Intent("android.client.FRIEND_SERVICE"), friendConnection, BIND_AUTO_CREATE);
-//        Log.v("MyContactService", "Eseguita la bindService del servizio locale");
-	}
+	protected void onCreate() {
 
-    @Override
-    protected void onDestroy() {
-        // Cancel the persistent notification.
-        mNM.cancel(R.string.local_service_started);
-        
 
-        // Tell the user we stopped.
-        Toast.makeText(this, R.string.local_service_stopped, Toast.LENGTH_SHORT).show();
-    }
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return mBinder;
-    }
+		mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
-    @Override
-	public void onServiceConnected(ComponentName name, IBinder service) {
-		posService = ((PositionService.LocalBinder)service).getService();
-		Toast.makeText(this, "PositionService bound", Toast.LENGTH_SHORT).show();
-		
+		// Display a notification about us starting.  We put an icon in the status bar.
+		serviceStartedNotification();
+//		Log.v("MyContactService", "Ho appena notificato");
+//		bindService(new Intent("android.client.FRIEND_SERVICE"), friendConnection, BIND_AUTO_CREATE);
+//		Log.v("MyContactService", "Eseguita la bindService del servizio locale");
 	}
 
 	@Override
-	public void onServiceDisconnected(ComponentName arg0) {
-		// TODO Auto-generated method stub
-		
+	protected void onDestroy() {
+		// Cancel the persistent notification.
+		mNM.cancel(R.string.local_service_started);
+
+
+		// Tell the user we stopped.
+		Toast.makeText(this, R.string.local_service_stopped, Toast.LENGTH_SHORT).show();
 	}
-    /**
-     * Show a notification while this service is running.
-     */
-    private void showNotification() {
-        // This is who should be launched if the user selects our notification.
-        Intent contentIntent = new Intent(this, MyContatsClient.class);
 
-        // This is who should be launched if the user selects the app icon in the notification,
-        // (in this case, we launch the same activity for both)
-        Intent appIntent = new Intent(this, MyContatsClient.class);
+	@Override
+	public IBinder onBind(Intent intent) {
+		return mBinder;
+	}
 
-        // In this sample, we'll use the same text for the ticker and the expanded notification
-        CharSequence text = getText(R.string.local_service_started);
+//	@Override
+//	public void onServiceConnected(ComponentName name, IBinder service) {
+//	posService = ((PositionService.LocalBinder)service).getService();
+//	Toast.makeText(this, "PositionService bound", Toast.LENGTH_SHORT).show();
 
-        // we use a string id because it is a unique
-                                                    // number.  we use it later to cancel the
-                                                    // notification
-                   not = new Notification(
-                       this,                        // our context
-                       R.drawable.small_icon_inactive,      // the icon for the status bar
-                       text,                        // the text to display in the ticker
-                       System.currentTimeMillis(),  // the timestamp for the notification
-                       getText(R.string.local_service_notification), // the title for the notification
-                       text,                        // the details to display in the notification
-                       contentIntent,               // the contentIntent (see above)
-                       R.drawable.icon,  // the app icon
-                       getText(R.string.app_name), // the name of the app
-                       appIntent);                 // the appIntent (see above)
+//	}
 
-                   mNM.notify(R.string.local_service_started, not);
-    }
+//	@Override
+//	public void onServiceDisconnected(ComponentName arg0) {
+//	// TODO Auto-generated method stub
+
+//	}
+	/**
+	 * Show a notification while this service is running.
+	 */
+	private void serviceConnectedNotification(){
+//		This is who should be launched if the user selects our notification.
+		Intent contentIntent = new Intent(this, MainLoopActivity.class);
+
+		// This is who should be launched if the user selects the app icon in the notification,
+		// (in this case, we launch the same activity for both)
+		Intent appIntent = new Intent(this, MainLoopActivity.class);
+
+		// In this sample, we'll use the same text for the ticker and the expanded notification
+		CharSequence text = getText(R.string.local_service_connected);
+
+		// we use a string id because it is a unique
+		// number.  we use it later to cancel the
+		// notification
+		not = new Notification(
+				this,                        // our context
+				R.drawable.small_icon_active,      // the icon for the status bar
+				text,                        // the text to display in the ticker
+				System.currentTimeMillis(),  // the timestamp for the notification
+				getText(R.string.app_name), // the title for the notification
+				text,                        // the details to display in the notification
+				contentIntent,               // the contentIntent (see above)
+				R.drawable.my_contacts,  // the app icon
+				getText(R.string.app_name), // the name of the app
+				appIntent);                 // the appIntent (see above)
+
+		mNM.notify(R.string.local_service_started, not);
+
+	}
+	private void serviceStartedNotification() {
+		// This is who should be launched if the user selects our notification.
+		Intent contentIntent = new Intent(this, MyContatsClient.class);
+
+		// This is who should be launched if the user selects the app icon in the notification,
+		// (in this case, we launch the same activity for both)
+		Intent appIntent = new Intent(this, MyContatsClient.class);
+
+		// In this sample, we'll use the same text for the ticker and the expanded notification
+		CharSequence text = getText(R.string.local_service_started);
+
+		// we use a string id because it is a unique
+		// number.  we use it later to cancel the
+		// notification
+		not = new Notification(
+				this,                        // our context
+				R.drawable.small_icon_inactive,      // the icon for the status bar
+				text,                        // the text to display in the ticker
+				System.currentTimeMillis(),  // the timestamp for the notification
+				getText(R.string.app_name), // the title for the notification
+				text,                        // the details to display in the notification
+				contentIntent,               // the contentIntent (see above)
+				R.drawable.my_contacts,  // the app icon
+				getText(R.string.app_name), // the name of the app
+				appIntent);                 // the appIntent (see above)
+
+		mNM.notify(R.string.local_service_started, not);
+	}
 
 }

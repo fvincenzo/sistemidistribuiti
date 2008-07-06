@@ -85,4 +85,16 @@ android:layout_x="60px"
 android:layout_y="172px"
 >
 </Button>
+<Button
+android:id="@+id/add_location"
+android:layout_width="190px"
+android:layout_height="wrap_content"
+android:text="Add a location"
+android:textSize="18sp"
+android:textStyle="bold"
+android:textColor="#ff666666"
+android:layout_x="60px"
+android:layout_y="242px"
+>
+</Button>
 </AbsoluteLayout>

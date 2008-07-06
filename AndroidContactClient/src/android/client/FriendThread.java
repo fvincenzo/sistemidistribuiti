@@ -23,7 +23,6 @@ public class FriendThread extends Thread {
 
 	public FriendThread(ServiceInterface.Stub s){
 		super();
-		
 		servInt = s;
 
 	}
@@ -37,16 +36,20 @@ public class FriendThread extends Thread {
 			try {
 				Thread.sleep(waitMinutes*60000);
 				synchronized (Lock) {
-					Log.v("FriendThread", "Controllo se c'e' qualcuno di nuovo nella lista degli amici");
-					List<String> friendsList = servInt.getFriends();
-					List<String> friendsReqCopy = friendReq;
-					for (String friend : friendReq){
-						if (friendsList.contains(friend)){
-							servInt.insertContact(friend);
-							friendsReqCopy.remove(friend);
+					if (friendReq.size() > 0) {
+						//Ho inserito qualche richiesta nella lista degli amici
+						Log.v("FriendThread", "Controllo se c'e' qualcuno di nuovo nella lista degli amici");
+						List<String> friendsList = servInt.getFriends();
+						List<String> friendsReqCopy = friendReq;
+						for (String friend : friendReq){
+							//per ogni richiesta effettuata controllo se compare nella lista degli amici e quindi è stata accettata
+							if (friendsList.contains(friend)){
+								servInt.insertContact(friend);
+								friendsReqCopy.remove(friend);
+							}
 						}
+						friendReq = friendsReqCopy;
 					}
-					friendReq = friendsReqCopy;
 				}
 
 			} catch (InterruptedException e) {
