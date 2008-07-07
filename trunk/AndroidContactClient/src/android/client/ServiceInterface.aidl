@@ -14,6 +14,7 @@ interface ServiceInterface {
 	List<String> getUserDetails(String friend);
 	boolean connect(String server);
 	boolean changepersonal(String username,String mobile,String home,String work,String mail,String im);
+	List<String> getPersonal();
 	boolean setpreferred(String username,String mode);
 	String getpreferred(String username);
 	boolean isRunning();

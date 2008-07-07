@@ -6,7 +6,9 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.DeadObjectException;
 import android.os.IBinder;
+import java.util.List;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -22,11 +24,11 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 
 	public static final String MODIFY_ACTION = 
 		"android.client.action.MODIFY";
-	
+
 	private int MODIFY = 1;
 	private int REGISTER = 0;
 	private int status;
-	
+
 	private ServiceInterface contactList = null;
 
 	private Button button;
@@ -52,9 +54,9 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 			status = MODIFY;
 		else 
 			status = REGISTER;
-		
+
 		bindService(new Intent("android.client.MY_SERVICE"),this,0);
-		
+
 
 	}
 
@@ -63,58 +65,71 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 	public void onClick(View arg0) {
 		if (arg0 == button){
 			if (status == REGISTER){
-			final String u = username.getText().toString();
-			final String p = password.getText().toString();
-			final String m = mobile.getText().toString();
-			final String h = home.getText().toString();
-			final String w = work.getText().toString();
-			final String e = email.getText().toString();
-			final String i = im.getText().toString();
-//			Location l = lManager.getCurrentLocation("gps");
-			try {
-				contactList.connect("10.0.2.2");
-//				if (contactList.register(u, p, m, h, w, e, i, l.getLatitude(), l.getLongitude())){
+				final String u = username.getText().toString();
+				final String p = password.getText().toString();
+				final String m = mobile.getText().toString();
+				final String h = home.getText().toString();
+				final String w = work.getText().toString();
+				final String e = email.getText().toString();
+				final String i = im.getText().toString();
+//				Location l = lManager.getCurrentLocation("gps");
+				try {
+					contactList.connect("10.0.2.2");
+//					if (contactList.register(u, p, m, h, w, e, i, l.getLatitude(), l.getLongitude())){
 					if (contactList.register(u, p, m, h, w, e, i)){
-					startActivity(new Intent(android.client.MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
-					finish();
+						startActivity(new Intent(android.client.MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
+						finish();
+					}
+					else {
+						AlertDialog.show(this, "Error", 0, "Error occurred while registering user:\n"+u, "OK", false);
+					}
+				}catch (Exception ex){
+					AlertDialog.show(this, "Exception", 0, "Exception occurred while registering user", "OK", false);
 				}
-				else {
-					AlertDialog.show(this, "Error", 0, "Error occurred while registering user:\n"+u, "OK", false);
-				}
-			}catch (Exception ex){
-				AlertDialog.show(this, "Exception", 0, "Exception occurred while registering user", "OK", false);
 			}
 		}
-		}
 		if (status == MODIFY) {
-			
+			//TODO: Inserire le operazioni di modifica dei dati personali
 		}
 	}
 
 
 	@Override
 	public void onServiceConnected(ComponentName arg0, IBinder arg1) {
-
-		contactList = ServiceInterface.Stub.asInterface(arg1);
-
+		try {
+			contactList = ServiceInterface.Stub.asInterface(arg1);
+			if (status == REGISTER)
+				setContentView(R.layout.register);
+			if (status == MODIFY)
+				setContentView(R.layout.modify);
 			
-		setContentView(R.layout.register);
-		username  = (EditText) findViewById(R.id.reg_username);
-		
-		password  = (EditText) findViewById(R.id.reg_password);
-		mobile  = (EditText) findViewById(R.id.mobile);
-		home  = (EditText) findViewById(R.id.home);
-		work  = (EditText) findViewById(R.id.work);
-		email  = (EditText) findViewById(R.id.email);
-		im  = (EditText) findViewById(R.id.im);
-		button  = (Button) findViewById(R.id.Register_final);
-		button.setOnClickListener(this);
-//		lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-		
-		if (status == MODIFY){
-			//TODO: Riempire i form per la modifica
-			username.setEnabled(false);
-			button.setText("Modify");
+			username  = (EditText) findViewById(R.id.reg_username);
+
+			password  = (EditText) findViewById(R.id.reg_password);
+			mobile  = (EditText) findViewById(R.id.mobile);
+			home  = (EditText) findViewById(R.id.home);
+			work  = (EditText) findViewById(R.id.work);
+			email  = (EditText) findViewById(R.id.email);
+			im  = (EditText) findViewById(R.id.im);
+			button  = (Button) findViewById(R.id.Register_final);
+			button.setOnClickListener(this);
+			
+//				lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+			
+			if (status == MODIFY){
+				username.setEnabled(false);
+				List<String> personal = contactList.getPersonal();
+				username.setText(personal.get(0));
+				mobile.setText(personal.get(1));
+				home.setText(personal.get(2));
+				work.setText(personal.get(3));
+				email.setText(personal.get(4));
+				im.setText(personal.get(5));
+			}
+
+
+		}catch (DeadObjectException e){
+
 		}
 	}
 
@@ -122,9 +137,9 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 	@Override
 	public void onServiceDisconnected(ComponentName arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
-	
-	
+
+
+
 }
