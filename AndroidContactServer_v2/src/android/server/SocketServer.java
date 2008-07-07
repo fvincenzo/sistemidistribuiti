@@ -76,95 +76,101 @@ public class SocketServer extends Thread{
 							out.println(result);
 						}
 						else
-							if(command.firstElement().equals("GETUSERS") && command.size() > 0) {
+							if(command.firstElement().equals("GETPERSONAL") && command.size() > 1) {
 
-//								System.out.println("GETUSERS");
-								result = getusers();
+								result = getPersonal(command.get(1));
 								out.println(result);
 							}
 							else
-								if(command.firstElement().equals("GETFRIENDS") && command.size() > 1) {
+								if(command.firstElement().equals("GETUSERS") && command.size() > 0) {
 
-//									System.out.println("GETFRIENDS");
-//									String u = in.readLine();
-									result = getfriends(command.get(1));
+//									System.out.println("GETUSERS");
+									result = getusers();
 									out.println(result);
 								}
 								else
-									if(command.firstElement().equals("UPDATEPOSITION") && command.size() > 2) {
+									if(command.firstElement().equals("GETFRIENDS") && command.size() > 1) {
 
-//										System.out.println("UPDATEPOSITION");
+//										System.out.println("GETFRIENDS");
 //										String u = in.readLine();
-//										String p = in.readLine();
-										result = updateposition(command.get(1),command.get(2));
+										result = getfriends(command.get(1));
 										out.println(result);
 									}
 									else
-										if(command.firstElement().equals("ADDFRIEND") && command.size() > 2) {
-//											System.out.println("ADDFRIEND");
+										if(command.firstElement().equals("UPDATEPOSITION") && command.size() > 2) {
+
+//											System.out.println("UPDATEPOSITION");
 //											String u = in.readLine();
 //											String p = in.readLine();
-											result = addfriend(command.get(1),command.get(2));
+											result = updateposition(command.get(1),command.get(2));
 											out.println(result);
 										}
 										else
-											if(command.firstElement().equals("PENDINGFRIENDS") && command.size() > 1) {
-//												System.out.println("PENDINGFRIENDS");
+											if(command.firstElement().equals("ADDFRIEND") && command.size() > 2) {
+//												System.out.println("ADDFRIEND");
+//												String u = in.readLine();
 //												String p = in.readLine();
-												result = pendingfriends(command.get(1));
+												result = addfriend(command.get(1),command.get(2));
 												out.println(result);
 											}
 											else
-												if(command.firstElement().equals("ACCEPTFRIEND") && command.size() > 2) {
-//													System.out.println("ACCEPTFRIEND");
-//													String u = in.readLine();
+												if(command.firstElement().equals("PENDINGFRIENDS") && command.size() > 1) {
+//													System.out.println("PENDINGFRIENDS");
 //													String p = in.readLine();
-													result = acceptfriend(command.get(1),command.get(2));
+													result = pendingfriends(command.get(1));
 													out.println(result);
 												}
 												else
-													if(command.firstElement().equals("DENYFRIEND") && command.size() > 2) {
-//														System.out.println("DENYFRIEND");
+													if(command.firstElement().equals("ACCEPTFRIEND") && command.size() > 2) {
+//														System.out.println("ACCEPTFRIEND");
 //														String u = in.readLine();
 //														String p = in.readLine();
-														result = denyfriend(command.get(1),command.get(2));
+														result = acceptfriend(command.get(1),command.get(2));
 														out.println(result);
 													}
 													else
-														if(command.firstElement().equals("GETUSERDATA") && command.size() > 2) {
-//															System.out.println("GETUSERDATA");
+														if(command.firstElement().equals("DENYFRIEND") && command.size() > 2) {
+//															System.out.println("DENYFRIEND");
 //															String u = in.readLine();
-//															String f = in.readLine();
-															result = getuserdata(command.get(1),command.get(2));
+//															String p = in.readLine();
+															result = denyfriend(command.get(1),command.get(2));
 															out.println(result);
 														}
 														else
-															if(command.firstElement().equals("CHECKPOSITION") && command.size() > 2) {
-//																System.out.println("CHECKPOSITION");
+															if(command.firstElement().equals("GETUSERDATA") && command.size() > 2) {
+//																System.out.println("GETUSERDATA");
 //																String u = in.readLine();
-																result = getposition(command.get(1),command.get(2));
+//																String f = in.readLine();
+																result = getuserdata(command.get(1),command.get(2));
 																out.println(result);
 															}
 															else
-																if(command.firstElement().equals("SETPREFERRED") && command.size() > 2) {
-//																	System.out.println("SETPREFERRED");
+																if(command.firstElement().equals("CHECKPOSITION") && command.size() > 2) {
+//																	System.out.println("CHECKPOSITION");
 //																	String u = in.readLine();
-//																	String pos = in.readLine();
-																	result = setpreferred(command.get(1),command.get(2));
+																	result = getposition(command.get(1),command.get(2));
 																	out.println(result);
 																}
 																else
-																	if(command.firstElement().equals("GETPREFERRED") && command.size() > 2) {
-//																		System.out.println("GETPREFERRED");
+																	if(command.firstElement().equals("SETPREFERRED") && command.size() > 2) {
+//																		System.out.println("SETPREFERRED");
 //																		String u = in.readLine();
-																		result = getpreferred(command.get(1),command.get(2));
+//																		String pos = in.readLine();
+																		result = setpreferred(command.get(1),command.get(2));
 																		out.println(result);
-																	} 
+																	}
 																	else
-																		if (command.firstElement().equals("QUIT")){
-																			System.out.println("Closing thread: user "+username+" sent QUIT command.");
-																			quit();
-																		}
+																		if(command.firstElement().equals("GETPREFERRED") && command.size() > 2) {
+//																			System.out.println("GETPREFERRED");
+//																			String u = in.readLine();
+																			result = getpreferred(command.get(1),command.get(2));
+																			out.println(result);
+																		} 
+																		else
+																			if (command.firstElement().equals("QUIT")){
+																				System.out.println("Closing thread: user "+username+" sent QUIT command.");
+																				quit();
+																			}
 
 				for ( ; size > 0; size--){
 					command.remove(0);

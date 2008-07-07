@@ -369,7 +369,7 @@ public class User  {
 	}
 
 	public String getPersonal(){
-		return uname+"$"+pwd+"$"+mobile+"$"+work+"$"+home+"$"+mail+"$"+im;
+		return uname+"$"+mobile+"$"+work+"$"+home+"$"+mail+"$"+im;
 	}
 
 
