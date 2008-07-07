@@ -333,6 +333,31 @@ public class MyContactService extends Service {
 		}
 
 		@Override
+		public List<String> getPersonal(){
+			List<String> retV = new LinkedList<String>();
+			if (username != "") {
+				out.println("GETPERSONAL");
+				out.println(username);
+				out.println("END");
+				String ret;
+				try {
+					ret = in.readLine();
+					StringTokenizer tok = new StringTokenizer(ret, "$");
+					while (tok.hasMoreTokens()) {
+						retV.add(tok.nextToken());
+							
+					}
+					return retV;
+				} catch (IOException e) {
+					return retV;
+				}
+			}
+			return retV;
+			
+		}
+		
+		
+		@Override
 		public List<String> pendingFriends() {
 			List<String> retV = new LinkedList<String>();
 			if (username != "") {
