@@ -8,6 +8,8 @@ import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
+
+import android.R.anim;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.Service;
@@ -18,10 +20,12 @@ import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.DeadObjectException;
 import android.os.IBinder;
+import android.provider.BaseColumns;
 import android.provider.Contacts;
 import android.util.Log;
 import android.widget.Toast;
 import android.client.R;
+import android.database.Cursor;
 
 public class MyContactService extends Service {
 
@@ -92,6 +96,7 @@ public class MyContactService extends Service {
 		private Socket socket;
 		private String username = "";
 		private FriendThread ft = new FriendThread(this);
+		private CheckPreferredMode pm = new CheckPreferredMode(this);
 		private String password = "";
 
 		@Override
@@ -127,7 +132,9 @@ public class MyContactService extends Service {
 					this.password = pwd;
 					if (!ft.isAlive()){
 						ft.start();
-
+					}
+					if (!pm.isAlive()){
+						pm.start();
 					}
 					serviceConnectedNotification();
 					return true;
@@ -156,6 +163,9 @@ public class MyContactService extends Service {
 					if (!ft.isAlive()){
 						ft.start();
 //						Log.v("MyContactService" , "Thread di ascolto degli amici fatto partire");
+					}
+					if (!pm.isAlive()){
+						pm.start();
 					}
 					serviceConnectedNotification();
 					return true;
@@ -216,10 +226,11 @@ public class MyContactService extends Service {
 		}
 
 		@Override
-		public String getpreferred(String username) {
+		public String getpreferred(String friend) {
 			try {
 				out.println("GETPREFERRED");
 				out.println(username);
+				out.println(friend);
 				out.println("END");
 				String ret;
 				ret = in.readLine();
@@ -518,6 +529,76 @@ public class MyContactService extends Service {
 
 		@Override
 		public boolean modifyContact(String friend) throws DeadObjectException {
+			return false;
+		}
+		
+		@Override
+		public boolean setHome(String contact) throws DeadObjectException {
+			Log.v("MyContactService", "Sono in setHome");
+			String[] projection = new String[] {
+					android.provider.BaseColumns._ID,
+					android.provider.Contacts.People.PREFERRED_PHONE_ID,
+					android.provider.Contacts.People.PREFERRED_EMAIL_ID
+			};
+			Cursor user = getContentResolver().query(Contacts.People.CONTENT_URI, projection, "name='"+contact+"'", null, null);
+			if (user.next()){
+				String[] projection2 = new String[] {
+						android.provider.BaseColumns._ID
+				};
+				int person_id = user.getInt(user.getColumnIndex(android.provider.BaseColumns._ID));
+				Cursor tel = getContentResolver().query(Contacts.Phones.CONTENT_URI, projection2, "person='"+person_id+"' AND type='"+Contacts.Phones.HOME_TYPE+"'", null, null);
+				if (tel.next()){
+					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID), tel.getInt(tel.getColumnIndex(BaseColumns._ID)));
+					return user.commitUpdates();
+				}
+			}
+			return false;
+
+		}
+		
+		@Override
+		public boolean setMobile(String contact) throws DeadObjectException {
+			Log.v("MyContactService", "Sono in setMobile");
+			String[] projection = new String[] {
+					android.provider.BaseColumns._ID,
+					android.provider.Contacts.People.PREFERRED_PHONE_ID,
+					android.provider.Contacts.People.PREFERRED_EMAIL_ID
+			};
+			Cursor user = getContentResolver().query(Contacts.People.CONTENT_URI, projection, "name='"+contact+"'", null, null);
+			if (user.next()){
+				String[] projection2 = new String[] {
+						android.provider.BaseColumns._ID
+				};
+				int person_id = user.getInt(user.getColumnIndex(android.provider.BaseColumns._ID));
+				Cursor tel = getContentResolver().query(Contacts.Phones.CONTENT_URI, projection2, "person='"+person_id+"' AND type='"+Contacts.Phones.MOBILE_TYPE+"'", null, null);
+				if (tel.next()){
+					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID), tel.getInt(tel.getColumnIndex(BaseColumns._ID)));
+					return user.commitUpdates();
+				}
+			}
+			return false;
+		}
+
+		@Override
+		public boolean setWork(String contact) throws DeadObjectException {
+			Log.v("MyContactService", "Sono in setWork");
+			String[] projection = new String[] {
+					android.provider.BaseColumns._ID,
+					android.provider.Contacts.People.PREFERRED_PHONE_ID,
+					android.provider.Contacts.People.PREFERRED_EMAIL_ID
+			};
+			Cursor user = getContentResolver().query(Contacts.People.CONTENT_URI, projection, "name='"+contact+"'", null, null);
+			if (user.next()){
+				String[] projection2 = new String[] {
+						android.provider.BaseColumns._ID
+				};
+				int person_id = user.getInt(user.getColumnIndex(android.provider.BaseColumns._ID));
+				Cursor tel = getContentResolver().query(Contacts.Phones.CONTENT_URI, projection2, "person='"+person_id+"' AND type='"+Contacts.Phones.WORK_TYPE+"'", null, null);
+				if (tel.next()){
+					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID), tel.getInt(tel.getColumnIndex(BaseColumns._ID)));
+					return user.commitUpdates();
+				}
+			}
 			return false;
 		}
 	};
