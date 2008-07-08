@@ -34,7 +34,7 @@ android:layout_y="32px"
 android:id="@+id/widget34"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
-android:text="Change your password"
+android:text="Change your password or leave blank"
 android:layout_x="30px"
 android:layout_y="92px"
 >

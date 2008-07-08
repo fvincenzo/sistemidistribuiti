@@ -2,7 +2,9 @@ package android.client;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
@@ -64,6 +66,7 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 	@Override
 	public void onClick(View arg0) {
 		if (arg0 == button){
+			button.setSelected(true);
 			if (status == REGISTER){
 				final String u = username.getText().toString();
 				final String p = password.getText().toString();
@@ -87,9 +90,20 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 					AlertDialog.show(this, "Exception", 0, "Exception occurred while registering user", "OK", false);
 				}
 			}
-		}
-		if (status == MODIFY) {
-			//TODO: Inserire le operazioni di modifica dei dati personali
+			if (status == MODIFY) {
+				if (password.getText().toString().equals("") ){
+					try {
+						contactList.changepersonal(username.getText().toString(), null, null, mobile.getText().toString(), home.getText().toString(), work.getText().toString(), email.getText().toString(), im.getText().toString());
+					} catch (DeadObjectException e) {
+			
+					}
+				}
+				else {
+					
+					new PasswordDialog(this, this).show();
+				}
+				//TODO: Inserire le operazioni di modifica dei dati personali
+			}
 		}
 	}
 
@@ -139,7 +153,57 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 		// TODO Auto-generated method stub
 
 	}
+	
+	
+	public boolean changePersonalData(String oldPassword){
+		try {
+			return contactList.changepersonal(username.getText().toString(), oldPassword, password.getText().toString(), mobile.getText().toString(), home.getText().toString(), work.getText().toString(), email.getText().toString(), im.getText().toString());
+		} catch (DeadObjectException e) {
 
+			return false;
+		}
+		
+	}
 
+	class PasswordDialog extends Dialog implements OnClickListener{
+
+		private Button ok;
+		private Button cancel;
+		private EditText password; 
+		private RegisterActivity callback;
+		
+		public PasswordDialog(Context context, RegisterActivity r) {
+			super(context);
+			this.callback = r;
+			setContentView(R.layout.password_dialog);
+			ok = (Button)findViewById(R.id.pwd_ok);
+			cancel = (Button)findViewById(R.id.pwd_cancel);
+			password = (EditText)findViewById(R.id.pwd_password);
+			ok.setOnClickListener(this);
+			cancel.setOnClickListener(this);
+			
+		}
+		
+		public void onClick(View arg0) {
+			if (arg0 == ok){
+				if (callback.changePersonalData(password.getText().toString())){
+					startActivity(new Intent(android.client.MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
+					finish();
+				}
+				else{
+					AlertDialog.show(callback, "Error", 0, "Wrong password inserted", "BACK",false);
+					
+				}
+			}
+			if (arg0 == cancel){
+				this.dismiss();
+			}
+			
+		}
+		
+		
+		
+		
+	}
 
 }

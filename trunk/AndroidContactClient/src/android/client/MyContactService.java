@@ -124,6 +124,7 @@ public class MyContactService extends Service {
 				ret = in.readLine();
 				if (ret.contains("OK")) {
 					this.username = uname;
+					this.password = pwd;
 					if (!ft.isAlive()){
 						ft.start();
 
@@ -151,6 +152,7 @@ public class MyContactService extends Service {
 				ret = in.readLine();
 				if (ret.contains("OK")) {
 					this.username = uname;
+					this.password = pwd;
 					if (!ft.isAlive()){
 						ft.start();
 //						Log.v("MyContactService" , "Thread di ascolto degli amici fatto partire");
@@ -165,11 +167,19 @@ public class MyContactService extends Service {
 		}
 
 		@Override
-		public boolean changepersonal(String username, String mobile,
+		public boolean changepersonal(String username, String oldPwd, String newPwd, String mobile,
 				String home, String work, String mail, String im) {
 			try {
 				out.println("CHANGEPERSONAL");
 				out.println(username);
+				if (oldPwd == null){
+					out.println(password);
+					out.println(password);
+				}
+				else {
+					out.println(oldPwd);
+					out.println(newPwd);
+				}
 				out.println(mobile);
 				out.println(home);
 				out.println(work);

@@ -64,6 +64,10 @@ public class MainLoopActivity extends Activity implements OnClickListener, Servi
 		if (arg0 == modifyData){
 			startActivity(new Intent(RegisterActivity.MODIFY_ACTION, getIntent().getData()));
 		}
+		if (arg0 == addOneFriend){
+			startActivity(new Intent(android.client.AddOneFriend.ADD_FRIEND_ACTION, getIntent().getData()));
+			
+		}
 	}
 
 

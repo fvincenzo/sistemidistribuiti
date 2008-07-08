@@ -75,10 +75,10 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 						finish();
 					}
 					else {
-						AlertDialog.show(this, "Errore", 0, "Error occurred while logging in. Check your data or try later", "BACK",false);
+						AlertDialog.show(this, "Error", 0, "Error occurred while logging in. Check your data or try later", "BACK",false);
 					}
 				}catch (Exception e){
-					AlertDialog.show(this, "Errore", 0, "Error occurred while connecting to server.", "BACK",false);
+					AlertDialog.show(this, "Error", 0, "Error occurred while connecting to server.", "BACK",false);
 				}
 			}
 			else 
