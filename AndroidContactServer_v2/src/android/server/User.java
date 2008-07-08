@@ -189,6 +189,7 @@ public class User  {
 			String friend = friendsIn.readLine();
 			while (friend != null){
 				friends.add(friend);
+				friend = friendsIn.readLine();
 			}
 
 			friendsIn.close();
@@ -204,6 +205,7 @@ public class User  {
 			String pending = pendingsIn.readLine();
 			while (pending != null){
 				pendings.add(pending);
+				pending = pendingsIn.readLine();
 			}
 			pendingsIn.close();
 			pendingsFis.close();
