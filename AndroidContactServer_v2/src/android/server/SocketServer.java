@@ -171,7 +171,7 @@ public class SocketServer extends Thread{
 																				System.out.println("Closing thread: user "+username+" sent QUIT command.");
 																				quit();
 																			}
-
+				System.out.println("Returning: "+result);
 				for ( ; size > 0; size--){
 					command.remove(0);
 				}
@@ -686,7 +686,7 @@ public class SocketServer extends Thread{
 			User f = um.getUser(friend);
 			if (u!= null && f != null){
 				if (u.getFriends().contains(friend) && f.getFriends().contains(uname)){
-					ret =u.getPreferredMode();
+					ret =f.getPreferredMode();
 				}
 			}
 		}
