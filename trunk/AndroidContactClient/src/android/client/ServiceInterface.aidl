@@ -17,10 +17,14 @@ interface ServiceInterface {
 	List<String> getPersonal();
 	boolean setpreferred(String username,String mode);
 	String getpreferred(String username);
+	
+	
 	boolean isRunning();
 	boolean insertContact(String friend);
 	boolean modifyContact(String friend);
-	
+	boolean setMobile(String contact);
+	boolean setWork(String contact);
+	boolean setHome(String contact);
 	
 	
 }
