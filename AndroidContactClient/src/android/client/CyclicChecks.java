@@ -29,7 +29,7 @@ public class CyclicChecks extends Thread {
 	public void run(){
 		while (run){
 			try {
-				Thread.sleep(6000*minutesToSleep);
+				Thread.sleep(60000*minutesToSleep);
 				if (status == NORMAL){
 					if ( service.pendingFriends().size() > 0 ){
 						service.notifyPendings();
