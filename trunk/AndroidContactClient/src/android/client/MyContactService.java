@@ -9,14 +9,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import android.R.anim;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.net.Uri;
 import android.os.DeadObjectException;
 import android.os.IBinder;
@@ -96,7 +93,7 @@ public class MyContactService extends Service {
 		private Socket socket;
 		private String username = "";
 		private FriendThread ft = new FriendThread(this);
-		private CheckPreferredMode pm = new CheckPreferredMode(this);
+		private CyclicChecks pm = new CyclicChecks(this);
 		private String password = "";
 
 		@Override
@@ -601,6 +598,69 @@ public class MyContactService extends Service {
 			}
 			return false;
 		}
+
+		public boolean setIm(String contact) throws DeadObjectException {
+			String[] projection = new String[] {
+					android.provider.BaseColumns._ID,
+					android.provider.Contacts.People.NOTES,
+					android.provider.Contacts.People.PREFERRED_PHONE_ID,
+					android.provider.Contacts.People.PREFERRED_EMAIL_ID
+			};
+			Cursor user = getContentResolver().query(Contacts.People.CONTENT_URI, projection, "name='"+contact+"'", null, null);
+			if (user.next()){
+				String[] projection2 = new String[] {
+						android.provider.BaseColumns._ID
+				};
+				int person_id = user.getInt(user.getColumnIndex(android.provider.BaseColumns._ID));
+				Cursor mail = getContentResolver().query(Contacts.ContactMethods.CONTENT_URI, projection2, "person='"+person_id+"' AND label='Messenger'", null, null);
+				if (mail.next()){
+					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_EMAIL_ID), mail.getInt(mail.getColumnIndex(BaseColumns._ID)));
+					user.updateString(user.getColumnIndex(Contacts.People.NOTES), "Best contact with IM");
+					
+					user.updateToNull(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID));
+					
+					return user.commitUpdates();
+				}
+			}
+			return false;
+		}
+
+		public boolean setMail(String contact) throws DeadObjectException {
+			String[] projection = new String[] {
+					android.provider.BaseColumns._ID,
+					android.provider.Contacts.People.NOTES,
+					android.provider.Contacts.People.PREFERRED_PHONE_ID,
+					android.provider.Contacts.People.PREFERRED_EMAIL_ID
+			};
+			Cursor user = getContentResolver().query(Contacts.People.CONTENT_URI, projection, "name='"+contact+"'", null, null);
+			if (user.next()){
+				String[] projection2 = new String[] {
+						android.provider.BaseColumns._ID
+				};
+				int person_id = user.getInt(user.getColumnIndex(android.provider.BaseColumns._ID));
+				Cursor mail = getContentResolver().query(Contacts.ContactMethods.CONTENT_URI, projection2, "person='"+person_id+"' AND label='Mail'", null, null);
+				if (mail.next()){
+					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_EMAIL_ID), mail.getInt(mail.getColumnIndex(BaseColumns._ID)));
+					user.updateString(user.getColumnIndex(Contacts.People.NOTES), "Best contact with email");
+					
+					user.updateToNull(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID));
+					
+					return user.commitUpdates();
+				}
+			}
+			return false;
+		}
+
+		public void notifyPendings() throws DeadObjectException {
+			pendingFriendsNotification();
+			
+		}
+
+		public void setNormalStatus() throws DeadObjectException {
+			pm.setNormal();
+			serviceWorkingNormally();
+			
+		}
 	};
 
 	@Override
@@ -704,5 +764,62 @@ public class MyContactService extends Service {
 
 		mNM.notify(R.string.local_service_started, not);
 	}
+	
+	private void pendingFriendsNotification() {
+		// This is who should be launched if the user selects our notification.
+		Intent contentIntent = new Intent(FriendsList.PENDING_ACTION, null);
 
+		// This is who should be launched if the user selects the app icon in the notification,
+		// (in this case, we launch the same activity for both)
+		Intent appIntent = new Intent(FriendsList.PENDING_ACTION, null);
+
+		// In this sample, we'll use the same text for the ticker and the expanded notification
+		CharSequence text = getText(R.string.local_service_pendings);
+
+		// we use a string id because it is a unique
+		// number.  we use it later to cancel the
+		// notification
+		not = new Notification(
+				this,                        // our context
+				R.drawable.small_icon_notification,      // the icon for the status bar
+				text,                        // the text to display in the ticker
+				System.currentTimeMillis(),  // the timestamp for the notification
+				getText(R.string.app_name), // the title for the notification
+				text,                        // the details to display in the notification
+				contentIntent,               // the contentIntent (see above)
+				R.drawable.my_contacts,  // the app icon
+				getText(R.string.app_name), // the name of the app
+				appIntent);                 // the appIntent (see above)
+
+		mNM.notify(R.string.local_service_started, not);
+	}
+
+	private void serviceWorkingNormally() {
+		// This is who should be launched if the user selects our notification.
+		Intent contentIntent = new Intent(this, MainLoopActivity.class);
+
+		// This is who should be launched if the user selects the app icon in the notification,
+		// (in this case, we launch the same activity for both)
+		Intent appIntent = new Intent(this, MainLoopActivity.class);
+
+		// In this sample, we'll use the same text for the ticker and the expanded notification
+		CharSequence text = getText(R.string.local_service_running);
+
+		// we use a string id because it is a unique
+		// number.  we use it later to cancel the
+		// notification
+		not = new Notification(
+				this,                        // our context
+				R.drawable.small_icon_active,      // the icon for the status bar
+				text,                        // the text to display in the ticker
+				System.currentTimeMillis(),  // the timestamp for the notification
+				getText(R.string.app_name), // the title for the notification
+				text,                        // the details to display in the notification
+				contentIntent,               // the contentIntent (see above)
+				R.drawable.my_contacts,  // the app icon
+				getText(R.string.app_name), // the name of the app
+				appIntent);                 // the appIntent (see above)
+
+		mNM.notify(R.string.local_service_started, not);
+	}
 }

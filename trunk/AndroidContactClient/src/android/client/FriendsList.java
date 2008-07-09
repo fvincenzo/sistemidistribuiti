@@ -158,6 +158,14 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 			setListAdapter(arrAd);
 		}
 		else {
+			if (mState == PENDING) {
+				try {
+					s.setNormalStatus();
+				} catch (DeadObjectException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
 			finish();
 		}
@@ -170,7 +178,7 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 	/**
 	 * Inserisce i dati di un utente in rubrica
 	 * 
-	 * @param info dati dell'utente sotto forma di lista così come viene ritornata 
+	 * @param info dati dell'utente sotto forma di lista cosï¿½ come viene ritornata 
 	 * da getUserdetails
 	 * 
 	 * @return
@@ -295,7 +303,7 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 		return true;
 
 	}
-*/
+	 */
 
 
 	@Override
@@ -328,6 +336,8 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 
 		}
 		else {
+			if (mState == ALL_USERS)
+				AlertDialog.show(this, "No more users", 0, "All the users are already in your friends list", "OK",false);
 			startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
 			finish();
 		}
