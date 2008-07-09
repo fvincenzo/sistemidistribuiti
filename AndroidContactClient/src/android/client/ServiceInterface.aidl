@@ -25,6 +25,8 @@ interface ServiceInterface {
 	boolean setMobile(String contact);
 	boolean setWork(String contact);
 	boolean setHome(String contact);
-	
-	
+	boolean setIm(String contact);
+	boolean setMail(String contact);
+	void notifyPendings();
+	void setNormalStatus();
 }

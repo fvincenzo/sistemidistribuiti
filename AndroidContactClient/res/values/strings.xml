@@ -9,4 +9,7 @@
     <string name="local_service_stopped">My Contacts stopped</string>
     <string name="local_service_connected">My Contacts connected</string>
     <string name="local_service_disconnected">My Contacts disconnected</string>
+    <string name="local_service_pendings">One or more pending friends</string>
+    <string name="local_service_running">My Contacts is running</string>
+    
 </resources>
