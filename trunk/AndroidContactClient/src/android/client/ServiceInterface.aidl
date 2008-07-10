@@ -19,6 +19,7 @@ interface ServiceInterface {
 	String getpreferred(String username);
 	
 	
+	void stop();
 	boolean isRunning();
 	boolean insertContact(String friend);
 	boolean modifyContact(String friend);
