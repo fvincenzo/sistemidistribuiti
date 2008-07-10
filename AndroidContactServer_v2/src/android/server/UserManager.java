@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 
@@ -14,6 +15,8 @@ public class UserManager {
 
 	private Map<String ,User> users = new HashMap<String, User>();
 
+	private Hashtable<String, SocketServer> usersocket = new Hashtable<String, SocketServer>();
+	
 	private PrintWriter out_users;
 
 	private static UserManager u = null;
@@ -86,6 +89,26 @@ public class UserManager {
 		return users.get(uname);
 	}
 
+	public void setConnected(String uname,SocketServer ss){
+		
+		this.usersocket.put(uname, ss);
+		
+	}
+	
+	public boolean unameConnected(String uname) {
+		
+		return this.usersocket.containsKey(uname);
+	
+	}
+	
+	public void removeUnameConnected(String uname) {
+		
+		SocketServer s = (SocketServer)this.usersocket.get(uname);
+		s.quit();
+		this.usersocket.remove(uname);
+		
+	}
+	
 	public Set<String> getUsers() {
 		return users.keySet();
 	}
