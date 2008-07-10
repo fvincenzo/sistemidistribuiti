@@ -11,6 +11,7 @@ import android.os.IBinder;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 
@@ -33,6 +34,7 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 	public int service_status = 1;
 	private Button login;
 	private Button register;
+	private CheckBox forcelogin;
 	EditText username;
 	EditText password;
 
@@ -69,7 +71,13 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 			if ( u != "" && p != ""){
 				try {
 					this.s.connect("10.0.2.2");
-					if (this.s.login(u,p)){
+					boolean ret;
+					if(forcelogin.isChecked()){
+						ret = this.s.forcelogin(u, p);
+					} else 
+						ret = this.s.login(u,p);	
+					
+					if (ret){
 						//TODO Controllare il getIntent().getData che significa
 						startActivity(new Intent(android.client.FriendsList.PENDING_ACTION, getIntent().getData()));
 						finish();
@@ -107,6 +115,7 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 				password = (EditText)findViewById(R.id.Password);
 				login = (Button) findViewById(R.id.Login);
 				register  = (Button) findViewById(R.id.Register);
+				forcelogin = (CheckBox) findViewById(R.id.forcelogincheckbox);
 				login.setOnClickListener(this);
 				register.setOnClickListener(this);
 			}
