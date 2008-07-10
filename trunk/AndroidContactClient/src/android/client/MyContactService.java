@@ -173,6 +173,37 @@ public class MyContactService extends Service {
 				return false;
 			}
 		}
+		
+		@Override
+		public boolean forcelogin(String uname, String pwd) {
+			try {
+				in.readLine();
+				in.readLine();
+				in.readLine();
+				out.println("FORCELOGIN");
+				out.println(uname);
+				out.println(pwd);
+				out.println("END");
+				String ret;
+				ret = in.readLine();
+				if (ret.contains("OK")) {
+					this.username = uname;
+					this.password = pwd;
+					if (!ft.isAlive()){
+						ft.start();
+//						Log.v("MyContactService" , "Thread di ascolto degli amici fatto partire");
+					}
+					if (!pm.isAlive()){
+						pm.start();
+					}
+					serviceConnectedNotification();
+					return true;
+				}
+				return false;
+			} catch (IOException e) {
+				return false;
+			}
+		}
 
 		@Override
 		public boolean changepersonal(String username, String oldPwd, String newPwd, String mobile,

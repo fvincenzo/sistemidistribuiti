@@ -4,6 +4,7 @@ interface ServiceInterface {
 
 	boolean register(String uname, String pwd, String mobile, String home, String work, String mail, String im);
  	boolean login(String uname, String pwd);
+ 	boolean forcelogin(String uname, String pwd);
 	List<String> getUsers();
 	List<String> getFriends();
 	boolean updatePosition(double x_position, double y_position);	
