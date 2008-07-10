@@ -22,6 +22,7 @@ import android.provider.Contacts;
 import android.util.Log;
 import android.widget.Toast;
 import android.client.R;
+import android.client.ServiceInterface.Stub;
 import android.database.Cursor;
 
 public class MyContactService extends Service {
@@ -531,9 +532,11 @@ public class MyContactService extends Service {
 		
 		@Override
 		public boolean setHome(String contact) throws DeadObjectException {
+			//TODO: pulire i campi settati dagli altri
 			Log.v("MyContactService", "Sono in setHome");
 			String[] projection = new String[] {
 					android.provider.BaseColumns._ID,
+					android.provider.Contacts.People.NOTES,
 					android.provider.Contacts.People.PREFERRED_PHONE_ID,
 					android.provider.Contacts.People.PREFERRED_EMAIL_ID
 			};
@@ -545,6 +548,7 @@ public class MyContactService extends Service {
 				int person_id = user.getInt(user.getColumnIndex(android.provider.BaseColumns._ID));
 				Cursor tel = getContentResolver().query(Contacts.Phones.CONTENT_URI, projection2, "person='"+person_id+"' AND type='"+Contacts.Phones.HOME_TYPE+"'", null, null);
 				if (tel.next()){
+					user.updateToNull(user.getColumnIndex(Contacts.People.NOTES));
 					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID), tel.getInt(tel.getColumnIndex(BaseColumns._ID)));
 					return user.commitUpdates();
 				}
@@ -558,6 +562,7 @@ public class MyContactService extends Service {
 			Log.v("MyContactService", "Sono in setMobile");
 			String[] projection = new String[] {
 					android.provider.BaseColumns._ID,
+					android.provider.Contacts.People.NOTES,
 					android.provider.Contacts.People.PREFERRED_PHONE_ID,
 					android.provider.Contacts.People.PREFERRED_EMAIL_ID
 			};
@@ -569,6 +574,7 @@ public class MyContactService extends Service {
 				int person_id = user.getInt(user.getColumnIndex(android.provider.BaseColumns._ID));
 				Cursor tel = getContentResolver().query(Contacts.Phones.CONTENT_URI, projection2, "person='"+person_id+"' AND type='"+Contacts.Phones.MOBILE_TYPE+"'", null, null);
 				if (tel.next()){
+					user.updateToNull(user.getColumnIndex(Contacts.People.NOTES));
 					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID), tel.getInt(tel.getColumnIndex(BaseColumns._ID)));
 					return user.commitUpdates();
 				}
@@ -581,6 +587,7 @@ public class MyContactService extends Service {
 			Log.v("MyContactService", "Sono in setWork");
 			String[] projection = new String[] {
 					android.provider.BaseColumns._ID,
+					android.provider.Contacts.People.NOTES,
 					android.provider.Contacts.People.PREFERRED_PHONE_ID,
 					android.provider.Contacts.People.PREFERRED_EMAIL_ID
 			};
@@ -592,6 +599,7 @@ public class MyContactService extends Service {
 				int person_id = user.getInt(user.getColumnIndex(android.provider.BaseColumns._ID));
 				Cursor tel = getContentResolver().query(Contacts.Phones.CONTENT_URI, projection2, "person='"+person_id+"' AND type='"+Contacts.Phones.WORK_TYPE+"'", null, null);
 				if (tel.next()){
+					user.updateToNull(user.getColumnIndex(Contacts.People.NOTES));
 					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID), tel.getInt(tel.getColumnIndex(BaseColumns._ID)));
 					return user.commitUpdates();
 				}
@@ -661,6 +669,11 @@ public class MyContactService extends Service {
 			serviceWorkingNormally();
 			
 		}
+		@Override
+		public void stop(){
+			pm.quit();
+			ft.quit();
+		}
 	};
 
 	@Override
@@ -684,7 +697,15 @@ public class MyContactService extends Service {
 
 
 		// Tell the user we stopped.
+		try {
+			mBinder.stop();
+		} catch (DeadObjectException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Toast.makeText(this, R.string.local_service_stopped, Toast.LENGTH_SHORT).show();
+		
+		
 	}
 
 	@Override
