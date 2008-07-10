@@ -67,4 +67,16 @@ android:layout_x="30px"
 android:layout_y="112px"
 >
 </TextView>
+<CheckBox
+android:id="@+id/forcelogincheckbox"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Force Login"
+android:textStyle="bold"
+android:textColor="#ff2ffd33"
+android:textAlign="center"
+android:layout_x="96px"
+android:layout_y="307px"
+>
+</CheckBox>
 </AbsoluteLayout>
