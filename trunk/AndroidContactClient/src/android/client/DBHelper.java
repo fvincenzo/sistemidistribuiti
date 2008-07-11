@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.google.android.maps.Point;
 
+import android.app.ApplicationContext;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -38,6 +39,7 @@ public class DBHelper {
 	private SQLiteDatabase db;
 
 	public DBHelper(Context ctx) {
+
 		try {
 			db = ctx.openDatabase(DATABASE_NAME, null);
 		} catch (FileNotFoundException e) {
@@ -63,7 +65,7 @@ public class DBHelper {
 		db.delete(DATABASE_TABLE, "latitude=" + l.latitude+" AND longitude="+l.longitude+" AND preferred ='"+l.preferred+"'", null);
 	}
 
-	public boolean addLocation(Point p, String type) {
+	public boolean addLocation(Point p, String type, boolean defaultLocation) {
 
 		String selection[] = new String[] {
 				"_id"
@@ -72,18 +74,37 @@ public class DBHelper {
 				"latitude="+p.getLatitudeE6() +" AND longitude="+p.getLongitudeE6(), null, null, null, null);
 		if (c.count() == 0) {
 
+			if (defaultLocation){
+				ContentValues setZero = new ContentValues();
+				setZero.put("defaultFlag", 0);
+				db.update(DATABASE_TABLE, setZero, "defaultFlag=1", null);
+			}
 			ContentValues initialValues = new ContentValues();
 
 			initialValues.put("latitude", p.getLatitudeE6());
 			initialValues.put("longitude", p.getLongitudeE6());
 			initialValues.put("preferred", type);
-			initialValues.put("defaultFlag", 0);
+			if (defaultLocation)
+				initialValues.put("defaultFlag", 1);
+			else 
+				initialValues.put("defaultFlag", 0);
 			if (db.insert(DATABASE_TABLE, null, initialValues) != -1){
 				return true;
 			}
 		}
 		return false;
 
+	}
+	
+	public String getDefault(){
+	
+
+		Cursor c = db.query(true, DATABASE_TABLE, new String[] {
+				"preferred"},"defaultFlag=1", null, null, null, null);
+		if (c.first()) {
+			return c.getString(0);
+		} 
+		return "MOBILE";
 	}
 
 
@@ -113,9 +134,8 @@ public class DBHelper {
 		Location row;
 
 		Cursor c = db.query(true, DATABASE_TABLE, new String[] {
-				"_id",  "latitude", "longitude","preferred","address", "defaultFlag"},null, null, null, null, null);
+				"_id",  "latitude", "longitude","preferred","address", "defaultFlag"},"defaultFlag=0", null, null, null, null);
 		while (c.next()) {
-			
 			row = new Location();
 			row._id = c.getLong(0);
 			row.latitude = c.getInt(1);
