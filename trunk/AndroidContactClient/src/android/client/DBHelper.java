@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.google.android.maps.Point;
 
-import android.app.ApplicationContext;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -65,7 +64,7 @@ public class DBHelper {
 		db.delete(DATABASE_TABLE, "latitude=" + l.latitude+" AND longitude="+l.longitude+" AND preferred ='"+l.preferred+"'", null);
 	}
 
-	public boolean addLocation(Point p, String type, boolean defaultLocation) {
+	public boolean addLocation(Point p, String address, String type) {
 
 		String selection[] = new String[] {
 				"_id"
@@ -73,21 +72,12 @@ public class DBHelper {
 		Cursor c = db.query(DATABASE_TABLE, selection, 
 				"latitude="+p.getLatitudeE6() +" AND longitude="+p.getLongitudeE6(), null, null, null, null);
 		if (c.count() == 0) {
-
-			if (defaultLocation){
-				ContentValues setZero = new ContentValues();
-				setZero.put("defaultFlag", 0);
-				db.update(DATABASE_TABLE, setZero, "defaultFlag=1", null);
-			}
 			ContentValues initialValues = new ContentValues();
-
+			initialValues.put("address", address);
 			initialValues.put("latitude", p.getLatitudeE6());
 			initialValues.put("longitude", p.getLongitudeE6());
 			initialValues.put("preferred", type);
-			if (defaultLocation)
-				initialValues.put("defaultFlag", 1);
-			else 
-				initialValues.put("defaultFlag", 0);
+			initialValues.put("defaultFlag", 0);
 			if (db.insert(DATABASE_TABLE, null, initialValues) != -1){
 				return true;
 			}
@@ -95,12 +85,39 @@ public class DBHelper {
 		return false;
 
 	}
-	
+
+	public boolean setDefaultLocation(String type){
+		String selection[] = new String[] {
+				"preferred"
+		};
+		ContentValues pref = new ContentValues();
+		pref.put("defaultFlag", 1);
+		pref.put("preferred", type);
+		
+		Cursor c = db.query(DATABASE_TABLE, selection, "defaultFlag=1", null, null, null, null);
+		if (c.count() > 0) {
+			
+			db.update(DATABASE_TABLE, pref, "defaultFlag=1", null);
+//			c.first();
+//			c.updateString(c.getColumnIndex("preferred"), type);
+//			return c.commitUpdates();
+		}
+		else {
+//			ContentValues pref = new ContentValues();
+//			pref.put("defaultFlag", 1);
+//			pref.put("preferred", type);
+			if (db.insert(DATABASE_TABLE, null, pref) != -1){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public String getDefault(){
-	
+
 
 		Cursor c = db.query(true, DATABASE_TABLE, new String[] {
-				"preferred"},"defaultFlag=1", null, null, null, null);
+		"preferred"},"defaultFlag=1", null, null, null, null);
 		if (c.first()) {
 			return c.getString(0);
 		} 

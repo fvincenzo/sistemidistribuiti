@@ -9,6 +9,9 @@ import com.google.android.maps.Point;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Xml;
 import android.view.Menu;
@@ -39,8 +42,11 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 	private LinearLayout searchBar;
 	private EditText search;
 	private Button go;
+	private Point lastSearch;
 
 	private DBHelper db;
+
+	private String lastAddress;
 	@Override
 	protected void onCreate(Bundle icicle) {
 		// TODO Auto-generated method stub
@@ -121,6 +127,8 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 			Xml.parse(xmlCode, handler);
 			Point p = new Point((int)handler.getLatitudeAsLong(), (int)handler.getLongitudeAsLong());
 			MapController mc = myMap.getController();
+			lastSearch = p;
+			lastAddress = address;
 			mc.animateTo(p);
 			mc.zoomTo(21);
 		} catch (IOException e){
@@ -141,7 +149,7 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 		private Button setMail;
 		private Button setIM;
 		private boolean defaultLocation;
-
+		private Geocoder geoCoder;
 
 
 
@@ -151,7 +159,7 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 			this.defaultLocation = defaultLocation;
 			this.setTitle("Current position is:");
 			setContentView(R.layout.choose_dialog);
-
+			geoCoder = new Geocoder();
 			setMobile = (Button)findViewById(R.id.set_mobile);
 			setHome = (Button)findViewById(R.id.set_home);
 			setWork = (Button)findViewById(R.id.set_work);
@@ -192,21 +200,130 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 
 
 		private void setHome(){
-			db.addLocation(this.p, "HOME", defaultLocation);
-
+			if (defaultLocation){
+				db.setDefaultLocation("HOME");
+			}
+			else {
+			String res = "";
+			try {
+				Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
+				if (addr != null){
+					if (addr.length > 0){
+						res = addr[0].toString();
+					}
+				}
+			} catch (IOException e) {
+				
+			}
+			if (res.equals("")){
+				if (this.p.equals(lastSearch)){
+					res = lastAddress;
+				}
+			}
+			
+			
+			db.addLocation(this.p, res, "HOME");
+			}
 		}
 		private void setWork(){
-			db.addLocation(this.p, "WORK", defaultLocation);
+			if (defaultLocation){
+				db.setDefaultLocation("WORK");
+			}
+			else {
+			String res = "";
+			try {
+				Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
+				if (addr != null){
+					if (addr.length > 0){
+						res = addr[0].toString();
+					}
+				}
+			} catch (IOException e) {
+				
+			}
+			if (res.equals("")){
+				if (this.p.equals(lastSearch)){
+					res = lastAddress;
+				}
+			}
+			
+			db.addLocation(this.p, res, "WORK");
+		}
 		}
 		private void setMobile(){
-			db.addLocation(this.p, "MOBILE", defaultLocation);
-
+			if (defaultLocation){
+				db.setDefaultLocation("MOBILE");
+			}
+			else {
+			String res = "";
+			try {
+				Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
+				if (addr != null){
+					if (addr.length > 0){
+						res = addr[0].toString();
+					}
+				}
+			} catch (IOException e) {
+				
+			}
+			if (res.equals("")){
+				if (this.p.equals(lastSearch)){
+					res = lastAddress;
+				}
+			}
+			
+			db.addLocation(this.p, res,  "MOBILE");
+			}
 		}
 		private void setMail(){
-			db.addLocation(this.p, "MAIL", defaultLocation);
+			if (defaultLocation){
+				db.setDefaultLocation("MAIL");
+			}
+			else {
+			String res = "";
+			try {
+				Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
+				if (addr != null){
+					if (addr.length > 0){
+						res = addr[0].toString();
+					}
+				}
+			} catch (IOException e) {
+				
+			}
+			if (res.equals("")){
+				if (this.p.equals(lastSearch)){
+					res = lastAddress;
+				}
+			}
+			
+			db.addLocation(this.p, res, "MAIL");
+		}
 		}
 		private void setIm(){
-			db.addLocation(this.p, "IM", defaultLocation);
+			if (defaultLocation){
+				db.setDefaultLocation("IM");
+			}
+			else {
+			String res = "";
+			try {
+				Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
+				if (addr != null){
+					if (addr.length > 0){
+						res = addr[0].toString();
+					}
+				}
+			} catch (IOException e) {
+				
+			}
+			
+			if (res.equals("")){
+				if (this.p.equals(lastSearch)){
+					res = lastAddress;
+				}
+			}
+			db.addLocation(this.p, res, "IM");
+			}
 		}
 	}
 }
