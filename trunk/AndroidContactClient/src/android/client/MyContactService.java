@@ -258,7 +258,7 @@ public class MyContactService extends Service {
 		}
 
 		@Override
-		public boolean setpreferred(String username, String mode) {
+		public boolean setpreferred(String mode) {
 			try {
 				out.println("SETPREFERRED");
 				out.println(username);

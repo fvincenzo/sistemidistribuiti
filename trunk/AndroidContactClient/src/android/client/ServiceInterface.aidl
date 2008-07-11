@@ -16,7 +16,7 @@ interface ServiceInterface {
 	boolean connect(String server);
 	boolean changepersonal(String username,String oldpwd, String newPwd, String mobile,String home,String work,String mail,String im);
 	List<String> getPersonal();
-	boolean setpreferred(String username,String mode);
+	boolean setpreferred(String mode);
 	String getpreferred(String username);
 	
 	
