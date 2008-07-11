@@ -74,7 +74,7 @@ public class GPSThread extends Thread {
 						
 						apos = disgeod(((double)l.latitude/1000000),((double)l.longitude/1000000),lat_flo,lng_flo);
 						
-						Log.v("GPSThread","posizione corrente: "+ apos );
+						Log.v("GPSThread","posizione corrente: "+ lat_str + " " + lng_str);
 						
 						if(apos<pos) {
 							
@@ -92,7 +92,8 @@ public class GPSThread extends Thread {
 					
 						Precpos = Position;
 						servInt.setpreferred(Position);
-					
+						servInt.updatePosition(lat_flo, lng_flo);
+						
 					}
 					
 					//Log.v("GPSThread","posizione corrente: "+ pos +" "+ Position);
