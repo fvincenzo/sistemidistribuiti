@@ -100,13 +100,15 @@ public class MyContactService extends Service {
 		private String password = "";
 		protected LocationManager myLocationManager = null;
 		private GPSThread gps = null;
+		private DBHelper db = null;
 		
 		@Override
 		public boolean register(String uname, String pwd, String mobile,
 				String home, String work, String mail, String im) {
 			
 			this.myLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-			this.gps = new GPSThread(this,myLocationManager);
+			this.db = new DBHelper(getContext());
+			this.gps = new GPSThread(this,myLocationManager,db);
 			
 			try {
 				in.readLine();
@@ -155,7 +157,8 @@ public class MyContactService extends Service {
 		public boolean login(String uname, String pwd) {
 			
 			this.myLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-			this.gps = new GPSThread(this,myLocationManager);
+			this.db = new DBHelper(getContext());
+			this.gps = new GPSThread(this,myLocationManager,db);
 			
 			try {
 				in.readLine();
@@ -191,7 +194,8 @@ public class MyContactService extends Service {
 		public boolean forcelogin(String uname, String pwd) {
 			
 			this.myLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-			this.gps = new GPSThread(this,myLocationManager);
+			this.db = new DBHelper(getContext());
+			this.gps = new GPSThread(this,myLocationManager,db);
 			
 			try {
 				in.readLine();
@@ -774,6 +778,9 @@ public class MyContactService extends Service {
 //	// TODO Auto-generated method stub
 
 //	}
+	private Context getContext(){
+		return this;
+	}
 	/**
 	 * Show a notification while this service is running.
 	 */
