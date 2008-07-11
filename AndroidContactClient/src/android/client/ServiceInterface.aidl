@@ -18,6 +18,7 @@ interface ServiceInterface {
 	List<String> getPersonal();
 	boolean setpreferred(String mode);
 	String getpreferred(String username);
+	String checkposition(String friendName);
 	
 	
 	void stop();

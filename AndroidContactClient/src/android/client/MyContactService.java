@@ -727,6 +727,23 @@ public class MyContactService extends Service {
 			ft.quit();
 			gps.quit();
 		}
+
+		@Override
+		public String checkposition(String friendName) throws DeadObjectException {
+			try {
+				if (username != "") {
+					out.println("CHECKPOSITION");
+					out.println(username);
+					out.println(friendName);
+					out.println("END");
+					String position = in.readLine();
+					return position;
+				}
+				return null;
+			} catch (Exception e) {
+				return null;
+			}
+		}
 	};
 
 	@Override
