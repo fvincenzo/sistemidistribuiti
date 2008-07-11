@@ -2,6 +2,8 @@ package android.client;
 
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 
 import org.xml.sax.SAXException;
@@ -9,9 +11,14 @@ import com.google.android.maps.Point;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Paint.Style;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Xml;
 import android.view.Menu;
@@ -26,6 +33,9 @@ import android.widget.LinearLayout;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
+import com.google.android.maps.OverlayController;
+import com.google.android.maps.Overlay.PixelCalculator;
 
 public class LocationSelection extends MapActivity implements OnClickListener{
 
@@ -45,6 +55,7 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 	private Point lastSearch;
 
 	private DBHelper db;
+	protected OverlayController myOverlayController = null; 
 
 	private String lastAddress;
 	@Override
@@ -62,6 +73,11 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 		go.setOnClickListener(this);
 		select.setOnClickListener(this);
 		db = new DBHelper(this);
+		
+		myOverlayController = myMap.createOverlayController();
+        MyLocationOverlay myLocationOverlay = new MyLocationOverlay();
+        myOverlayController.add(myLocationOverlay, true); 
+		
 	}
 
 	public void onClick(View arg0) {
@@ -325,5 +341,134 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 			db.addLocation(this.p, res, "IM");
 			}
 		}
+	}
+	
+	protected class MyLocationOverlay extends Overlay {
+        @Override
+        public void draw(Canvas canvas, PixelCalculator calculator, boolean shadow) {
+          super.draw(canvas, calculator, shadow);
+          
+          // Setup our "brush"/"pencil"/ whatever...
+          Paint paint = new Paint();
+          paint.setTextSize(14);
+         
+          LocationManager myLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+          
+          Location l = myLocationManager.getCurrentLocation("gps");
+          
+          // Create a Point that represents our GPS-Location
+          Double lat = l.getLatitude() * 1E6;
+          Double lng = l.getLongitude() * 1E6;
+          Point point = new Point(lat.intValue(), lng.intValue());
+         
+          int[] myScreenCoords = new int[2];
+          // Converts lat/lng-Point to OUR coordinates on the screen.
+          calculator.getPointXY(point, myScreenCoords);
+          
+          // Draw a circle for our location
+          RectF oval = new RectF(myScreenCoords[0] - 7, myScreenCoords[1] + 7,
+                                   myScreenCoords[0] + 7, myScreenCoords[1] - 7);
+          
+          // Setup a color for our location
+          paint.setStyle(Style.FILL);
+          paint.setARGB(255, 80, 150, 30); // Nice strong Android-Green    
+          // Draw our name
+          canvas.drawText(getString(R.string.map_overlay_own_name),
+                                   myScreenCoords[0] +9, myScreenCoords[1], paint);
+          
+          // Change the paint to a 'Lookthrough' Android-Green
+          paint.setARGB(80, 156, 192, 36);
+          paint.setStrokeWidth(1);
+          // draw an oval around our location
+          canvas.drawOval(oval, paint);
+          
+           // With a black stroke around the oval we drew before.
+          paint.setARGB(255,0,0,0);
+          paint.setStyle(Style.STROKE);
+          canvas.drawCircle(myScreenCoords[0], myScreenCoords[1], 7, paint);
+          
+          //Aggiungo le mie posizioni
+          
+          List<DBHelper.Location> ll = db.fetchAllRows();
+          Iterator<DBHelper.Location> i = ll.iterator();
+          
+          while(i.hasNext()) {
+        	  
+        	  // Setup our "brush"/"pencil"/ whatever...
+              Paint paint1 = new Paint();
+              paint.setTextSize(14);
+             
+              DBHelper.Location loc = i.next();
+              
+              // Create a Point that represents our GPS-Location
+              Double lat1 = Double.parseDouble(String.valueOf(loc.latitude));
+              Double lng1 = Double.parseDouble(String.valueOf(loc.longitude));
+              Point point1 = new Point(lat1.intValue(), lng1.intValue());
+             
+              int[] myScreenCoords1 = new int[2];
+              // Converts lat/lng-Point to OUR coordinates on the screen.
+              calculator.getPointXY(point1, myScreenCoords);
+              
+              // Draw a circle for our location
+              RectF oval1 = new RectF(myScreenCoords[0] - 7, myScreenCoords[1] + 7,
+                                       myScreenCoords[0] + 7, myScreenCoords[1] - 7);
+              
+              // Setup a color for our location
+              paint1.setStyle(Style.FILL);
+              paint1.setARGB(255, 90, 150, 100); // Nice strong Android-Green    
+              // Draw our name
+              canvas.drawText(loc.preferred,
+                                       myScreenCoords[0] +9, myScreenCoords[1], paint1);
+              
+              // Change the paint to a 'Lookthrough' Android-Green
+              paint1.setARGB(80, 56, 192, 106);
+              paint1.setStrokeWidth(1);
+              // draw an oval around our location
+              canvas.drawOval(oval1, paint1);
+              
+               // With a black stroke around the oval we drew before.
+              paint1.setARGB(255,0,0,0);
+              paint1.setStyle(Style.STROKE);
+              canvas.drawCircle(myScreenCoords[0], myScreenCoords[1], 7, paint1);
+        	  
+          }
+          
+          /*
+          int[] friendScreenCoords = new int[2];
+          //Draw each friend with a line pointing to our own location.
+          for(Friend aFriend : FriendFinderMap.this.nearFriends){
+               lat = aFriend.itsLocation.getLatitude() * 1E6;
+               lng = aFriend.itsLocation.getLongitude() * 1E6;
+               point = new Point(lat.intValue(), lng.intValue());
+
+               // Converts lat/lng-Point to coordinates on the screen.
+               calculator.getPointXY(point, friendScreenCoords);
+               if(Math.abs(friendScreenCoords[0]) < 2000 && Math.abs(friendScreenCoords[1]) < 2000){
+                    // Draw a circle for this friend and his name
+                    oval = new RectF(friendScreenCoords[0] - 7, friendScreenCoords[1] + 7,
+                                        friendScreenCoords[0] + 7, friendScreenCoords[1] - 7);
+                    
+                    // Setup a color for all friends
+                    paint.setStyle(Style.FILL);
+                    paint.setARGB(255, 255, 0, 0); // Nice red             
+                    canvas.drawText(aFriend.itsName, friendScreenCoords[0] +9,
+                                             friendScreenCoords[1], paint);
+                    
+                    // Draw a line connecting us to the current Friend
+                    paint.setARGB(80, 255, 0, 0); // Nice red, more look through...
+
+                    paint.setStrokeWidth(2);
+                    canvas.drawLine(myScreenCoords[0], myScreenCoords[1],
+                                        friendScreenCoords[0], friendScreenCoords[1], paint);
+                    paint.setStrokeWidth(1);
+                    // draw an oval around our friends location
+                    canvas.drawOval(oval, paint);
+                    
+                     // With a black stroke around the oval we drew before.
+                    paint.setARGB(255,0,0,0);
+                    paint.setStyle(Style.STROKE);
+                    canvas.drawCircle(friendScreenCoords[0], friendScreenCoords[1], 7, paint);
+               }*/
+          } 
 	}
 }

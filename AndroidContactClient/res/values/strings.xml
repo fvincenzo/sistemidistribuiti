@@ -12,5 +12,6 @@
     <string name="local_service_pendings">One or more pending friends</string>
     <string name="local_service_running">My Contacts is running</string>
     <string name="view_locations_title">Locations currently inserted:</string>
+    <string name="map_overlay_own_name">Me</string> 
     
 </resources>
