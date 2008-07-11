@@ -21,6 +21,7 @@ interface ServiceInterface {
 	String checkposition(String friendName);
 	
 	
+	
 	void stop();
 	boolean isRunning();
 	boolean insertContact(String friend);
@@ -30,6 +31,7 @@ interface ServiceInterface {
 	boolean setHome(String contact);
 	boolean setIm(String contact);
 	boolean setMail(String contact);
+	boolean setPosition(String contact, String position);
 	void notifyPendings();
 	void setNormalStatus();
 	
