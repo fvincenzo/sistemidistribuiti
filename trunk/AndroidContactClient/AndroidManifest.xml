@@ -4,7 +4,7 @@
     <application android:label="@string/app_name" android:persistent="false" android:icon="@drawable/my_contacts">
         <activity android:label="@string/app_name" android:name="MyContatsClient">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN_LOOP" />
+               
                 <action android:name="android.client.action.LOGIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             <action android:name="android.intent.action.MAIN">
@@ -40,6 +40,14 @@
                 <action android:name="android.client.action.SELECT_LOCATION" />
                  <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            
+
+</activity>
+        <activity android:label="@string/view_locations_title" android:name="ViewLocations"> <intent-filter>
+                <action android:name="android.client.action.VIEW_LOCATIONS" />
+                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            
 
 </activity>
         
@@ -50,7 +58,6 @@
              <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </service>
-   
 </application>
 <uses-permission android:name="android.permission.READ_CONTACTS">
 </uses-permission><uses-permission android:name="android.permission.WRITE_CONTACTS">

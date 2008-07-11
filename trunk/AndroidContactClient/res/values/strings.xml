@@ -11,5 +11,6 @@
     <string name="local_service_disconnected">My Contacts disconnected</string>
     <string name="local_service_pendings">One or more pending friends</string>
     <string name="local_service_running">My Contacts is running</string>
+    <string name="view_locations_title">Locations currently inserted:</string>
     
 </resources>

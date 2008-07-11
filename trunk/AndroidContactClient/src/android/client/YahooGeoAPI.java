@@ -14,8 +14,8 @@ import android.util.Log;
 
 public class YahooGeoAPI {
 
-	private static final String LOGGER = "lordhong.yahoo";
-	private static final String APPID = "your app id here...";
+//	private static final String LOGGER = "lordhong.yahoo";
+	private static final String APPID = "MyContactsClient";
 	private static final String YAHOO_GEO_API_URL = "http://local.yahooapis.com/MapsService/V1/geocode?appid=";
 	private static HttpConnectionManager connectionManager = new SimpleHttpConnectionManager();
 	
