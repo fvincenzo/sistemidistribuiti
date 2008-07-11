@@ -5,6 +5,7 @@ import java.util.List;
 import android.app.Activity;
 import android.client.DBHelper.Location;
 import android.os.Bundle;
+import android.text.Layout.Alignment;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -41,8 +42,10 @@ public class ViewLocations extends Activity {
 				LayoutParams.WRAP_CONTENT,
 				LayoutParams.FILL_PARENT
 		));
-		defText.setWidth(250);
+//		defText.setWidth(250);
 		defText.setLines(3);
+		defText.setAlignment(Alignment.ALIGN_CENTER);
+		defText.setHeight(15);
 		defText.setText("Default way to be contacted is:\n"+defString);
 		
 		fstRow.addView(defText);
