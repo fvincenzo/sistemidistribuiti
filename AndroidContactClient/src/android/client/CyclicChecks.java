@@ -42,7 +42,11 @@ public class CyclicChecks extends Thread {
 					
 					if (localMap.containsKey(friend)){
 						Log.v("CheckPreferredMode", "Utente già presente in lista");
+						
 						if (!pref.equals(localMap.get(friend))){
+							//TODO inserire il controllo della posizione dell'utente
+							
+							
 							if (pref.equals("HOME")){
 								Log.v("CheckPreferredMode", "Devo settare HOME");
 								service.setHome(friend);
@@ -70,6 +74,8 @@ public class CyclicChecks extends Thread {
 						Log.v("CheckPreferredMode", "Utente non presente in lista, lo inserisco");
 
 						localMap.put(friend, pref);
+						//TODO:chiedere la posizione dell'utente e aggiornarla
+						
 						if (pref.equals("HOME")){
 							Log.v("CheckPreferredMode", "Devo settare HOME ---");
 							service.setHome(friend);
