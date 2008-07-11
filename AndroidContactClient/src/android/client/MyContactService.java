@@ -13,7 +13,9 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.DeadObjectException;
 import android.os.IBinder;
@@ -96,10 +98,16 @@ public class MyContactService extends Service {
 		private FriendThread ft = new FriendThread(this);
 		private CyclicChecks pm = new CyclicChecks(this);
 		private String password = "";
-
+		protected LocationManager myLocationManager = null;
+		private GPSThread gps = null;
+		
 		@Override
 		public boolean register(String uname, String pwd, String mobile,
 				String home, String work, String mail, String im) {
+			
+			this.myLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+			this.gps = new GPSThread(this,myLocationManager);
+			
 			try {
 				in.readLine();
 				in.readLine();
@@ -145,6 +153,10 @@ public class MyContactService extends Service {
 
 		@Override
 		public boolean login(String uname, String pwd) {
+			
+			this.myLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+			this.gps = new GPSThread(this,myLocationManager);
+			
 			try {
 				in.readLine();
 				in.readLine();
@@ -164,6 +176,7 @@ public class MyContactService extends Service {
 					}
 					if (!pm.isAlive()){
 						pm.start();
+						gps.start();
 					}
 					serviceConnectedNotification();
 					return true;
@@ -176,6 +189,10 @@ public class MyContactService extends Service {
 		
 		@Override
 		public boolean forcelogin(String uname, String pwd) {
+			
+			this.myLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+			this.gps = new GPSThread(this,myLocationManager);
+			
 			try {
 				in.readLine();
 				in.readLine();
@@ -704,6 +721,7 @@ public class MyContactService extends Service {
 		public void stop(){
 			pm.quit();
 			ft.quit();
+			gps.quit();
 		}
 	};
 

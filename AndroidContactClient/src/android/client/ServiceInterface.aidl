@@ -31,4 +31,5 @@ interface ServiceInterface {
 	boolean setMail(String contact);
 	void notifyPendings();
 	void setNormalStatus();
+	
 }
