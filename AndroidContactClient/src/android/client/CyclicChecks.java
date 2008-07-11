@@ -39,7 +39,7 @@ public class CyclicChecks extends Thread {
 					
 				for (String friend : service.getFriends()){
 					String pref = service.getpreferred(friend);
-
+					
 					if (localMap.containsKey(friend)){
 						Log.v("CheckPreferredMode", "Utente già presente in lista");
 						if (!pref.equals(localMap.get(friend))){
