@@ -22,7 +22,7 @@ public class GPSThread extends Thread {
     protected Location myLocation = null; 
     protected DBHelper db;
 	
-    protected final long MINIMUM_TIME_BETWEEN_UPDATE = 2500; // in Millisecondi 
+    protected final long MINIMUM_TIME_BETWEEN_UPDATE = 5000; // in Millisecondi 
 
 	public GPSThread(ServiceInterface.Stub s,LocationManager loc,DBHelper db){
 		super();
@@ -43,6 +43,7 @@ public class GPSThread extends Thread {
 		double apos = 0;
 		double pos = 1000000; 
 		String Position = null;
+		String Precpos = null;
 		
 		super.run();
 		while (run){
@@ -84,13 +85,26 @@ public class GPSThread extends Thread {
 						
 					}
 					
-					Log.v("GPSThread","posizione corrente: "+ pos +" "+ Position);
+					if(pos > ((double)1500))
+						Position = db.getDefault();
+					
+					if(!Position.equals(Precpos)) {
+					
+						Precpos = Position;
+						servInt.setpreferred(Position);
+					
+					}
+					
+					//Log.v("GPSThread","posizione corrente: "+ pos +" "+ Position);
 				
 				} else {
 					System.out.println("GPSThread.run():nullpointerexception");
 				}
 
 			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (DeadObjectException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
