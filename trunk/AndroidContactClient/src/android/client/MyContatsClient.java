@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.DeadObjectException;
 import android.os.IBinder;
@@ -37,6 +38,7 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 	private CheckBox forcelogin;
 	EditText username;
 	EditText password;
+	private LocationManager myLocationManager = null;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -50,7 +52,9 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 //		startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
 ////		finish();
 //		} else {
-
+		myLocationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+		
+		
 		startService(new Intent("android.client.MY_SERVICE"), null);
 		bindService(new Intent("android.client.MY_SERVICE"),this, 0);
 
