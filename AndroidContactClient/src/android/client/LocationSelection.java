@@ -32,7 +32,8 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 	private final int SEARCH = Menu.FIRST;
 	private final int CHOOSE = Menu.FIRST+1;
 	private final int VIEW_LOCATIONS = Menu.FIRST+2;
-
+	private final int CHOOSE_DEFAULT = Menu.FIRST+3;
+	
 	private MapView myMap = null;
 	private Button select;
 	private LinearLayout searchBar;
@@ -78,6 +79,7 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 		menu.add(0, SEARCH, "Search", R.drawable.search_icon);
 		menu.add(0, CHOOSE, "Choose here", R.drawable.here_icon);
 		menu.add(0, VIEW_LOCATIONS, "View locations", android.R.drawable.icon_highlight_square);
+		menu.add(0, CHOOSE_DEFAULT, "Set Default", android.R.drawable.arrow_down_float);
 
 		return true;
 	}
@@ -91,6 +93,9 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 		case CHOOSE:
 			selectCurrentPosition();
 			break;
+		case CHOOSE_DEFAULT:
+			selectDefaultPosition();
+			break;
 		case VIEW_LOCATIONS:
 			startActivity(new Intent(ViewLocations.VIEW_LOCATIONS_ACTION, getIntent().getData()));
 			break;
@@ -100,8 +105,14 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 	}
 	private void selectCurrentPosition(){
 		Point p = myMap.getMapCenter();
-		new LocationDialog(this, p).show();
+		new LocationDialog(this, p, false).show();
 	}
+	
+	private void selectDefaultPosition(){
+		Point p = myMap.getMapCenter();
+		new LocationDialog(this, p, true).show();
+	}
+	
 
 	private void gotoAddress(String address){
 		try {
@@ -129,13 +140,15 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 		private Button setWork;
 		private Button setMail;
 		private Button setIM;
+		private boolean defaultLocation;
 
 
 
 
-		public LocationDialog(Context context, Point p) {
+		public LocationDialog(Context context, Point p, boolean defaultLocation) {
 			super(context);
 			this.p=p;
+			this.defaultLocation = defaultLocation;
 			this.setTitle("Current position is:");
 			setContentView(R.layout.choose_dialog);
 
@@ -179,21 +192,21 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 
 
 		private void setHome(){
-			db.addLocation(this.p, "HOME");
+			db.addLocation(this.p, "HOME", defaultLocation);
 
 		}
 		private void setWork(){
-			db.addLocation(this.p, "WORK");
+			db.addLocation(this.p, "WORK", defaultLocation);
 		}
 		private void setMobile(){
-			db.addLocation(this.p, "MOBILE");
+			db.addLocation(this.p, "MOBILE", defaultLocation);
 
 		}
 		private void setMail(){
-			db.addLocation(this.p, "MAIL");
+			db.addLocation(this.p, "MAIL", defaultLocation);
 		}
 		private void setIm(){
-			db.addLocation(this.p, "IM");
+			db.addLocation(this.p, "IM", defaultLocation);
 		}
 	}
 }
