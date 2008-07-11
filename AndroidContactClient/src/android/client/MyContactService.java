@@ -744,6 +744,31 @@ public class MyContactService extends Service {
 				return null;
 			}
 		}
+
+		public boolean setPosition(String contact, String position) throws DeadObjectException {
+			String[] projection = new String[] {
+					android.provider.BaseColumns._ID
+			};
+			Cursor user = getContentResolver().query(Contacts.People.CONTENT_URI, projection, "name='"+contact+"'", null, null);
+			if (user.next()){
+				String[] projection2 = new String[] {
+						android.provider.BaseColumns._ID,
+						android.provider.Contacts.ContactMethods.DATA
+				};
+				int person_id = user.getInt(user.getColumnIndex(android.provider.BaseColumns._ID));
+				Cursor geo = getContentResolver().query(Contacts.ContactMethods.CONTENT_URI, projection2, "person='"+person_id+"' AND kind="+Contacts.ContactMethods.POSTAL_KIND, null, null);
+				if (geo.next()){
+//					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_EMAIL_ID), mail.getInt(mail.getColumnIndex(BaseColumns._ID)));
+					geo.updateString(geo.getColumnIndex(Contacts.ContactMethods.DATA), position);
+					
+//					user.updateToNull(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID));
+					
+					return geo.commitUpdates();
+				}
+			}
+			return false;
+			
+		}
 	};
 
 	@Override
