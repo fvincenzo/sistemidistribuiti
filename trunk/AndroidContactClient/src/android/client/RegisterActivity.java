@@ -94,6 +94,7 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 				if (password.getText().toString().equals("") ){
 					try {
 						contactList.changepersonal(username.getText().toString(), null, null, mobile.getText().toString(), home.getText().toString(), work.getText().toString(), email.getText().toString(), im.getText().toString());
+						//TODO: Notificare l'avvenuta modifica
 					} catch (DeadObjectException e) {
 			
 					}

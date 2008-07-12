@@ -1,13 +1,10 @@
 package android.client;
 import java.text.DecimalFormat;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
-import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.DeadObjectException;
 import android.util.Log;
 import java.lang.Math;

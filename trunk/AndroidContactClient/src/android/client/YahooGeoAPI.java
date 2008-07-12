@@ -10,8 +10,6 @@ import org.apache.commons.httpclient.HttpURL;
 import org.apache.commons.httpclient.SimpleHttpConnectionManager;
 import org.apache.commons.httpclient.methods.GetMethod;
 
-import android.util.Log;
-
 public class YahooGeoAPI {
 
 //	private static final String LOGGER = "lordhong.yahoo";

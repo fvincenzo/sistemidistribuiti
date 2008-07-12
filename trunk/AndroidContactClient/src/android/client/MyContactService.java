@@ -24,7 +24,6 @@ import android.provider.Contacts;
 import android.util.Log;
 import android.widget.Toast;
 import android.client.R;
-import android.client.ServiceInterface.Stub;
 import android.database.Cursor;
 
 public class MyContactService extends Service {
@@ -493,6 +492,7 @@ public class MyContactService extends Service {
 
 		@Override
 		public boolean insertContact(String friend) throws DeadObjectException {
+			//TODO: Controllare che non sia già presente, se no aggiornare i valori
 			List<String> info = getUserDetails(friend);
 			ContentValues person = new ContentValues();
 			person.put(Contacts.People.NAME, info.get(0));
