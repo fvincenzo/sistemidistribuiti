@@ -1440,6 +1440,9 @@
   <JavaProfile_1:JavaProfile__MultidimensionalArray xmi:id="_lLb9ESlsEd2mp-fq4LRO5A" dimension="1"/>
   <JavaProfile_1:JavaProfile__MultidimensionalArray xmi:id="_679DESlsEd2mp-fq4LRO5A" dimension="1"/>
   <JavaProfile_1:JavaProfile__MultidimensionalArray xmi:id="_rYSrciltEd2mp-fq4LRO5A" dimension="1"/>
+  <JavaProfile_1:JavaProfile__MultidimensionalArray xmi:id="_H35foiluEd2mp-fq4LRO5A" dimension="1"/>
+  <JavaProfile_1:JavaProfile__MultidimensionalArray xmi:id="_tdoqgClxEd2ceKIzw9CoRg" dimension="1"/>
+  <JavaProfile_1:JavaProfile__MultidimensionalArray xmi:id="_uPjPoilxEd2ceKIzw9CoRg" base_Parameter="_uPjPoClxEd2ceKIzw9CoRg" dimension="1"/>
   <Omondo_1:Omondo__Import xmi:id="_6W8ocI9kEdyYl60b6Tg7lw" base_Usage="_6Wf8gI9kEdyYl60b6Tg7lw"/>
   <JavaProfile_1:JavaProfile__AutoDetected xmi:id="_6XPjYI9kEdyYl60b6Tg7lw" base_Element="_6Wf8gI9kEdyYl60b6Tg7lw"/>
   <Omondo_1:Omondo__Access xmi:id="_GejTcI9lEdyYl60b6Tg7lw" base_Usage="_GeGngY9lEdyYl60b6Tg7lw"/>
@@ -1559,7 +1562,4 @@
   <JavaProfile_1:JavaProfile__AutoDetected xmi:id="_6e63ISjPEd2tx4zxYZ_iCg" base_Element="_6eUaMCjPEd2tx4zxYZ_iCg"/>
   <Omondo_1:Omondo__Import xmi:id="_fWrPwCjVEd2tx4zxYZ_iCg" base_Usage="_fV7o4CjVEd2tx4zxYZ_iCg"/>
   <JavaProfile_1:JavaProfile__AutoDetected xmi:id="_fWrPwSjVEd2tx4zxYZ_iCg" base_Element="_fV7o4CjVEd2tx4zxYZ_iCg"/>
-  <JavaProfile_1:JavaProfile__MultidimensionalArray xmi:id="_H35foiluEd2mp-fq4LRO5A" dimension="1"/>
-  <JavaProfile_1:JavaProfile__MultidimensionalArray xmi:id="_tdoqgClxEd2ceKIzw9CoRg" dimension="1"/>
-  <JavaProfile_1:JavaProfile__MultidimensionalArray xmi:id="_uPjPoilxEd2ceKIzw9CoRg" base_Parameter="_uPjPoClxEd2ceKIzw9CoRg" dimension="1"/>
 </xmi:XMI>
