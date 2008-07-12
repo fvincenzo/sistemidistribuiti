@@ -147,6 +147,7 @@ public class Adminshell {
 		        
 		        else {
 		        	
+		        	if(str.isEmpty()) str = "empty";
 		        	System.out.println(rs.exec(str));
 		        	
 		        }
