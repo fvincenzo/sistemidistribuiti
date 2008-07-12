@@ -94,7 +94,7 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	 */
 	public String add(String a, String ip, String Info) throws RemoteException {
 		
-		n.addChild(a, a, ip, n, Info);
+		n.addChild(a, n.getHostID()+"."+a, ip, n, Info);
 		System.out.println("Registered:"+n.getHostID()+"."+a);
 		
 		//Mi connetto a mio padre per aggiornarlo

@@ -143,7 +143,8 @@ public class Node implements Serializable{
  	}
 
  	public String getHostID() {
- 	
+ 		
+ 		System.out.println("Nome host:"+nc.getID());
  		return nc.getID();
  		
  	}
