@@ -25,6 +25,8 @@ public class CyclicChecks extends Thread {
 	public void setNormal(){
 		status = NORMAL;
 	}
+	
+	//TODO: Controllare se un amico ha cambiato i propri dati
 	@Override
 	public void run(){
 		while (run){

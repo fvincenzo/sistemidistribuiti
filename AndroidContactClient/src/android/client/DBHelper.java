@@ -61,6 +61,7 @@ public class DBHelper {
 	}
 
 	public void deleteRow(Location l) {
+		Log.i(LOGGER, "Sto per cancellare: "+l.latitude+" e "+l.longitude);
 		db.delete(DATABASE_TABLE, "latitude=" + l.latitude+" AND longitude="+l.longitude+" AND preferred ='"+l.preferred+"'", null);
 	}
 
