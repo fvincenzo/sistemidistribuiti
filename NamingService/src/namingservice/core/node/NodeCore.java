@@ -23,7 +23,7 @@ public class NodeCore implements Serializable{
 	 */
 	public NodeCore(String ID, String IP) {
 		
-		System.out.println("Il nome è:"+ID);
+//		System.out.println("Il nome è:"+ID);
 		this.HostID = ID;
 		this.HostIP = IP;
 		

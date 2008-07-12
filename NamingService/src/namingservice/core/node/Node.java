@@ -43,7 +43,7 @@ public class Node implements Serializable{
  		this.nodeInfo = Info;
  		this.nc = new NodeCore(host,ip);
  		
- 		System.out.println("Node name:"+host);
+// 		System.out.println("Node name:"+host);
  		
  	}
  	
@@ -144,7 +144,7 @@ public class Node implements Serializable{
 
  	public String getHostID() {
  		
- 		System.out.println("Nome host:"+nc.getID());
+// 		System.out.println("Nome host:"+nc.getID());
  		return nc.getID();
  		
  	}

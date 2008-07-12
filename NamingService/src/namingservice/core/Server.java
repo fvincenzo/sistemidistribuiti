@@ -62,6 +62,8 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	 */
 	public String find(String Name) throws RemoteException {
 		
+		System.out.println("Server.find():"+n.findChild(Name));
+		
 		if(n.findChild(Name)==true) {
 			
 			return n.getChild(Name).getHostIP()+" "+n.getChild(Name).getHostID();
