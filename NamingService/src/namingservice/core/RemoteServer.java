@@ -6,6 +6,12 @@ import java.util.Vector;
 
 import namingservice.core.node.Node;
 
+/**
+ * Interfaccia RemoteServer è un'interfaccia remota che si occupa di esportare i metodi utilizzati dal servizio di naming
+ * 
+ * @author Nicolas Tagliani e Vincenzo Frascino
+ *
+ */
 public interface RemoteServer extends Remote {
 	
 	//public String sum(String a, String b) throws RemoteException;

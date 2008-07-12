@@ -9,10 +9,17 @@ import java.util.Vector;
 import namingservice.core.node.Node;
 import namingservice.core.node.NodeManager;
 
+/**
+ * Classe Server rappresenta il servizio di naming vero e proprio estende la classe UnicastRemoteObject per poter utilizzare RMI ed implementa l'interfaccia remota RemoteException
+ * 
+ * @author Nicolas Tagliani e Vincenzo Frascino
+ *
+ */
 public class Server extends UnicastRemoteObject implements RemoteServer {
 	
 	private Node n;
 	private NodeManager nm;
+	
 	
 	public Server(String n, String ip, String Info,Node father) throws RemoteException {
 		

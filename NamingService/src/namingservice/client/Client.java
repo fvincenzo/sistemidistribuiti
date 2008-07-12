@@ -12,10 +12,18 @@ import namingservice.core.NSClient;
 import namingservice.core.NSServer;
 import namingservice.core.RemoteServer;
 
+/**
+ * Classe Client usata per connettersi al servizio di naming
+ * 
+ * @author Nicolas Tagliani e Vincenzo Frascino
+ *
+ */
 public class Client {
 
 	/**
-	 * @param args
+	 * Metodo Main
+	 * 
+	 * @param args serve a passare i parametri da shell(inutilizzato al momento)
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

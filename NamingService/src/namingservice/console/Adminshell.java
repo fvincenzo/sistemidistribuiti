@@ -10,7 +10,12 @@ import namingservice.core.NSClient;
 import namingservice.core.NSServer;
 import namingservice.core.RemoteServer;
 
-
+/**
+ * Classe Admin Serve a fare il bootstrap della rete
+ * 
+ * @author Nicolas Tagliani e Vincenzo Frascino
+ *
+ */
 public class Adminshell {
 
 	
@@ -20,7 +25,9 @@ public class Adminshell {
 	private static RemoteServer rs;
 	
 	/**
-	 * @param args
+	 * Metodo Main
+	 * 
+	 * @param args serve a passare i parametri da shell(inutilizzato al momento)
 	 */
 	public static void main(String[] args) {
 		
