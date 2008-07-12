@@ -142,6 +142,23 @@ public class Client {
 			 
 			        }
 			        
+			        if(str.compareTo("sum")==0) {
+			        	if (conn == 1) {
+			        		
+			        		String a = i.readLine();
+			        		String b = i.readLine();
+			        		a = rs.sum(a, b);
+			        		
+			        		System.out.println("La somma è:"+a);
+			        	
+			        	} else {
+			        		
+			        		System.out.println("Connect Before");
+			        		continue;
+			        	}
+			 
+			        }
+			        
 			        else {
 			        	
 			        	System.out.println(rs.exec(str));
