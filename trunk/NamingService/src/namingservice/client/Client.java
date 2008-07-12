@@ -145,8 +145,8 @@ public class Client {
 			        if(str.compareTo("sum")==0) {
 			        	if (conn == 1) {
 			        		
-			        		String a = i.readLine();
-			        		String b = i.readLine();
+			        		String a = in.readLine();
+			        		String b = in.readLine();
 			        		a = rs.sum(a, b);
 			        		System.out.println("La somma è:"+a);
 			        	
