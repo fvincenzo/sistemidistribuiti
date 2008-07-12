@@ -313,6 +313,7 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	 */
 	public String sum(String a, String b) throws RemoteException {
 		
+		System.out.println("Server.sum():"+a+" "+b);
 		int c = Integer.parseInt(a);
 		int d = Integer.parseInt(b);
 		int somma = c+d;
