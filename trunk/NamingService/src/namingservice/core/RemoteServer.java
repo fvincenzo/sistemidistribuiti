@@ -14,7 +14,7 @@ import namingservice.core.node.Node;
  */
 public interface RemoteServer extends Remote {
 	
-	//public String sum(String a, String b) throws RemoteException;
+	public String sum(String a, String b) throws RemoteException;
 	public String add(String a, String ip, String Info) throws RemoteException;
 	public Vector<String> getlist() throws RemoteException;
 	public String request(String Name) throws RemoteException;

@@ -20,7 +20,15 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	private Node n;
 	private NodeManager nm;
 	
-	
+	/**
+	 * Costruttore Server si occupa di inizializzare i paramtri del servizio
+	 * 
+	 * @param n il nome del server
+	 * @param ip l'ip del server
+	 * @param Info le informazioni sul server
+	 * @param father riferimento al nodo padre
+	 * @throws RemoteException dovuta ad eventuali fallimenti o errori del server RMI in fase di registrazione del servizio
+	 */
 	public Server(String n, String ip, String Info,Node father) throws RemoteException {
 		
 		this.n = new Node("/", n, ip, father, Info);
@@ -28,18 +36,30 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		
 	}
 	
+	/**
+	 * Metodo getReference consente di ottenere un riferimento al nodo
+	 */
 	public Node getReference() throws RemoteException {
 		
 		return n;
 		
 	}
 	
+	/**
+	 * Metodo Info consente di ottenere le informazioni sul nodo
+	 */
 	public String Info() throws RemoteException {
 		
 		return n.getHostIP();
 		
 	}
 	
+	/**
+	 * Metodo find consente la ricerca di un nome sul database locale se la richiesta non ha esito positivo viene propagata al padre fino ad arrivare a root. Se il nodo root non riesce a dare una risposta viene tornato il messaggio host non trovato
+	 *
+	 * @param Name indica il nome dell'host da cercare
+	 * @return una stringa contenente l'ip
+	 */
 	public String find(String Name) throws RemoteException {
 		
 		if(n.findChild(Name)==true) {
@@ -63,6 +83,15 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		
 	}
 	
+	/**
+	 * Metodo add consente di registrare un host sul proprio naming service
+	 * 
+	 * @param a nome dell'host da regitrare
+	 * @param ip ip dell'host da regitrare
+	 * @param Info informazioni dell'host da registrare
+	 * 
+	 * @return una stringa contenente il nome completo dell'host
+	 */
 	public String add(String a, String ip, String Info) throws RemoteException {
 		
 		n.addChild(a, a, ip, n, Info);
@@ -94,6 +123,11 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		
 	}
 	
+	/**
+	 * Metodo getlist consente di ottenere una lista dehli host registrati sul proprio servizio
+	 *
+	 * @return un vettore contenete i nomi degli host
+	 */
 	public Vector<String> getlist() throws RemoteException {
 		
 		return n.listChild();
@@ -106,6 +140,14 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		
 	}
 	
+	/**
+	 * Metodo synch viene utilizzato quando una modifica viene fatta ad un livello x della rete per propagarla ricorsivamente fino alla root
+	 *
+	 * @param ServerName nome del server che ha ricevuto modifica
+	 * @param root database del nodo che ha ricevuto la modifica
+	 * 
+	 * @return risultato della propagazione della modifica true se è andata a buon fine
+	 */
 	public boolean synch(String ServerName, Node root)throws RemoteException {
 		
 		//Aggiorno me stesso
@@ -178,6 +220,12 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		
 	}
 	
+	/**
+	 * Metodo updateNode serve a modificare il database di un nodo
+	 * 
+	 * @param ServerName nome del server che ha ricevuto modifica
+	 * @param root database del nodo che ha ricevuto la modifica
+	 */
 	public void updateNode(String ServerName, Node root)throws RemoteException {
 		
 		String url = ServerName;
@@ -196,6 +244,11 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		
 	}
 	
+	/**
+	 * Metodo request fornisce nomehost ed indirizzo di un determinato host
+	 * 
+	 * @param Name nome dell'host
+	 */
 	public String request(String Name) throws RemoteException {
 		
 		Vector<String> pars = new Vector<String>(); 
@@ -247,7 +300,16 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		return hname+" "+haddr+":1099";	
 	}
 	
-	/*public String sum(String a, String b) throws RemoteException {
+	
+	/**
+	 * Metodo sum servizio generico messo a disposione dall'host come esempio di utilizzo
+	 * 
+	 * @param a primo parametro
+	 * @param b secondo parametro
+	 * @return la somma
+	 * @throws RemoteException eccezione sollevata da RMI
+	 */
+	public String sum(String a, String b) throws RemoteException {
 		
 		int c = Integer.parseInt(a);
 		int d = Integer.parseInt(b);
@@ -255,6 +317,6 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		
 		return String.valueOf(somma);
 		
-	}*/
+	}
 
 }
