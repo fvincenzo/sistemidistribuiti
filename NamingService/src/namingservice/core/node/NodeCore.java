@@ -18,8 +18,8 @@ public class NodeCore implements Serializable{
 	/**
 	 * Cotruttore si occupa di settere i parametri ID ed IP che non possono essere più cambiati
 	 * 
-	 * @param ID
-	 * @param IP
+	 * @param ID identificatore dell'host
+	 * @param IP ip dell'host
 	 */
 	public NodeCore(String ID, String IP) {
 		
