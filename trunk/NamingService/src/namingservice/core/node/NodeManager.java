@@ -3,10 +3,20 @@ package namingservice.core.node;
 import java.util.Iterator;
 import java.util.Vector;
 
+/**
+ * Classe NodeManager costituisce il sistema di gestione del database interno di un Host rappresenta un nodo della rete
+ * 
+ * @author Nicolas Tagliani e Vincenzo Frascino
+ *
+ */
 public class NodeManager {
 	
 	private Node n;
 	
+	/**
+	 * Costruttore NodeManager 
+	 * @param n nodo da gestire
+	 */
 	public NodeManager(Node n) {
 		
 		this.n = n;
@@ -14,6 +24,11 @@ public class NodeManager {
 	}
 		
 	
+	/**
+	 * Metodo exec serve ad invocare i comandi sul database di un host
+	 * @param command comando da invocare
+	 * @return risultato invocazione
+	 */
 	public String exec(String command) {
 		
 		String com = " ";

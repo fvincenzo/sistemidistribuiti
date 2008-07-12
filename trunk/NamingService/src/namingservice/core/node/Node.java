@@ -4,6 +4,13 @@ import java.util.Hashtable;
 import java.util.Vector;
 import java.io.Serializable;
 
+/**
+ * Classe Node costituisce l'elemento minimo del database interno di un Host rappresenta un nodo della rete
+ * implementa l'interfaccia Serializzable per poter essere usata come parametro di una funzione che sfrutta RMI.
+ * 
+ * @author Nicolas Tagliani e Vincenzo Frascino
+ *
+ */
 public class Node implements Serializable{
 	
 	private Hashtable<String,Node> children;
@@ -16,6 +23,15 @@ public class Node implements Serializable{
  	//NodeCore information
  	private NodeCore nc;
  	
+ 	/**
+ 	 * Costruttore Node si occupa di inizializzare il nodo
+ 	 * 
+ 	 * @param name nome del nodo
+ 	 * @param host nome completo del nodo
+ 	 * @param ip ip del nodo
+ 	 * @param father riferimento del padre
+ 	 * @param Info informazioni sul nodo
+ 	 */
  	public Node(String name, String host, String ip, Node father, String Info) {
  		
  		super();
@@ -30,6 +46,8 @@ public class Node implements Serializable{
  		System.out.println("Node name:"+host);
  		
  	}
+ 	
+ 	//Funzioni di utilità del singolo nodo: setter, getter, ecc
  	
  	public String getName() {
  		
