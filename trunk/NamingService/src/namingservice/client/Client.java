@@ -148,7 +148,6 @@ public class Client {
 			        		String a = i.readLine();
 			        		String b = i.readLine();
 			        		a = rs.sum(a, b);
-			        		
 			        		System.out.println("La somma è:"+a);
 			        	
 			        	} else {
