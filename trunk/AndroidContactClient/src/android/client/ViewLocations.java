@@ -31,7 +31,6 @@ public class ViewLocations extends ListActivity implements OnClickListener {
 	
 	@Override
 	protected void onCreate(Bundle icicle) {
-		// TODO Auto-generated method stub
 		
 	
 		super.onCreate(icicle);
@@ -54,7 +53,7 @@ public class ViewLocations extends ListActivity implements OnClickListener {
 		MyView m = (MyView)((Button)arg0).getParent();
 		m.delete();
 		setListAdapter(new MyListAdapter(this, this));
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -84,7 +83,7 @@ public class ViewLocations extends ListActivity implements OnClickListener {
 		}
 
 		public long getItemId(int position) {
-			// TODO Auto-generated method stub
+			
 			return 0;
 		}
 

@@ -25,7 +25,6 @@ interface ServiceInterface {
 	void stop();
 	boolean isRunning();
 	boolean insertContact(String friend);
-	boolean modifyContact(String friend);
 	boolean setMobile(String contact);
 	boolean setWork(String contact);
 	boolean setHome(String contact);
