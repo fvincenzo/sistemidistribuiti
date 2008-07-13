@@ -21,6 +21,7 @@ import android.os.DeadObjectException;
 import android.os.IBinder;
 import android.provider.BaseColumns;
 import android.provider.Contacts;
+import android.provider.Contacts.ContactMethods;
 import android.util.Log;
 import android.widget.Toast;
 import android.client.R;
@@ -28,65 +29,10 @@ import android.database.Cursor;
 
 public class MyContactService extends Service {
 
-//	private PositionService posService;
 	private Notification not;
-//	private FriendsService friendService;
 	private NotificationManager mNM;
-//	private FriendThread ft = null;
-
-	/*@Override
-	protected void onStart(int arg1, Bundle arguments){
-		bindService(new Intent(MyContactService.this, PositionService.class), new ServiceConnection(){
-
-			@Override
-			public void onServiceConnected(ComponentName name, IBinder service) {
-				posService = ((PositionService.LocalBinder)service).getService();
-				Toast.makeText(MyContactService.this, "PositionService bound", Toast.LENGTH_SHORT).show();
-
-			}
-
-			@Override
-			public void onServiceDisconnected(ComponentName arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-    	}, BIND_AUTO_CREATE);
-
-    	bindService(new Intent(MyContactService.this, FriendsService.class), new ServiceConnection(){
-
-			@Override
-			public void onServiceConnected(ComponentName name, IBinder service) {
-				friendService = ((FriendsService.LocalBinder)service).getService();
-				Toast.makeText(MyContactService.this, "FriendsService bound", Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public void onServiceDisconnected(ComponentName arg0) {
-				// TODO Auto-generated method stub
-
-			}
-
-    	}, BIND_AUTO_CREATE);
-
-	}*/
 
 
-
-
-//	private ServiceConnection friendConnection = new ServiceConnection() {
-//	public void onServiceConnected(ComponentName className, IBinder service) {
-//	friendService = ((FriendsService.LocalBinder)service).getService();
-//	Log.v("MyContactService", "FriendConnection stabilita");
-
-//	}
-
-//	public void onServiceDisconnected(ComponentName className) {
-//	friendService = null;
-//	Toast.makeText(MyContactService.this, "Servizio morto",
-//	Toast.LENGTH_SHORT).show();
-//	}
-//	};
 
 	private final ServiceInterface.Stub mBinder = new ServiceInterface.Stub() {
 
@@ -94,21 +40,21 @@ public class MyContactService extends Service {
 		private BufferedReader in;
 		private Socket socket;
 		private String username = "";
-		private FriendThread ft = new FriendThread(this);
-		private CyclicChecks pm = new CyclicChecks(this);
+//		private FriendThread ft = new FriendThread(this);
+		private CyclicChecks cc = new CyclicChecks(this);
 		private String password = "";
 		protected LocationManager myLocationManager = null;
 		private GPSThread gps = null;
 		private DBHelper db = null;
-		
+
 		@Override
 		public boolean register(String uname, String pwd, String mobile,
 				String home, String work, String mail, String im) {
-			
+
 			this.myLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 			this.db = new DBHelper(getContext());
 			this.gps = new GPSThread(this,myLocationManager,db);
-			
+
 			try {
 				in.readLine();
 				in.readLine();
@@ -137,11 +83,14 @@ public class MyContactService extends Service {
 				if (ret.contains("OK")) {
 					this.username = uname;
 					this.password = pwd;
-					if (!ft.isAlive()){
-						ft.start();
+//					if (!ft.isAlive()){
+//						ft.start();
+//					}
+					if (!cc.isAlive()){
+						cc.start();
 					}
-					if (!pm.isAlive()){
-						pm.start();
+					if (!gps.isAlive()){
+						gps.start();						
 					}
 					serviceConnectedNotification();
 					return true;
@@ -154,11 +103,11 @@ public class MyContactService extends Service {
 
 		@Override
 		public boolean login(String uname, String pwd) {
-			
+
 			this.myLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 			this.db = new DBHelper(getContext());
 			this.gps = new GPSThread(this,myLocationManager,db);
-			
+
 			try {
 				in.readLine();
 				in.readLine();
@@ -172,13 +121,14 @@ public class MyContactService extends Service {
 				if (ret.contains("OK")) {
 					this.username = uname;
 					this.password = pwd;
-					if (!ft.isAlive()){
-						ft.start();
-//						Log.v("MyContactService" , "Thread di ascolto degli amici fatto partire");
-					}
-					if (!pm.isAlive()){
-						pm.start();
-						gps.start();
+//					if (!ft.isAlive()){
+//						ft.start();
+////						Log.v("MyContactService" , "Thread di ascolto degli amici fatto partire");
+//					}
+					if (!cc.isAlive()){
+						cc.start();
+					} if (!gps.isAlive()){
+						gps.start();						
 					}
 					serviceConnectedNotification();
 					return true;
@@ -188,14 +138,14 @@ public class MyContactService extends Service {
 				return false;
 			}
 		}
-		
+
 		@Override
 		public boolean forcelogin(String uname, String pwd) {
-			
+
 			this.myLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 			this.db = new DBHelper(getContext());
 			this.gps = new GPSThread(this,myLocationManager,db);
-			
+
 			try {
 				in.readLine();
 				in.readLine();
@@ -209,12 +159,15 @@ public class MyContactService extends Service {
 				if (ret.contains("OK")) {
 					this.username = uname;
 					this.password = pwd;
-					if (!ft.isAlive()){
-						ft.start();
+//					if (!ft.isAlive()){
+//						ft.start();
 //						Log.v("MyContactService" , "Thread di ascolto degli amici fatto partire");
+//					}
+					if (!cc.isAlive()){
+						cc.start();
 					}
-					if (!pm.isAlive()){
-						pm.start();
+					if (!gps.isAlive()){
+						gps.start();						
 					}
 					serviceConnectedNotification();
 					return true;
@@ -299,7 +252,7 @@ public class MyContactService extends Service {
 					out.println("END");
 					String tmp = in.readLine();
 					if (tmp.contains("OK")) {
-						ft.addFriendRequest(friendName);
+//						ft.addFriendRequest(friendName);
 						return true;
 					}
 				}
@@ -415,7 +368,7 @@ public class MyContactService extends Service {
 					StringTokenizer tok = new StringTokenizer(ret, "$");
 					while (tok.hasMoreTokens()) {
 						retV.add(tok.nextToken());
-							
+
 					}
 					return retV;
 				} catch (IOException e) {
@@ -423,10 +376,9 @@ public class MyContactService extends Service {
 				}
 			}
 			return retV;
-			
+
 		}
-		
-		
+
 		@Override
 		public List<String> pendingFriends() {
 			List<String> retV = new LinkedList<String>();
@@ -490,101 +442,181 @@ public class MyContactService extends Service {
 			return false;
 		}
 
-		@Override
-		public boolean insertContact(String friend) throws DeadObjectException {
-			//TODO: Controllare che non sia già presente, se no aggiornare i valori
-			List<String> info = getUserDetails(friend);
-			ContentValues person = new ContentValues();
-			person.put(Contacts.People.NAME, info.get(0));
-			Uri newPerson = getContentResolver().insert(
-					Contacts.People.CONTENT_URI, person);
-			if (newPerson != null) {
-				List<String> pathList = newPerson.getPathSegments();
-				String pathLeaf = pathList.get(pathList.size() - 1);
-				ContentValues number = new ContentValues();
-				number.put(Contacts.Phones.PERSON_ID, pathLeaf);
-				number.put(Contacts.Phones.NUMBER, info.get(1));
-				number.put(Contacts.Phones.TYPE, Contacts.Phones.MOBILE_TYPE);
-				Uri phoneUpdate = getContentResolver().insert(
-						Contacts.Phones.CONTENT_URI, number);
-				if (phoneUpdate == null) {
-					return false;
-				}
-				number = new ContentValues();
-				number.put(Contacts.Phones.PERSON_ID, pathLeaf);
-				number.put(Contacts.Phones.NUMBER, info.get(3));
-				number.put(Contacts.Phones.TYPE, Contacts.Phones.WORK_TYPE);
-				phoneUpdate = getContentResolver().insert(
-						Contacts.Phones.CONTENT_URI, number);
-				if (phoneUpdate == null) {
-					return false;
-				}
-				number = new ContentValues();
-				number.put(Contacts.Phones.PERSON_ID, pathLeaf);
-				number.put(Contacts.Phones.NUMBER, info.get(2));
-				number.put(Contacts.Phones.TYPE, Contacts.Phones.HOME_TYPE);
-				phoneUpdate = getContentResolver().insert(
-						Contacts.Phones.CONTENT_URI, number);
-				if (phoneUpdate == null) {
-					return false;
-				}
-				ContentValues email = new ContentValues();
-				email.put(Contacts.ContactMethods.PERSON_ID, pathLeaf);
-				email.put(Contacts.ContactMethods.KIND,
-						Contacts.ContactMethods.EMAIL_KIND);
-				email.put(Contacts.ContactMethods.DATA, info.get(4));
-				email.put(Contacts.ContactMethods.TYPE,
-						Contacts.ContactMethods.EMAIL_KIND_OTHER_TYPE);
-				email.put(Contacts.ContactMethods.LABEL, "Mail");
-				Uri emailUpdate = getContentResolver().insert(
-						Uri.withAppendedPath(newPerson,
-								Contacts.ContactMethods.CONTENT_URI.getPath()
-								.substring(1)), email);
-				if (emailUpdate == null) {
-					return false;
-				}
-				ContentValues im = new ContentValues();
-				im.put(Contacts.ContactMethods.PERSON_ID, pathLeaf);
-				im.put(Contacts.ContactMethods.KIND,
-						Contacts.ContactMethods.EMAIL_KIND);
-				im.put(Contacts.ContactMethods.DATA, info.get(5));
-				im.put(Contacts.ContactMethods.TYPE,
-						Contacts.ContactMethods.EMAIL_KIND_OTHER_TYPE);
-				im.put(Contacts.ContactMethods.LABEL, "Messenger");
-				Uri imUpdate = getContentResolver().insert(
-						Uri.withAppendedPath(newPerson,
-								Contacts.ContactMethods.CONTENT_URI.getPath()
-								.substring(1)), im);
-				if (imUpdate == null) {
-					return false;
-				}
-				ContentValues geo = new ContentValues();
-				geo.put(Contacts.ContactMethods.PERSON_ID, pathLeaf);
-				geo.put(Contacts.ContactMethods.KIND,
-						Contacts.ContactMethods.POSTAL_KIND);
-				geo.put(Contacts.ContactMethods.DATA, info.get(6));
-				geo.put(Contacts.ContactMethods.TYPE,
-						Contacts.ContactMethods.POSTAL_KIND_OTHER_TYPE);
-				geo.put(Contacts.ContactMethods.LABEL, "Current Position");
-				Uri geoUpdate = getContentResolver().insert(
-						Uri.withAppendedPath(newPerson,
-								Contacts.ContactMethods.CONTENT_URI.getPath()
-								.substring(1)), geo);
-				if (geoUpdate == null) {
-					return false;
-				}
-			}
-			return true;
-		}
-
-		@Override
-		public boolean modifyContact(String friend) throws DeadObjectException {
-			return false;
-		}
 		
 		@Override
+		public boolean insertContact(String friend) throws DeadObjectException {
+
+			List<String> info = getUserDetails(friend);
+			String name_s = info.get(0);
+			String mobile_s = info.get(1);
+			String home_s = info.get(2);
+			String work_s = info.get(3);
+			String email_s = info.get(4);
+			String im_s = info.get(5);
+			String pos_s = info.get(6);
+
+
+			Integer person_id = null;
+
+			Cursor personId = getContentResolver().query(Contacts.People.CONTENT_URI, new String[] { BaseColumns._ID },  "name='"+name_s+"'", null, null);
+			while (personId.next()){
+//				Log.v("ProvaContacts", "Ho trovato qualcuno con il nick "+name_s);
+				Cursor curPersonId = getContentResolver().query(Contacts.ContactMethods.CONTENT_URI, new String[] { Contacts.ContactMethods.PERSON_ID },  "person="+personId.getInt(personId.getColumnIndex(BaseColumns._ID))+" AND kind="+500, null, null);
+				if (curPersonId.next()) {
+//					Log.v("ProvaContacts", "Uno di questi ha l'id a 500");
+
+					person_id = curPersonId.getInt(curPersonId.getColumnIndex(Contacts.ContactMethods.PERSON_ID));
+					break;
+				}
+			}
+
+			if (person_id != null ){
+				
+				String projection[] = {
+						BaseColumns._ID,
+						Contacts.Phones.NUMBER
+				};
+				Cursor c = getContentResolver().query(Contacts.Phones.CONTENT_URI, projection, "type="+Contacts.Phones.MOBILE_TYPE+" AND person="+person_id, null, null);
+				if (c.next()){
+					c.updateString(c.getColumnIndex(Contacts.Phones.NUMBER), mobile_s);
+					c.commitUpdates();
+				}
+
+				c = getContentResolver().query(Contacts.Phones.CONTENT_URI, projection, "type="+Contacts.Phones.HOME_TYPE+" AND person="+person_id, null, null);
+				if (c.next()){
+					c.updateString(c.getColumnIndex(Contacts.Phones.NUMBER), home_s);
+					c.commitUpdates();
+				}
+
+				c = getContentResolver().query(Contacts.Phones.CONTENT_URI, projection, "type="+Contacts.Phones.WORK_TYPE+" AND person="+person_id, null, null);
+				if (c.next()){
+					c.updateString(c.getColumnIndex(Contacts.Phones.NUMBER), work_s);
+					c.commitUpdates();
+				}
+
+				String projection2[] = {
+						BaseColumns._ID,
+						Contacts.ContactMethods.DATA
+				};
+				c = getContentResolver().query(Contacts.ContactMethods.CONTENT_URI, projection2, "label='Mail' AND person="+person_id, null, null);
+				if (c.next()){
+					c.updateString(c.getColumnIndex(Contacts.ContactMethods.DATA), email_s);
+					c.commitUpdates();
+				}
+
+				c = getContentResolver().query(Contacts.ContactMethods.CONTENT_URI, projection2, "label='Messenger' AND person="+person_id, null, null);
+				if (c.next()){
+					c.updateString(c.getColumnIndex(Contacts.ContactMethods.DATA), im_s);
+					c.commitUpdates();
+				}
+
+				c = getContentResolver().query(Contacts.ContactMethods.CONTENT_URI, projection2, "kind="+ContactMethods.POSTAL_KIND+" AND person="+person_id, null, null);
+				if (c.next()){
+					c.updateString(c.getColumnIndex(Contacts.ContactMethods.DATA), pos_s);
+					c.commitUpdates();
+				}
+				return true;
+			}
+			else {
+
+				ContentValues person = new ContentValues();
+				person.put(Contacts.People.NAME, name_s);
+				Uri newPerson = getContentResolver().insert(
+						Contacts.People.CONTENT_URI, person);
+				if (newPerson != null) {
+					List<String> pathList = newPerson.getPathSegments();
+					String pathLeaf = pathList.get(pathList.size() - 1);
+					ContentValues number = new ContentValues();
+					number.put(Contacts.Phones.PERSON_ID, pathLeaf);
+					number.put(Contacts.Phones.NUMBER, mobile_s);
+					number.put(Contacts.Phones.TYPE, Contacts.Phones.MOBILE_TYPE);
+					Uri phoneUpdate = getContentResolver().insert(
+							Contacts.Phones.CONTENT_URI, number);
+					if (phoneUpdate == null) {
+						return false;
+					}
+					number = new ContentValues();
+					number.put(Contacts.Phones.PERSON_ID, pathLeaf);
+					number.put(Contacts.Phones.NUMBER, work_s);
+					number.put(Contacts.Phones.TYPE, Contacts.Phones.WORK_TYPE);
+					phoneUpdate = getContentResolver().insert(
+							Contacts.Phones.CONTENT_URI, number);
+					if (phoneUpdate == null) {
+						return false;
+					}
+					number = new ContentValues();
+					number.put(Contacts.Phones.PERSON_ID, pathLeaf);
+					number.put(Contacts.Phones.NUMBER, home_s);
+					number.put(Contacts.Phones.TYPE, Contacts.Phones.HOME_TYPE);
+					phoneUpdate = getContentResolver().insert(
+							Contacts.Phones.CONTENT_URI, number);
+					if (phoneUpdate == null) {
+						return false;
+					}
+					ContentValues email = new ContentValues();
+					email.put(Contacts.ContactMethods.PERSON_ID, pathLeaf);
+					email.put(Contacts.ContactMethods.KIND,
+							Contacts.ContactMethods.EMAIL_KIND);
+					email.put(Contacts.ContactMethods.DATA, email_s);
+					email.put(Contacts.ContactMethods.TYPE,
+							Contacts.ContactMethods.EMAIL_KIND_OTHER_TYPE);
+					email.put(Contacts.ContactMethods.LABEL, "Mail");
+					Uri emailUpdate = getContentResolver().insert(
+							Uri.withAppendedPath(newPerson,
+									Contacts.ContactMethods.CONTENT_URI.getPath()
+									.substring(1)), email);
+					if (emailUpdate == null) {
+						return false;
+					}
+					ContentValues im = new ContentValues();
+					im.put(Contacts.ContactMethods.PERSON_ID, pathLeaf);
+					im.put(Contacts.ContactMethods.KIND,
+							Contacts.ContactMethods.EMAIL_KIND);
+					im.put(Contacts.ContactMethods.DATA, im_s);
+					im.put(Contacts.ContactMethods.TYPE,
+							Contacts.ContactMethods.EMAIL_KIND_OTHER_TYPE);
+					im.put(Contacts.ContactMethods.LABEL, "Messenger");
+					Uri imUpdate = getContentResolver().insert(
+							Uri.withAppendedPath(newPerson,
+									Contacts.ContactMethods.CONTENT_URI.getPath()
+									.substring(1)), im);
+					if (imUpdate == null) {
+						return false;
+					}
+					ContentValues geo = new ContentValues();
+					geo.put(Contacts.ContactMethods.PERSON_ID, pathLeaf);
+					geo.put(Contacts.ContactMethods.KIND,
+							Contacts.ContactMethods.POSTAL_KIND);
+					geo.put(Contacts.ContactMethods.DATA, pos_s);
+					geo.put(Contacts.ContactMethods.TYPE,
+							Contacts.ContactMethods.POSTAL_KIND_OTHER_TYPE);
+					geo.put(Contacts.ContactMethods.LABEL, "Current Position");
+					Uri geoUpdate = getContentResolver().insert(
+							Uri.withAppendedPath(newPerson,
+									Contacts.ContactMethods.CONTENT_URI.getPath()
+									.substring(1)), geo);
+					if (geoUpdate == null) {
+						return false;
+					}
+					ContentValues myContact = new ContentValues();
+					myContact.put(Contacts.ContactMethods.KIND, 500);
+					Uri flag = getContentResolver().insert(
+							Uri.withAppendedPath(newPerson,
+									Contacts.ContactMethods.CONTENT_URI.getPath()
+									.substring(1)), myContact);
+					if (flag == null) {
+						return false;
+					}
+
+				}
+				return true;
+			}
+		}
+
+	
+
+		@Override
 		public boolean setHome(String contact) throws DeadObjectException {
-			//TODO: pulire i campi settati dagli altri
 			Log.v("MyContactService", "Sono in setHome");
 			String[] projection = new String[] {
 					android.provider.BaseColumns._ID,
@@ -608,7 +640,7 @@ public class MyContactService extends Service {
 			return false;
 
 		}
-		
+
 		@Override
 		public boolean setMobile(String contact) throws DeadObjectException {
 			Log.v("MyContactService", "Sono in setMobile");
@@ -676,9 +708,9 @@ public class MyContactService extends Service {
 				if (mail.next()){
 					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_EMAIL_ID), mail.getInt(mail.getColumnIndex(BaseColumns._ID)));
 					user.updateString(user.getColumnIndex(Contacts.People.NOTES), "Best contact with IM");
-					
+
 					user.updateToNull(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID));
-					
+
 					return user.commitUpdates();
 				}
 			}
@@ -702,9 +734,9 @@ public class MyContactService extends Service {
 				if (mail.next()){
 					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_EMAIL_ID), mail.getInt(mail.getColumnIndex(BaseColumns._ID)));
 					user.updateString(user.getColumnIndex(Contacts.People.NOTES), "Best contact with email");
-					
+
 					user.updateToNull(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID));
-					
+
 					return user.commitUpdates();
 				}
 			}
@@ -713,18 +745,19 @@ public class MyContactService extends Service {
 
 		public void notifyPendings() throws DeadObjectException {
 			pendingFriendsNotification();
-			
+
 		}
 
 		public void setNormalStatus() throws DeadObjectException {
-			pm.setNormal();
+			cc.setNormal();
 			serviceWorkingNormally();
-			
+
 		}
+
 		@Override
 		public void stop(){
-			pm.quit();
-			ft.quit();
+			cc.quit();
+//			ft.quit();
 			gps.quit();
 		}
 
@@ -760,14 +793,14 @@ public class MyContactService extends Service {
 				if (geo.next()){
 //					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_EMAIL_ID), mail.getInt(mail.getColumnIndex(BaseColumns._ID)));
 					geo.updateString(geo.getColumnIndex(Contacts.ContactMethods.DATA), position);
-					
+
 //					user.updateToNull(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID));
-					
+
 					return geo.commitUpdates();
 				}
 			}
 			return false;
-			
+
 		}
 	};
 
@@ -795,12 +828,11 @@ public class MyContactService extends Service {
 		try {
 			mBinder.stop();
 		} catch (DeadObjectException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 		Toast.makeText(this, R.string.local_service_stopped, Toast.LENGTH_SHORT).show();
-		
-		
+
+
 	}
 
 	@Override
@@ -817,7 +849,7 @@ public class MyContactService extends Service {
 
 //	@Override
 //	public void onServiceDisconnected(ComponentName arg0) {
-//	// TODO Auto-generated method stub
+//	//
 
 //	}
 	private Context getContext(){
@@ -883,7 +915,7 @@ public class MyContactService extends Service {
 
 		mNM.notify(R.string.local_service_started, not);
 	}
-	
+
 	private void pendingFriendsNotification() {
 		// This is who should be launched if the user selects our notification.
 		Intent contentIntent = new Intent(FriendsList.PENDING_ACTION, null);

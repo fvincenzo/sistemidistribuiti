@@ -35,7 +35,7 @@ public class GPSThread extends Thread {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		
 		
 		double apos = 0;
 		double pos = 1000000; 
@@ -100,11 +100,9 @@ public class GPSThread extends Thread {
 				}
 
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			} catch (DeadObjectException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			} 
 
 		}

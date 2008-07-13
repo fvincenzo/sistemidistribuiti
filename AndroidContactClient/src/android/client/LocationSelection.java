@@ -4,6 +4,7 @@ package android.client;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.StringTokenizer;
 
 
 import org.xml.sax.SAXException;
@@ -11,6 +12,7 @@ import com.google.android.maps.Point;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
@@ -20,6 +22,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.util.Xml;
 import android.view.Menu;
 import android.view.View;
@@ -46,7 +49,7 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 	private final int CHOOSE = Menu.FIRST+1;
 	private final int VIEW_LOCATIONS = Menu.FIRST+2;
 	private final int CHOOSE_DEFAULT = Menu.FIRST+3;
-	
+
 	private MapView myMap = null;
 	private Button select;
 	private LinearLayout searchBar;
@@ -60,7 +63,7 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 	private String lastAddress;
 	@Override
 	protected void onCreate(Bundle icicle) {
-		// TODO Auto-generated method stub
+
 		super.onCreate(icicle);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.location_layout);
@@ -73,11 +76,11 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 		go.setOnClickListener(this);
 		select.setOnClickListener(this);
 		db = new DBHelper(this);
-		
+
 		myOverlayController = myMap.createOverlayController();
-        MyLocationOverlay myLocationOverlay = new MyLocationOverlay();
-        myOverlayController.add(myLocationOverlay, true); 
-		
+		MyLocationOverlay myLocationOverlay = new MyLocationOverlay();
+		myOverlayController.add(myLocationOverlay, true); 
+
 	}
 
 	public void onClick(View arg0) {
@@ -129,12 +132,12 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 		Point p = myMap.getMapCenter();
 		new LocationDialog(this, p, false).show();
 	}
-	
+
 	private void selectDefaultPosition(){
 		Point p = myMap.getMapCenter();
 		new LocationDialog(this, p, true).show();
 	}
-	
+
 
 	private void gotoAddress(String address){
 		try {
@@ -150,8 +153,7 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 		} catch (IOException e){
 
 		} catch (SAXException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 	}
 
@@ -220,25 +222,25 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 				db.setDefaultLocation("HOME");
 			}
 			else {
-			String res = "";
-			try {
-				Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
-				if (addr != null){
-					if (addr.length > 0){
-						res = addr[0].toString();
+				String res = "";
+				try {
+					Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
+					if (addr != null){
+						if (addr.length > 0){
+							res = addr[0].toString();
+						}
+					}
+				} catch (IOException e) {
+
+				}
+				if (res.equals("")){
+					if (this.p.equals(lastSearch)){
+						res = lastAddress;
 					}
 				}
-			} catch (IOException e) {
-				
-			}
-			if (res.equals("")){
-				if (this.p.equals(lastSearch)){
-					res = lastAddress;
-				}
-			}
-			
-			
-			db.addLocation(this.p, res, "HOME");
+
+
+				db.addLocation(this.p, res, "HOME");
 			}
 		}
 		private void setWork(){
@@ -246,49 +248,49 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 				db.setDefaultLocation("WORK");
 			}
 			else {
-			String res = "";
-			try {
-				Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
-				if (addr != null){
-					if (addr.length > 0){
-						res = addr[0].toString();
+				String res = "";
+				try {
+					Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
+					if (addr != null){
+						if (addr.length > 0){
+							res = addr[0].toString();
+						}
+					}
+				} catch (IOException e) {
+
+				}
+				if (res.equals("")){
+					if (this.p.equals(lastSearch)){
+						res = lastAddress;
 					}
 				}
-			} catch (IOException e) {
-				
+
+				db.addLocation(this.p, res, "WORK");
 			}
-			if (res.equals("")){
-				if (this.p.equals(lastSearch)){
-					res = lastAddress;
-				}
-			}
-			
-			db.addLocation(this.p, res, "WORK");
-		}
 		}
 		private void setMobile(){
 			if (defaultLocation){
 				db.setDefaultLocation("MOBILE");
 			}
 			else {
-			String res = "";
-			try {
-				Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
-				if (addr != null){
-					if (addr.length > 0){
-						res = addr[0].toString();
+				String res = "";
+				try {
+					Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
+					if (addr != null){
+						if (addr.length > 0){
+							res = addr[0].toString();
+						}
+					}
+				} catch (IOException e) {
+
+				}
+				if (res.equals("")){
+					if (this.p.equals(lastSearch)){
+						res = lastAddress;
 					}
 				}
-			} catch (IOException e) {
-				
-			}
-			if (res.equals("")){
-				if (this.p.equals(lastSearch)){
-					res = lastAddress;
-				}
-			}
-			
-			db.addLocation(this.p, res,  "MOBILE");
+
+				db.addLocation(this.p, res,  "MOBILE");
 			}
 		}
 		private void setMail(){
@@ -296,144 +298,162 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 				db.setDefaultLocation("MAIL");
 			}
 			else {
-			String res = "";
-			try {
-				Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
-				if (addr != null){
-					if (addr.length > 0){
-						res = addr[0].toString();
+				String res = "";
+				try {
+					Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
+					if (addr != null){
+						if (addr.length > 0){
+							res = addr[0].toString();
+						}
+					}
+				} catch (IOException e) {
+
+				}
+				if (res.equals("")){
+					if (this.p.equals(lastSearch)){
+						res = lastAddress;
 					}
 				}
-			} catch (IOException e) {
-				
+
+				db.addLocation(this.p, res, "MAIL");
 			}
-			if (res.equals("")){
-				if (this.p.equals(lastSearch)){
-					res = lastAddress;
-				}
-			}
-			
-			db.addLocation(this.p, res, "MAIL");
-		}
 		}
 		private void setIm(){
 			if (defaultLocation){
 				db.setDefaultLocation("IM");
 			}
 			else {
-			String res = "";
-			try {
-				Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
-				if (addr != null){
-					if (addr.length > 0){
-						res = addr[0].toString();
+				String res = "";
+				try {
+					Address[] addr = geoCoder.getFromLocation(p.getLatitudeE6(), p.getLongitudeE6());
+					if (addr != null){
+						if (addr.length > 0){
+							res = addr[0].toString();
+						}
+					}
+				} catch (IOException e) {
+
+				}
+
+				if (res.equals("")){
+					if (this.p.equals(lastSearch)){
+						res = lastAddress;
 					}
 				}
-			} catch (IOException e) {
-				
-			}
-			
-			if (res.equals("")){
-				if (this.p.equals(lastSearch)){
-					res = lastAddress;
-				}
-			}
-			db.addLocation(this.p, res, "IM");
+				db.addLocation(this.p, res, "IM");
 			}
 		}
 	}
-	
+
 	protected class MyLocationOverlay extends Overlay {
-        @Override
-        public void draw(Canvas canvas, PixelCalculator calculator, boolean shadow) {
-          super.draw(canvas, calculator, shadow);
-          
-          // Setup our "brush"/"pencil"/ whatever...
-          Paint paint = new Paint();
-          paint.setTextSize(14);
-         
-          LocationManager myLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-          
-          Location l = myLocationManager.getCurrentLocation("gps");
-          
-          // Create a Point that represents our GPS-Location
-          Double lat = l.getLatitude() * 1E6;
-          Double lng = l.getLongitude() * 1E6;
+		private Canvas canvas;
+		private PixelCalculator calculator;
+		private boolean shadow;
+		@Override
+		public void draw(Canvas canvas, PixelCalculator calculator, boolean shadow) {
+			super.draw(canvas, calculator, shadow);
+			this.canvas = canvas;
+			this.calculator = calculator;
+			this.shadow = shadow;
+
+			LocationManager myLocationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+			Location l = myLocationManager.getCurrentLocation("gps");
+
+			// Setup our "brush"/"pencil"/ whatever...
+			Paint paint = new Paint();
+			paint.setTextSize(14);
+
+
+			// Create a Point that represents our GPS-Location
+			Double lat = l.getLatitude() * 1E6;
+			Double lng = l.getLongitude() * 1E6;
+
+//			156, 192, 36
+
+			drawCircle(lat.intValue(), lng.intValue(), "ME", 156, 192, 36);
+			/*
           Point point = new Point(lat.intValue(), lng.intValue());
-         
+
           int[] myScreenCoords = new int[2];
           // Converts lat/lng-Point to OUR coordinates on the screen.
           calculator.getPointXY(point, myScreenCoords);
-          
+
           // Draw a circle for our location
           RectF oval = new RectF(myScreenCoords[0] - 7, myScreenCoords[1] + 7,
                                    myScreenCoords[0] + 7, myScreenCoords[1] - 7);
-          
+
           // Setup a color for our location
           paint.setStyle(Style.FILL);
           paint.setARGB(255, 80, 150, 30); // Nice strong Android-Green    
           // Draw our name
           canvas.drawText(getString(R.string.map_overlay_own_name),
                                    myScreenCoords[0] +9, myScreenCoords[1], paint);
-          
+
           // Change the paint to a 'Lookthrough' Android-Green
           paint.setARGB(80, 156, 192, 36);
           paint.setStrokeWidth(1);
           // draw an oval around our location
           canvas.drawOval(oval, paint);
-          
+
            // With a black stroke around the oval we drew before.
           paint.setARGB(255,0,0,0);
           paint.setStyle(Style.STROKE);
           canvas.drawCircle(myScreenCoords[0], myScreenCoords[1], 7, paint);
-          
+
           //Aggiungo le mie posizioni
-          
-          List<DBHelper.Location> ll = db.fetchAllRows();
+			 */
+			List<DBHelper.Location> ll = db.fetchAllRows();
+
+			for (android.client.DBHelper.Location loc : ll ){
+				drawCircle(loc.latitude, loc.longitude, loc.preferred, 230, 0, 0);
+
+			}
+			/*
           Iterator<DBHelper.Location> i = ll.iterator();
-          
+
           while(i.hasNext()) {
-        	  
+
         	  // Setup our "brush"/"pencil"/ whatever...
-              Paint paint1 = new Paint();
+        	  Paint paint1 = new Paint();
               paint.setTextSize(14);
-             
+
               DBHelper.Location loc = i.next();
-              
+
               // Create a Point that represents our GPS-Location
               Double lat1 = Double.parseDouble(String.valueOf(loc.latitude));
               Double lng1 = Double.parseDouble(String.valueOf(loc.longitude));
               Point point1 = new Point(lat1.intValue(), lng1.intValue());
-             
+
               int[] myScreenCoords1 = new int[2];
               // Converts lat/lng-Point to OUR coordinates on the screen.
               calculator.getPointXY(point1, myScreenCoords);
-              
+
               // Draw a circle for our location
               RectF oval1 = new RectF(myScreenCoords[0] - 7, myScreenCoords[1] + 7,
                                        myScreenCoords[0] + 7, myScreenCoords[1] - 7);
-              
+
               // Setup a color for our location
               paint1.setStyle(Style.FILL);
               paint1.setARGB(255, 90, 150, 100); // Nice strong Android-Green    
               // Draw our name
               canvas.drawText(loc.preferred,
                                        myScreenCoords[0] +9, myScreenCoords[1], paint1);
-              
+
               // Change the paint to a 'Lookthrough' Android-Green
               paint1.setARGB(80, 56, 192, 106);
               paint1.setStrokeWidth(1);
               // draw an oval around our location
               canvas.drawOval(oval1, paint1);
-              
+
                // With a black stroke around the oval we drew before.
               paint1.setARGB(255,0,0,0);
               paint1.setStyle(Style.STROKE);
               canvas.drawCircle(myScreenCoords[0], myScreenCoords[1], 7, paint1);
-        	  
+
           }
-          
-          /*
+			 */
+			/*
           int[] friendScreenCoords = new int[2];
           //Draw each friend with a line pointing to our own location.
           for(Friend aFriend : FriendFinderMap.this.nearFriends){
@@ -447,13 +467,13 @@ public class LocationSelection extends MapActivity implements OnClickListener{
                     // Draw a circle for this friend and his name
                     oval = new RectF(friendScreenCoords[0] - 7, friendScreenCoords[1] + 7,
                                         friendScreenCoords[0] + 7, friendScreenCoords[1] - 7);
-                    
+
                     // Setup a color for all friends
                     paint.setStyle(Style.FILL);
                     paint.setARGB(255, 255, 0, 0); // Nice red             
                     canvas.drawText(aFriend.itsName, friendScreenCoords[0] +9,
                                              friendScreenCoords[1], paint);
-                    
+
                     // Draw a line connecting us to the current Friend
                     paint.setARGB(80, 255, 0, 0); // Nice red, more look through...
 
@@ -463,12 +483,95 @@ public class LocationSelection extends MapActivity implements OnClickListener{
                     paint.setStrokeWidth(1);
                     // draw an oval around our friends location
                     canvas.drawOval(oval, paint);
-                    
+
                      // With a black stroke around the oval we drew before.
                     paint.setARGB(255,0,0,0);
                     paint.setStyle(Style.STROKE);
                     canvas.drawCircle(friendScreenCoords[0], friendScreenCoords[1], 7, paint);
                }*/
-          } 
+
+
+
+
+			
+			String[] projection = new String[] {
+					android.provider.Contacts.ContactMethods.PERSON_ID
+			};
+			Cursor user = getContentResolver().query(Contacts.ContactMethods.CONTENT_URI, projection, "kind="+Settings.MY_CONTACTS_KIND, null, null);
+			while (user.next()){
+				String[] projection2 = new String[] {
+//						android.provider.Contacts.People._ID,
+						android.provider.Contacts.People.NAME
+				};
+				int user_id = user.getInt(user.getColumnIndex(android.provider.Contacts.ContactMethods.PERSON_ID));
+				Cursor nome_c = getContentResolver().query(Contacts.People.CONTENT_URI, projection2, "people._id="+user_id, null, null);
+				if (nome_c.next()){
+					String nome = nome_c.getString(nome_c.getColumnIndex(Contacts.People.NAME));
+
+					String[] projection3 = new String[] {
+							android.provider.Contacts.ContactMethods.DATA
+					};
+					Cursor pos_c = getContentResolver().query(Contacts.ContactMethods.CONTENT_URI, projection3, Contacts.ContactMethods.PERSON_ID+"="+user_id+" AND kind="+Contacts.ContactMethods.POSTAL_KIND, null, null);
+					pos_c.next();
+					String pos = pos_c.getString(pos_c.getColumnIndex(Contacts.ContactMethods.DATA));
+
+					StringTokenizer tok = new StringTokenizer(pos.substring(1), ",");
+					Double latitude = Double.parseDouble(tok.nextToken()) * 1E6;
+					Double longitude = Double.parseDouble(tok.nextToken()) * 1E6;
+					drawCircle( latitude.intValue() , longitude.intValue(), nome, 0, 0, 200);
+				}
+			}
+
+
+
+
+
+
+		}
+
+
+		private void drawCircle(int latitude, int longitde, String text, int R, int G, int B ){
+
+			Paint paint = new Paint();
+			paint.setTextSize(14);
+
+
+			// Create a Point that represents our GPS-Location
+//			Double lat = l.getLatitude() * 1E6;
+//			Double lng = l.getLongitude() * 1E6;
+			Point point = new Point(latitude, longitde);
+
+			int[] myScreenCoords = new int[2];
+			// Converts lat/lng-Point to OUR coordinates on the screen.
+			calculator.getPointXY(point, myScreenCoords);
+
+			// Draw a circle for our location
+			RectF oval = new RectF(myScreenCoords[0] - 5, myScreenCoords[1] + 5,
+					myScreenCoords[0] + 5, myScreenCoords[1] - 5);
+
+			// Setup a color for our location
+			paint.setStyle(Style.FILL);
+//			paint.setARGB(255, 80, 150, 30); // Nice strong Android-Green    
+			paint.setARGB(255, R, G, B); // Nice strong Android-Green    
+
+			// Draw our name
+			canvas.drawText(text,
+					myScreenCoords[0] +9, myScreenCoords[1], paint);
+
+			// Change the paint to a 'Lookthrough' Android-Green
+//			paint.setARGB(80, 156, 192, 36);
+			paint.setARGB(80, R, G, B);
+
+			paint.setStrokeWidth(1);
+			// draw an oval around our location
+			canvas.drawOval(oval, paint);
+
+			// With a black stroke around the oval we drew before.
+			paint.setARGB(255,0,0,0);
+			paint.setStyle(Style.STROKE);
+			canvas.drawCircle(myScreenCoords[0], myScreenCoords[1], 5, paint);
+
+
+		}
 	}
 }

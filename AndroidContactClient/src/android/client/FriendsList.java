@@ -42,7 +42,6 @@ import android.widget.ListView;
 public class FriendsList extends ListActivity implements OnClickListener, ServiceConnection {
 
 
-	//TODO Inserire la gestione della lista degli utenti
 	private ServiceInterface s;
 
 	public static final String PENDING_ACTION =
@@ -113,12 +112,9 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 					if (s.insertContact(selected)){
 						removeEntry(selected);						
 					}
-					else {
-						//TODO controllare e segnalare l'errore;
-					}
+					
 				} catch (DeadObjectException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					
 				}
 			}
 			if (which == DialogInterface.BUTTON2){
@@ -126,8 +122,7 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 					s.denyFriend(selected);
 					removeEntry(selected);
 				} catch (DeadObjectException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					
 				}
 			}
 		}
@@ -142,7 +137,7 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 						AlertDialog.show(this, "ERROR", 0, "Unable to perform the request", "OK",false);
 					}
 				} catch (DeadObjectException e) {
-					// TODO Auto-generated catch block
+					
 					e.printStackTrace();
 				}
 			}
@@ -162,8 +157,7 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 				try {
 					s.setNormalStatus();
 				} catch (DeadObjectException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					
 				}
 			}
 			startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
@@ -315,8 +309,7 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 					v.add(str);
 				}
 			} catch (DeadObjectException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			}
 		}
 		if (mState == ALL_USERS){
@@ -326,8 +319,7 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 					if (!friends.contains(str)) v.add(str);
 				}
 			} catch (DeadObjectException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			}
 		}
 		if (v.size() > 0){

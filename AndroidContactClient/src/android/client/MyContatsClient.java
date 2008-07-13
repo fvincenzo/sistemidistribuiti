@@ -25,8 +25,8 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 	public static final String LOGIN_ACTION =
 		"android.client.action.LOGIN";
 
-	public static final String MAIN_LwOOP_ACTION =
-		"android.client.action.MAIN_LOOP";
+//	public static final String MAIN_LwOOP_ACTION =
+//		"android.client.action.MAIN_LOOP";
 
 	public static final int SERVICE_BOUND = 1;
 
@@ -38,7 +38,7 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 	private CheckBox forcelogin;
 	EditText username;
 	EditText password;
-	private LocationManager myLocationManager = null;
+//	private LocationManager myLocationManager = null;
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -52,7 +52,7 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 //		startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
 ////		finish();
 //		} else {
-		myLocationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+//		myLocationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
 		
 		
 		startService(new Intent("android.client.MY_SERVICE"), null);
@@ -74,7 +74,7 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 			final String p = password.getText().toString();
 			if ( u != "" && p != ""){
 				try {
-					this.s.connect("10.0.2.2");
+					this.s.connect(Settings.SERVER_ADDR);
 					boolean ret;
 					if(forcelogin.isChecked()){
 						ret = this.s.forcelogin(u, p);
@@ -82,7 +82,6 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 						ret = this.s.login(u,p);	
 					
 					if (ret){
-						//TODO Controllare il getIntent().getData che significa
 						startActivity(new Intent(android.client.FriendsList.PENDING_ACTION, getIntent().getData()));
 						finish();
 					}

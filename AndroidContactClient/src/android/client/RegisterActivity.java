@@ -44,8 +44,7 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 
 //	private LocationManager lManager;
 
-	//TODO: inserire i parametri che si vuole modificare quando si sceglie di modificarli...
-
+	
 
 
 	@Override
@@ -77,7 +76,7 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 				final String i = im.getText().toString();
 //				Location l = lManager.getCurrentLocation("gps");
 				try {
-					contactList.connect("10.0.2.2");
+					contactList.connect(Settings.SERVER_ADDR);
 //					if (contactList.register(u, p, m, h, w, e, i, l.getLatitude(), l.getLongitude())){
 					if (contactList.register(u, p, m, h, w, e, i)){
 						startActivity(new Intent(android.client.MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
@@ -93,8 +92,13 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 			if (status == MODIFY) {
 				if (password.getText().toString().equals("") ){
 					try {
-						contactList.changepersonal(username.getText().toString(), null, null, mobile.getText().toString(), home.getText().toString(), work.getText().toString(), email.getText().toString(), im.getText().toString());
-						//TODO: Notificare l'avvenuta modifica
+						if (contactList.changepersonal(username.getText().toString(), null, null, mobile.getText().toString(), home.getText().toString(), work.getText().toString(), email.getText().toString(), im.getText().toString())){
+							finish();
+						}
+						else {
+							AlertDialog.show(this, "Error", 0, " Error occurred while modifying your data", "BACK",false);							
+						}
+						
 					} catch (DeadObjectException e) {
 			
 					}
@@ -103,7 +107,7 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 					
 					new PasswordDialog(this, this).show();
 				}
-				//TODO: Inserire le operazioni di modifica dei dati personali
+				
 			}
 		}
 	}
