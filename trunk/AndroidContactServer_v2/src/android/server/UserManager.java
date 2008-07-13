@@ -265,7 +265,7 @@ public class UserManager {
 			fout.close();
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 
 	}
@@ -353,37 +353,37 @@ public class UserManager {
 	@Override
 	public String changepersonal(String username, String mobile, String home,
 			String work, String mail, String im) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public String denyfriend(String uname, String friend) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public String getfriends(String uname) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public String getposition(String uname) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public String getpreferred(String uname) {
-		// TODO Auto-generated method stub
+	ub
 		return null;
 	}
 
 	@Override
 	public String getuserdata(String uname, String friend) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -391,32 +391,32 @@ public class UserManager {
 
 	@Override
 	public boolean login(String uname, String pwd) {
-		// TODO Auto-generated method stub
+	
 		return false;
 	}
 
 	@Override
 	public String pendingfriends(String uname) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public boolean register(String username, String password, String mobile,
 			String home, String work, String mail, String im) {
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 
 	@Override
 	public String setpreferred(String uname, String pos) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
 	@Override
 	public String updateposition(String uname, String position) {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 */

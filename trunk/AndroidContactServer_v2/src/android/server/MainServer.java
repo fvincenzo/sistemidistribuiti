@@ -10,8 +10,7 @@ public class MainServer {
 	 * @param args
 	 */
 	public static void main(String[] args) throws IOException{
-		// TODO Auto-generated method stub
-
+		
 		ServerSocket serverSocket = null;
         try {
             serverSocket = new ServerSocket(4444);
