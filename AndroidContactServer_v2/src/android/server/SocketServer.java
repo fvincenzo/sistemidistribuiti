@@ -45,7 +45,7 @@ public class SocketServer extends Thread{
 			out.println("Status: up and running.");
 			int size = 0;
 			while(run) {
-
+				result = "";
 				command.add(in.readLine());
 
 				while(!command.lastElement().equals("END")) {
@@ -196,7 +196,7 @@ public class SocketServer extends Thread{
             serverSocket.close();
 			 */
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 
 
@@ -615,7 +615,7 @@ public class SocketServer extends Thread{
 	}
 	/*	Iterator<User> i = users.iterator();
 		String result = "";
-		//TODO: non sarebbe giusto controllare anche se friend ha nella sua lista di amici uname?
+		
 		if(getfriends(uname).contains(friend)) {
 
 			do {

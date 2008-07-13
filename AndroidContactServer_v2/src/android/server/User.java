@@ -66,7 +66,7 @@ public class User  {
 			frout.close();
 			frdout.close();
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 	}
 
@@ -81,7 +81,7 @@ public class User  {
 			frout.close();
 			frdout.close();
 		} catch (Exception e) {
-			// TODO: handle exception
+			
 		}
 	}*/
 
@@ -122,7 +122,7 @@ public class User  {
 				frout.close();
 				frdout.close();
 			} catch (Exception e) {
-				// TODO: handle exception
+				
 			}
 		}
 
@@ -137,7 +137,7 @@ public class User  {
 				frout.close();
 				frdout.close();
 			} catch (Exception e) {
-				// TODO: handle exception
+				
 			}
 		}
 
