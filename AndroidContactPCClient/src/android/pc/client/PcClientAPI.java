@@ -13,6 +13,7 @@ public class PcClientAPI {
 	private Socket kkSocket = null;
     private PrintWriter out = null;
     private BufferedReader in = null;
+    private String Host;
     private String Username;
 	private String Password;
     private int connected = 0; 
@@ -26,6 +27,7 @@ public class PcClientAPI {
 		
 		try {
 			BufferedReader i = new BufferedReader(new FileReader("conf/config.txt"));
+			Host = i.readLine();
 			Username = i.readLine();
 			Password = i.readLine();
 		} catch (Exception e) {
@@ -33,7 +35,7 @@ public class PcClientAPI {
 		}
 		
 		try {
-            kkSocket = new Socket("localhost", 4444);
+            kkSocket = new Socket(Host, 4444);
             out = new PrintWriter(kkSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(kkSocket.getInputStream()));
         } catch (UnknownHostException e) {
