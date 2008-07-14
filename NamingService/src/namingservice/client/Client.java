@@ -2,7 +2,6 @@ package namingservice.client;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.util.Iterator;
@@ -137,7 +136,7 @@ public class Client {
 			        	if (conn == 1) {
 			        		
 			        		Vector<String> ls = nsc.list();
-			        		Iterator it = ls.iterator();
+			        		Iterator<String> it = ls.iterator();
 			        		
 			        		while(it.hasNext()) {
 			        			

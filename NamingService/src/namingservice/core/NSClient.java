@@ -1,6 +1,5 @@
 package namingservice.core;
 
-import java.net.InetAddress;
 import java.rmi.Naming;
 import java.util.Vector;
 
