@@ -37,6 +37,7 @@ public class Client {
 			String host = i.readLine();
 			String hname = host.substring(0,host.indexOf(" "));
 			String haddr = host.substring(host.indexOf(" ")+1);
+			String myname;
 			
 			NSClient nsc = null;
 			RemoteServer rs = null;
@@ -96,7 +97,8 @@ public class Client {
 			        	if (conn == 1) {
 			        		
 			        		System.out.print("Server Name:");
-			        		ns = new NSServer(nsc.register(in.readLine(),InetAddress.getLocalHost().getHostAddress()),rs.getReference());
+			        		myname = in.readLine();
+			        		ns = new NSServer(nsc.register(myname,InetAddress.getLocalHost().getHostAddress()),rs.getReference());
 			       
 			        	} else {
 			        		
@@ -140,6 +142,36 @@ public class Client {
 			        		continue;
 			        	}
 			 
+			        }
+			        
+			        //TODO: Aggiungere askremove utile ad un nodo a rimuovere se stesso da una rete
+			        
+			        if(str.compareTo("askremove")==0) {
+			        	if (conn == 1) {
+			        		
+			        		System.out.println("Node Name:");
+			        		String a = in.readLine();
+			        		System.out.println(rs.remove(a));
+			        		
+			        	} else {
+			        		
+			        		System.out.println("Connect Before");
+			        		continue;
+			        	}
+			        }
+			        
+			        if(str.compareTo("remove")==0) {
+			        	if (conn == 1) {
+			        		
+			        		System.out.println("Node Name:");
+			        		String a = in.readLine();
+			        		System.out.println(rs.remove(a));
+			        		
+			        	} else {
+			        		
+			        		System.out.println("Connect Before");
+			        		continue;
+			        	}
 			        }
 			        
 			        if(str.compareTo("sum")==0) {
