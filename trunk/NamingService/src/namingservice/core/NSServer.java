@@ -24,7 +24,7 @@ public class NSServer {
 	 * @param nome rappresenta il nome del servizio che si inizializza
 	 * @param father reappresenta il nodo padre della rete da cui questo servizio discende nel caso si tratti del nodo root il parametro father=null
 	 */
-	public NSServer(String nome, Node father) {
+	public NSServer(String nome, NodeMap father) {
 		try{
 			try{
 				r = LocateRegistry.createRegistry(1099);
@@ -59,6 +59,10 @@ public class NSServer {
 		}catch(UnknownHostException e){
 			System.out.println("Impossibile identificare l'hostname");
 		}
+		
 	}
 
+	public Server getReference() {
+		return s;
+	}
 }

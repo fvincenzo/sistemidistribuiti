@@ -6,7 +6,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
 import java.util.Vector;
 
-import namingservice.core.node.Node;
+import namingservice.core.node.NodeMap;
 import namingservice.core.node.NodeManager;
 
 /**
@@ -17,7 +17,7 @@ import namingservice.core.node.NodeManager;
  */
 public class Server extends UnicastRemoteObject implements RemoteServer {
 	
-	private Node n;
+	private NodeMap n;
 	private NodeManager nm;
 	
 	/**
@@ -29,9 +29,9 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	 * @param father riferimento al nodo padre
 	 * @throws RemoteException dovuta ad eventuali fallimenti o errori del server RMI in fase di registrazione del servizio
 	 */
-	public Server(String n, String ip, String Info,Node father) throws RemoteException {
+	public Server(String n, String ip, String Info,NodeMap father) throws RemoteException {
 		
-		this.n = new Node("/", n, ip, father, Info);
+		this.n = new NodeMap("/", n, ip, father, Info);
 		nm = new NodeManager(this.n);
 		
 	}
@@ -39,7 +39,7 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	/**
 	 * Metodo getReference consente di ottenere un riferimento al nodo
 	 */
-	public Node getReference() throws RemoteException {
+	public NodeMap getReference() throws RemoteException {
 		
 		return n;
 		
@@ -101,12 +101,12 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		
 		//Mi connetto a mio padre per aggiornarlo
 		if (n.getHostID().equals("root") == false){
-			Node father = n.getFather();
+			NodeMap father = n.getFather();
 			
 			//		System.out.println(n.getFather());
 			//		System.out.println("Server Info:"+father.getHostID()+" "+father.getHostIP());
 			
-			System.out.println(((Node)father).getHostID());
+			System.out.println(((NodeMap)father).getHostID());
 			
 			String url = "//"+father.getHostIP()+":1099/"+father.getHostID();
 			
@@ -136,7 +136,7 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		
 	}
 	
-	public String exec(String s) throws RemoteException {
+	public String exec(String s){
 		
 		return nm.exec(s);
 		
@@ -150,14 +150,14 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	 * 
 	 * @return risultato della propagazione della modifica true se e' andata a buon fine
 	 */
-	public boolean synch(String ServerName, Node root)throws RemoteException {
+	public boolean synch(String ServerName, NodeMap root)throws RemoteException {
 		
 		//Aggiorno me stesso
 		updateNode(ServerName,root);
 		
 		//Aggiorno gli altri
 		String url;
-		Node father = n.getFather();
+		NodeMap father = n.getFather();
 		
 		System.out.println("Father Name:"+father.getHostID());
 		
@@ -228,7 +228,7 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	 * @param ServerName nome del server che ha ricevuto modifica
 	 * @param root database del nodo che ha ricevuto la modifica
 	 */
-	public void updateNode(String ServerName, Node root)throws RemoteException {
+	public void updateNode(String ServerName, NodeMap root)throws RemoteException {
 		
 		String url = ServerName;
 		
@@ -240,7 +240,7 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 				break;
 			}
 		
-		Node m = n.getChild(url);
+		NodeMap m = n.getChild(url);
 		
 		m.updateNode(root); 
 		
@@ -286,7 +286,7 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 			}
 				
 			Iterator it = pars.iterator();
-			Node ns = n;
+			NodeMap ns = n;
 			
 			
 			while(it.hasNext()){
@@ -302,15 +302,41 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		return hname+" "+haddr+":1099";	
 	}
 	
-	public String remove(String Name) throws RemoteException {
+	public String remove(String Name) {
 		
-		return n.removeChild(Name);
+		String result = n.removeChild(Name);
+		
+		String url = "//"+n.getFather().getHostIP()+":1099/"+n.getFather().getHostID();
+		
+		try {
+			
+			RemoteServer r = (RemoteServer) Naming.lookup(url);
+			r.synch(n.getHostID(), n);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return result;
 		
 	}
 	
 	public String askremove(String Name) throws RemoteException {
 		
-		return n.getFather().removeChild(Name);
+		String result = n.removeChild(Name);
+		
+		String url = "//"+n.getFather().getHostIP()+":1099/"+n.getFather().getHostID();
+		
+		try {
+			
+			RemoteServer r = (RemoteServer) Naming.lookup(url);
+			r.synch(n.getHostID(), n);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return result;
 		
 	}
 	
