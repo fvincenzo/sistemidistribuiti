@@ -4,10 +4,19 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Classe principale da eseguire per lanciare il server
+ * 
+ * @author Nicolas Tagliani
+ * @author Vincenzo Frascino
+ *
+ */
 public class MainServer {
 
 	/**
-	 * @param args
+	 * Metodo main usato per lanciare un server in ascolto sulla porta 4444
+	 * 
+	 * @param args i parametri ignorati
 	 */
 	public static void main(String[] args) throws IOException{
 		
