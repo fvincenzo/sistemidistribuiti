@@ -129,10 +129,11 @@ public class Node implements Serializable{
  		
  	}
  	
- 	public void removeChild(String name) {
+ 	public String removeChild(String name) {
  		
  		names.remove(name);
  		children.remove(name);
+ 		return "OK";
  		
  	}
  	

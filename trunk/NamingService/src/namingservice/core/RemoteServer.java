@@ -18,6 +18,8 @@ public interface RemoteServer extends Remote {
 	public String add(String a, String ip, String Info) throws RemoteException;
 	public Vector<String> getlist() throws RemoteException;
 	public String request(String Name) throws RemoteException;
+	public String remove(String Name) throws RemoteException;
+	public String askremove(String Name) throws RemoteException;
 	public String exec(String s) throws RemoteException;
 	public Node getReference() throws RemoteException;
 	public boolean synch(String ServerName, Node root)throws RemoteException;

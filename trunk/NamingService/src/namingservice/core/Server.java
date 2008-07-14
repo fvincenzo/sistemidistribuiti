@@ -302,6 +302,17 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		return hname+" "+haddr+":1099";	
 	}
 	
+	public String remove(String Name) throws RemoteException {
+		
+		return n.removeChild(Name);
+		
+	}
+	
+	public String askremove(String Name) throws RemoteException {
+		
+		return n.getFather().removeChild(Name);
+		
+	}
 	
 	/**
 	 * Metodo sum servizio generico messo a disposione dall'host come esempio di utilizzo
