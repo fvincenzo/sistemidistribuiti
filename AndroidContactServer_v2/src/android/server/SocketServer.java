@@ -4,13 +4,18 @@ import java.net.*;
 import java.util.Vector;
 import java.io.*;
 
+/**
+ * Classe che implementa il socket server del sistema.
+ * Questa classe si occupa di gestire le richieste che provengono da un client. 
+ * Esistera' un'istanza di questa classe per ogni utente connesso.
+ * 
+ * @author Nicolas Tagliani
+ * @author Vincenzo Frascino
+ *
+ */
 public class SocketServer extends Thread{
 
-//	public static UserManager um;
-//	public static Vector<User> users;
 	private  String result;
-
-//	private boolean connected;
 	private Socket clientSocket;
 	private User u;
 	private UserManager um = UserManager.getHinstance();
@@ -18,24 +23,23 @@ public class SocketServer extends Thread{
 	private boolean logged;
 	private String username;
 
+	/**
+	 * Costruttore per la classe SocketServer riceve un socket su cui è stata accettata una connessione
+	 * 
+	 * @param s Il socket su cui è stata accettata una connessione
+	 */
 	public SocketServer(Socket s) {
 		System.out.println("Android Contact Server ver 0.15 final");
-
 		clientSocket = s;
-//		um = new UserManager();
-//		users = um.restore(); 
-
 
 	}
 
 	public void run(){
 
-
 		try {
 			Vector<String> command = new Vector<String>();
 			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-//			String s = null;
 
 			//Server version
 			out.println("Android Contact Server ver 0.15 final");
@@ -201,6 +205,11 @@ public class SocketServer extends Thread{
 
 
 	}
+	
+	/**
+	 * Ferma il server.
+	 *
+	 */
 	public void quit(){
 		try {
 			run = false;
@@ -210,23 +219,38 @@ public class SocketServer extends Thread{
 		}
 	}
 
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#register(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	/**
+	 * Registra un utente
+	 * 
+	 * @param username lo username
+	 * @param password la password
+	 * @param mobile il numero di cellulare
+	 * @param home il numero di casa
+	 * @param work il numero del lavoro
+	 * @param mail l'indirizzo email
+	 * @param im il contatto di istant messenger
+	 * 
+	 * @return Una stringa contenente OK se ha avuto successo ERROR altrimenti
 	 */
 	public  String register(String username,String password,String mobile,String home,String work,String mail,String im) {
 
 		if (!logged){
 			u = new User(username,password,mobile,home,work,mail,im, "@0.0,0.0", "MOBILE");
 			if (um.addUser(u)){
-//				um.commit();
 				return login(username,password);
 			}
 		}
 		return "Register ERROR.";
 	}
 
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#login(java.lang.String, java.lang.String)
+
+	/**
+	 * Effettua il login di un utente
+	 * 
+	 * @param uname username
+	 * @param pwd password
+	 * 
+	 * @return Una stringa contenente OK se ha avuto successo ERROR altrimenti
 	 */
 	public  String login(String uname, String pwd) {
 		User u;
@@ -243,23 +267,16 @@ public class SocketServer extends Thread{
 			}
 		}
 		return "Login ERROR.";
-		/*	Iterator<User> i = users.iterator();
-
-		do {
-
-			User u = (User)i.next();
-
-			if((u.getUser().equals(uname)==true) && (u.getPwd().equals(pwd))==true) {
-				u.setConnected();
-				return true;
-			}
-
-		} while(i.hasNext());
-
-		return false;
-		 */
 	}
 
+	/**
+	 * Forza il login. Se e' gia' presente un altro utente connesso con il nostro nick e la nostra password e' esatta lo disconnette
+	 * 
+	 * @param uname lo username
+	 * @param pwd la password
+	 * 
+	 * @return Una stringa contenente OK se ha avuto successo ERROR altrimenti
+	 */
 	public  String forcelogin(String uname, String pwd) {
 		User u;
 		if (!logged){
@@ -278,45 +295,13 @@ public class SocketServer extends Thread{
 			}
 		}
 		return "Login ERROR.";
-		/*	Iterator<User> i = users.iterator();
-
-		do {
-
-			User u = (User)i.next();
-
-			if((u.getUser().equals(uname)==true) && (u.getPwd().equals(pwd))==true) {
-				u.setConnected();
-				return true;
-			}
-
-		} while(i.hasNext());
-
-		return false;
-		 */
+		
 	}
 
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#changepersonal(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
-	 */
-	/*public  String changepersonal(String username,String mobile,String home,String work,String mail,String im) {
-		User u = null;
-		String result = "Update ERROR.";
-		if (logged && username.equals(this.username) &&(u = um.getUser(username)) != null){
-			u.setMobile(mobile);
-			u.setHome(home);
-			u.setIm(im);
-			u.setMail(mail);
-			u.setWork(work);
-			um.commit();
-			result = "Update OK.";
-		}
-		return result;
-
-
-	}*/
-
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#getusers()
+	/**
+	 * Ritorna la lista degli utenti registrati al sistema separati da $
+	 * 
+	 * @return La lista degli utenti registrati al sistema separati da $ oppure una stringa vuota
 	 */
 	public  String getusers() {
 		String ret = "";
@@ -328,8 +313,13 @@ public class SocketServer extends Thread{
 		return ret;
 	}
 
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#getfriends(java.lang.String)
+
+	/**
+	 * Ottiene la lista dei nostri amici se il nick indicato e' quello associato a questo thread
+	 * 
+	 * @param uname il nostro nick
+	 * 
+	 * @return la lista degli amici separati da $
 	 */
 	public  String getfriends(String uname) {
 		String ret = "";
@@ -344,8 +334,13 @@ public class SocketServer extends Thread{
 		return ret;
 	}
 
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#updateposition(java.lang.String, java.lang.String)
+
+	/**
+	 * Aggiorna la propria posizione
+	 * 
+	 * @param uname l'username dell'utente
+	 * @param position la posizione da aggiornare nel formato @latitudine,longitudine
+	 * @return
 	 */
 	public  String updateposition(String uname, String position){
 
@@ -360,38 +355,14 @@ public class SocketServer extends Thread{
 		}
 		return ret;
 	}
-	/*		Iterator<User> i = users.iterator();
-		String result = "";
-
-		do {
-
-			User u = (User)i.next();
-
-			if((u.getUser().equals(uname)==true) && (u.getConnected() == true)) {
-
-				u.setGeo(position);
-
-				result = "Position Updated. OK.";
-
-				break;
-
-			} else if ((u.getUser().equals(uname)==true) && (u.getConnected() == false)) {
-
-				result = "Connect Before. ERROR.";
-
-			}
-
-		} while(i.hasNext());
-
-		um.save(users);
-
-		return result;
-
-	}*/
-
-	//Alla richiesta di aggiunta di un amico questo viene aggiunto nella lista degli pending
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#addfriend(java.lang.String, java.lang.String)
+	
+	/**
+	 * Cerca di aggiungere un amico alla propria lista di amici inserendo uname nella lista dei pendingfriends di friend
+	 * 
+	 * @param uname il nostro username
+	 * @param friend l'username di colui al quale chiediamo di essere amici
+	 * 
+	 * @return Una stringa contenente OK se ha avuto successo ERROR altrimenti
 	 */
 	public  String addfriend(String uname,String friend) {
 
@@ -406,32 +377,13 @@ public class SocketServer extends Thread{
 		}
 		return ret;
 	}
-	/*	}
-		Iterator<User> i = users.iterator();
-		String result = "";
-
-		do {
-
-			User u = (User)i.next();
-
-			if((u.getUser().equals(friend)==true)) {
-
-				u.addPendings(uname);
-				result = "Friend added to pending list. OK.";
-				break;
-
-			} 
-
-		} while(i.hasNext());
-
-		um.savefriends(friend,users);
-
-		return result;
-
-	}*/
-
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#pendingfriends(java.lang.String)
+	
+	/**
+	 * Ottiene la lista dei propri pendingfriends
+	 * 
+	 * @param uname l'username di chi effettua la richiesta
+	 * 
+	 * @return un elenco di utenti separati da $
 	 */
 	public  String pendingfriends(String uname) {
 		String ret = "";
@@ -445,39 +397,15 @@ public class SocketServer extends Thread{
 		}
 		return ret;
 
-		/*Iterator<User> i = users.iterator();
-		String result = "";
-
-		do {
-
-			User u = (User)i.next();
-
-			if((u.getUser().equals(uname)==true) && (u.getConnected() == true)) {
-
-				Iterator<String> it = u.listPendings().iterator();
-
-				while(it.hasNext()) {
-
-					result += it.next()+"$";
-
-				}
-
-				break;
-
-			} else if ((u.getUser().equals(uname)==true) && (u.getConnected() == false)) {
-
-				result = "Connect Before. ERROR.";
-
-			}
-
-		} while(i.hasNext());
-
-		return result;
-
-		 */
 	}
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#acceptfriend(java.lang.String, java.lang.String)
+
+	/**
+	 * Accetta un pendingfriend come amico
+	 * 
+	 * @param uname l'username di chi effettua l'operazione
+	 * @param friend il nick dell'amico da accettare
+	 * 
+	 * @return Una stringa contenente OK se ha avuto successo ERROR altrimenti
 	 */
 	public  String acceptfriend(String uname,String friend) {
 
@@ -497,107 +425,36 @@ public class SocketServer extends Thread{
 		}
 		return ret;
 	}
-	/*
-
-
-		Iterator<User> i = users.iterator();
-		String result = "Request Denied. ERROR.";
-
-		do {
-
-			User u = (User)i.next();
-
-			if((u.getUser().equals(uname)==true) && (u.getConnected() == true)) {
-
-				u.addFriend(friend);
-				u.removePenginds(friend);
-
-				break;
-
-			} else if ((u.getUser().equals(uname)==true) && (u.getConnected() == false)) {
-
-				result = "Connect Before. ERROR.";
-
-			}
-
-		} while(i.hasNext());
-
-		i = users.iterator();
-		do {
-
-			User u = (User)i.next();
-
-			if((u.getUser().equals(friend)==true)) {
-
-				u.addFriend(uname);
-				u.removePenginds(uname);
-
-				result = "OK.";
-
-				break;
-
-			} 
-
-		} while(i.hasNext());
-
-		//Salvo tutto
-		um.savefriends(friend,users);
-
-		return result;
-
-	}
-	 */
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#denyfriend(java.lang.String, java.lang.String)
+	
+	/**
+	 * Rimuove un amico dalla propria lista di pending friends di fatto rifiutando la sua richiesta
+	 * 
+	 * @param uname l'username di chi effettua l'operazione
+	 * @param friend l'amico da rifiutare
+	 * 
+	 * @return Una stringa contenente OK se ha avuto successo ERROR altrimenti
 	 */
 	public  String denyfriend(String uname,String friend) {
-
 
 		String ret = "Friend not accepted. ERROR.";
 		if (logged && uname.equals(username)){
 			User u = um.getUser(uname);
 			if (u!= null){
-//				u.addFriend(friend);
 				u.removePenginds(friend);
 				um.commit();
 				ret = "Friend removed from pendings. OK.";
 			}
-//			u = um.getUser(friend);
-//			if (u!= null){
-//			u.addFriend(uname);
-//			}
 		}
 		return ret;
 	}
 
-
-	/*	Iterator<User> i = users.iterator();
-		String result = "Request Denied. ERROR.";
-
-		do {
-
-			User u = (User)i.next();
-
-			if((u.getUser().equals(uname)==true)) {
-
-				u.removePenginds(friend);
-
-				result = "OK.";
-
-				break;
-
-			} 
-
-		} while(i.hasNext());
-
-		um.savefriends(friend,users);
-
-		return result;
-
-	}*/
-
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#getuserdata(java.lang.String, java.lang.String)
+	/**
+	 * Ottiene le informazioni di un amico
+	 * 
+	 * @param uname l'username di chi effettua la richiesta
+	 * @param friend l'amico di cui vogliamo avere le informazioni
+	 * 
+	 * @return una stringa nella forma: username$posizione_geografica$numero_cellulare$numero_lavoro$numero_casa$indirizzo_mail$istant_messenger
 	 */
 	public  String getuserdata(String uname, String friend) {
 
@@ -613,37 +470,14 @@ public class SocketServer extends Thread{
 		}
 		return ret;
 	}
-	/*	Iterator<User> i = users.iterator();
-		String result = "";
-		
-		if(getfriends(uname).contains(friend)) {
-
-			do {
-
-				User u = (User)i.next();
-
-				if((u.getUser().equals(friend)==true)) {
-
-					result = u.getUserInfo();
-
-					break;
-
-				} 
-
-			} while(i.hasNext());
-
-		} else {
-
-			result = friend + "is not in your friends list. ERROR."; 
-
-		}
-
-		return result;
-
-	}*/
-
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#getposition(java.lang.String)
+	
+	/**
+	 * Ottiene la posizione di un amico
+	 * 
+	 * @param uname l'username di chi effettua la richiesta
+	 * @param friend l'amico di cui si vuole sapere la posizione
+	 * 
+	 * @return la posizione formattata come @latitudine,longitudine
 	 */
 	public  String getposition(String uname, String friend) {
 		String ret = "Impossible return position ERROR.";
@@ -658,30 +492,14 @@ public class SocketServer extends Thread{
 		}
 		return ret;
 	}
-	/*
-		Iterator<User> i = users.iterator();
-		String result = "";
-
-		do {
-
-			User u = (User)i.next();
-
-			if((u.getUser().equals(uname)==true)) {
-
-				result = u.getGeo();
-
-				break;
-
-			} 
-
-		} while(i.hasNext());
-
-		return result;
-
-	}
-	 */
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#setpreferred(java.lang.String, java.lang.String)
+	
+	/**
+	 * Imposta il proprio modo preferito per essere contattati a pref
+	 * 
+	 * @param uname l'username di chi effettua l'operazione
+	 * @param pref una stringa che deve essere solo MOBILE, HOME, WORK, MAIL o IM a seconda del caso
+	 * 
+	 * @return Una stringa contenente OK se ha avuto successo ERROR altrimenti
 	 */
 	public  String setpreferred(String uname, String pref) {
 		String ret = "Impossible to set prederred mode. ERROR.";
@@ -695,32 +513,14 @@ public class SocketServer extends Thread{
 		}
 		return ret;
 	}
-	/*
-		Iterator<User> i = users.iterator();
-		String result = "ERROR Unexisting User.";
-
-		do {
-
-			User u = (User)i.next();
-
-			if((u.getUser().equals(uname)==true)) {
-
-				result = "OK Mode Changed.";
-
-				u.setPreferredMode(pos);
-
-				break;
-
-			} 
-
-		} while(i.hasNext());
-
-		return result;
-
-	}	*/
-
-	/* (non-Javadoc)
-	 * @see android.server.ServerInterface#getpreferred(java.lang.String)
+	
+	/**
+	 * Ottiene il modo con cui un amico preferisce essere contattato
+	 * 
+	 * @param uname l'utente che effettua la richiesta
+	 * @param friend l'amico di cui si vuole sapere come preferisce essere contattato
+	 * 
+	 * @return HOME, MOBILE, WORK, MAIL o IM.
 	 */
 	public  String getpreferred(String uname, String friend) {
 		String ret= "Impossible return preferred mode. ERROR";
@@ -736,6 +536,13 @@ public class SocketServer extends Thread{
 		return ret;
 	}
 
+	/**
+	 * Ottiene le informazioni personali dell'utente
+	 * 
+	 * @param uname l'utente che effettua la richiesta
+	 * 
+	 * @return una stringa nella forma: username$numero_cellulare$numero_lavoro$numero_casa$indirizzo_mail$istant_messenger
+	 */
 	public String getPersonal(String uname){
 		String ret= "Impossible return personal data. ERROR";
 		if (logged && uname.equals(username)){
@@ -748,6 +555,20 @@ public class SocketServer extends Thread{
 		return ret;
 	}
 
+	/**
+	 * Cambia le informazioni personali di un utente ad eccezione dello username.
+	 * 
+	 * @param uname l'utente che ha effettuato la richiesta
+	 * @param oldPwd la vecchia password
+	 * @param pwd la nuova password
+	 * @param mobile il numero di cellulare
+	 * @param work il numero del lavoro
+	 * @param home il numero di casa
+	 * @param mail l'indirizzo mail 
+	 * @param im l'istant messenger
+	 * 
+	 * @return Una stringa contenente OK se ha avuto successo ERROR altrimenti
+	 */
 	public String changePersonal(String uname, String oldPwd, String pwd,String  mobile,String work,String home,String mail,String im){
 		String ret= "Impossible to change personal data. ERROR";
 		if (logged && uname.equals(username)){
@@ -763,34 +584,10 @@ public class SocketServer extends Thread{
 					um.commit();
 					ret = "OK";
 				}
-//				u.
 			}
 		}
 
 		return ret;
 	}
-
-
-	/*
-		Iterator<User> i = users.iterator();
-		String result = "ERROR Unexisting User.";
-
-		do {
-
-			User u = (User)i.next();
-
-			if((u.getUser().equals(uname)==true)) {
-
-				result = u.getPreferredMode();
-
-				break;
-
-			} 
-
-		} while(i.hasNext());
-
-		return result;
-
-	}	*/
 
 }	
