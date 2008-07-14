@@ -55,6 +55,8 @@ public class Client {
 			        if (str.compareTo("start")==0) {
 			        	
 			        	ns = new NSServer("root",null);
+			        	s = ns.getReference();
+			        	continue;
 			        	
 			        }
 			        
@@ -62,7 +64,7 @@ public class Client {
 			        	
 			        	try {
 				        	nsc = new NSClient();
-				        	rs = rs = nsc.connect(hname, haddr);
+				        	rs = nsc.connect(hname, haddr);
 				        	if(rs != null) conn = 1;
 						} catch (Exception e) {
 							System.out.println("Host Unknown");
@@ -81,6 +83,18 @@ public class Client {
 				        	nsc = new NSClient();
 				        	rs = nsc.connect(hn,hip+":1099");
 				        	if(rs != null) conn = 1;
+						} catch (Exception e) {
+							System.out.println("Host Unknown");
+						}
+			        	
+			        	continue;
+			        }
+			        
+			        if (str.compareTo("lfind")==0) {
+			        	
+			        	try {
+			        		System.out.print("Server Name:");
+				        	System.out.println(s.lfind(in.readLine()));
 						} catch (Exception e) {
 							System.out.println("Host Unknown");
 						}

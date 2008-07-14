@@ -55,6 +55,26 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	}
 	
 	/**
+	 * Metodo lfind consente la ricerca di un nome sul database locale se la richiesta non ha esito positivo viene propagata al padre fino ad arrivare a root. Se il nodo root non riesce a dare una risposta viene tornato il messaggio host non trovato
+	 *
+	 * @param Name indica il nome dell'host da cercare
+	 * @return una stringa contenente l'ip
+	 */
+	public String lfind(String Name) {
+		
+		if(n.findChild(Name)==true) {
+			
+			return n.getChild(Name).getHostIP()+" "+n.getChild(Name).getHostID();
+			
+		} else {
+			
+			return "Unknown host";
+			
+		}
+		
+	}
+	
+	/**
 	 * Metodo find consente la ricerca di un nome sul database locale se la richiesta non ha esito positivo viene propagata al padre fino ad arrivare a root. Se il nodo root non riesce a dare una risposta viene tornato il messaggio host non trovato
 	 *
 	 * @param Name indica il nome dell'host da cercare
@@ -152,70 +172,26 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	 */
 	public boolean synch(String ServerName, NodeMap root)throws RemoteException {
 		
-		//Aggiorno me stesso
-		updateNode(ServerName,root);
-		
 		//Aggiorno gli altri
 		String url;
 		NodeMap father = n.getFather();
 		
-		System.out.println("Father Name:"+father.getHostID());
+		updateNode(ServerName,root);
 		
-		if(father.getHostID().equals("root")==true) {
+		if(father != null){
 			
 			url = "//"+father.getHostIP()+":1099/"+father.getHostID();
 			
 			try {
 				
 				RemoteServer r = (RemoteServer) Naming.lookup(url);
-				r.updateNode(ServerName, father);
+				r.synch(n.getHostID(), n);
 				
 			} catch (Exception e) {
 				// TODO: handle exception
-			}
-			
-		} else {
-			
-			url = "//"+father.getHostIP()+":1099/"+father.getHostID();
-			
-			try {
-				
-				RemoteServer r = (RemoteServer) Naming.lookup(url);
-				r.updateNode(ServerName, father);
-				
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			
-			while(true) {
-				
-				father = father.getFather();
-				
-				url = "//"+father.getHostIP()+":1099/"+father.getHostID();
-				
-				try {
-					
-					RemoteServer r = (RemoteServer) Naming.lookup(url);
-					r.updateNode(ServerName, father);
-					
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
-				
-				if(father.getHostID().equals("root")==true) {
-					
-					break;
-					
-				} else {
-					
-					continue;
-					
-				}
-				
 			}
 			
 		}
-		
 		
 		
 		return true;
