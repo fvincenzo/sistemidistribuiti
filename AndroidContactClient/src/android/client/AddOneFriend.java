@@ -13,8 +13,19 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * Activity che implementa la schermata per l'inserimento di un amico conoscendo il suo nome.
+ * Viene richiamata tramite una ADD_FRIEND_ACTION
+ * 
+ * @author Nicolas Tagliani
+ * @author Vincenzo Frascino
+ *
+ */
 public class AddOneFriend extends Activity implements OnClickListener, ServiceConnection {
 
+	/**
+	 * Intent a cui è sensibile questa activity
+	 */
 	public static final String ADD_FRIEND_ACTION =
 		"android.client.action.ADD_A_FRIEND";
 

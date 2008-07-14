@@ -1,31 +1,42 @@
 package android.client;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-
 import android.os.DeadObjectException;
 import android.util.Log;
 
+/**
+ * Questo thread si occupa di effettuare i controlli ciclici sugli amici e sulle eventuali nortifiche da parte del server
+ * 
+ * @author Nicolas Tagliani
+ * @author Vincenzo Frascino
+ *
+ */
 public class CyclicChecks extends Thread {
 
 	private ServiceInterface.Stub service =  null;
-	private long minutesToSleep = 2;
 	private boolean run = true;
-
-
 	private int NOTIFY = 1;
 	private int NORMAL = 0;
 	private int status = 0;
 	private Map<String, String> localMap = new HashMap<String, String>();
-	private Set<String> friendSet = new HashSet<String>();
 
+	
+	/**
+	 * Costruttore del thread
+	 * 
+	 * @param service Il remote service che implementa tutte le funzioni di comunicazione con il server
+	 */
 	public CyclicChecks(ServiceInterface.Stub service) {
 		super();
 		this.service = service;
 	}
 
+	/**
+	 * Imposta lo stato di esecuzione "NORMAL"
+	 * Questo metodo viene richiamato dal servizio di backgroud una volta che le notifiche sono state visualizzate e rimosse
+	 *
+	 */
 	public void setNormal(){
 		status = NORMAL;
 	}
@@ -35,8 +46,8 @@ public class CyclicChecks extends Thread {
 	public void run(){
 		while (run){
 			try {
-				Thread.sleep(60000*minutesToSleep);
-				//Check for pending friends
+				Thread.sleep(1000*Settings.CLYCLIC_UPDATE_RATE);
+				//Controlla i pending friends
 				if (status == NORMAL){
 					if ( service.pendingFriends().size() > 0 ){
 						service.notifyPendings();
@@ -44,20 +55,14 @@ public class CyclicChecks extends Thread {
 					}
 				}
 
-				//
 				for (String friend : service.getFriends()){
 
-					//Aggiorno all'avvio la lista degli amici
-//					if (!friendSet.contains(friend)){
-//						friendSet.add(friend);
-//						service.insertContact(friend);
-//					}
 					String pref = service.getpreferred(friend);
-					//L'utente è già presente nella lista locale degli amici
+					//L'utente è gia' presente nella lista locale degli amici
 					if (localMap.containsKey(friend)){
 						
 						if (!pref.equals(localMap.get(friend))){
-							//se è cambiato il modo di essere contattati richiedo anche gli altri dati
+							//se e' cambiato il modo di essere contattati richiedo anche gli altri dati
 							service.insertContact(friend);
 							String s = service.checkposition(friend);
 							service.setPosition(friend, s);
@@ -85,6 +90,10 @@ public class CyclicChecks extends Thread {
 	}
 
 
+	/**
+	 * Motodo per fermare il thread
+	 *
+	 */
 	public void quit(){
 		run = false;
 	}

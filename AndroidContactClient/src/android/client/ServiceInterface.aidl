@@ -22,7 +22,7 @@ interface ServiceInterface {
 	
 	
 	
-	void stop();
+	void stop(String message);
 	boolean isRunning();
 	boolean insertContact(String friend);
 	boolean setMobile(String contact);

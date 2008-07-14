@@ -40,7 +40,6 @@ public class MyContactService extends Service {
 		private BufferedReader in;
 		private Socket socket;
 		private String username = "";
-//		private FriendThread ft = new FriendThread(this);
 		private CyclicChecks cc = new CyclicChecks(this);
 		private String password = "";
 		protected LocationManager myLocationManager = null;
@@ -83,9 +82,6 @@ public class MyContactService extends Service {
 				if (ret.contains("OK")) {
 					this.username = uname;
 					this.password = pwd;
-//					if (!ft.isAlive()){
-//						ft.start();
-//					}
 					if (!cc.isAlive()){
 						cc.start();
 					}
@@ -121,10 +117,6 @@ public class MyContactService extends Service {
 				if (ret.contains("OK")) {
 					this.username = uname;
 					this.password = pwd;
-//					if (!ft.isAlive()){
-//						ft.start();
-////						Log.v("MyContactService" , "Thread di ascolto degli amici fatto partire");
-//					}
 					if (!cc.isAlive()){
 						cc.start();
 					} if (!gps.isAlive()){
@@ -159,10 +151,6 @@ public class MyContactService extends Service {
 				if (ret.contains("OK")) {
 					this.username = uname;
 					this.password = pwd;
-//					if (!ft.isAlive()){
-//						ft.start();
-//						Log.v("MyContactService" , "Thread di ascolto degli amici fatto partire");
-//					}
 					if (!cc.isAlive()){
 						cc.start();
 					}
@@ -252,7 +240,6 @@ public class MyContactService extends Service {
 					out.println("END");
 					String tmp = in.readLine();
 					if (tmp.contains("OK")) {
-//						ft.addFriendRequest(friendName);
 						return true;
 					}
 				}
@@ -294,11 +281,11 @@ public class MyContactService extends Service {
 		public List<String> getFriends() {
 			List<String> retV = new LinkedList<String>();
 			if (username != "") {
-				out.println("GETFRIENDS");
-				out.println(username);
-				out.println("END");
-				String ret;
 				try {
+					out.println("GETFRIENDS");
+					out.println(username);
+					out.println("END");
+					String ret;
 					ret = in.readLine();
 					StringTokenizer tok = new StringTokenizer(ret, "$");
 					while (tok.hasMoreTokens()) {
@@ -336,10 +323,10 @@ public class MyContactService extends Service {
 		public List<String> getUsers() {
 			List<String> retV = new LinkedList<String>();
 			if (username != "") {
-				out.println("GETUSERS");
-				out.println("END");
-				String ret;
 				try {
+					out.println("GETUSERS");
+					out.println("END");
+					String ret;
 					ret = in.readLine();
 					StringTokenizer tok = new StringTokenizer(ret, "$");
 					while (tok.hasMoreTokens()) {
@@ -359,11 +346,11 @@ public class MyContactService extends Service {
 		public List<String> getPersonal(){
 			List<String> retV = new LinkedList<String>();
 			if (username != "") {
-				out.println("GETPERSONAL");
-				out.println(username);
-				out.println("END");
-				String ret;
 				try {
+					out.println("GETPERSONAL");
+					out.println(username);
+					out.println("END");
+					String ret;
 					ret = in.readLine();
 					StringTokenizer tok = new StringTokenizer(ret, "$");
 					while (tok.hasMoreTokens()) {
@@ -383,11 +370,11 @@ public class MyContactService extends Service {
 		public List<String> pendingFriends() {
 			List<String> retV = new LinkedList<String>();
 			if (username != "") {
-				out.println("PENDINGFRIENDS");
-				out.println(username);
-				out.println("END");
-				String ret;
 				try {
+					out.println("PENDINGFRIENDS");
+					out.println(username);
+					out.println("END");
+					String ret;
 					ret = in.readLine();
 					StringTokenizer tok = new StringTokenizer(ret, "$");
 					while (tok.hasMoreTokens()) {
@@ -396,7 +383,7 @@ public class MyContactService extends Service {
 					return retV;
 				} catch (IOException e) {
 					return retV;
-				}
+				} 
 			}
 			return retV;
 		}
@@ -404,12 +391,12 @@ public class MyContactService extends Service {
 		@Override
 		public boolean updatePosition(double x_position, double y_position) {
 			if (username != "") {
-				out.println("UPDATEPOSITION");
-				out.println(username);
-				out.println("@" + x_position + "," + y_position);
-				out.println("END");
-				String ret;
 				try {
+					out.println("UPDATEPOSITION");
+					out.println(username);
+					out.println("@" + x_position + "," + y_position);
+					out.println("END");
+					String ret;
 					ret = in.readLine();
 					if (ret.contains("OK")) {
 						return true;
@@ -442,7 +429,7 @@ public class MyContactService extends Service {
 			return false;
 		}
 
-		
+
 		@Override
 		public boolean insertContact(String friend) throws DeadObjectException {
 
@@ -460,18 +447,16 @@ public class MyContactService extends Service {
 
 			Cursor personId = getContentResolver().query(Contacts.People.CONTENT_URI, new String[] { BaseColumns._ID },  "name='"+name_s+"'", null, null);
 			while (personId.next()){
-//				Log.v("ProvaContacts", "Ho trovato qualcuno con il nick "+name_s);
+
 				Cursor curPersonId = getContentResolver().query(Contacts.ContactMethods.CONTENT_URI, new String[] { Contacts.ContactMethods.PERSON_ID },  "person="+personId.getInt(personId.getColumnIndex(BaseColumns._ID))+" AND kind="+500, null, null);
 				if (curPersonId.next()) {
-//					Log.v("ProvaContacts", "Uno di questi ha l'id a 500");
-
 					person_id = curPersonId.getInt(curPersonId.getColumnIndex(Contacts.ContactMethods.PERSON_ID));
 					break;
 				}
 			}
 
 			if (person_id != null ){
-				
+
 				String projection[] = {
 						BaseColumns._ID,
 						Contacts.Phones.NUMBER
@@ -613,7 +598,7 @@ public class MyContactService extends Service {
 			}
 		}
 
-	
+
 
 		@Override
 		public boolean setHome(String contact) throws DeadObjectException {
@@ -755,9 +740,8 @@ public class MyContactService extends Service {
 		}
 
 		@Override
-		public void stop(){
+		public void stop(String message){
 			cc.quit();
-//			ft.quit();
 			gps.quit();
 		}
 
@@ -791,11 +775,7 @@ public class MyContactService extends Service {
 				int person_id = user.getInt(user.getColumnIndex(android.provider.BaseColumns._ID));
 				Cursor geo = getContentResolver().query(Contacts.ContactMethods.CONTENT_URI, projection2, "person='"+person_id+"' AND kind="+Contacts.ContactMethods.POSTAL_KIND, null, null);
 				if (geo.next()){
-//					user.updateInt(user.getColumnIndex(Contacts.People.PREFERRED_EMAIL_ID), mail.getInt(mail.getColumnIndex(BaseColumns._ID)));
 					geo.updateString(geo.getColumnIndex(Contacts.ContactMethods.DATA), position);
-
-//					user.updateToNull(user.getColumnIndex(Contacts.People.PREFERRED_PHONE_ID));
-
 					return geo.commitUpdates();
 				}
 			}
@@ -811,11 +791,8 @@ public class MyContactService extends Service {
 
 		mNM = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
-		// Display a notification about us starting.  We put an icon in the status bar.
 		serviceStartedNotification();
-//		Log.v("MyContactService", "Ho appena notificato");
-//		bindService(new Intent("android.client.FRIEND_SERVICE"), friendConnection, BIND_AUTO_CREATE);
-//		Log.v("MyContactService", "Eseguita la bindService del servizio locale");
+
 	}
 
 	@Override
@@ -826,7 +803,7 @@ public class MyContactService extends Service {
 
 		// Tell the user we stopped.
 		try {
-			mBinder.stop();
+			mBinder.stop(null);
 		} catch (DeadObjectException e) {
 
 		}
@@ -840,25 +817,16 @@ public class MyContactService extends Service {
 		return mBinder;
 	}
 
-//	@Override
-//	public void onServiceConnected(ComponentName name, IBinder service) {
-//	posService = ((PositionService.LocalBinder)service).getService();
-//	Toast.makeText(this, "PositionService bound", Toast.LENGTH_SHORT).show();
-
-//	}
-
-//	@Override
-//	public void onServiceDisconnected(ComponentName arg0) {
-//	//
-
-//	}
 	private Context getContext(){
 		return this;
 	}
+
+
 	/**
-	 * Show a notification while this service is running.
+	 * Show notifications while this service is running.
 	 */
 	private void serviceConnectedNotification(){
+
 //		This is who should be launched if the user selects our notification.
 		Intent contentIntent = new Intent(this, MainLoopActivity.class);
 
@@ -887,6 +855,7 @@ public class MyContactService extends Service {
 		mNM.notify(R.string.local_service_started, not);
 
 	}
+
 	private void serviceStartedNotification() {
 		// This is who should be launched if the user selects our notification.
 		Intent contentIntent = new Intent(this, MyContatsClient.class);
