@@ -1,6 +1,5 @@
 package namingservice.core;
 
-import java.net.InetAddress;
 import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
@@ -19,6 +18,8 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	
 	private NodeMap n;
 	private NodeManager nm;
+	private static final long serialVersionUID = 7526471155622776147L;
+	
 	
 	/**
 	 * Costruttore Server si occupa di inizializzare i paramtri del servizio
@@ -261,7 +262,7 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 				line = line.replace(line.substring(0, line.indexOf(" ")+1), "");
 			}
 				
-			Iterator it = pars.iterator();
+			Iterator<String> it = pars.iterator();
 			NodeMap ns = n;
 			
 			
