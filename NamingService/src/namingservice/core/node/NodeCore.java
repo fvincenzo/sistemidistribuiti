@@ -16,20 +16,20 @@ public class NodeCore implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * Cotruttore si occupa di settere i parametri ID ed IP che non possono essere più cambiati
+	 * Cotruttore si occupa di settere i parametri ID ed IP che non possono essere piu' cambiati
 	 * 
 	 * @param ID identificatore dell'host
 	 * @param IP ip dell'host
 	 */
 	public NodeCore(String ID, String IP) {
 		
-//		System.out.println("Il nome è:"+ID);
+//		System.out.println("Il nome e':"+ID);
 		this.HostID = ID;
 		this.HostIP = IP;
 		
 	}
 	
-	//Funzioni di utilità
+	//Funzioni di utilita'
 	
 	public String getID() {
 		

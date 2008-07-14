@@ -47,7 +47,7 @@ public class Node implements Serializable{
  		
  	}
  	
- 	//Funzioni di utilità del singolo nodo: setter, getter, ecc
+ 	//Funzioni di utilita' del singolo nodo: setter, getter, ecc
  	
  	public String getName() {
  		

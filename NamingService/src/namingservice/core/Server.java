@@ -148,7 +148,7 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	 * @param ServerName nome del server che ha ricevuto modifica
 	 * @param root database del nodo che ha ricevuto la modifica
 	 * 
-	 * @return risultato della propagazione della modifica true se è andata a buon fine
+	 * @return risultato della propagazione della modifica true se e' andata a buon fine
 	 */
 	public boolean synch(String ServerName, Node root)throws RemoteException {
 		

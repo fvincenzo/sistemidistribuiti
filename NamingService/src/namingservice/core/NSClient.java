@@ -25,7 +25,7 @@ public class NSClient {
 	 * Metodo connect serve a connettersi ad un servizio attivo
 	 * 
 	 * @param nome host a cui ci si connette
-	 * @param Host servizio su cui è registrato
+	 * @param Host servizio su cui e' registrato
 	 * @return un oggetto remoto di tipo RemoteServer su cui poter invocare i principali messi a disposizione dal servizio di Naming
 	 */
 	public RemoteServer connect(String nome, String Host) {
