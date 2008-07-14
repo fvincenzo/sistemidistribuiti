@@ -19,7 +19,7 @@ public class NSServer {
 	private static Registry r;
 	
 	/**
-	 * Costruttore NSServer si occupa di inizializzare il servizio e di avviarlo dando la possibilità ai client di registrarsi
+	 * Costruttore NSServer si occupa di inizializzare il servizio e di avviarlo dando la possibilitï¿½ ai client di registrarsi
 	 * 
 	 * @param nome rappresenta il nome del servizio che si inizializza
 	 * @param father reappresenta il nodo padre della rete da cui questo servizio discende nel caso si tratti del nodo root il parametro father=null
