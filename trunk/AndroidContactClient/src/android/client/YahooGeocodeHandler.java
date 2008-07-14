@@ -4,6 +4,13 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+/**
+ * Classe per effettuare il parsing delle coordinate geografiche ottenute da yahoo sotto forma di XML.
+ * 
+ * @author Nicolas Tagliani
+ * @author Vincenzo Frascino
+ *
+ */
 public class YahooGeocodeHandler extends DefaultHandler {
 	private String latitude = "";
     private String longitude = "";
@@ -11,6 +18,7 @@ public class YahooGeocodeHandler extends DefaultHandler {
     private boolean isLatitude = false;
     private boolean isLongitude = false;
 
+    @Override
     public void startElement(String namespaceURI,
                              String localName,
                              String qName,
@@ -22,6 +30,7 @@ public class YahooGeocodeHandler extends DefaultHandler {
         }
     }
 
+    @Override
     public void endElement(String namespaceURI,
                            String localName,
                            String qName) throws SAXException {
@@ -32,6 +41,7 @@ public class YahooGeocodeHandler extends DefaultHandler {
         }
     }
 
+    @Override
     public void characters(char[] chars, int i, int i1) throws SAXException {
         if (isLatitude) {
             latitude = new String(chars, i, i1);
@@ -40,14 +50,29 @@ public class YahooGeocodeHandler extends DefaultHandler {
         }
     }
 
+    /**
+     * La latitudine sotto forma di String
+     * 
+     * @return la latitudine
+     */
     public String getLatitude() {
         return latitude;
     }
 
+    /**
+     * La longitudine sotto forma di String
+     * 
+     * @return la longitudine
+     */
     public String getLongitude() {
         return longitude;
     }
     
+    /**
+     * La latitudine sotto forma di long
+     * 
+     * @return la latitudine
+     */
     public long getLatitudeAsLong() {
     	if (latitude!=null && latitude.length()>0) {
     		return (long)(Double.parseDouble(latitude)*1000000);
@@ -56,6 +81,11 @@ public class YahooGeocodeHandler extends DefaultHandler {
     	}
     }
     
+    /**
+     * La longitudine sotto forma di long
+     * 
+     * @return la longitudine
+     */
     public long getLongitudeAsLong() {
     	if (longitude!=null && longitude.length()>0) {
     		return (long)(Double.parseDouble(longitude)*1000000);

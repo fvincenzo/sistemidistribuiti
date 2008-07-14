@@ -11,8 +11,17 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * Classe che implementa la schermata principale del programma in cui si puo' anche far partire o fermare il servizio remoto
+ * 
+ * @author Nicolas Tagliani
+ * @author Vincenzo Frascino
+ */
 public class MainLoopActivity extends Activity implements OnClickListener, ServiceConnection{
 
+	/**
+	 * Intent a cui è sensibile la MainLoopActivity
+	 */
 	public static final String MAIN_LOOP_ACTION =
 		"android.client.action.MAIN_LOOP";
 	
@@ -32,11 +41,6 @@ public class MainLoopActivity extends Activity implements OnClickListener, Servi
 		
 		bindService(new Intent("android.client.MY_SERVICE"),this,0);
 		
-//		}
-//		else {
-//			startActivity(new Intent(Intent.MAIN_ACTION, getIntent().getData()));
-//			finish();
-//		}
 	}
 
 
@@ -45,6 +49,7 @@ public class MainLoopActivity extends Activity implements OnClickListener, Servi
 		if (arg0 == findFriends){
 			startActivity(new Intent(android.client.FriendsList.ALL_USERS_ACTION, getIntent().getData()));
 		}
+		
 		if (arg0 == start){
 			startService(new Intent("android.client.MY_SERVICE"), null);
 			start.setVisibility(View.INVISIBLE);
@@ -53,21 +58,23 @@ public class MainLoopActivity extends Activity implements OnClickListener, Servi
 			runningLabel.setVisibility(View.VISIBLE);
 			
 		}
+		
 		if (arg0 == stop){
 			stopService(new Intent("android.client.MY_SERVICE"));
 			stop.setVisibility(View.INVISIBLE);
 			runningLabel.setVisibility(View.INVISIBLE);
 			start.setVisibility(View.VISIBLE);
 			notRunningLabel.setVisibility(View.VISIBLE);
-			
 		}
+		
 		if (arg0 == modifyData){
 			startActivity(new Intent(RegisterActivity.MODIFY_ACTION, getIntent().getData()));
 		}
+		
 		if (arg0 == addOneFriend){
 			startActivity(new Intent(android.client.AddOneFriend.ADD_FRIEND_ACTION, getIntent().getData()));
-			
 		}
+		
 		if (arg0 == addLocation){
 			startActivity(new Intent(android.client.LocationSelection.SELECT_LOCATION_ACTION, getIntent().getData()));
 			

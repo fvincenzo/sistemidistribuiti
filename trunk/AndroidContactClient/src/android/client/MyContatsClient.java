@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.DeadObjectException;
 import android.os.IBinder;
@@ -15,52 +14,36 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-
+/**
+ * Classe che implementa la schermata e le operazioni di login.
+ * Si tratta della classe principale che viene fatta partire quando si clicca sull'icona
+ * 
+ * @author Nicolas Tagliani
+ * @author Vincenzo Frascino
+ *
+ */
 public class MyContatsClient extends Activity implements OnClickListener, ServiceConnection{
 
-	//TODO sistemare la gestione del servizio
-
-	private ServiceInterface s;
-
+	
+	/**
+	 * Intent a cui e' sensibile questa classe
+	 */
 	public static final String LOGIN_ACTION =
 		"android.client.action.LOGIN";
 
-//	public static final String MAIN_LwOOP_ACTION =
-//		"android.client.action.MAIN_LOOP";
-
-	public static final int SERVICE_BOUND = 1;
-
-	private static final int LOGIN = 1;
-
-	public int service_status = 1;
+	private ServiceInterface s;
 	private Button login;
 	private Button register;
 	private CheckBox forcelogin;
-	EditText username;
-	EditText password;
-//	private LocationManager myLocationManager = null;
+	private EditText username;
+	private EditText password;
 
+	
 	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
-
-//		final Intent intent = getIntent();
-//		String action = intent.getAction();
-//		if (action.equals(Intent.MAIN_ACTION)){
-
-//		if (bindService(new Intent("android.client.MY_SERVICE"),this, 0)){
-//		startActivity(new Intent(MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
-////		finish();
-//		} else {
-//		myLocationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
-		
-		
 		startService(new Intent("android.client.MY_SERVICE"), null);
 		bindService(new Intent("android.client.MY_SERVICE"),this, 0);
-
-//		}
-//		}
-
 
 	}
 
@@ -68,7 +51,6 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 	public void onClick(View arg0) {
 		if (arg0 == login){
 			bindService(new Intent("android.client.MY_SERVICE"),this, 0);
-			service_status = LOGIN;
 
 			final String u = username.getText().toString();
 			final String p = password.getText().toString();

@@ -16,14 +16,24 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 
+/**
+ * Classe che implementa le funzioni relative ai dati degli utenti: registrazione e modifica.
+ * 
+ * @author Nicolas Tagliani
+ * @author Vincenzo Frascino
+ *
+ */
 public class RegisterActivity extends Activity implements OnClickListener , ServiceConnection{
 
 	/**
-	 * This is a special intent action that means "register a new user".
+	 * Intent a cui e' sensibile con il significato di "registra un nuovo utente".
 	 */
 	public static final String REGISTER_ACTION =
 		"android.client.action.REGISTER";
 
+	/**
+	 * Intent a cui e' sensibile con il significato di "modifica i dati di un utente".
+	 */
 	public static final String MODIFY_ACTION = 
 		"android.client.action.MODIFY";
 
@@ -41,10 +51,6 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 	private EditText work;
 	private EditText email;
 	private EditText im;
-
-//	private LocationManager lManager;
-
-	
 
 
 	@Override
@@ -74,10 +80,10 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 				final String w = work.getText().toString();
 				final String e = email.getText().toString();
 				final String i = im.getText().toString();
-//				Location l = lManager.getCurrentLocation("gps");
+
 				try {
 					contactList.connect(Settings.SERVER_ADDR);
-//					if (contactList.register(u, p, m, h, w, e, i, l.getLatitude(), l.getLongitude())){
+
 					if (contactList.register(u, p, m, h, w, e, i)){
 						startActivity(new Intent(android.client.MainLoopActivity.MAIN_LOOP_ACTION, getIntent().getData()));
 						finish();
@@ -133,8 +139,6 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 			button  = (Button) findViewById(R.id.Register_final);
 			button.setOnClickListener(this);
 			
-//				lManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-			
 			if (status == MODIFY){
 				username.setEnabled(false);
 				List<String> personal = contactList.getPersonal();
@@ -159,7 +163,13 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 
 	}
 	
-	
+	/**
+	 * Metodo richiamato dal dialog per la modifica dei propri dati se si vuole cambiare anche la password
+	 * 
+	 * @param oldPassword La vecchia password inserita per ragioni di sicurezza
+	 * 
+	 * @return true se ha sucesso false altrimenti
+	 */
 	public boolean changePersonalData(String oldPassword){
 		try {
 			return contactList.changepersonal(username.getText().toString(), oldPassword, password.getText().toString(), mobile.getText().toString(), home.getText().toString(), work.getText().toString(), email.getText().toString(), im.getText().toString());
@@ -170,6 +180,12 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 		
 	}
 
+	/**
+	 * Dialog per l'inserimento della vecchia password quando si vuole modificare anche la password.
+	 * Per gli altri dati non e' necessario reinserire la password
+	 * @author noname
+	 *
+	 */
 	class PasswordDialog extends Dialog implements OnClickListener{
 
 		private Button ok;
