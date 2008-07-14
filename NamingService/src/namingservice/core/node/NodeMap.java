@@ -11,11 +11,11 @@ import java.io.Serializable;
  * @author Nicolas Tagliani e Vincenzo Frascino
  *
  */
-public class Node implements Serializable{
+public class NodeMap implements Serializable{
 	
-	private Hashtable<String,Node> children;
+	private Hashtable<String,NodeMap> children;
 	private Vector<String> names;
- 	private Node father;
+ 	private NodeMap father;
  	private String name;
  	private String nodeInfo;
  	private static final long serialVersionUID = 7526471155622776147L;
@@ -32,12 +32,12 @@ public class Node implements Serializable{
  	 * @param father riferimento del padre
  	 * @param Info informazioni sul nodo
  	 */
- 	public Node(String name, String host, String ip, Node father, String Info) {
+ 	public NodeMap(String name, String host, String ip, NodeMap father, String Info) {
  		
  		super();
  		
  		this.father = father;
- 		this.children = new Hashtable<String,Node>();
+ 		this.children = new Hashtable<String,NodeMap>();
  		this.names = new Vector<String>();
  		this.name = name;
  		this.nodeInfo = Info;
@@ -61,15 +61,15 @@ public class Node implements Serializable{
  		
  	} 
  	
- 	public Node getFather() {
+ 	public NodeMap getFather() {
  		
  		return this.father;
  		
  	}
  	
- 	public Node getRoot() {
+ 	public NodeMap getRoot() {
  		
- 		Node n = this;
+ 		NodeMap n = this;
  		
  		while(n.getName() != "/") {
  			n = n.getFather();
@@ -79,9 +79,9 @@ public class Node implements Serializable{
  		
  	}
  	
- 	public Node getSNode(String s) {
+ 	public NodeMap getSNode(String s) {
  		
- 		Node n = this;
+ 		NodeMap n = this;
  		
  		while(n.getName() != s) {
  			n = n.getFather();
@@ -103,16 +103,16 @@ public class Node implements Serializable{
  		
  	}
  	
- 	public void addChild(String name, String  host, String ip, Node father, String Info) {
+ 	public void addChild(String name, String  host, String ip, NodeMap father, String Info) {
  		
  		names.add(name);
- 		children.put(name, new Node(name,host,ip,father,Info));
+ 		children.put(name, new NodeMap(name,host,ip,father,Info));
  		
  	}
  	
- 	public Node getChild(String name) {
+ 	public NodeMap getChild(String name) {
  		
- 		return ((Node)children.get(name));
+ 		return ((NodeMap)children.get(name));
  		
  	}
  	
@@ -156,7 +156,7 @@ public class Node implements Serializable{
  		
  	}
  	
- 	public Hashtable<String,Node> getChildren(){
+ 	public Hashtable<String,NodeMap> getChildren(){
  		
  		return this.children;
  		
@@ -168,7 +168,7 @@ public class Node implements Serializable{
  		
  	}
   	
- 	public void updateNode(Node n) {
+ 	public void updateNode(NodeMap n) {
  		
  		this.children = n.getChildren();
  		this.names = n.getNames();

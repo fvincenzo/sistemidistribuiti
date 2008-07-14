@@ -11,13 +11,13 @@ import java.util.Vector;
  */
 public class NodeManager {
 	
-	private Node n;
+	private NodeMap n;
 	
 	/**
 	 * Costruttore NodeManager 
 	 * @param n nodo da gestire
 	 */
-	public NodeManager(Node n) {
+	public NodeManager(NodeMap n) {
 		
 		this.n = n;
 		
@@ -42,8 +42,14 @@ public class NodeManager {
 			Vector<String> list = n.listChild();
 			Iterator<String> i = list.iterator();
 			
-			while(i.hasNext()) {
-				result += ((String) i.next()) + " ";
+			if(list.isEmpty()) {
+				result = " ";
+			} else {
+			
+				while(i.hasNext()) {
+					result += ((String) i.next()) + " ";
+				}
+				
 			}
 			
 		} 
@@ -62,8 +68,8 @@ public class NodeManager {
 						
 						if(n.getName().equals("/")==false)
 							n = n.getFather();
-						else
-							n = n;
+//						else
+//							n = n;
 						
 					} else {
 						

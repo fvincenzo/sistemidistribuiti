@@ -11,6 +11,7 @@ import java.util.Vector;
 import namingservice.core.NSClient;
 import namingservice.core.NSServer;
 import namingservice.core.RemoteServer;
+import namingservice.core.Server;
 
 /**
  * Classe Client usata per connettersi al servizio di naming
@@ -31,13 +32,14 @@ public class Client {
 		try {
 			
 			NSServer ns;
+			Server s = null;
 			InputStreamReader reader = new InputStreamReader (System.in);
 			BufferedReader in = new BufferedReader (reader);
 			BufferedReader i = new BufferedReader(new FileReader("config.txt"));
 			String host = i.readLine();
 			String hname = host.substring(0,host.indexOf(" "));
 			String haddr = host.substring(host.indexOf(" ")+1);
-			String myname;
+			String myname = null;
 			
 			NSClient nsc = null;
 			RemoteServer rs = null;
@@ -49,6 +51,12 @@ public class Client {
 					
 					System.out.print(">");
 			        str = in.readLine ();
+			        
+			        if (str.compareTo("start")==0) {
+			        	
+			        	ns = new NSServer("root",null);
+			        	
+			        }
 			        
 			        if (str.compareTo("connect")==0) {
 			        	
@@ -99,7 +107,8 @@ public class Client {
 			        		System.out.print("Server Name:");
 			        		myname = in.readLine();
 			        		ns = new NSServer(nsc.register(myname,InetAddress.getLocalHost().getHostAddress()),rs.getReference());
-			       
+			        		s = ns.getReference();
+			        		
 			        	} else {
 			        		
 			        		System.out.println("Connect Before");
@@ -149,9 +158,7 @@ public class Client {
 			        if(str.compareTo("askremove")==0) {
 			        	if (conn == 1) {
 			        		
-			        		System.out.println("Node Name:");
-			        		String a = in.readLine();
-			        		System.out.println(rs.remove(a));
+			        		System.out.println(rs.askremove(myname));
 			        		
 			        	} else {
 			        		
@@ -165,7 +172,7 @@ public class Client {
 			        		
 			        		System.out.println("Node Name:");
 			        		String a = in.readLine();
-			        		System.out.println(rs.remove(a));
+			        		System.out.println(s.remove(a));
 			        		
 			        	} else {
 			        		
@@ -193,7 +200,7 @@ public class Client {
 			        else {
 			        	
 			        	if(str.isEmpty()) str = "empty";
-			        	System.out.println(rs.exec(str));
+			        	System.out.println(s.exec(str));
 			        	
 			        }
 

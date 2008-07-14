@@ -68,7 +68,8 @@ public class NSClient {
 	}
 	
 	/**
-	 * Metodo list consente di vedere gli host registrati al proprio livello (metodo usato in fase di debug onde evitare di chiamare quello presente nell'interfaccia remota)
+	 * Metodo list consente di vedere gli host registrati al proprio livello 
+	 * (metodo usato in fase di debug onde evitare di chiamare quello presente nell'interfaccia remota)
 	 * 
 	 * @return un vettore di stringhe contenete i nomi degli host
 	 */
