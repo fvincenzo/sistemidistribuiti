@@ -283,15 +283,18 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		
 		String result = n.removeChild(Name);
 		
-		String url = "//"+n.getFather().getHostIP()+":1099/"+n.getFather().getHostID();
+		if(!n.getHostID().equals("root")) {
+			String url = "//"+n.getFather().getHostIP()+":1099/"+n.getFather().getHostID();
 		
-		try {
+			try {
 			
-			RemoteServer r = (RemoteServer) Naming.lookup(url);
-			r.synch(n.getHostID(), n);
+				RemoteServer r = (RemoteServer) Naming.lookup(url);
+				r.synch(n.getHostID(), n);
 			
-		} catch (Exception e) {
-			// TODO: handle exception
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		
 		}
 		
 		return result;
@@ -300,19 +303,10 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	
 	public String askremove(String Name) throws RemoteException {
 		
-		String result = n.removeChild(Name);
+		System.out.println("Name:"+Name+"Father:"+n.getHostID()+"Exists:"+n.findChild(Name));
 		
-		String url = "//"+n.getFather().getHostIP()+":1099/"+n.getFather().getHostID();
-		
-		try {
+		String result = remove(Name);
 			
-			RemoteServer r = (RemoteServer) Naming.lookup(url);
-			r.synch(n.getHostID(), n);
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
 		return result;
 		
 	}
