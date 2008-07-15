@@ -12,11 +12,29 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import android.pc.client.api.PcClientAPI;
+import android.pc.client.api.PcClientAPIInterface;
+
+
+/**
+ * Classe PcClient: implementazione di un client con le api fornite dalla classe PcClientAPI
+ * dialoga con il server e può settare la modalità preferità da cui essere contattati 
+ * scegliendola tra quelle presenti sul PC cioè Mail ed IM.
+ * 
+ * Tale Client è platform indipendent (Testato su Linux Mac e Windows x86)
+ *  
+ * @author Nicolas Tagliani e Vincenzo Frascino
+ *
+ */
 public class PcClient {
 
+	/**
+	 * Costruttore PcClient si occupa di inializzare ed istanziare la API fornite da PcClientAPI
+	 * e di istanziare i principali oggetti grafici che costituiscono il client
+	 */
 	public PcClient() {
 		
-		final PcClientAPI pcapi = new PcClientAPI();
+		final PcClientAPIInterface pcapi = new PcClientAPI();
 		
 		final TrayIcon trayIcon;
 
@@ -129,6 +147,7 @@ public class PcClient {
 	}
 	
 	/**
+	 * Metodo main fa partire l'applicazione
 	 * @param args
 	 */
 	public static void main(String[] args) {
