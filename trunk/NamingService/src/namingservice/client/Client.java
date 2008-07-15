@@ -172,6 +172,7 @@ public class Client {
 			        	if (conn == 1) {
 			        		
 			        		System.out.println(rs.askremove(myname));
+			        		conn = 0;
 			        		
 			        	} else {
 			        		

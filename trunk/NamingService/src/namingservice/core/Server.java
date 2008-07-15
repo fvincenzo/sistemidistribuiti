@@ -303,7 +303,7 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	
 	public String askremove(String Name) throws RemoteException {
 		
-		System.out.println("Name:"+Name+"Father:"+n.getHostID()+"Exists:"+n.findChild(Name));
+		System.out.println("Name: "+Name+" Father: "+n.getHostID()+" Removed: "+n.findChild(Name));
 		
 		String result = remove(Name);
 			
