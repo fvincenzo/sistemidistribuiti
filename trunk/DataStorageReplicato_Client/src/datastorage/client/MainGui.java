@@ -26,15 +26,16 @@ import datastorage.corba.Server;
 import datastorage.corba.ServerHelper;
 
 /**
- * Classe che implementa un semplice client grafico per accedere alle funzionalita' deò datastorage replicato
- * 
- * 
- * @author Vincenzo Frascino
- * @author Nicolas Tagliani
- *
+ * Classe che implementa un semplice client grafico per accedere alle funzionalita' deï¿½ datastorage replicato
+ * @author  Vincenzo Frascino
+ * @author  Nicolas Tagliani
  */
 @SuppressWarnings("serial")
 public class MainGui extends JFrame implements ActionListener , KeyListener{
+	/**
+	 * @uml.property  name="m"
+	 * @uml.associationEnd  
+	 */
 	private static MainGui m;
 	private Server s;
 	private int defaultWidth = 400;
