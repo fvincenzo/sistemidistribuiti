@@ -5,19 +5,23 @@ import java.util.Vector;
 import java.io.*;
 
 /**
- * Classe che implementa il socket server del sistema.
- * Questa classe si occupa di gestire le richieste che provengono da un client. 
- * Esistera' un'istanza di questa classe per ogni utente connesso.
- * 
- * @author Nicolas Tagliani
- * @author Vincenzo Frascino
- *
+ * Classe che implementa il socket server del sistema. Questa classe si occupa di gestire le richieste che provengono da un client.  Esistera' un'istanza di questa classe per ogni utente connesso.
+ * @author  Nicolas Tagliani
+ * @author  Vincenzo Frascino
  */
 public class SocketServer extends Thread{
 
 	private  String result;
 	private Socket clientSocket;
+	/**
+	 * @uml.property  name="u"
+	 * @uml.associationEnd  
+	 */
 	private User u;
+	/**
+	 * @uml.property  name="um"
+	 * @uml.associationEnd  
+	 */
 	private UserManager um = UserManager.getHinstance();
 	private boolean run = true;
 	private boolean logged;
