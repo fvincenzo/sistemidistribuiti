@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1189,516" id="namingservice" metadata="uml2-1.0" initialized="true" tag="1000" key="32303038303431342D31303030204E616D696E67536572766963652F6761627269656C6B6E69676874">
+  <children xsi:type="editmodel:PackageEditModel" name="namingservice.client" location="5,5" size="216,186" id="namingservice.client">
+    <children xsi:type="editmodel:ClassEditModel" name="Client" location="67,73" size="84,68" id="namingservice.client/Client">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="59,18">
+        <children xsi:type="editmodel:MethodEditModel" name="main" id="namingservice.client/Client#main([Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="namingservice.core" location="245,0" size="446,453" id="namingservice.core">
+    <children xsi:type="editmodel:ClassEditModel" name="NSClient" location="8,40" size="104,122" id="namingservice.core/NSClient">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="79,72">
+        <children xsi:type="editmodel:MethodEditModel" name="NSClient" id="namingservice.core/NSClient#NSClient()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="connect" id="namingservice.core/NSClient#connect(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="list" id="namingservice.core/NSClient#list()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="register" id="namingservice.core/NSClient#register(Ljava.lang.String;Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="NSServer" location="132,37" size="129,86" id="namingservice.core/NSServer">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="106,36">
+        <children xsi:type="editmodel:MethodEditModel" name="NSServer" id="namingservice.core/NSServer#NSServer(Ljava.lang.String;Lnamingservice.core.node.NodeMap;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getReference" id="namingservice.core/NSServer#getReference()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@children.3/@sourceConnections.0" name="RemoteServer" location="284,37" size="146,225" id="namingservice.core/RemoteServer">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="106,162">
+        <children xsi:type="editmodel:MethodEditModel" name="Info" id="namingservice.core/RemoteServer#Info()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="add" id="namingservice.core/RemoteServer#add(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="askremove" id="namingservice.core/RemoteServer#askremove(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="find" id="namingservice.core/RemoteServer#find(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getReference" id="namingservice.core/RemoteServer#getReference()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getlist" id="namingservice.core/RemoteServer#getlist()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="request" id="namingservice.core/RemoteServer#request(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="sum" id="namingservice.core/RemoteServer#sum(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="synch" id="namingservice.core/RemoteServer#synch(Ljava.lang.String;Lnamingservice.core.node.NodeMap;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="Server" location="130,131" size="129,302" id="namingservice.core/Server">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="106,252">
+        <children xsi:type="editmodel:MethodEditModel" name="Info" id="namingservice.core/Server#Info()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="Server" id="namingservice.core/Server#Server(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Lnamingservice.core.node.NodeMap;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="add" id="namingservice.core/Server#add(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="askremove" id="namingservice.core/Server#askremove(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="exec" id="namingservice.core/Server#exec(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="find" id="namingservice.core/Server#find(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getReference" id="namingservice.core/Server#getReference()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getlist" id="namingservice.core/Server#getlist()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="lfind" id="namingservice.core/Server#lfind(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="remove" id="namingservice.core/Server#remove(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="request" id="namingservice.core/Server#request(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="sum" id="namingservice.core/Server#sum(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="synch" id="namingservice.core/Server#synch(Ljava.lang.String;Lnamingservice.core.node.NodeMap;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="updateNode" id="namingservice.core/Server#updateNode(Ljava.lang.String;Lnamingservice.core.node.NodeMap;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="namingservice.core/RemoteServer&lt;-namingservice.core/Server" source="//@children.1/@children.3" target="//@children.1/@children.2" targetEnd="//@children.1/@children.3/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@children.3/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="129,65" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,159"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="namingservice.core.node" location="705,5" size="456,431" id="namingservice.core.node">
+    <children xsi:type="editmodel:ClassEditModel" name="NodeCore" location="312,47" size="115,104" id="namingservice.core.node/NodeCore" runTimeClassModel="getIP(),getID(),NodeCore(Ljava.lang.String;Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="87,54">
+        <children xsi:type="editmodel:MethodEditModel" name="NodeCore" id="namingservice.core.node/NodeCore#NodeCore(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getID" id="namingservice.core.node/NodeCore#getID()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getIP" id="namingservice.core.node/NodeCore#getIP()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="NodeManager" location="281,165" size="146,104" id="namingservice.core.node/NodeManager">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="109,54">
+        <children xsi:type="editmodel:MethodEditModel" name="NodeManager" id="namingservice.core.node/NodeManager#NodeManager(Lnamingservice.core.node.NodeMap;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="exec" id="namingservice.core.node/NodeManager#exec(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="update" id="namingservice.core.node/NodeManager#update(Lnamingservice.core.node.NodeMap;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="NodeMap" location="7,35" size="260,356" id="namingservice.core.node/NodeMap">
+      <children xsi:type="editmodel:CompartmentEditModel" size="237,54">
+        <children xsi:type="editmodel:AttributeEditModel" name="children" id="namingservice.core.node/NodeMap#children"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="name" id="namingservice.core.node/NodeMap#name"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="names" id="namingservice.core.node/NodeMap#names"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="134,252">
+        <children xsi:type="editmodel:MethodEditModel" name="NodeMap" id="namingservice.core.node/NodeMap#NodeMap(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Lnamingservice.core.node.NodeMap;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="addChild" id="namingservice.core.node/NodeMap#addChild(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Lnamingservice.core.node.NodeMap;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="findChild" id="namingservice.core.node/NodeMap#findChild(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getChild" id="namingservice.core.node/NodeMap#getChild(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getHostID" id="namingservice.core.node/NodeMap#getHostID()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getHostIP" id="namingservice.core.node/NodeMap#getHostIP()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getInfo" id="namingservice.core.node/NodeMap#getInfo()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getRoot" id="namingservice.core.node/NodeMap#getRoot()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getSNode" id="namingservice.core.node/NodeMap#getSNode(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="listChild" id="namingservice.core.node/NodeMap#listChild()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="recursiveFindChild" id="namingservice.core.node/NodeMap#recursiveFindChild(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="removeChild" id="namingservice.core.node/NodeMap#removeChild(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="setInfo" id="namingservice.core.node/NodeMap#setInfo(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="updateNode" id="namingservice.core.node/NodeMap#updateNode(Lnamingservice.core.node.NodeMap;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

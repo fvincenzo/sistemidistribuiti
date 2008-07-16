@@ -5,14 +5,20 @@ import java.util.Vector;
 
 /**
  * Classe NodeManager costituisce il sistema di gestione del database interno di un Host rappresenta un nodo della rete
- * 
- * @author Nicolas Tagliani e Vincenzo Frascino
- *
+ * @author  Nicolas Tagliani e Vincenzo Frascino
  */
 public class NodeManager {
 	
+	/**
+	 * @uml.property  name="curPos"
+	 * @uml.associationEnd  
+	 */
 	private NodeMap curPos;
 	
+	/**
+	 * @uml.property  name="n"
+	 * @uml.associationEnd  
+	 */
 	private NodeMap n;
 	
 	/**

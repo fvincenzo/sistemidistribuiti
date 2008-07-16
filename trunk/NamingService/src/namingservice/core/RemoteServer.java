@@ -25,6 +25,6 @@ public interface RemoteServer extends Remote {
 	public boolean synch(String ServerName, NodeMap root)throws RemoteException;
 	public String Info() throws RemoteException;
 	public String find(String Name) throws RemoteException;
-	public void updateNode(String ServerName, NodeMap root)throws RemoteException;
+	//public void updateNode(String ServerName, NodeMap root)throws RemoteException;
 	
 }

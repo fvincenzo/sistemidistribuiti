@@ -5,12 +5,14 @@ import java.util.Vector;
 
 /**
  * Classe NSClient Svolge le principali funzioni di connessione ad un servizio attivo
- * 
- * @author Nicolas Tagliani e Vincenzo Frascino
- *
+ * @author  Nicolas Tagliani e Vincenzo Frascino
  */
 public class NSClient {
 
+	/**
+	 * @uml.property  name="r"
+	 * @uml.associationEnd  
+	 */
 	private RemoteServer r;
 	
 	/**
