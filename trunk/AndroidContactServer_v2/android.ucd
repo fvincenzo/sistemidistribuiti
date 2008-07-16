@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1183,486" id="android" metadata="uml2-1.0" initialized="true" scrolledY="22" tag="1000" key="32303038303431342D3130303020416E64726F6964436F6E746163745365727665722F6761627269656C6B6E69676874">
+  <children xsi:type="editmodel:PackageEditModel" name="android.server" location="35,5" size="973,498" id="android.server">
+    <children xsi:type="editmodel:ClassEditModel" name="MainServer" location="30,87" size="124,68" id="android.server/MainServer" runTimeClassModel="main([Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="59,18">
+        <children xsi:type="editmodel:MethodEditModel" name="main" id="android.server/MainServer#main([Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="android.server/MainServer-Standard::Call->android.server/SocketServer*android.server/MainServer-Standard::Instantiate->android.server/SocketServer" source="//@children.0/@children.0" target="//@children.0/@children.1" targetEnd="//@children.0/@children.0/@sourceConnections.0/@children.2" label="//@children.0/@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Instantiate, Call»" size="103,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="116,34" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,77"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.0/@sourceConnections.0 //@children.0/@children.3/@sourceConnections.0" name="SocketServer" location="224,44" size="145,410" id="android.server/SocketServer" runTimeClassModel="setpreferred(Ljava.lang.String;Ljava.lang.String;),changePersonal(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),login(Ljava.lang.String;Ljava.lang.String;),getfriends(Ljava.lang.String;),addfriend(Ljava.lang.String;Ljava.lang.String;),updateposition(Ljava.lang.String;Ljava.lang.String;),getusers(),run,forcelogin(Ljava.lang.String;Ljava.lang.String;),register(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),getPersonal(Ljava.lang.String;),getpreferred(Ljava.lang.String;Ljava.lang.String;),acceptfriend(Ljava.lang.String;Ljava.lang.String;),run(),quit(),SocketServer(Ljava.net.Socket;),getuserdata(Ljava.lang.String;Ljava.lang.String;),pendingfriends(Ljava.lang.String;),getposition(Ljava.lang.String;Ljava.lang.String;),denyfriend(Ljava.lang.String;Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="91,18">
+        <children xsi:type="editmodel:AttributeEditModel" name="run" id="android.server/SocketServer#run"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="122,342">
+        <children xsi:type="editmodel:MethodEditModel" name="SocketServer" id="android.server/SocketServer#SocketServer(Ljava.net.Socket;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="acceptfriend" id="android.server/SocketServer#acceptfriend(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="addfriend" id="android.server/SocketServer#addfriend(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="changePersonal" id="android.server/SocketServer#changePersonal(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="denyfriend" id="android.server/SocketServer#denyfriend(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="forcelogin" id="android.server/SocketServer#forcelogin(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getPersonal" id="android.server/SocketServer#getPersonal(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getfriends" id="android.server/SocketServer#getfriends(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getposition" id="android.server/SocketServer#getposition(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getpreferred" id="android.server/SocketServer#getpreferred(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getuserdata" id="android.server/SocketServer#getuserdata(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getusers" id="android.server/SocketServer#getusers()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="login" id="android.server/SocketServer#login(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="pendingfriends" id="android.server/SocketServer#pendingfriends(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="quit" id="android.server/SocketServer#quit()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="register" id="android.server/SocketServer#register(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="run" id="android.server/SocketServer#run()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="setpreferred" id="android.server/SocketServer#setpreferred(Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="updateposition" id="android.server/SocketServer#updateposition(Ljava.lang.String;Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="android.server/User@u+android.server/SocketServer@" source="//@children.0/@children.1" target="//@children.0/@children.2" targetEnd="//@children.0/@children.1/@sourceConnections.0/@children.2" label="//@children.0/@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="145,205" id="android.server/User@u+android.server/SocketServer@|android.server/SocketServer#" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="u" location="0,208" id="android.server/User@u+android.server/SocketServer@|android.server/User#u" multiplicityLabel="//@children.0/@children.1/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.0/@children.1/@sourceConnections.0/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - u" location="459,261" size="19,13" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="0..1" location="456,234" size="22,13" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="android.server/UserManager@um+android.server/SocketServer@" source="//@children.0/@children.1" target="//@children.0/@children.3" targetEnd="//@children.0/@children.1/@sourceConnections.1/@children.2" label="//@children.0/@children.1/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@children.1/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="145,131" id="android.server/UserManager@um+android.server/SocketServer@|android.server/SocketServer#" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="um" location="0,118" id="android.server/UserManager@um+android.server/SocketServer@|android.server/UserManager#um" multiplicityLabel="//@children.0/@children.1/@sourceConnections.1/@children.2/@children.1" roleLabel="//@children.0/@children.1/@sourceConnections.1/@children.2/@children.0" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - um" location="766,189" size="30,13" anchorKind="LastPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="789,162" size="7,13" anchorKind="LastPart"/>
+        </children>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="android.server/SocketServer-Standard::Call->android.server/User*android.server/SocketServer-Standard::Instantiate->android.server/User*android.server/SocketServer-Soyatec::Import->android.server/User" source="//@children.0/@children.1" target="//@children.0/@children.2" targetEnd="//@children.0/@children.1/@sourceConnections.2/@children.2" label="//@children.0/@children.1/@sourceConnections.2/@children.0" sourceEnd="//@children.0/@children.1/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" location="524,85" size="148,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="145,225" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,243"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="android.server/SocketServer-Standard::Call->android.server/UserManager*android.server/SocketServer-Soyatec::Import->android.server/UserManager" source="//@children.0/@children.1" target="//@children.0/@children.3" targetEnd="//@children.0/@children.1/@sourceConnections.3/@children.2" label="//@children.0/@children.1/@sourceConnections.3/@children.0" sourceEnd="//@children.0/@children.1/@sourceConnections.3/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="80,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="145,91" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,76"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.1/@sourceConnections.0 //@children.0/@children.1/@sourceConnections.2 //@children.0/@children.3/@sourceConnections.1" name="User" location="450,41" size="173,428" id="android.server/User" runTimeClassModel="work,home,mail,removePenginds(Ljava.lang.String;),geo,load(),getUserInfo(),getUser(),saveMe(),User(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),im,toString(),addFriend(Ljava.lang.String;),pwd,addPendings(Ljava.lang.String;),friends,getPersonal(),preferredMode,equals(Ljava.lang.Object;),pendings,mobile">
+      <children xsi:type="editmodel:CompartmentEditModel" size="150,180">
+        <children xsi:type="editmodel:AttributeEditModel" name="friends" id="android.server/User#friends"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="geo" id="android.server/User#geo"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="home" id="android.server/User#home"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="im" id="android.server/User#im"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="mail" id="android.server/User#mail"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="mobile" id="android.server/User#mobile"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="pendings" id="android.server/User#pendings"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="preferredMode" id="android.server/User#preferredMode"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="pwd" id="android.server/User#pwd"/>
+        <children xsi:type="editmodel:AttributeEditModel" name="work" id="android.server/User#work"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="126,198">
+        <children xsi:type="editmodel:MethodEditModel" name="User" id="android.server/User#User(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="addFriend" id="android.server/User#addFriend(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="addPendings" id="android.server/User#addPendings(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="equals" id="android.server/User#equals(Ljava.lang.Object;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getPersonal" id="android.server/User#getPersonal()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getUser" id="android.server/User#getUser()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getUserInfo" id="android.server/User#getUserInfo()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="load" id="android.server/User#load()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="removePenginds" id="android.server/User#removePenginds(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="saveMe" id="android.server/User#saveMe()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="toString" id="android.server/User#toString()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.1/@sourceConnections.1 //@children.0/@children.1/@sourceConnections.3 //@children.0/@children.3/@sourceConnections.2" name="UserManager" location="768,59" size="197,194" id="android.server/UserManager" runTimeClassModel="commit(),users,getHinstance(),addUser(Landroid.server.User;),getUser(Ljava.lang.String;),removeUnameConnected(Ljava.lang.String;),unameConnected(Ljava.lang.String;),setConnected(Ljava.lang.String;Landroid.server.SocketServer;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="166,18">
+        <children xsi:type="editmodel:AttributeEditModel" name="users" id="android.server/UserManager#users"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="174,126">
+        <children xsi:type="editmodel:MethodEditModel" name="addUser" id="android.server/UserManager#addUser(Landroid.server.User;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="commit" id="android.server/UserManager#commit()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getHinstance" id="android.server/UserManager#getHinstance()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getUser" id="android.server/UserManager#getUser(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="removeUnameConnected" id="android.server/UserManager#removeUnameConnected(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="setConnected" id="android.server/UserManager#setConnected(Ljava.lang.String;Landroid.server.SocketServer;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="unameConnected" id="android.server/UserManager#unameConnected(Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="android.server/UserManager-Standard::Call->android.server/SocketServer*android.server/UserManager-Soyatec::Import->android.server/SocketServer" source="//@children.0/@children.3" target="//@children.0/@children.1" targetEnd="//@children.0/@children.3/@sourceConnections.0/@children.2" label="//@children.0/@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="80,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,96" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="145,111"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="android.server/UserManager-Standard::Call->android.server/User*android.server/UserManager-Standard::Instantiate->android.server/User*android.server/UserManager-Soyatec::Import->android.server/User" source="//@children.0/@children.3" target="//@children.0/@children.2" targetEnd="//@children.0/@children.3/@sourceConnections.1/@children.2" label="//@children.0/@children.3/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@children.3/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" size="148,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,96" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="173,114"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="android.server/UserManager@u+android.server/UserManager@" source="//@children.0/@children.3" target="//@children.0/@children.3" targetEnd="//@children.0/@children.3/@sourceConnections.2/@children.2" label="//@children.0/@children.3/@sourceConnections.2/@children.0" sourceEnd="//@children.0/@children.3/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" name="u" location="0,10" id="android.server/UserManager@u+android.server/UserManager@|android.server/UserManager#u" anchorKind="FixedAtEdge" attachSource="true" multiplicityLabel="//@children.0/@children.3/@sourceConnections.2/@children.1/@children.2" roleLabel="//@children.0/@children.3/@sourceConnections.2/@children.1/@children.0" orderingLabel="//@children.0/@children.3/@sourceConnections.2/@children.1/@children.1" scopeKind="1" navigable="true">
+          <children xsi:type="editmodel:LabelEditModel" name=" - u" location="777,41" size="19,13" anchorKind="FirstPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="{order}" location="751,81" size="45,13" anchorKind="FirstPart"/>
+          <children xsi:type="editmodel:LabelEditModel" name="1" location="789,54" size="7,13" anchorKind="FirstPart"/>
+        </children>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="10,0" id="android.server/UserManager@u+android.server/UserManager@|android.server/UserManager#" anchorKind="FixedAtEdge"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=7;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

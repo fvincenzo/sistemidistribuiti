@@ -13,16 +13,21 @@ import java.util.Set;
 
 /**
  * Classe di tipo singleton per la gestione dei dati degli utenti e il salvataggio degli stessi sui files.
- * 
- * @author Nicolas Tagliani
- * @author Vincenzo Frascino
- *
+ * @author  Nicolas Tagliani
+ * @author  Vincenzo Frascino
  */
 public class UserManager {
 
+	/**
+	 * @uml.property  name="users"
+	 */
 	private Map<String ,User> users = new HashMap<String, User>();
 	private Hashtable<String, SocketServer> usersocket = new Hashtable<String, SocketServer>();
 	
+	/**
+	 * @uml.property  name="u"
+	 * @uml.associationEnd  
+	 */
 	private static UserManager u = null;
 
 	private UserManager(){	
@@ -127,8 +132,8 @@ public class UserManager {
 	
 	/**
 	 * Ritorna tutto l'elenco degli utenti registrati al sistema sotto forma di Set<String>
-	 * 
-	 * @return l'elenco degli utenti registrati nel sistema
+	 * @return  l'elenco degli utenti registrati nel sistema
+	 * @uml.property  name="users"
 	 */
 	public Set<String> getUsers() {
 		return users.keySet();

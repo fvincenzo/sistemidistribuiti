@@ -10,26 +10,54 @@ import java.util.*;
 
 /**
  * Classe per la gestione dei dati di ogni singolo utente
- * 
- * @author Nicolas Tagliani
- * @author Vincenzo Frascino
- *
+ * @author  Nicolas Tagliani
+ * @author  Vincenzo Frascino
  */
 public class User  {
 
 	private String uname;
+	/**
+	 * @uml.property  name="pwd"
+	 */
 	private String pwd;
+	/**
+	 * @uml.property  name="mobile"
+	 */
 	private String mobile;
+	/**
+	 * @uml.property  name="work"
+	 */
 	private String work;
+	/**
+	 * @uml.property  name="home"
+	 */
 	private String home;
+	/**
+	 * @uml.property  name="mail"
+	 */
 	private String mail;
+	/**
+	 * @uml.property  name="im"
+	 */
 	private String im;
+	/**
+	 * @uml.property  name="geo"
+	 */
 	private String geo;
 
 	//Questa Stringa può assumere i valori HOME WORK MAIL IM o MOBILE, di default per ogni utente è settata ad MOBILE
+	/**
+	 * @uml.property  name="preferredMode"
+	 */
 	private String preferredMode;
 
+	/**
+	 * @uml.property  name="friends"
+	 */
 	private Set<String> friends = new HashSet<String>();
+	/**
+	 * @uml.property  name="pendings"
+	 */
 	private Set<String> pendings = new HashSet<String>();
 	private Object pendingsLock = new Object();
 	private Object friendsLock = new Object();
@@ -190,8 +218,8 @@ public class User  {
 
 	/**
 	 * Ottiene la lista degli amici come insieme di Stringhe
-	 * 
-	 * @return la lista degli amici
+	 * @return  la lista degli amici
+	 * @uml.property  name="friends"
 	 */
 	public Set<String> getFriends(){
 		return friends;
@@ -199,8 +227,8 @@ public class User  {
 	
 	/**
 	 * Ottiene la lista dei pendingfriends come insieme di Stringhe
-	 * 
-	 * @return la lista dei pendingfriends
+	 * @return  la lista dei pendingfriends
+	 * @uml.property  name="pendings"
 	 */
 	public Set<String> getPendings(){
 		return pendings;
@@ -256,8 +284,8 @@ public class User  {
 
 	/**
 	 * Getter della password
-	 * 
-	 * @return la password
+	 * @return  la password
+	 * @uml.property  name="pwd"
 	 */
 	public String getPwd() {
 		return pwd;
@@ -265,8 +293,8 @@ public class User  {
 
 	/**
 	 * Getter della posizione geografica
-	 * 
-	 * @return la posizione geografica nella forma @latitudine,longitudine
+	 * @return  la posizione geografica nella forma @latitudine,longitudine
+	 * @uml.property  name="geo"
 	 */
 	public String getGeo() {
 		return geo;
@@ -283,8 +311,8 @@ public class User  {
 
 	/**
 	 * Getter del numero di cellulare
-	 * 
-	 * @return il numero di cellulare
+	 * @return  il numero di cellulare
+	 * @uml.property  name="mobile"
 	 */
 	public String getMobile() {
 		return mobile;
@@ -292,8 +320,8 @@ public class User  {
 
 	/**
 	 * Getter del numero del lavoro
-	 * 
-	 * @return il numero del lavoro
+	 * @return  il numero del lavoro
+	 * @uml.property  name="work"
 	 */
 	public String getWork() {
 		return work;
@@ -301,8 +329,8 @@ public class User  {
 
 	/**
 	 * Getter del numero di casa
-	 * 
-	 * @return il numero di casa
+	 * @return  il numero di casa
+	 * @uml.property  name="home"
 	 */
 	public String getHome() {
 		return home;
@@ -310,8 +338,8 @@ public class User  {
 
 	/**
 	 * Getter dell'indirizzo email
-	 * 
-	 * @return l'indirizzo email
+	 * @return  l'indirizzo email
+	 * @uml.property  name="mail"
 	 */
 	public String getMail() {
 		return mail;
@@ -319,8 +347,8 @@ public class User  {
 	
 	/**
 	 * Getter del contatto per istant messenger
-	 * 
-	 * @return il contatto per l'istant messenger
+	 * @return  il contatto per l'istant messenger
+	 * @uml.property  name="im"
 	 */
 	public String getIm() {
 		return im;
@@ -328,8 +356,8 @@ public class User  {
 
 	/**
 	 * Getter del modo preferito per essere contattati
-	 * 
-	 * @return il modo preferito con cui essere contattati a scelta tra: MOBILE, HOME, WORK, MAIL, IM
+	 * @return  il modo preferito con cui essere contattati a scelta tra: MOBILE, HOME, WORK, MAIL, IM
+	 * @uml.property  name="preferredMode"
 	 */
 	public String getPreferredMode() {
 		return preferredMode;
@@ -337,8 +365,8 @@ public class User  {
 
 	/**
 	 * Setter per il modo preferito con cui essere contattati
-	 * 
-	 * @param preferredMode il modo preferito con cui essere contattati a scelta tra: MOBILE, HOME, WORK, MAIL, IM
+	 * @param preferredMode  il modo preferito con cui essere contattati a scelta tra: MOBILE, HOME, WORK, MAIL, IM
+	 * @uml.property  name="preferredMode"
 	 */
 	public void setPreferredMode(String preferredMode) {
 		this.preferredMode = preferredMode;
@@ -346,8 +374,8 @@ public class User  {
 	
 	/**
 	 * Setter per la posizione geografica
-	 * 
-	 * @param geo la posizione geografica nel formato  @latitudine,longitudine
+	 * @param geo  la posizione geografica nel formato  @latitudine,longitudine
+	 * @uml.property  name="geo"
 	 */
 	public void setGeo(String geo) {
 		this.geo = geo;
@@ -355,8 +383,8 @@ public class User  {
 
 	/**
 	 * Setter per la password
-	 * 
-	 * @param pwd la password
+	 * @param pwd  la password
+	 * @uml.property  name="pwd"
 	 */
 	public void setPwd(String pwd){
 		this.pwd = pwd;
@@ -364,8 +392,8 @@ public class User  {
 	
 	/**
 	 * Setter per il numero di cellulare
-	 * 
-	 * @param mobile il numero di cellulare
+	 * @param mobile  il numero di cellulare
+	 * @uml.property  name="mobile"
 	 */
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
@@ -373,8 +401,8 @@ public class User  {
 
 	/**
 	 * Setter per il numero del lavoro
-	 * 
-	 * @param work il numero del lavoro
+	 * @param work  il numero del lavoro
+	 * @uml.property  name="work"
 	 */
 	public void setWork(String work) {
 		this.work = work;
@@ -382,8 +410,8 @@ public class User  {
 
 	/**
 	 * Setter per il numero di casa
-	 * 
-	 * @param home il numero di casa
+	 * @param home  il numero di casa
+	 * @uml.property  name="home"
 	 */
 	public void setHome(String home) {
 		this.home = home;
@@ -391,8 +419,8 @@ public class User  {
 
 	/**
 	 * Setter per l'indirizzo email
-	 * 
-	 * @param mail l'indirizzo email
+	 * @param mail  l'indirizzo email
+	 * @uml.property  name="mail"
 	 */
 	public void setMail(String mail) {
 		this.mail = mail;
@@ -400,8 +428,8 @@ public class User  {
 	
 	/**
 	 * Setter per l'istant messenger
-	 * 
-	 * @param im l'istant messenger
+	 * @param im  l'istant messenger
+	 * @uml.property  name="im"
 	 */
 	public void setIm(String im) {
 		this.im = im;
