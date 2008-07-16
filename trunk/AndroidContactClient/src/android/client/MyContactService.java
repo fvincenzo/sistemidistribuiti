@@ -27,6 +27,9 @@ import android.widget.Toast;
 import android.client.R;
 import android.database.Cursor;
 
+/**
+ * @author  gabrielknight
+ */
 public class MyContactService extends Service {
 
 	private Notification not;
@@ -34,6 +37,10 @@ public class MyContactService extends Service {
 
 
 
+	/**
+	 * @uml.property  name="mBinder"
+	 * @uml.associationEnd  
+	 */
 	private final ServiceInterface.Stub mBinder = new ServiceInterface.Stub() {
 
 		private PrintWriter out;

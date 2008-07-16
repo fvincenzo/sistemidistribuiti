@@ -14,12 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 /**
- * Activity che implementa la schermata per l'inserimento di un amico conoscendo il suo nome.
- * Viene richiamata tramite una ADD_FRIEND_ACTION
- * 
- * @author Nicolas Tagliani
- * @author Vincenzo Frascino
- *
+ * Activity che implementa la schermata per l'inserimento di un amico conoscendo il suo nome. Viene richiamata tramite una ADD_FRIEND_ACTION
+ * @author  Nicolas Tagliani
+ * @author  Vincenzo Frascino
  */
 public class AddOneFriend extends Activity implements OnClickListener, ServiceConnection {
 
@@ -32,6 +29,10 @@ public class AddOneFriend extends Activity implements OnClickListener, ServiceCo
 	private Button ok;
 	private EditText username;
 	private boolean ready = false;
+	/**
+	 * @uml.property  name="service"
+	 * @uml.associationEnd  
+	 */
 	private ServiceInterface service = null;
 
 	@Override

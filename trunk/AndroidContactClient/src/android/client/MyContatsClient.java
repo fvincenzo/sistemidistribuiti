@@ -15,12 +15,9 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 
 /**
- * Classe che implementa la schermata e le operazioni di login.
- * Si tratta della classe principale che viene fatta partire quando si clicca sull'icona
- * 
- * @author Nicolas Tagliani
- * @author Vincenzo Frascino
- *
+ * Classe che implementa la schermata e le operazioni di login. Si tratta della classe principale che viene fatta partire quando si clicca sull'icona
+ * @author  Nicolas Tagliani
+ * @author  Vincenzo Frascino
  */
 public class MyContatsClient extends Activity implements OnClickListener, ServiceConnection{
 
@@ -31,6 +28,10 @@ public class MyContatsClient extends Activity implements OnClickListener, Servic
 	public static final String LOGIN_ACTION =
 		"android.client.action.LOGIN";
 
+	/**
+	 * @uml.property  name="s"
+	 * @uml.associationEnd  
+	 */
 	private ServiceInterface s;
 	private Button login;
 	private Button register;

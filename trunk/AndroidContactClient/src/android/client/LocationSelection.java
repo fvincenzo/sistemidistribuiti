@@ -36,12 +36,9 @@ import com.google.android.maps.Overlay;
 import com.google.android.maps.OverlayController;
 
 /**
- * Questa activity mostra la nostra posizione sulla mappa, la posizione dei nostri amici e la posizione delle location inserite nel database
- * Permette inoltre di modificare i parametri per le locations tramite un menu
- * 
- * @author Nicolas Tagliani
- * @author Vincenzo Frascino
- *
+ * Questa activity mostra la nostra posizione sulla mappa, la posizione dei nostri amici e la posizione delle location inserite nel database Permette inoltre di modificare i parametri per le locations tramite un menu
+ * @author  Nicolas Tagliani
+ * @author  Vincenzo Frascino
  */
 public class LocationSelection extends MapActivity implements OnClickListener{
 
@@ -63,6 +60,10 @@ public class LocationSelection extends MapActivity implements OnClickListener{
 	private Button go;
 	private Point lastSearch;
 
+	/**
+	 * @uml.property  name="db"
+	 * @uml.associationEnd  
+	 */
 	private DBHelper db;
 	protected OverlayController myOverlayController = null; 
 	private String lastAddress;

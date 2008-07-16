@@ -15,9 +15,8 @@ import android.widget.TextView;
 
 /**
  * Classe che implementa le schermate per la visualizzazione e la modifica delle posizioni inserite dall'utente
- * 
- * @author Nicolas Tagliani
- * @author Vincenzo Frascino
+ * @author  Nicolas Tagliani
+ * @author  Vincenzo Frascino
  */
 public class ViewLocations extends ListActivity implements OnClickListener {
 
@@ -28,6 +27,10 @@ public class ViewLocations extends ListActivity implements OnClickListener {
 		"android.client.action.VIEW_LOCATIONS";
 
 
+	/**
+	 * @uml.property  name="db"
+	 * @uml.associationEnd  
+	 */
 	private DBHelper db;
 
 
@@ -103,10 +106,17 @@ public class ViewLocations extends ListActivity implements OnClickListener {
 	}
 
 
+	/**
+	 * @author  gabrielknight
+	 */
 	private class MyView extends LinearLayout {
 
 		private TextView t;
 		private Button b;
+		/**
+		 * @uml.property  name="loc"
+		 * @uml.associationEnd  
+		 */
 		private DBHelper.Location loc;
 
 		public MyView(Context context, DBHelper.Location loc) {

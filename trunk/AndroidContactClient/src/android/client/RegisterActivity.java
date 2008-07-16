@@ -18,10 +18,8 @@ import android.widget.EditText;
 
 /**
  * Classe che implementa le funzioni relative ai dati degli utenti: registrazione e modifica.
- * 
- * @author Nicolas Tagliani
- * @author Vincenzo Frascino
- *
+ * @author  Nicolas Tagliani
+ * @author  Vincenzo Frascino
  */
 public class RegisterActivity extends Activity implements OnClickListener , ServiceConnection{
 
@@ -41,6 +39,10 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 	private int REGISTER = 0;
 	private int status;
 
+	/**
+	 * @uml.property  name="contactList"
+	 * @uml.associationEnd  
+	 */
 	private ServiceInterface contactList = null;
 
 	private Button button;
@@ -181,16 +183,18 @@ public class RegisterActivity extends Activity implements OnClickListener , Serv
 	}
 
 	/**
-	 * Dialog per l'inserimento della vecchia password quando si vuole modificare anche la password.
-	 * Per gli altri dati non e' necessario reinserire la password
-	 * @author noname
-	 *
+	 * Dialog per l'inserimento della vecchia password quando si vuole modificare anche la password. Per gli altri dati non e' necessario reinserire la password
+	 * @author  noname
 	 */
 	class PasswordDialog extends Dialog implements OnClickListener{
 
 		private Button ok;
 		private Button cancel;
 		private EditText password; 
+		/**
+		 * @uml.property  name="callback"
+		 * @uml.associationEnd  
+		 */
 		private RegisterActivity callback;
 		
 		public PasswordDialog(Context context, RegisterActivity r) {
