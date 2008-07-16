@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1183,486" id="android" metadata="uml2-1.0" initialized="true" tag="1000" key="32303038303431342D3130303020416E64726F6964436F6E746163745043436C69656E742F6761627269656C6B6E69676874">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1183,486" id="android" metadata="uml2-1.0" initialized="true" scrolledX="28" tag="1000" key="32303038303431342D3130303020416E64726F6964436F6E746163745043436C69656E742F6761627269656C6B6E69676874">
   <children xsi:type="editmodel:PackageEditModel" name="android.pc.client" location="65,35" size="186,216" id="android.pc.client">
     <children xsi:type="editmodel:ClassEditModel" name="PcClient" location="31,43" size="102,86" id="android.pc.client/PcClient" runTimeClassModel="main([Ljava.lang.String;),PcClient()">
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
@@ -8,11 +8,26 @@
         <children xsi:type="editmodel:MethodEditModel" name="main" id="android.pc.client/PcClient#main([Ljava.lang.String;)"/>
       </children>
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="android.pc.client/PcClient-Standard::Instantiate->android.pc.client.api/PcClientAPI" source="//@children.0/@children.0" target="//@children.1/@children.1" targetEnd="//@children.0/@children.0/@sourceConnections.0/@children.2" label="//@children.0/@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Instantiate»" size="74,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="102,43" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,62"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="android.pc.client/PcClient-Soyatec::Import->android.pc.client.api/PcClientAPIInterface" source="//@children.0/@children.0" target="//@children.1/@children.0" targetEnd="//@children.0/@children.0/@sourceConnections.1/@children.2" label="//@children.0/@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="51,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="102,43" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,61"/>
+      </sourceConnections>
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="android.pc.client-Standard::Instantiate->android.pc.client.api*android.pc.client-Soyatec::Import->android.pc.client.api" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate»" size="119,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="186,105" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,120"/>
+    </sourceConnections>
   </children>
-  <children xsi:type="editmodel:PackageEditModel" name="android.pc.client.api" location="300,20" size="446,226" id="android.pc.client.api">
-    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@children.1/@sourceConnections.0" name="PcClientAPIInterface" location="26,40" size="192,135" id="android.pc.client.api/PcClientAPIInterface" runTimeClassModel="connect(),im(),mail(),disconnect()">
+  <children xsi:type="editmodel:PackageEditModel" targetConnections="//@children.0/@sourceConnections.0" name="android.pc.client.api" location="300,20" size="446,226" id="android.pc.client.api">
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@children.1/@sourceConnections.0 //@children.0/@children.0/@sourceConnections.1 //@children.1/@children.1/@sourceConnections.1" name="PcClientAPIInterface" location="26,40" size="192,135" id="android.pc.client.api/PcClientAPIInterface" runTimeClassModel="connect(),im(),mail(),disconnect()">
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <children xsi:type="editmodel:CompartmentEditModel" size="92,72">
         <children xsi:type="editmodel:MethodEditModel" name="connect" id="android.pc.client.api/PcClientAPIInterface#connect()"/>
@@ -23,7 +38,7 @@
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
-    <children xsi:type="editmodel:ClassEditModel" name="PcClientAPI" location="290,39" size="126,140" id="android.pc.client.api/PcClientAPI">
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.0/@sourceConnections.0" name="PcClientAPI" location="290,39" size="126,140" id="android.pc.client.api/PcClientAPI" runTimeClassModel="connect(),im(),mail(),disconnect(),PcClientAPI()">
       <children xsi:type="editmodel:CompartmentEditModel"/>
       <children xsi:type="editmodel:CompartmentEditModel" size="93,90">
         <children xsi:type="editmodel:MethodEditModel" name="PcClientAPI" id="android.pc.client.api/PcClientAPI#PcClientAPI()"/>
@@ -36,6 +51,11 @@
       <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="android.pc.client.api/PcClientAPIInterface&lt;-android.pc.client.api/PcClientAPI" source="//@children.1/@children.1" target="//@children.1/@children.0" targetEnd="//@children.1/@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
         <children xsi:type="editmodel:AssociationEndEditModel" location="0,68" attachSource="true"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="192,67"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="android.pc.client.api/PcClientAPI-Soyatec::Implement->android.pc.client.api/PcClientAPIInterface" source="//@children.1/@children.1" target="//@children.1/@children.0" targetEnd="//@children.1/@children.1/@sourceConnections.1/@children.2" label="//@children.1/@children.1/@sourceConnections.1/@children.0" sourceEnd="//@children.1/@children.1/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Implement»" size="74,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,48" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="192,47"/>
       </sourceConnections>
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
