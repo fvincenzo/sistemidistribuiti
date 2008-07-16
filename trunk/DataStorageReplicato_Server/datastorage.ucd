@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="723,307" id="datastorage" metadata="uml2-1.0" initialized="true" tag="1000" key="32303038303431342D31303030204461746153746F726167655265706C696361746F5F5365727665722F6761627269656C6B6E69676874">
+  <children xsi:type="editmodel:PackageEditModel" name="datastorage.server" location="20,5" size="631,336" id="datastorage.server">
+    <children xsi:type="editmodel:ClassEditModel" name="MainClass" location="46,46" size="116,68" id="datastorage.server/MainClass" runTimeClassModel="main([Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="59,18">
+        <children xsi:type="editmodel:MethodEditModel" name="main" id="datastorage.server/MainClass#main([Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.2/@sourceConnections.0" name="ReplicationCommunication" location="42,197" size="238,104" id="datastorage.server/ReplicationCommunication" runTimeClassModel="sendPrivMessage(Ljava.lang.String;Ljava.lang.String;),ReplicationCommunication,sendMessage(Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="180,54">
+        <children xsi:type="editmodel:MethodEditModel" name="ReplicationCommunication" id="datastorage.server/ReplicationCommunication#ReplicationCommunication"/>
+        <children xsi:type="editmodel:MethodEditModel" name="sendMessage" id="datastorage.server/ReplicationCommunication#sendMessage(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="sendPrivMessage" id="datastorage.server/ReplicationCommunication#sendPrivMessage(Ljava.lang.String;Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="ReplicationServer" location="438,41" size="171,122" id="datastorage.server/ReplicationServer" runTimeClassModel="ReplicationServer(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),write(II),onMessage,read(I)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="130,72">
+        <children xsi:type="editmodel:MethodEditModel" name="ReplicationServer" id="datastorage.server/ReplicationServer#ReplicationServer(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="onMessage" id="datastorage.server/ReplicationServer#onMessage"/>
+        <children xsi:type="editmodel:MethodEditModel" name="read" id="datastorage.server/ReplicationServer#read(I)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="write" id="datastorage.server/ReplicationServer#write(II)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="datastorage.server/ReplicationServer-Soyatec::Import->datastorage.server/ReplicationCommunication" source="//@children.0/@children.2" target="//@children.0/@children.1" targetEnd="//@children.0/@children.2/@sourceConnections.0/@children.2" label="//@children.0/@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="51,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,96" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="238,4"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=7;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
