@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1224,745" id="namingservice" metadata="uml2-1.0" initialized="true" scrolledX="2" scrolledY="-5" tag="1000" key="32303037303533312D31303030204E616D696E67536572766963652F6E6F6E616D65">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1224,745" id="namingservice" metadata="uml2-1.0" initialized="true" scrolledY="-5" tag="1000" key="32303037303533312D31303030204E616D696E67536572766963652F6E6F6E616D65">
   <children xsi:type="editmodel:PackageEditModel" name="namingservice.client" location="565,645" size="241,162" id="namingservice.client">
     <children xsi:type="editmodel:ClassEditModel" name="Client" location="67,73" size="84,68" id="namingservice.client/Client" runTimeClassModel="main([Ljava.lang.String;)">
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
@@ -8,34 +8,34 @@
       </children>
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.client/Client-Standard::Call->namingservice.core/RemoteServer*namingservice.client/Client-Soyatec::Import->namingservice.core/RemoteServer" source="//@children.0/@children.0" target="//@children.1/@children.2" targetEnd="//@children.0/@children.0/@sourceConnections.0/@children.2" label="//@children.0/@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="80,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="11,0" attachSource="true"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="146,192"/>
       </sourceConnections>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.client/Client-Standard::Call->namingservice.core/Server*namingservice.client/Client-Soyatec::Import->namingservice.core/Server" source="//@children.0/@children.0" target="//@children.1/@children.3" targetEnd="//@children.0/@children.0/@sourceConnections.1/@children.2" label="//@children.0/@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="80,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="17,0" attachSource="true"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="129,240"/>
       </sourceConnections>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.client/Client-Standard::Call->namingservice.core/NSClient*namingservice.client/Client-Standard::Instantiate->namingservice.core/NSClient*namingservice.client/Client-Soyatec::Import->namingservice.core/NSClient" source="//@children.0/@children.0" target="//@children.1/@children.0" targetEnd="//@children.0/@children.0/@sourceConnections.2/@children.2" label="//@children.0/@children.0/@sourceConnections.2/@children.0" sourceEnd="//@children.0/@children.0/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" size="148,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="0,6" attachSource="true"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="104,95"/>
       </sourceConnections>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.client/Client-Standard::Call->namingservice.core/NSServer*namingservice.client/Client-Standard::Instantiate->namingservice.core/NSServer*namingservice.client/Client-Soyatec::Import->namingservice.core/NSServer" source="//@children.0/@children.0" target="//@children.1/@children.1" targetEnd="//@children.0/@children.0/@sourceConnections.3/@children.2" label="//@children.0/@children.0/@sourceConnections.3/@children.0" sourceEnd="//@children.0/@children.0/@sourceConnections.3/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" size="148,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="32,0" attachSource="true"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="77,86"/>
       </sourceConnections>
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
     <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.client-Standard::Call->namingservice.core*namingservice.client-Standard::Instantiate->namingservice.core*namingservice.client-Soyatec::Import->namingservice.core" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
-      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" size="148,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
       <children xsi:type="editmodel:AssociationEndEditModel" location="15,0" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="555,536"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="555,546"/>
     </sourceConnections>
   </children>
-  <children xsi:type="editmodel:PackageEditModel" targetConnections="//@children.0/@sourceConnections.0" name="namingservice.core" location="25,0" size="571,536" id="namingservice.core">
+  <children xsi:type="editmodel:PackageEditModel" targetConnections="//@children.0/@sourceConnections.0" name="namingservice.core" location="25,0" size="571,546" id="namingservice.core">
     <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.0/@sourceConnections.2" name="NSClient" location="38,321" size="104,122" id="namingservice.core/NSClient" runTimeClassModel="connect(Ljava.lang.String;Ljava.lang.String;),NSClient(),register(Ljava.lang.String;Ljava.lang.String;),list()">
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <children xsi:type="editmodel:CompartmentEditModel" size="79,72">
@@ -46,7 +46,7 @@
       </children>
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.core/NSClient-Standard::Call->namingservice.core/RemoteServer*namingservice.core/NSClient-Soyatec::Import->namingservice.core/RemoteServer" source="//@children.1/@children.0" target="//@children.1/@children.2" targetEnd="//@children.1/@children.0/@sourceConnections.0/@children.2" label="//@children.1/@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="80,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="51,0" attachSource="true"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="56,225"/>
       </sourceConnections>
@@ -60,18 +60,18 @@
       </children>
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.core/NSServer-Soyatec::Import->namingservice.core.node/NodeMap" source="//@children.1/@children.1" target="//@children.2/@children.2" targetEnd="//@children.1/@children.1/@sourceConnections.0/@children.2" label="//@children.1/@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="51,13" anchorKind="MiddlePart"/>
-        <children xsi:type="editmodel:AssociationEndEditModel" location="129,42" attachSource="true"/>
-        <children xsi:type="editmodel:AssociationEndEditModel" location="0,123"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="129,43" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,124"/>
       </sourceConnections>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.core/NSServer-Standard::Instantiate->namingservice.core/Server*namingservice.core/NSServer-Soyatec::Import->namingservice.core/Server" source="//@children.1/@children.1" target="//@children.1/@children.3" targetEnd="//@children.1/@children.1/@sourceConnections.1/@children.2" label="//@children.1/@children.1/@sourceConnections.1/@children.0" sourceEnd="//@children.1/@children.1/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate»" size="119,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="12,86" attachSource="true"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="115,15"/>
       </sourceConnections>
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
-    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@children.3/@sourceConnections.0 //@children.0/@children.0/@sourceConnections.0 //@children.1/@children.0/@sourceConnections.0 //@children.1/@children.3/@sourceConnections.3" name="RemoteServer" location="33,46" size="146,225" id="namingservice.core/RemoteServer" runTimeClassModel="request(Ljava.lang.String;),askremove(Ljava.lang.String;),find(Ljava.lang.String;),getlist(),Info(),sum(Ljava.lang.String;Ljava.lang.String;),synch(Ljava.lang.String;Lnamingservice.core.node.NodeMap;),getReference(),add(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)">
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@children.3/@sourceConnections.0 //@children.0/@children.0/@sourceConnections.0 //@children.1/@children.0/@sourceConnections.0 //@children.1/@children.3/@sourceConnections.3" name="RemoteServer" location="33,46" size="146,225" id="namingservice.core/RemoteServer" runTimeClassModel="request(Ljava.lang.String;),find(Ljava.lang.String;),askremove(Ljava.lang.String;),sum(Ljava.lang.String;Ljava.lang.String;),Info(),getlist(),synch(Ljava.lang.String;Lnamingservice.core.node.NodeMap;),add(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),getReference()">
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <children xsi:type="editmodel:CompartmentEditModel" size="106,162">
         <children xsi:type="editmodel:MethodEditModel" name="Info" id="namingservice.core/RemoteServer#Info()"/>
@@ -86,13 +86,13 @@
       </children>
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" id="namingservice.core/RemoteServer-Soyatec::Import->namingservice.core.node/NodeMap" source="//@children.1/@children.2" target="//@children.2/@children.2" targetEnd="//@children.1/@children.2/@sourceConnections.0/@children.2" label="//@children.1/@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="51,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="146,67" attachSource="true"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="0,56"/>
       </sourceConnections>
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
-    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.0/@sourceConnections.1 //@children.1/@children.1/@sourceConnections.1" name="Server" location="308,223" size="129,302" id="namingservice.core/Server" runTimeClassModel="request(Ljava.lang.String;),find(Ljava.lang.String;),Server(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Lnamingservice.core.node.NodeMap;),sum(Ljava.lang.String;Ljava.lang.String;),remove(Ljava.lang.String;),lfind(Ljava.lang.String;),updateNode(Ljava.lang.String;Lnamingservice.core.node.NodeMap;),askremove(Ljava.lang.String;),Info(),getlist(),exec(Ljava.lang.String;),synch(Ljava.lang.String;Lnamingservice.core.node.NodeMap;),getReference(),add(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;)">
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.0/@sourceConnections.1 //@children.1/@children.1/@sourceConnections.1" name="Server" location="308,223" size="129,302" id="namingservice.core/Server" runTimeClassModel="request(Ljava.lang.String;),find(Ljava.lang.String;),Server(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Lnamingservice.core.node.NodeMap;),sum(Ljava.lang.String;Ljava.lang.String;),remove(Ljava.lang.String;),lfind(Ljava.lang.String;),updateNode(Ljava.lang.String;Lnamingservice.core.node.NodeMap;),askremove(Ljava.lang.String;),Info(),getlist(),exec(Ljava.lang.String;),synch(Ljava.lang.String;Lnamingservice.core.node.NodeMap;),add(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;),getReference()">
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <children xsi:type="editmodel:CompartmentEditModel" size="106,252">
         <children xsi:type="editmodel:MethodEditModel" name="Info" id="namingservice.core/Server#Info()"/>
@@ -116,29 +116,29 @@
         <children xsi:type="editmodel:AssociationEndEditModel" location="146,201"/>
       </sourceConnections>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.core/Server-Standard::Call->namingservice.core.node/NodeMap*namingservice.core/Server-Standard::Instantiate->namingservice.core.node/NodeMap*namingservice.core/Server-Soyatec::Import->namingservice.core.node/NodeMap" source="//@children.1/@children.3" target="//@children.2/@children.2" targetEnd="//@children.1/@children.3/@sourceConnections.1/@children.2" label="//@children.1/@children.3/@sourceConnections.1/@children.0" sourceEnd="//@children.1/@children.3/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" size="148,13" anchorKind="MiddlePart"/>
-        <children xsi:type="editmodel:AssociationEndEditModel" location="129,84" attachSource="true"/>
-        <children xsi:type="editmodel:AssociationEndEditModel" location="0,272"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="129,83" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,271"/>
       </sourceConnections>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.core/Server-Standard::Call->namingservice.core.node/NodeManager*namingservice.core/Server-Standard::Instantiate->namingservice.core.node/NodeManager*namingservice.core/Server-Soyatec::Import->namingservice.core.node/NodeManager" source="//@children.1/@children.3" target="//@children.2/@children.1" targetEnd="//@children.1/@children.3/@sourceConnections.2/@children.2" label="//@children.1/@children.3/@sourceConnections.2/@children.0" sourceEnd="//@children.1/@children.3/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" size="148,13" anchorKind="MiddlePart"/>
-        <children xsi:type="editmodel:AssociationEndEditModel" location="129,243" attachSource="true"/>
-        <children xsi:type="editmodel:AssociationEndEditModel" location="0,51"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="129,244" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,52"/>
       </sourceConnections>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" id="namingservice.core/Server-Standard::Call->namingservice.core/RemoteServer*namingservice.core/Server-Soyatec::Import->namingservice.core/RemoteServer*namingservice.core/Server-Soyatec::Implement->namingservice.core/RemoteServer" source="//@children.1/@children.3" target="//@children.1/@children.2" targetEnd="//@children.1/@children.3/@sourceConnections.3/@children.2" label="//@children.1/@children.3/@sourceConnections.3/@children.0" sourceEnd="//@children.1/@children.3/@sourceConnections.3/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Implement, Call»" size="148,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="0,87" attachSource="true"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="141,225"/>
       </sourceConnections>
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
     <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.core-Standard::Call->namingservice.core.node*namingservice.core-Standard::Instantiate->namingservice.core.node*namingservice.core-Soyatec::Import->namingservice.core.node" source="//@children.1" target="//@children.2" targetEnd="//@children.1/@sourceConnections.0/@children.2" label="//@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
-      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" size="148,13" anchorKind="MiddlePart"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="571,268" attachSource="true"/>
-      <children xsi:type="editmodel:AssociationEndEditModel" location="0,268"/>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="571,269" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,269"/>
     </sourceConnections>
   </children>
-  <children xsi:type="editmodel:PackageEditModel" targetConnections="//@children.1/@sourceConnections.0 //@children.1/@children.2/@sourceConnections.0" name="namingservice.core.node" location="760,0" size="481,536" id="namingservice.core.node">
+  <children xsi:type="editmodel:PackageEditModel" targetConnections="//@children.1/@sourceConnections.0 //@children.1/@children.2/@sourceConnections.0" name="namingservice.core.node" location="760,0" size="486,540" id="namingservice.core.node">
     <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.2/@children.2/@sourceConnections.0" name="NodeCore" location="354,45" size="115,104" id="namingservice.core.node/NodeCore" runTimeClassModel="getIP(),getID(),NodeCore(Ljava.lang.String;Ljava.lang.String;)">
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <children xsi:type="editmodel:CompartmentEditModel" size="87,54">
@@ -158,13 +158,13 @@
       </children>
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.core.node/NodeManager-Standard::Call->namingservice.core.node/NodeMap*namingservice.core.node/NodeManager-Soyatec::Import->namingservice.core.node/NodeMap" source="//@children.2/@children.1" target="//@children.2/@children.2" targetEnd="//@children.2/@children.1/@sourceConnections.0/@children.2" label="//@children.2/@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.2/@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="80,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="20,0" attachSource="true"/>
         <children xsi:type="editmodel:AssociationEndEditModel" location="239,356"/>
       </sourceConnections>
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
-    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@children.1/@sourceConnections.0 //@children.1/@children.3/@sourceConnections.1 //@children.2/@children.1/@sourceConnections.0 //@children.1/@children.2/@sourceConnections.0" name="NodeMap" location="7,35" size="260,356" id="namingservice.core.node/NodeMap" runTimeClassModel="NodeMap(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Lnamingservice.core.node.NodeMap;Ljava.lang.String;),getInfo(),addChild(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Lnamingservice.core.node.NodeMap;Ljava.lang.String;),children,getHostIP(),removeChild(Ljava.lang.String;),setInfo(Ljava.lang.String;),updateNode(Lnamingservice.core.node.NodeMap;),getHostID(),getSNode(Ljava.lang.String;),getChild(Ljava.lang.String;),names,name,getRoot(),recursiveFindChild(Ljava.lang.String;),listChild(),findChild(Ljava.lang.String;)">
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@children.1/@sourceConnections.0 //@children.1/@children.3/@sourceConnections.1 //@children.2/@children.1/@sourceConnections.0 //@children.1/@children.2/@sourceConnections.0" name="NodeMap" location="7,35" size="260,356" id="namingservice.core.node/NodeMap" runTimeClassModel="NodeMap(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Lnamingservice.core.node.NodeMap;Ljava.lang.String;),getInfo(),addChild(Ljava.lang.String;Ljava.lang.String;Ljava.lang.String;Lnamingservice.core.node.NodeMap;Ljava.lang.String;),children,getHostIP(),removeChild(Ljava.lang.String;),setInfo(Ljava.lang.String;),updateNode(Lnamingservice.core.node.NodeMap;),getHostID(),getSNode(Ljava.lang.String;),getChild(Ljava.lang.String;),names,recursiveFindChild(Ljava.lang.String;),getRoot(),name,listChild(),findChild(Ljava.lang.String;)">
       <children xsi:type="editmodel:CompartmentEditModel" size="237,54">
         <children xsi:type="editmodel:AttributeEditModel" name="children" id="namingservice.core.node/NodeMap#children"/>
         <children xsi:type="editmodel:AttributeEditModel" name="name" id="namingservice.core.node/NodeMap#name"/>
@@ -188,9 +188,9 @@
       </children>
       <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
       <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="namingservice.core.node/NodeMap-Standard::Call->namingservice.core.node/NodeCore*namingservice.core.node/NodeMap-Standard::Instantiate->namingservice.core.node/NodeCore*namingservice.core.node/NodeMap-Soyatec::Import->namingservice.core.node/NodeCore" source="//@children.2/@children.2" target="//@children.2/@children.0" targetEnd="//@children.2/@children.2/@sourceConnections.0/@children.2" label="//@children.2/@children.2/@sourceConnections.0/@children.0" sourceEnd="//@children.2/@children.2/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
-        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" size="148,13" anchorKind="MiddlePart"/>
-        <children xsi:type="editmodel:AssociationEndEditModel" location="260,62" attachSource="true"/>
-        <children xsi:type="editmodel:AssociationEndEditModel" location="0,52"/>
+        <children xsi:type="editmodel:WireLabelEditModel" size="0,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="260,61" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,51"/>
       </sourceConnections>
       <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
     </children>
