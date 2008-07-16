@@ -91,7 +91,7 @@ public class TakeRequest  {
 	}
 
 	/**
-	 * Aggiunge un nodo alla take request. Questo metodo viene richiamato in fase di join se esistono già delle takerequest sul sistema.
+	 * Aggiunge un nodo alla take request. Questo metodo viene richiamato in fase di join se esistono gia' delle takerequest sul sistema.
 	 * 
 	 * @param n Il nodo da aggiungere alla takerequest
 	 */
@@ -136,7 +136,7 @@ public class TakeRequest  {
 
 	/**
 	 * Metodo che resitituisce lo stato della takerequest.
-	 * Se un risultato o una eccezione è stata propagata la Take Request sarà nello stato done e il flag sara' true.
+	 * Se un risultato o una eccezione e' stata propagata la Take Request sara' nello stato done e il flag sara' true.
 	 * 
 	 * @return True se la take request ha finito il suo lavoro false altrimenti
 	 */

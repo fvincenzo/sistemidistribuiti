@@ -15,7 +15,7 @@ import net.jini.space.JavaSpace;
 
 /**
  * Questa classe si occupa di effettuare una read blocante su un nodo remoto per conto di una federazione.
- * Una volta ottenuto un risultato questo verrà propagato indietro alla federazione chiamante.
+ * Una volta ottenuto un risultato questo verra' propagato indietro alla federazione chiamante.
  * 
  * @author Vincenzo Frascino
  * @author Nicolas Tagliani
@@ -44,15 +44,15 @@ public class TakeThread extends Thread {
 	 */
 	private boolean quit = false;
 	/**
-	 * Riferimento all'oggetto che riceverà la notifica della risposta
+	 * Riferimento all'oggetto che ricevera' la notifica della risposta
 	 */
 	private TakeRequest tq;
 	/**
-	 * Tempo massimo di attesa per singola richiesta così da non saturare il server con thread sempre attivi
+	 * Tempo massimo di attesa per singola richiesta cosi' da non saturare il server con thread sempre attivi
 	 */
 	private long updateRate = 10000;
 	/**
-	 * Riferimento dell'oggetto che dovrà ottenere il risultato
+	 * Riferimento dell'oggetto che dovra' ottenere il risultato
 	 */
 	private NodoRemotoInterface nodoSource;
 
@@ -61,7 +61,7 @@ public class TakeThread extends Thread {
 	 * Viene inizializzato con tutti i parametri necessari a effettuare una take
 	 * 
 	 * @param rq Riferimento dell'oggetto che ha istanziato questo takethread
-	 * @param nodoSource Nodo remoto che dovrà ottenere l'eventuale risposta
+	 * @param nodoSource Nodo remoto che dovra' ottenere l'eventuale risposta
 	 * @param address indirizzo del javaspace su cui effettuare la take
 	 * @param e l'entry da ottenere
 	 * @param t la trasazione associata alla take

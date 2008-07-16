@@ -45,7 +45,7 @@ public interface FederationServiceInterface extends Remote {
 	public Set<String> federazioniPresenti() throws RemoteException;
 	
 	/**
-	 * Restituisce una federazione a cui ci si è allacciati
+	 * Restituisce una federazione a cui ci si e' allacciati
 	 * 
 	 * @param n Il proprio identificativo sotto forma di NodoRemotoInterface per far si che la federazione possa invocare delle operazioni sui nodi locali
 	 * @param nome Il nome della federazione a cui allacciarsi
