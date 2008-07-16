@@ -88,7 +88,7 @@ public class ReadRequest  {
 	}
 	
 	/**
-	 * Aggiunge un nodo alla read request. Questo metodo viene richiamato in fase di join se esistono già delle readrequest sul sistema.
+	 * Aggiunge un nodo alla read request. Questo metodo viene richiamato in fase di join se esistono gia' delle readrequest sul sistema.
 	 * 
 	 * @param n Il nodo da aggiungere alla readrequest
 	 */
@@ -133,7 +133,7 @@ public class ReadRequest  {
 
 	/**
 	 * Metodo che resitituisce lo stato della readrequest
-	 * Se un risultato o una eccezione è stata propagata la Read Request sarà nello stato done e il flag sara' true.
+	 * Se un risultato o una eccezione e' stata propagata la Read Request sara' nello stato done e il flag sara' true.
 	 * 
 	 * @return True se la read request ha finito il suo lavoro false altrimenti
 	 */
