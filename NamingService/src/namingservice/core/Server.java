@@ -2,6 +2,7 @@ package namingservice.core;
 
 import java.rmi.*;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -62,16 +63,8 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	 * @return una stringa contenente l'ip
 	 */
 	public String lfind(String Name) {
-		
-		if(n.findChild(Name)==true) {
-			
-			return n.getChild(Name).getHostIP()+" "+n.getChild(Name).getHostID();
-			
-		} else {
-			
-			return "Unknown host";
-			
-		}
+	
+		return n.recursiveFindChild(Name);
 		
 	}
 	
@@ -83,6 +76,8 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	 */
 	public String find(String Name) throws RemoteException {
 		
+		String s;
+		
 		System.out.println("Server.find():"+n.findChild(Name));
 		
 		if(n.findChild(Name)==true) {
@@ -91,17 +86,22 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 			
 		} else {
 			
-			String url = "//"+n.getFather().getHostIP()+":1099/"+n.getFather().getHostID();
+			if(!(s = n.recursiveFindChild(Name)).equals("Unknown Host"))
+				return s;
+			else {
+				
+				String url = "//"+n.getFather().getHostIP()+":1099/"+n.getFather().getHostID();
+				
+				try {
+					
+					RemoteServer r = (RemoteServer) Naming.lookup(url);
+					return r.find(Name);
+					
+				} catch (Exception e) {
+					return null;
+				}
 			
-			try {
-				
-				RemoteServer r = (RemoteServer) Naming.lookup(url);
-				return r.find(Name);
-				
-			} catch (Exception e) {
-				return null;
 			}
-			
 		}
 		
 	}

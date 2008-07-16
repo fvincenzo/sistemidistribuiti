@@ -129,6 +129,23 @@ public class NodeMap implements Serializable{
  		
  	}
  	
+ 	public String recursiveFindChild(String name) {
+ 		
+ 		if(findChild(name))
+				return getChild(name).getHostIP()+" "+getChild(name).getHostID();
+ 		else
+ 		for(NodeMap node : children.values()) {
+ 			String ret = node.recursiveFindChild(name);
+ 					if (!ret.equals("Unknown Host")){
+ 						return ret;
+ 					}
+ 			
+ 		}
+ 		
+ 		return "Unknown Host";
+ 		
+ 	}
+ 	
  	public String removeChild(String name) {
  		
  		names.remove(name);
