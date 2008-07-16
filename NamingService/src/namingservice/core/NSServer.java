@@ -9,12 +9,14 @@ import namingservice.core.node.*;
 
 /**
  * Classe NSServer inizializza ed avvia il servizio di naming
- * 
- * @author Nicolas Tagliani e Vincenzo Frascino
- *
+ * @author  Nicolas Tagliani e Vincenzo Frascino
  */
 public class NSServer {
 
+	/**
+	 * @uml.property  name="s"
+	 * @uml.associationEnd  
+	 */
 	private Server s;
 	private static Registry r;
 	
