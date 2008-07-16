@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="tuplespace_client" size="614,328" id="" metadata="uml2-1.0" initialized="true" scrolledY="386" tag="1000" key="32303037303533312D31303030205475706C655370616365466564657261746F5F436C69656E742F6E6F6E616D65">
+  <children xsi:type="editmodel:PackageEditModel" name="tuplespace" location="61,92" size="530,699" id="tuplespace">
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.0/@children.1/@sourceConnections.0" name="NodoRemotoInterface" location="15,45" size="204,153" id="tuplespace/NodoRemotoInterface" runTimeClassModel="getJavaSpaceAddress(),remoteReadIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),remoteTakeIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),throwException(Ljava.lang.Exception;),putResult(Lnet.jini.core.entry.Entry;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="154,90">
+        <children xsi:type="editmodel:MethodEditModel" name="getJavaSpaceAddress" id="tuplespace/NodoRemotoInterface#getJavaSpaceAddress()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="putResult" id="tuplespace/NodoRemotoInterface#putResult(Lnet.jini.core.entry.Entry;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="remoteReadIfExists" id="tuplespace/NodoRemotoInterface#remoteReadIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="remoteTakeIfExists" id="tuplespace/NodoRemotoInterface#remoteTakeIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="throwException" id="tuplespace/NodoRemotoInterface#throwException(Ljava.lang.Exception;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="NodoLocale" location="101,299" size="231,374" id="tuplespace/NodoLocale" runTimeClassModel="result,getJavaSpaceAddress(),NodoLocale(Ljava.lang.String;),js,cercaFederazione(Ljava.lang.String;),throwException(Ljava.lang.Exception;),debug,write(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),join(Ljava.lang.String;),resultException,remFedService,result_status,creaFederazione(Ljava.lang.String;),getFederationServiceAddress(),trManager,remoteTakeIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),read(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),takeIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),federationServiceAddress,f,remoteReadIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),readIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),putResult(Lnet.jini.core.entry.Entry;),setFederationServiceAddress(Ljava.lang.String;),leave(),jSpaceRemoteAddress,take(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="208,18">
+        <children xsi:type="editmodel:AttributeEditModel" name="federationServiceAddress" id="tuplespace/NodoLocale#federationServiceAddress"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="197,306">
+        <children xsi:type="editmodel:MethodEditModel" name="NodoLocale" id="tuplespace/NodoLocale#NodoLocale(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="cercaFederazione" id="tuplespace/NodoLocale#cercaFederazione(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="creaFederazione" id="tuplespace/NodoLocale#creaFederazione(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getFederationServiceAddress" id="tuplespace/NodoLocale#getFederationServiceAddress()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="getJavaSpaceAddress" id="tuplespace/NodoLocale#getJavaSpaceAddress()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="join" id="tuplespace/NodoLocale#join(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="leave" id="tuplespace/NodoLocale#leave()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="putResult" id="tuplespace/NodoLocale#putResult(Lnet.jini.core.entry.Entry;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="read" id="tuplespace/NodoLocale#read(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="readIfExists" id="tuplespace/NodoLocale#readIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="remoteReadIfExists" id="tuplespace/NodoLocale#remoteReadIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="remoteTakeIfExists" id="tuplespace/NodoLocale#remoteTakeIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="setFederationServiceAddress" id="tuplespace/NodoLocale#setFederationServiceAddress(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="take" id="tuplespace/NodoLocale#take(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="takeIfExists" id="tuplespace/NodoLocale#takeIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="throwException" id="tuplespace/NodoLocale#throwException(Ljava.lang.Exception;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="write" id="tuplespace/NodoLocale#write(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="tuplespace/NodoRemotoInterface&lt;-tuplespace/NodoLocale" source="//@children.0/@children.1" target="//@children.0/@children.0" targetEnd="//@children.0/@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="58,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="144,153"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="tuplespace/NodoLocaleInterface&lt;-tuplespace/NodoLocale" source="//@children.0/@children.1" target="//@children.0/@children.2" targetEnd="//@children.0/@children.1/@sourceConnections.1/@children.1" sourceEnd="//@children.0/@children.1/@sourceConnections.1/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="211,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="19,225"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.0/@children.1/@sourceConnections.1" name="NodoLocaleInterface" location="293,41" size="194,225" id="tuplespace/NodoLocaleInterface" runTimeClassModel="leave(),cercaFederazione(Ljava.lang.String;),readIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),take(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),read(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),join(Ljava.lang.String;),write(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),takeIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),creaFederazione(Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="129,162">
+        <children xsi:type="editmodel:MethodEditModel" name="cercaFederazione" id="tuplespace/NodoLocaleInterface#cercaFederazione(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="creaFederazione" id="tuplespace/NodoLocaleInterface#creaFederazione(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="join" id="tuplespace/NodoLocaleInterface#join(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="leave" id="tuplespace/NodoLocaleInterface#leave()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="read" id="tuplespace/NodoLocaleInterface#read(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="readIfExists" id="tuplespace/NodoLocaleInterface#readIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="take" id="tuplespace/NodoLocaleInterface#take(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="takeIfExists" id="tuplespace/NodoLocaleInterface#takeIfExists(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="write" id="tuplespace/NodoLocaleInterface#write(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=3;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
