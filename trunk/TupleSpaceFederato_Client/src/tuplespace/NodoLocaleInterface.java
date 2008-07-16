@@ -6,8 +6,8 @@ import net.jini.core.lease.Lease;
 import net.jini.core.transaction.Transaction;
 
 /**
- * Questa interfaccia mostra le funzionalità che devono essere disponibili in un qualsiasi nodo locale
- * Il fatto di essere connessi o meno a una federazione è trasparente all'utente
+ * Questa interfaccia mostra le funzionalita' che devono essere disponibili in un qualsiasi nodo locale
+ * Il fatto di essere connessi o meno a una federazione e' trasparente all'utente
  * 
  * @author Vincenzo Frascino
  * @author Nicolas Tagliani
@@ -74,7 +74,7 @@ public interface NodoLocaleInterface{
 	 * Crea una nuova federazione con nome nome
 	 * 
 	 * @param nome Il nome della federazione da creare
-	 * @return true se la federazione è stata creata o false se è capitato qualche problema che non ha permesso di creare la federazione
+	 * @return true se la federazione e' stata creata o false se e' capitato qualche problema che non ha permesso di creare la federazione
 	 */
 	public boolean creaFederazione(String nome);
 	
@@ -90,7 +90,7 @@ public interface NodoLocaleInterface{
 	 * Aggiunge il nodo locale a una federazione specificandone il nome
 	 * 
 	 * @param nome Il nome della federazione a cui collegarsi
-	 * @return true se è andato tutto bene o false se è capitato qualche problema che ha impedito il collegamento con la federazione
+	 * @return true se e' andato tutto bene o false se e' capitato qualche problema che ha impedito il collegamento con la federazione
 	 */
 	public boolean join(String nome); 
 	

@@ -6,9 +6,14 @@ package test;
 
 
 import java.rmi.RemoteException;
+
+import net.jini.core.entry.Entry;
 import net.jini.core.entry.UnusableEntryException;
 import net.jini.core.lease.Lease;
+import net.jini.core.lookup.ServiceTemplate;
 import net.jini.core.transaction.TransactionException;
+import net.jini.core.transaction.server.TransactionManager;
+import net.jini.lookup.entry.Name;
 import tuplespace.NodoLocale;
 public class TaskPoster {
 
@@ -23,6 +28,8 @@ public class TaskPoster {
      * @throws RemoteException 
      */
     public static void main(String[] args) throws Exception  {
+    	
+//    	TransactionManager trManager
         js = new NodoLocale("jini://localhost");
         js.setFederationServiceAddress("localhost");
         if (js.cercaFederazione("fed1")){
