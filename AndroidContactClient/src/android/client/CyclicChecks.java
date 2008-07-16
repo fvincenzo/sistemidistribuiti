@@ -7,13 +7,15 @@ import android.util.Log;
 
 /**
  * Questo thread si occupa di effettuare i controlli ciclici sugli amici e sulle eventuali nortifiche da parte del server
- * 
- * @author Nicolas Tagliani
- * @author Vincenzo Frascino
- *
+ * @author  Nicolas Tagliani
+ * @author  Vincenzo Frascino
  */
 public class CyclicChecks extends Thread {
 
+	/**
+	 * @uml.property  name="service"
+	 * @uml.associationEnd  
+	 */
 	private ServiceInterface.Stub service =  null;
 	private boolean run = true;
 	private int NOTIFY = 1;

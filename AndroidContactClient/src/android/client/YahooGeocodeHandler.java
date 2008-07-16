@@ -6,13 +6,17 @@ import org.xml.sax.helpers.DefaultHandler;
 
 /**
  * Classe per effettuare il parsing delle coordinate geografiche ottenute da yahoo sotto forma di XML.
- * 
- * @author Nicolas Tagliani
- * @author Vincenzo Frascino
- *
+ * @author  Nicolas Tagliani
+ * @author  Vincenzo Frascino
  */
 public class YahooGeocodeHandler extends DefaultHandler {
+	/**
+	 * @uml.property  name="latitude"
+	 */
 	private String latitude = "";
+    /**
+	 * @uml.property  name="longitude"
+	 */
     private String longitude = "";
 
     private boolean isLatitude = false;
@@ -51,19 +55,19 @@ public class YahooGeocodeHandler extends DefaultHandler {
     }
 
     /**
-     * La latitudine sotto forma di String
-     * 
-     * @return la latitudine
-     */
+	 * La latitudine sotto forma di String
+	 * @return  la latitudine
+	 * @uml.property  name="latitude"
+	 */
     public String getLatitude() {
         return latitude;
     }
 
     /**
-     * La longitudine sotto forma di String
-     * 
-     * @return la longitudine
-     */
+	 * La longitudine sotto forma di String
+	 * @return  la longitudine
+	 * @uml.property  name="longitude"
+	 */
     public String getLongitude() {
         return longitude;
     }

@@ -10,15 +10,16 @@ import android.util.Log;
 import java.lang.Math;
 
 /**
- * Thread che effettua in controllo della propria posizione a intervalli regolari ed aggiorna 
- * le proprie informazioni quando necessario
- * 
- * @author Nicolas Tagliani
- * @author Vincenzo Frascino
- *
+ * Thread che effettua in controllo della propria posizione a intervalli regolari ed aggiorna  le proprie informazioni quando necessario
+ * @author  Nicolas Tagliani
+ * @author  Vincenzo Frascino
  */
 public class GPSThread extends Thread {
 
+	/**
+	 * @uml.property  name="servInt"
+	 * @uml.associationEnd  
+	 */
 	private ServiceInterface.Stub servInt =  null;
 
 	private boolean run = true;	
@@ -27,6 +28,10 @@ public class GPSThread extends Thread {
 
 	private Location myLocation = null; 
 
+	/**
+	 * @uml.property  name="db"
+	 * @uml.associationEnd  
+	 */
 	private DBHelper db;
 
 	private long MINIMUM_TIME_BETWEEN_UPDATE = Settings.GPS_UPDATE_RATE*1000;

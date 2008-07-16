@@ -35,9 +35,7 @@ import android.widget.ListView;
 
 
 /**
- * Questa activity serve a mostrare una lista di utenti.
- * Viene utilizzata sia per mostrare i pendingfriends sia gli utenti presenti nel sistema.
- * La scelta tra le due modalità viene effettuata tramite l'intent appropriato
+ * Questa activity serve a mostrare una lista di utenti. Viene utilizzata sia per mostrare i pendingfriends sia gli utenti presenti nel sistema. La scelta tra le due modalità viene effettuata tramite l'intent appropriato
  */
 public class FriendsList extends ListActivity implements OnClickListener, ServiceConnection {
 
@@ -56,6 +54,10 @@ public class FriendsList extends ListActivity implements OnClickListener, Servic
 	private static final int PENDING = 0;
 	private static final int ALL_USERS = 1;
 
+	/**
+	 * @uml.property  name="s"
+	 * @uml.associationEnd  
+	 */
 	private ServiceInterface s;
 	private int mState;
 
