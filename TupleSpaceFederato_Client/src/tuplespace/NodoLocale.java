@@ -18,6 +18,12 @@ import net.jini.core.lookup.ServiceRegistrar;
 import net.jini.core.lookup.ServiceTemplate;
 import net.jini.core.transaction.Transaction;
 import net.jini.core.transaction.TransactionException;
+import net.jini.core.transaction.TransactionFactory;
+import net.jini.core.transaction.UnknownTransactionException;
+import net.jini.core.transaction.Transaction.Created;
+import net.jini.core.transaction.server.TransactionManager;
+import net.jini.core.transaction.server.TransactionParticipant;
+import net.jini.lookup.entry.Name;
 import net.jini.space.JavaSpace;
 
 /**
@@ -43,6 +49,10 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 	 */
 	private JavaSpace js;
 	
+	/**
+	 * Riferimento al transaction manager
+	 */
+	private TransactionManager trManager;
 	/**
 	 * riferimento alla federazione remota
 	 */
@@ -83,7 +93,7 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 	/**
 	 * Costruttore della classe nodo locale
 	 * 
-	 * @param externalAddress L'indirizzo pubblico da cui sarà raggiungibile il javaspace
+	 * @param externalAddress L'indirizzo pubblico da cui sarÔøΩ raggiungibile il javaspace
 	 * @throws IOException
 	 * @throws ClassNotFoundException
 	 * @throws RemoteException
@@ -95,6 +105,11 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 		js = (JavaSpace)r.lookup(new ServiceTemplate(null, new Class[]{ JavaSpace.class }, null));
 		jSpaceRemoteAddress = externalAddress;
 
+//		Entry[] serverAttributes = new Entry[1];
+//        serverAttributes[0] = new Name ("TransactionManager");
+//        ServiceTemplate template = new ServiceTemplate (null, new Class[]{TransactionManager.class} , null);
+//        trManager = (TransactionManager) r.lookup (template);
+        
 	}
 
 	/**
@@ -124,7 +139,7 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 	 * Crea una nuova federazione con nome nome
 	 * 
 	 * @param nome Il nome della federazione da creare
-	 * @return true se la federazione è stata creata o false se è capitato qualche problema che non ha permesso di creare la federazione
+	 * @return true se la federazione ÔøΩ stata creata o false se ÔøΩ capitato qualche problema che non ha permesso di creare la federazione
 	 */
 	public boolean creaFederazione(String nome) {
 		try{
@@ -149,7 +164,7 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 	 * Aggiunge il nodo locale a una federazione specificandone il nome
 	 * 
 	 * @param nome Il nome della federazione a cui collegarsi
-	 * @return true se è andato tutto bene o false se è capitato qualche problema che ha impedito il collegamento con la federazione
+	 * @return true se ÔøΩ andato tutto bene o false se ÔøΩ capitato qualche problema che ha impedito il collegamento con la federazione
 	 */
 	public boolean join(String nome) {
 		try{
@@ -209,8 +224,8 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 	}
 	
 	/**
-	 * Getter dell'indirizzo remoto a cui è raggiungibile il javaspace locale
-	 * Questo metodo è tipicamente richiamato da remoto dalla federazione
+	 * Getter dell'indirizzo remoto a cui ÔøΩ raggiungibile il javaspace locale
+	 * Questo metodo ÔøΩ tipicamente richiamato da remoto dalla federazione
 	 * 
 	 * @return L'indirizzo remoto del javaspace locale
 	 */
@@ -229,14 +244,14 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 	 */
 	public Entry read(Entry e, Transaction t, long l) throws Exception {
 		if (f!=null){
-			Entry ret = js.readIfExists(e,t,l);
-			if (ret != null){
-				return ret;
-			}
-			else{
+//			Entry ret = js.readIfExists(e,t,l);
+//			if (ret != null){
+//				return ret;
+//			}
+//			else{
 				f.read(this, e, t, l);
 				return getResult();
-			}
+//			}
 		}
 		return js.read(e,t,l);
 	}
@@ -270,19 +285,19 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 		
 		if (f!=null){
 //			Entry ret = null;
-			Entry ret = js.takeIfExists(e,t,l);
-
-			if (ret != null){
-				return ret;
-			}
-			else{
+//			Entry ret = js.takeIfExists(e,t,l);
+//
+//			if (ret != null){
+//				return ret;
+//			}
+//			else{
 				if (debug) System.out.println("Eseguo la take sulla federazione");
 				if (debug) System.out.println("Take da parte di :"+this.hashCode());
 				f.take(this, e, t, l);
 				if (debug) System.out.println("Fatto");
 				return getResult();
 			}
-		}
+//		}
 
 		return js.take(e,t,l);
 	}
@@ -312,7 +327,15 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 	 * @throws Exception  
 	 */
 	public Lease write(Entry e, Transaction t, long l) throws Exception {
-		return js.write(e,t,l);
+
+//		if (t == null) {
+//		Created ctx = TransactionFactory.create(trManager, l);
+//		Lease ret = js.write(e,ctx.transaction,l);
+//		ctx.transaction.commit();
+//		return ret;
+//		}
+//		else 
+			return js.write(e,t,l);
 
 	}
 
@@ -412,6 +435,30 @@ public class NodoLocale implements NodoLocaleInterface , NodoRemotoInterface, Se
 		result_status  = -1;
 		
 	}
+/*
+	public void abort(TransactionManager arg0, long arg1) throws UnknownTransactionException, RemoteException {
+		System.out.println( "Write aborted!!" );
 
+		
+	}
 
+	public void commit(TransactionManager arg0, long arg1) throws UnknownTransactionException, RemoteException {
+		System.out.println("Committed");
+		
+	}
+
+	public int prepare(TransactionManager arg0, long arg1) throws UnknownTransactionException, RemoteException {
+		return PREPARED;
+	}
+
+	public int prepareAndCommit(TransactionManager arg0, long arg1) throws UnknownTransactionException, RemoteException {
+		int result = prepare( arg0, arg1 );
+	      if ( result == PREPARED ) {
+	         commit(arg0, arg1);
+	         result = COMMITTED;
+	      }
+	      return result;
+	}
+
+*/
 }
