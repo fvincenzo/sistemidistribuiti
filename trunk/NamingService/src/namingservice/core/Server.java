@@ -158,7 +158,6 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 	}
 	
 	public String exec(String s){
-		
 		return nm.exec(s);
 		
 	}
@@ -176,7 +175,7 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 		//Aggiorno gli altri
 		String url;
 		NodeMap father = n.getFather();
-		
+	 	System.out.println("sono: "+n.getHostID()+" devo aggiornare "+root.getHostID());
 		updateNode(ServerName,root);
 		
 		if(father != null){
@@ -213,14 +212,14 @@ public class Server extends UnicastRemoteObject implements RemoteServer {
 			if(url.contains(".")==true){
 				url=url.replace(url.substring(0, url.indexOf(".")+1), "");
 			} else {
-				System.out.println(url);
+//				System.out.println(url);
 				break;
 			}
 		
 		NodeMap m = n.getChild(url);
 		
 		m.updateNode(root); 
-		
+		nm.update(n);
 	}
 	
 	/**

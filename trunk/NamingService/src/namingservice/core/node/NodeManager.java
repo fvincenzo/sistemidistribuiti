@@ -11,6 +11,8 @@ import java.util.Vector;
  */
 public class NodeManager {
 	
+	private NodeMap curPos;
+	
 	private NodeMap n;
 	
 	/**
@@ -20,10 +22,14 @@ public class NodeManager {
 	public NodeManager(NodeMap n) {
 		
 		this.n = n;
+		this.curPos = n;
 		
 	}
 		
-	
+	public void update(NodeMap n){
+		this.n = n;
+		this.curPos = n;
+	}
 	/**
 	 * Metodo exec serve ad invocare i comandi sul database di un host
 	 * @param command comando da invocare
@@ -39,7 +45,7 @@ public class NodeManager {
 		//comandi singola opzione
 		if(command.equals("ls")==true) {
 			
-			Vector<String> list = n.listChild();
+			Vector<String> list = curPos.listChild();
 			Iterator<String> i = list.iterator();
 			
 			if(list.isEmpty()) {
@@ -66,14 +72,14 @@ public class NodeManager {
 					
 					if(pars.equals("..")) {
 						
-						if(n.getName().equals("/")==false)
-							n = n.getFather();
+						if(!n.getHostID().equals(curPos.getHostID()))
+							curPos = curPos.getFather();
 //						else
 //							n = n;
 						
 					} else {
 						
-						n = n.getChild(pars);
+						curPos = curPos.getChild(pars);
 						
 					}
 					
