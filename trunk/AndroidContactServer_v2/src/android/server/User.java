@@ -144,7 +144,7 @@ public class User  {
 	/**
 	 * Aggiunge un utente alla lista dei pending friends e salva il cambiamento su file nomeutente.spnd
 	 * 
-	 * @param f il nickname dell'amico da aggiungere alla propria lista
+	 * @param pen il nickname dell'amico da aggiungere alla propria lista
 	 */
 	public void addPendings(String pen) {
 		synchronized (pendingsLock) {

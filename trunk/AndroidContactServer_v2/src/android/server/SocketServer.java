@@ -340,7 +340,7 @@ public class SocketServer extends Thread{
 	 * 
 	 * @param uname l'username dell'utente
 	 * @param position la posizione da aggiornare nel formato @latitudine,longitudine
-	 * @return
+	 * @return una stringa contenente OK se ha avuto successo o contente ERROR altrimenti
 	 */
 	public  String updateposition(String uname, String position){
 
