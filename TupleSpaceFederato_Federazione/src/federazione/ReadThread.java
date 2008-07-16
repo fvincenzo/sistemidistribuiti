@@ -14,12 +14,9 @@ import net.jini.core.transaction.TransactionException;
 import net.jini.space.JavaSpace;
 
 /**
- * Questa classe si occupa di effettuare una read blocante su un nodo remoto per conto di una federazione.
- * Una volta ottenuto un risultato questo verra' propagato indietro alla federazione chiamante.
- * 
- * @author Vincenzo Frascino
- * @author Nicolas Tagliani
- *
+ * Questa classe si occupa di effettuare una read blocante su un nodo remoto per conto di una federazione. Una volta ottenuto un risultato questo verra' propagato indietro alla federazione chiamante.
+ * @author  Vincenzo Frascino
+ * @author  Nicolas Tagliani
  */
 public class ReadThread extends Thread {
 

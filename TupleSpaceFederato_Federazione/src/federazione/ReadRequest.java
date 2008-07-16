@@ -8,12 +8,9 @@ import net.jini.core.entry.Entry;
 import net.jini.core.transaction.Transaction;
 
 /**
- * Classe che si occupa istanziare e gestire una read bloccante sulla federazione.
- * Per ogni read bloccante verra' istanziata una classe di tipo ReadRequest
- * 
- * @author Vincenzo Frascino
- * @author Nicolas Tagliani
- *
+ * Classe che si occupa istanziare e gestire una read bloccante sulla federazione. Per ogni read bloccante verra' istanziata una classe di tipo ReadRequest
+ * @author  Vincenzo Frascino
+ * @author  Nicolas Tagliani
  */
 public class ReadRequest  {
 
@@ -132,10 +129,9 @@ public class ReadRequest  {
 	}
 
 	/**
-	 * Metodo che resitituisce lo stato della readrequest
-	 * Se un risultato o una eccezione e' stata propagata la Read Request sara' nello stato done e il flag sara' true.
-	 * 
-	 * @return True se la read request ha finito il suo lavoro false altrimenti
+	 * Metodo che resitituisce lo stato della readrequest Se un risultato o una eccezione e' stata propagata la Read Request sara' nello stato done e il flag sara' true.
+	 * @return  True se la read request ha finito il suo lavoro false altrimenti
+	 * @uml.property  name="done"
 	 */
 	public boolean isDone(){
 		return done;
