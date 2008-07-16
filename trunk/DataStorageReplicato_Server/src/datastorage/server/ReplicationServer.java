@@ -16,7 +16,6 @@ import datastorage.corba.CantUpdate;
  * 
  * @author Vincenzo Frascino
  * @author Nicolas Tagliani
- * @uml.stereotype uml_id="Standard::ImplementationClass" 
  */
 @SuppressWarnings("serial")
 public class ReplicationServer extends ServerPOA implements MessageListener {
