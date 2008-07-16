@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="1183,486" id="android" metadata="uml2-1.0" initialized="true" tag="1000" key="32303038303431342D3130303020416E64726F6964436F6E746163745043436C69656E742F6761627269656C6B6E69676874">
+  <children xsi:type="editmodel:PackageEditModel" name="android.pc.client" location="65,35" size="186,216" id="android.pc.client">
+    <children xsi:type="editmodel:ClassEditModel" name="PcClient" location="31,43" size="102,86" id="android.pc.client/PcClient" runTimeClassModel="main([Ljava.lang.String;),PcClient()">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="76,36">
+        <children xsi:type="editmodel:MethodEditModel" name="PcClient" id="android.pc.client/PcClient#PcClient()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="main" id="android.pc.client/PcClient#main([Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" name="android.pc.client.api" location="300,20" size="446,226" id="android.pc.client.api">
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@children.1/@sourceConnections.0" name="PcClientAPIInterface" location="26,40" size="192,135" id="android.pc.client.api/PcClientAPIInterface" runTimeClassModel="connect(),im(),mail(),disconnect()">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="92,72">
+        <children xsi:type="editmodel:MethodEditModel" name="connect" id="android.pc.client.api/PcClientAPIInterface#connect()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="disconnect" id="android.pc.client.api/PcClientAPIInterface#disconnect()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="im" id="android.pc.client.api/PcClientAPIInterface#im()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="mail" id="android.pc.client.api/PcClientAPIInterface#mail()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" name="PcClientAPI" location="290,39" size="126,140" id="android.pc.client.api/PcClientAPI">
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="93,90">
+        <children xsi:type="editmodel:MethodEditModel" name="PcClientAPI" id="android.pc.client.api/PcClientAPI#PcClientAPI()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="connect" id="android.pc.client.api/PcClientAPI#connect()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="disconnect" id="android.pc.client.api/PcClientAPI#disconnect()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="im" id="android.pc.client.api/PcClientAPI#im()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="mail" id="android.pc.client.api/PcClientAPI#mail()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="android.pc.client.api/PcClientAPIInterface&lt;-android.pc.client.api/PcClientAPI" source="//@children.1/@children.1" target="//@children.1/@children.0" targetEnd="//@children.1/@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@children.1/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,68" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="192,67"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
