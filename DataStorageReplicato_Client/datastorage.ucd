@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="723,307" id="datastorage" metadata="uml2-1.0" initialized="true" tag="1000" key="32303038303431342D31303030204461746153746F726167655265706C696361746F5F436C69656E742F6761627269656C6B6E69676874">
+  <children xsi:type="editmodel:PackageEditModel" name="datastorage.client" location="60,30" size="219,226" id="datastorage.client">
+    <children xsi:type="editmodel:ClassEditModel" name="MainGui" location="74,47" size="148,158" id="datastorage.client/MainGui" runTimeClassModel="main([Ljava.lang.String;),keyTyped(Ljava.awt.event.KeyEvent;),keyPressed(Ljava.awt.event.KeyEvent;),actionPerformed(Ljava.awt.event.ActionEvent;),keyReleased(Ljava.awt.event.KeyEvent;),MainGui([Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="125,108">
+        <children xsi:type="editmodel:MethodEditModel" name="MainGui" id="datastorage.client/MainGui#MainGui([Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="actionPerformed" id="datastorage.client/MainGui#actionPerformed(Ljava.awt.event.ActionEvent;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="keyPressed" id="datastorage.client/MainGui#keyPressed(Ljava.awt.event.KeyEvent;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="keyReleased" id="datastorage.client/MainGui#keyReleased(Ljava.awt.event.KeyEvent;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="keyTyped" id="datastorage.client/MainGui#keyTyped(Ljava.awt.event.KeyEvent;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="main" id="datastorage.client/MainGui#main([Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
