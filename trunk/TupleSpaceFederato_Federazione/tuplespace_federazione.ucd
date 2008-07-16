@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="tuplespace_federazione" size="1224,540" id="" metadata="uml2-1.0" initialized="true" scrolledX="2" tag="1000" key="32303037303533312D31303030205475706C655370616365466564657261746F5F4665646572617A696F6E652F6E6F6E616D65">
+  <children xsi:type="editmodel:PackageEditModel" name="federationservice" location="60,80" size="306,414" id="federationservice">
+    <children xsi:type="editmodel:ClassEditModel" name="FederationService" location="63,245" size="174,158" id="federationservice/FederationService" runTimeClassModel="main([Ljava.lang.String;),FederationService(),join(Ltuplespace.NodoRemotoInterface;Ljava.lang.String;),cercaFederazione(Ljava.lang.String;),federazioniPresenti(),creaFederazione(Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="140,108">
+        <children xsi:type="editmodel:MethodEditModel" name="FederationService" id="federationservice/FederationService#FederationService()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="cercaFederazione" id="federationservice/FederationService#cercaFederazione(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="creaFederazione" id="federationservice/FederationService#creaFederazione(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="federazioniPresenti" id="federationservice/FederationService#federazioniPresenti()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="join" id="federationservice/FederationService#join(Ltuplespace.NodoRemotoInterface;Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="main" id="federationservice/FederationService#main([Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="federationservice/FederationServiceInterface&lt;-federationservice/FederationService" source="//@children.0/@children.0" target="//@children.0/@children.1" targetEnd="//@children.0/@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@children.0/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="86,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="99,135"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="federationservice/FederationService-Soyatec::Implement->federationservice/FederationServiceInterface" source="//@children.0/@children.0" target="//@children.0/@children.1" targetEnd="//@children.0/@children.0/@sourceConnections.1/@children.2" label="//@children.0/@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Implement»" location="114,292" size="74,13" automaticRelocationAllowed="false" locationOnWireFromSource="-3.0" distanceFromWire="38.0" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="66,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="79,135"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="federationservice/FederationService-Soyatec::Import->federazione/FederazioneInterface" source="//@children.0/@children.0" target="//@children.1/@children.2" targetEnd="//@children.0/@children.0/@sourceConnections.2/@children.2" label="//@children.0/@children.0/@sourceConnections.2/@children.0" sourceEnd="//@children.0/@children.0/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="51,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="174,149" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,8"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="federationservice/FederationService-Standard::Call->federazione/Federazione*federationservice/FederationService-Standard::Instantiate->federazione/Federazione*federationservice/FederationService-Soyatec::Import->federazione/Federazione" source="//@children.0/@children.0" target="//@children.1/@children.4" targetEnd="//@children.0/@children.0/@sourceConnections.3/@children.2" label="//@children.0/@children.0/@sourceConnections.3/@children.0" sourceEnd="//@children.0/@children.0/@sourceConnections.3/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" size="148,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="174,119" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,38"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.0/@children.0/@sourceConnections.0 //@children.0/@children.0/@sourceConnections.1" name="FederationServiceInterface" location="50,50" size="240,135" id="federationservice/FederationServiceInterface" runTimeClassModel="join(Ltuplespace.NodoRemotoInterface;Ljava.lang.String;),cercaFederazione(Ljava.lang.String;),federazioniPresenti(),creaFederazione(Ljava.lang.String;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="140,72">
+        <children xsi:type="editmodel:MethodEditModel" name="cercaFederazione" id="federationservice/FederationServiceInterface#cercaFederazione(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="creaFederazione" id="federationservice/FederationServiceInterface#creaFederazione(Ljava.lang.String;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="federazioniPresenti" id="federationservice/FederationServiceInterface#federazioniPresenti()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="join" id="federationservice/FederationServiceInterface#join(Ltuplespace.NodoRemotoInterface;Ljava.lang.String;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="federationservice/FederationServiceInterface-Soyatec::Import->federazione/FederazioneInterface" source="//@children.0/@children.1" target="//@children.1/@children.2" targetEnd="//@children.0/@children.1/@sourceConnections.0/@children.2" label="//@children.0/@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="51,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="203,135" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="6,0"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="federationservice-Standard::Call->federazione*federationservice-Standard::Instantiate->federazione*federationservice-Soyatec::Import->federazione" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" size="148,13" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="306,207" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,212"/>
+    </sourceConnections>
+  </children>
+  <children xsi:type="editmodel:PackageEditModel" targetConnections="//@children.0/@sourceConnections.0" name="federazione" location="525,75" size="696,581" id="federazione">
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@children.4/@sourceConnections.2 //@children.1/@children.1/@sourceConnections.0" name="ReadRequest" location="294,107" size="141,158" id="federazione/ReadRequest" runTimeClassModel="throwException(Ltuplespace.NodoRemotoInterface;Ljava.lang.Exception;),done,gotResult(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;),ReadRequest(Ltuplespace.NodoRemotoInterface;Ljava.util.List;Lfederazione.Response;),read(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),addNode(Ltuplespace.NodoRemotoInterface;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="100,18">
+        <children xsi:type="editmodel:AttributeEditModel" name="done" location="7,26" id="federazione/ReadRequest#done"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="117,90">
+        <children xsi:type="editmodel:MethodEditModel" name="ReadRequest" location="7,61" id="federazione/ReadRequest#ReadRequest(Ltuplespace.NodoRemotoInterface;Ljava.util.List;Lfederazione.Response;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="addNode" id="federazione/ReadRequest#addNode(Ltuplespace.NodoRemotoInterface;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="gotResult" id="federazione/ReadRequest#gotResult(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="read" id="federazione/ReadRequest#read(Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="throwException" id="federazione/ReadRequest#throwException(Ltuplespace.NodoRemotoInterface;Ljava.lang.Exception;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="federazione/ReadRequest-Standard::Call->federazione/Response*federazione/ReadRequest-Soyatec::Import->federazione/Response" source="//@children.1/@children.0" target="//@children.1/@children.3" targetEnd="//@children.1/@children.0/@sourceConnections.0/@children.2" label="//@children.1/@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="80,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,21" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="140,78"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" id="federazione/ReadRequest-Standard::Call->federazione/ReadThread*federazione/ReadRequest-Standard::Instantiate->federazione/ReadThread*federazione/ReadRequest-Soyatec::Import->federazione/ReadThread" source="//@children.1/@children.0" target="//@children.1/@children.1" targetEnd="//@children.1/@children.0/@sourceConnections.1/@children.2" label="//@children.1/@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.1/@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" location="1021,309" size="148,13" automaticRelocationAllowed="false" locationOnWireFromSource="9.773851604279743" distanceFromWire="80.80514726685125" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="141,71" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,41"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@children.0/@sourceConnections.1" name="ReadThread" location="562,333" size="131,104" id="federazione/ReadThread" runTimeClassModel="run(),halt(),ReadThread(Lfederazione.ReadRequest;Ltuplespace.NodoRemotoInterface;Ljava.lang.String;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="99,54">
+        <children xsi:type="editmodel:MethodEditModel" name="ReadThread" id="federazione/ReadThread#ReadThread(Lfederazione.ReadRequest;Ltuplespace.NodoRemotoInterface;Ljava.lang.String;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="halt" id="federazione/ReadThread#halt()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="run" id="federazione/ReadThread#run()"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" id="federazione/ReadThread-Standard::Call->federazione/ReadRequest*federazione/ReadThread-Soyatec::Import->federazione/ReadRequest" source="//@children.1/@children.1" target="//@children.1/@children.0" targetEnd="//@children.1/@children.1/@sourceConnections.0/@children.2" label="//@children.1/@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" location="977,452" size="80,13" automaticRelocationAllowed="false" locationOnWireFromSource="-43.171157449946854" distanceFromWire="32.82150460341357" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,99" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="141,122"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@children.4/@sourceConnections.1 //@children.0/@children.0/@sourceConnections.2 //@children.0/@children.1/@sourceConnections.0 //@children.1/@children.4/@sourceConnections.3" name="FederazioneInterface" location="29,391" size="198,153" id="federazione/FederazioneInterface" runTimeClassModel="take(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),takeIfExists(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),leave(Ltuplespace.NodoRemotoInterface;),read(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),readIfExists(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="98,90">
+        <children xsi:type="editmodel:MethodEditModel" name="leave" location="9,54" id="federazione/FederazioneInterface#leave(Ltuplespace.NodoRemotoInterface;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="read" id="federazione/FederazioneInterface#read(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="readIfExists" id="federazione/FederazioneInterface#readIfExists(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="take" id="federazione/FederazioneInterface#take(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="takeIfExists" id="federazione/FederazioneInterface#takeIfExists(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.1/@children.4/@sourceConnections.0 //@children.1/@children.0/@sourceConnections.0 //@children.1/@children.4/@sourceConnections.4" name="Response" location="50,50" size="140,99" id="federazione/Response" runTimeClassModel="throwException(Ltuplespace.NodoRemotoInterface;Ljava.lang.Exception;),response(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="117,36">
+        <children xsi:type="editmodel:MethodEditModel" name="response" id="federazione/Response#response(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="throwException" id="federazione/Response#throwException(Ltuplespace.NodoRemotoInterface;Ljava.lang.Exception;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+    <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@children.0/@sourceConnections.3" name="Federazione" location="258,331" size="140,212" id="federazione/Federazione" runTimeClassModel="take(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),throwException(Ltuplespace.NodoRemotoInterface;Ljava.lang.Exception;),response(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;),takeIfExists(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),Federazione(),leave(Ltuplespace.NodoRemotoInterface;),join(Ltuplespace.NodoRemotoInterface;),read(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J),readIfExists(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)">
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <children xsi:type="editmodel:CompartmentEditModel" size="117,162">
+        <children xsi:type="editmodel:MethodEditModel" name="Federazione" id="federazione/Federazione#Federazione()"/>
+        <children xsi:type="editmodel:MethodEditModel" name="join" id="federazione/Federazione#join(Ltuplespace.NodoRemotoInterface;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="leave" id="federazione/Federazione#leave(Ltuplespace.NodoRemotoInterface;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="read" id="federazione/Federazione#read(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="readIfExists" id="federazione/Federazione#readIfExists(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="response" id="federazione/Federazione#response(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="take" id="federazione/Federazione#take(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="takeIfExists" id="federazione/Federazione#takeIfExists(Ltuplespace.NodoRemotoInterface;Lnet.jini.core.entry.Entry;Lnet.jini.core.transaction.Transaction;J)"/>
+        <children xsi:type="editmodel:MethodEditModel" name="throwException" id="federazione/Federazione#throwException(Ltuplespace.NodoRemotoInterface;Ljava.lang.Exception;)"/>
+      </children>
+      <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="federazione/Response&lt;-federazione/Federazione" source="//@children.1/@children.4" target="//@children.1/@children.3" targetEnd="//@children.1/@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@children.4/@sourceConnections.0/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="5,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="101,99"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="federazione/FederazioneInterface&lt;-federazione/Federazione" source="//@children.1/@children.4" target="//@children.1/@children.2" targetEnd="//@children.1/@children.4/@sourceConnections.1/@children.1" sourceEnd="//@children.1/@children.4/@sourceConnections.1/@children.0" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,135" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="198,75"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="federazione/Federazione-Standard::Call->federazione/ReadRequest*federazione/Federazione-Standard::Instantiate->federazione/ReadRequest*federazione/Federazione-Soyatec::Import->federazione/ReadRequest" source="//@children.1/@children.4" target="//@children.1/@children.0" targetEnd="//@children.1/@children.4/@sourceConnections.2/@children.2" label="//@children.1/@children.4/@sourceConnections.2/@children.0" sourceEnd="//@children.1/@children.4/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Instantiate, Call»" location="825,370" size="148,13" automaticRelocationAllowed="false" locationOnWireFromSource="-3.0" distanceFromWire="-29.0" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="87,0" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="51,158"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="federazione/Federazione-Soyatec::Implement->federazione/FederazioneInterface" source="//@children.1/@children.4" target="//@children.1/@children.2" targetEnd="//@children.1/@children.4/@sourceConnections.3/@children.2" label="//@children.1/@children.4/@sourceConnections.3/@children.0" sourceEnd="//@children.1/@children.4/@sourceConnections.3/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Implement»" size="74,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,139" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="198,95"/>
+      </sourceConnections>
+      <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="federazione/Federazione-Soyatec::Implement->federazione/Response" source="//@children.1/@children.4" target="//@children.1/@children.3" targetEnd="//@children.1/@children.4/@sourceConnections.4/@children.2" label="//@children.1/@children.4/@sourceConnections.4/@children.0" sourceEnd="//@children.1/@children.4/@sourceConnections.4/@children.1" connectionRouterKind="Manual">
+        <children xsi:type="editmodel:WireLabelEditModel" name="«Implement»" size="74,13" anchorKind="MiddlePart"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="0,17" attachSource="true"/>
+        <children xsi:type="editmodel:AssociationEndEditModel" location="81,99"/>
+      </sourceConnections>
+      <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+    </children>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=3;Product=eUML2" autoName="false"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>
